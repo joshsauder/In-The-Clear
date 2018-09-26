@@ -155,41 +155,9 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
     
     @IBAction func showDirection(_ sender: UIButton){
         
-        self.drawPath(startLocation: locationStart, endLocation: locationEnd)
+        self.createLine(startLocation: locationStart, endLocation: locationEnd)
     }
-    
-    //function to create directions path from start to end
-    func drawPath(startLocation: CLLocation, endLocation: CLLocation){
-        
-        let origin = "\(startLocation.coordinate.latitude),\(startLocation.coordinate.longitude)"
-        let destination = "\(endLocation.coordinate.latitude),\(endLocation.coordinate.longitude)"
-        
-        let pathURL = url.PATH_URL + origin + "&destination=" + destination + "&mode=driving"
-    
-        Alamofire.request(pathURL, method: .get).validate().responseJSON { response in
-            
-                print(response.request as Any)
-                
-                print(response.request as Any)  // original URL request
-                print(response.response as Any) // HTTP URL response
-                print(response.data as Any)     // server data
-                print(response.result as Any)
-                
-                let json = JSON(response.data!)
-                let routes = json["routes"].arrayValue
-                for route in routes
-                {
-                    let routeOverviewPolyline = route["overview_polyline"].dictionary
-                    let points = routeOverviewPolyline?["points"]?.stringValue
-                    let path = GMSPath.init(fromEncodedPath: points!)
-                    let polyline = GMSPolyline.init(path: path)
-                    polyline.strokeWidth = 4
-                    polyline.strokeColor = UIColor.red
-                    polyline.map = self.mapView
-                }
-            
-        }
-    }
+
     
     // function to create a marker on map
     func createMarker(titleMarker: String, latitude: CLLocationDegrees, longitude: CLLocationDegrees) {
