@@ -10,51 +10,60 @@ import Foundation
 import Alamofire
 import SwiftyJSON
 import GoogleMaps
+import Async
 
 extension ViewController {
-    
-    func getWeather(zipcode: String, country: String){
-        var urlBase = "api.openweathermap.org/data/2.5/forecast?"
-        let urlComplete = urlBase + "zip=/(zipcode),/(country)"
-    
-        Alamofire.request(urlComplete, method: .get).validate().responseJSON { response in
+    func getWeather(lat: String, long: String, timeToLookFor: Date, completion: @escaping (String) -> ()) {
+        let urlBase = "http://api.openweathermap.org/data/2.5/forecast?"
+        let urlComplete = urlBase + "lat=\(lat)&lon=\(long)&APPID=0c2beca9233adf894f6acded6d9a946c"
+        let url = URL(string: urlComplete)!
+        var condition = ""
+        Alamofire.request(urlComplete, method: .get).responseJSON(completionHandler: {
+                (response) in
+         
+            switch response.result {
             
-            let json = JSON(response.data!)
-            let largeWeatherList = json["list"]
-            let weatherList = largeWeatherList["main"].arrayValue
-            
-            for weather in weatherList
-            {
-                //get temperature
-                let main = weather["main"]
-                self.temps.append(main["temp"].stringValue)
+            case .success:
+                let json = JSON(response.data!)
+                let weatherList = json["list"].arrayValue
+                    
+                for weather in weatherList
+                {
+                    //get condition
+                        
+                    //get time
+                    let time = weather["dt_txt"].stringValue
+                    let dateFormatter = DateFormatter()
+                    dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+                    dateFormatter.timeZone = TimeZone(abbreviation: "UTC")
+                    let dateFromString = dateFormatter.date(from: time)
+                    self.times.append(dateFromString!)
+                    let weatherArray = weather["weather"].arrayValue
+                    condition = weatherArray[0]["main"].stringValue
+                    print(dateFromString!.addingTimeInterval(60*60*3))
+                    if(dateFromString!.addingTimeInterval(60.0*60*3) > timeToLookFor || dateFromString!.addingTimeInterval(-60.0*60*3) < timeToLookFor) {
+                        print (condition)
+                        completion(condition)
+                        break;
+                    }
+                }
+                break;
                 
-                //get condition
-                let condition = weather["weather"]
-                self.conditions.append(condition["main"].stringValue)
-                
-                //get time
-                let time = weather["dt_txt"].stringValue
-                let dateFormatter = DateFormatter()
-                dateFormatter.dateFormat = "yyyy-MM-DD HH:MM:SS"
-                let dateFromString = dateFormatter.date(from: time)
-                self.times.append(dateFromString!)
+            case .failure(let error):
+                print(error)
+                break;
             }
-        }
+        })
     }
     
     func createLine(startLocation: CLLocation, endLocation: CLLocation){
         
         //colors for lines based on condition
-        let snow = UIColor.blue
-        let rain = UIColor.green
-        let storms = UIColor.red
-        let sun = UIColor.yellow
         
         let origin = "\(startLocation.coordinate.latitude),\(startLocation.coordinate.longitude)"
         let destination = "\(endLocation.coordinate.latitude),\(endLocation.coordinate.longitude)"
         
-        let pathURL = url.PATH_URL + origin + "&destination=" + destination + "&mode=driving"
+        let pathURL = url.PATH_URL + origin + "&destination=" + destination + "&mode=driving&key=" + "AIzaSyDznbmSUzLQ7dBofWqxHg-N6_jxxFBrxy0"
         
         Alamofire.request(pathURL, method: .get).validate().responseJSON { response in
             
@@ -67,21 +76,65 @@ extension ViewController {
             
             let json = JSON(response.data!)
             let routes = json["routes"].arrayValue
+            let routesVal = routes[0]["legs"].arrayValue
+            let stepsEval = routesVal[0]
+            let steps = stepsEval["steps"].arrayValue
+            
+            
             for route in routes
             {
                 let routeOverviewPolyline = route["overview_polyline"].dictionary
                 let points = routeOverviewPolyline?["points"]?.stringValue
                 let path = GMSPath.init(fromEncodedPath: points!)
                 let polyline = GMSPolyline.init(path: path)
-                polyline.strokeWidth = 4
-                polyline.strokeColor = UIColor.red
+                polyline.strokeWidth = 7
+                self.colorPath(line: polyline, steps: steps)
                 polyline.map = self.mapView
+                self.mapView.animate(with: GMSCameraUpdate.fit(GMSCoordinateBounds(path: polyline.path!), withPadding: 50))
             }
             
         }
     }
     
-    func colorPath() {
+    func colorPath(line: GMSPolyline, steps: [JSON]) {
+        //take each step and get weather at end location
+        let refDate = Date.timeIntervalSinceReferenceDate
+        var date = Date(timeIntervalSinceReferenceDate: refDate)
+        var colorSegs: [GMSStyleSpan] = []
+
+        var distance: [Int] = []
+        var totalTime = 0
         
+        let snow = GMSStrokeStyle.solidColor(UIColor.blue)
+        let rain = GMSStrokeStyle.solidColor(UIColor.green)
+        let storms = GMSStrokeStyle.solidColor(UIColor.red)
+        let sun = GMSStrokeStyle.solidColor(UIColor.yellow)
+        
+        for step in steps {
+            //get distance
+            let time = step["duration"]["value"].intValue
+            distance.append(time)
+            date = date.addingTimeInterval(TimeInterval(60 * totalTime))
+            totalTime = time + totalTime
+            //get weather
+            let lat = step["end_location"]["lat"].stringValue
+            let long = step["end_location"]["lng"].stringValue
+            getWeather(lat: lat, long: long, timeToLookFor: date) { condition in
+                
+            if condition == "Rain" {
+                colorSegs.append(GMSStyleSpan(style: rain))
+            } else if condition == "Thunderstorm" {
+                colorSegs.append(GMSStyleSpan(style: storms))
+            } else if condition == "Snow" {
+                colorSegs.append(GMSStyleSpan(style: snow))
+            } else {
+                colorSegs.append(GMSStyleSpan(style: sun))
+            }
+            line.spans = colorSegs
+            }
+        }
+        //take step time divided by total time
+       // line.spans = colorSegs
+        //color path based on fraction
     }
 }

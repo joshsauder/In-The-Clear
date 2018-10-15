@@ -62,15 +62,7 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         
-        let location = locations.last
-        
-        let locationTujuan = CLLocation(latitude: 37.784023631590777, longitude: -122.40486681461333)
-        
-        createMarker(titleMarker: "Lokasi Tujuan", latitude: locationTujuan.coordinate.latitude, longitude: locationTujuan.coordinate.longitude)
-        
-        createMarker(titleMarker: "Lokasi Aku", latitude: (location?.coordinate.latitude)!, longitude: (location?.coordinate.longitude)!)
-        
-        drawPath(startLocation: location!, endLocation: locationTujuan)
+       // createLine(startLocation: location!, endLocation: locationTujuan)
         
         self.locationManager.stopUpdatingLocation()
         
