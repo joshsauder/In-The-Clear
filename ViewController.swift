@@ -11,7 +11,7 @@ import CoreLocation
 import GoogleMaps
 import GooglePlaces
 import Alamofire
-import SwiftyJSON
+import FontAwesome_swift
 
 enum Location {
     case startLocation
@@ -25,6 +25,7 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
     
     @IBOutlet weak var startLocation: UITextField!
     @IBOutlet weak var destinationLocation: UITextField!
+    @IBOutlet weak var directions: UIButton!
     
     @IBOutlet weak var mapView: GMSMapView!
     var locationStart = CLLocation()
@@ -37,6 +38,7 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        addGlyph()
         locationAuthorization()
         setupMap()
     }
@@ -58,6 +60,12 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
         locationManager.startUpdatingLocation()
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.startMonitoringSignificantLocationChanges()
+    }
+    
+    func addGlyph(){
+        directions.titleLabel?.font = UIFont.fontAwesome(ofSize: 60, style: .solid)
+        directions.setTitle(String.fontAwesomeIcon(name: .directions), for: .normal)
+        directions.setTitleColor(UIColor.white, for: .normal)
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {

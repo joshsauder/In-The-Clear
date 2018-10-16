@@ -10,7 +10,6 @@ import Foundation
 import Alamofire
 import SwiftyJSON
 import GoogleMaps
-import Async
 
 extension ViewController {
     func getWeather(lat: String, long: String, timeToLookFor: Date, completion: @escaping (String) -> ()) {
