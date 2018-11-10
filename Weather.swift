@@ -25,7 +25,7 @@ extension ViewController {
             case .success:
                 let json = JSON(response.data!)
                 let weatherList = json["list"].arrayValue
-                    
+                self.cities.append(json["city"]["name"].stringValue)
                 for weather in weatherList
                 {
                     //get condition
@@ -118,7 +118,12 @@ extension ViewController {
             //get weather
             let lat = step["end_location"]["lat"].stringValue
             let long = step["end_location"]["lng"].stringValue
+            
+            directionArray.append(step["maneuver"].stringValue)
+            
             getWeather(lat: lat, long: long, timeToLookFor: date) { condition in
+            
+                self.conditions.append(condition)
                 
             if condition == "Rain" {
                 colorSegs.append(GMSStyleSpan(style: rain))

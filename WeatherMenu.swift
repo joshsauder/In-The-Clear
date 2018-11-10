@@ -8,29 +8,64 @@
 
 import Foundation
 import UIKit
+import FontAwesome_swift
 
-class weatherMenu: UITableView {
+class weatherMenu: UITableViewController {
     
     var weatherDataArray: [weatherData.Entry] = []
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    var backgroundColor = UIColor.init(red: 132, green: 29, blue: 132, alpha: 1)
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+    }
+    
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return weatherDataArray.count
     }
 
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! WeatherTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "WeatherTableViewCell", for: indexPath) as! WeatherTableViewCell
         let entry = weatherDataArray[indexPath.row]
         cell.directionsImage.image = directionsImage(directions: entry.directions)
         cell.weatherImage.image = weatherImage(weather: entry.weather)
         cell.cityLabel.text = entry.city
         cell.directionsLabel.text = entry.directions
+        cell.backgroundColor = cellColor(weather: entry.weather)
+        cell.layer.cornerRadius = 5
+        cell.layer.borderWidth = 4
+        cell.layer.borderColor = backgroundColor.cgColor
         
         return cell
     }
     
+    func cellColor(weather: String) -> UIColor {
+        
+        var color = UIColor()
+        
+        if weather == "Rain" {
+            color = UIColor.green
+            
+        } else if weather == "Thunderstorm" {
+            color = UIColor.red
+            
+        } else if weather == "Snow" {
+            color = UIColor.blue
+            
+        } else {
+            color = UIColor.yellow
+        }
+        
+        return color
+    }
     
 
     func directionsImage(directions: String) -> UIImage {
@@ -39,39 +74,39 @@ class weatherMenu: UITableView {
             image = UIImage.fontAwesomeIcon(
                 name: .arrowAltCircleLeft,
                 style: .solid,
-                textColor: .yellow,
-                size: CGSize(width: 50, height: 50)
+                textColor: .white,
+                size: CGSize(width: 20, height: 15)
             )
         } else if directions == "turn-sharp-right" || directions == "turn-slight-right" || directions == "turn-right" || directions == "ramp-right" || directions == "roundabout-right" || directions == "ramp-right" || directions == "keep-right" {
             image = UIImage.fontAwesomeIcon(
                 name: .arrowAltCircleRight,
                 style: .solid,
-                textColor: .yellow,
-                size: CGSize(width: 50, height: 50)
+                textColor: .white,
+                size: CGSize(width: 20, height: 15)
             )
         }
         else if directions == "uturn-left"{
             image = UIImage.fontAwesomeIcon(
                 name: .undo,
                 style: .solid,
-                textColor: .yellow,
-                size: CGSize(width: 50, height: 50)
+                textColor: .white,
+                size: CGSize(width: 20, height: 15)
             )
             
         } else if directions == "uturn-right"{
             image = UIImage.fontAwesomeIcon(
                 name: .redo,
                 style: .solid,
-                textColor: .yellow,
-                size: CGSize(width: 50, height: 50)
+                textColor: .white,
+                size: CGSize(width: 20, height: 15)
             )
         }
         else {
             image = UIImage.fontAwesomeIcon(
                 name: .arrowAltCircleUp,
                 style: .solid,
-                textColor: .yellow,
-                size: CGSize(width: 50, height: 50)
+                textColor: .white,
+                size: CGSize(width: 20, height: 15)
             )
         }
         return image
@@ -83,46 +118,34 @@ class weatherMenu: UITableView {
             image = UIImage.fontAwesomeIcon(
                 name: .tint,
                 style: .solid,
-                textColor: .blue,
-                size: CGSize(width: 50, height: 50)
+                textColor: .white,
+                size: CGSize(width: 20, height: 15)
             )
         } else if weather == "Thunderstorm" {
             image = UIImage.fontAwesomeIcon(
                 name: .bolt,
                 style: .solid,
-                textColor: .yellow,
-                size: CGSize(width: 50, height: 50)
+                textColor: .white,
+                size: CGSize(width: 20, height: 15)
             )
             
         } else if weather == "Snow" {
             image = UIImage.fontAwesomeIcon(
                 name: .snowflake,
                 style: .solid,
-                textColor: .blue,
-                size: CGSize(width: 50, height: 50)
+                textColor: .white,
+                size: CGSize(width: 20, height: 15)
             )
             
         } else {
             image = UIImage.fontAwesomeIcon(
                 name: .sun,
                 style: .solid,
-                textColor: .yellow,
-                size: CGSize(width: 50, height: 50)
+                textColor: .white,
+                size: CGSize(width: 20, height: 15)
             )
         }
         return image
-    }
-    
-    func loadData(weather: [String], directionsData: [String], cityData:[String]){
-        
-        let i = 0
-        while i < weather.count {
-            var entry = weatherData.Entry(weather: "", directions: "", city: "")
-            entry.city = cityData[i]
-            entry.directions = directionsData[i]
-            entry.weather = weather[i]
-            weatherDataArray.append(entry)
-        }
     }
 
 }
