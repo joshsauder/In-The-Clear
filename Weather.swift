@@ -25,7 +25,9 @@ extension ViewController {
             case .success:
                 let json = JSON(response.data!)
                 let weatherList = json["list"].arrayValue
-                self.cities.append(json["city"]["name"].stringValue)
+                if !self.cities.contains(json["cities"]["name"].stringValue) {
+                    self.cities.append(json["city"]["name"].stringValue)
+                }
                 for weather in weatherList
                 {
                     //get condition

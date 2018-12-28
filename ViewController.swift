@@ -25,7 +25,6 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
     
     @IBOutlet weak var startLocation: UITextField!
     @IBOutlet weak var destinationLocation: UITextField!
-    @IBOutlet weak var directions: UIButton!
     @IBOutlet weak var weatherList: UIButton!
     
     @IBOutlet weak var mapView: GMSMapView!
@@ -68,19 +67,12 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
     }
     
     func addGlyph(){
-        directions.titleLabel?.font = UIFont.fontAwesome(ofSize: 60, style: .solid)
-    directions.setTitle(String.fontAwesomeIcon(name: .directions), for: .normal)
-        directions.setTitleColor(UIColor.white, for: .normal)
         
-        weatherList.frame = CGRect(x: 160, y: 100, width: 50, height: 50)
-        weatherList.layer.cornerRadius = 0.5 * weatherList.bounds.size.width
-            weatherList.clipsToBounds = true
-        weatherList.titleLabel?.font = UIFont.fontAwesome(ofSize: 60, style: .solid)
-    weatherList.setTitle(String.fontAwesomeIcon(name: .arrowCircleUp), for: .normal)
-     weatherList.setTitleColor(UIColor.init(red: 49, green: 78, blue: 137, alpha: 1), for: .normal)
-        weatherList.isHidden = true
-        
-        
+        weatherList.layer.cornerRadius = 5
+        weatherList.clipsToBounds = true
+        weatherList.setTitle("Expanded City List" , for: .normal)
+        weatherList.setTitleColor(UIColor.black, for: .normal)
+        weatherList.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
@@ -166,12 +158,12 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
         self.locationManager.stopUpdatingLocation()
         
         self.present(autoCompleteController, animated: true, completion: nil)
+        
     }
     
-    @IBAction func showDirection(_ sender: UIButton){
+    func showDirection(){
         
         self.createLine(startLocation: locationStart, endLocation: locationEnd)
-        weatherList.isHidden = false
     }
 
     
@@ -185,7 +177,7 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
 
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "ShowWeatherTable"{
+        if segue.identifier == "ShowNavigation"{
             var weatherDataVals: [weatherData.Entry] = []
             var i = 0
             while i < conditions.count {
@@ -196,11 +188,14 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
                 weatherDataVals.append(entry)
                 i = i + 1
             }
-            if let destinationVC = segue.destination as? weatherMenu {
-                destinationVC.weatherDataArray = weatherDataVals
-            }
+            
+            let DestViewController = segue.destination as! UINavigationController
+            let targetController = DestViewController.topViewController as! weatherMenu
+            targetController.weatherDataArray = weatherDataVals
+
         }
     }
+    
     
 }
 

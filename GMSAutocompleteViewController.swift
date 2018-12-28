@@ -27,6 +27,10 @@ extension ViewController: GMSAutocompleteViewControllerDelegate {
         }
         
         self.mapView.camera = camera
+        
+        if locationStart.coordinate.longitude != 0 && locationEnd.coordinate.longitude != 0 {
+            showDirection()
+        }
         self.dismiss(animated: true, completion: nil)
     }
     

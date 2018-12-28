@@ -18,6 +18,7 @@ class weatherMenu: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setUpNav()
         
     }
     
@@ -42,9 +43,19 @@ class weatherMenu: UITableViewController {
         cell.backgroundColor = cellColor(weather: entry.weather)
         cell.layer.cornerRadius = 5
         cell.layer.borderWidth = 4
-        cell.layer.borderColor = backgroundColor.cgColor
+        cell.layer.borderColor = tableView.backgroundColor?.cgColor
         
         return cell
+    }
+    
+    func setUpNav() {
+        let backButton = UIBarButtonItem(title: "Back", style: .plain, target: self, action: #selector(self.backButtonPressed))
+        backButton.title = "Back"
+        navigationItem.leftBarButtonItem = backButton
+    }
+    
+    @objc func backButtonPressed() {
+        dismiss(animated: true, completion: nil)
     }
     
     func cellColor(weather: String) -> UIColor {
