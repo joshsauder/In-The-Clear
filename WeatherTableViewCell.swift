@@ -10,10 +10,11 @@ import UIKit
 
 class WeatherTableViewCell: UITableViewCell {
     
-    @IBOutlet weak var directionsImage: UIImageView!
     @IBOutlet weak var weatherImage: UIImageView!
-    @IBOutlet weak var directionsLabel: UILabel!
     @IBOutlet weak var cityLabel: UILabel!
+    @IBOutlet weak var tempLabel: UILabel!
+    
+    
     
     override func awakeFromNib() {
         super.awakeFromNib()

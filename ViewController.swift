@@ -34,10 +34,10 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
     var locationEnd = CLLocation()
     
     var times: [Date] = []
-    var temps: [String] = []
     var conditions: [String] = []
     var cities: [String] = []
-    var directionArray: [String] = []
+    var highTemps: [Float] = []
+    var lowTemps: [Float] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -72,12 +72,11 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
         weatherList.clipsToBounds = true
         weatherList.setTitle("Expanded City List" , for: .normal)
         weatherList.setTitleColor(UIColor.black, for: .normal)
+        weatherList.titleLabel?.font = UIFont.systemFont(ofSize: 12)
         weatherList.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        
-       // createLine(startLocation: location!, endLocation: locationTujuan)
         
         self.locationManager.stopUpdatingLocation()
         
@@ -179,14 +178,20 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "ShowNavigation"{
             var weatherDataVals: [weatherData.Entry] = []
-            var i = 0
-            while i < conditions.count {
-                let entry = weatherData.Entry(weather: "", directions: "", city: "")
-                entry.city = cities[i]
-                entry.directions = directionArray[i]
-                entry.weather = conditions[i]
-                weatherDataVals.append(entry)
-                i = i + 1
+            while conditions.count > 0 {
+                let city = cities.remove(at: 0)
+                if !cities.contains(city){
+                    let entry = weatherData.Entry(weather: "", city: "", highTemp: 0, lowTemp: 0)
+                    entry.city = city
+                    entry.weather = conditions.remove(at: 0)
+                    entry.highTemp = highTemps.remove(at: 0)
+                    entry.lowTemp = lowTemps.remove(at: 0)
+                    weatherDataVals.append(entry)
+                }else{
+                    conditions.remove(at: 0)
+                    highTemps.remove(at: 0)
+                    lowTemps.remove(at: 0)
+                }
             }
             
             let DestViewController = segue.destination as! UINavigationController

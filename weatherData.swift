@@ -12,12 +12,15 @@ class weatherData {
     
     class Entry {
         var weather: String
-        var directions: String
         var city: String
-        init(weather: String, directions: String, city: String){
+        var highTemp: Float
+        var lowTemp:Float
+        
+        init(weather: String, city: String, highTemp: Float, lowTemp: Float){
             self.weather = weather
-            self.directions = directions
             self.city = city
+            self.highTemp = highTemp
+            self.lowTemp = lowTemp
         }
     }
         

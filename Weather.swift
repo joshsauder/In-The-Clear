@@ -14,7 +14,7 @@ import GoogleMaps
 extension ViewController {
     func getWeather(lat: String, long: String, timeToLookFor: Date, completion: @escaping (String) -> ()) {
         let urlBase = "http://api.openweathermap.org/data/2.5/forecast?"
-        let urlComplete = urlBase + "lat=\(lat)&lon=\(long)&APPID=0c2beca9233adf894f6acded6d9a946c"
+        let urlComplete = urlBase + "lat=\(lat)&lon=\(long)&units=imperial&APPID=0c2beca9233adf894f6acded6d9a946c"
         let url = URL(string: urlComplete)!
         var condition = ""
         Alamofire.request(urlComplete, method: .get).responseJSON(completionHandler: {
@@ -25,15 +25,17 @@ extension ViewController {
             case .success:
                 let json = JSON(response.data!)
                 let weatherList = json["list"].arrayValue
-                if !self.cities.contains(json["cities"]["name"].stringValue) {
-                    self.cities.append(json["city"]["name"].stringValue)
-                }
+                
+                self.cities.append(json["city"]["name"].stringValue)
+                
                 for weather in weatherList
                 {
                     //get condition
                         
                     //get time
                     let time = weather["dt_txt"].stringValue
+                    self.highTemps.append(weather["main"]["temp_max"].floatValue)
+                    self.lowTemps.append(weather["main"]["temp_min"].floatValue)
                     let dateFormatter = DateFormatter()
                     dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
                     dateFormatter.timeZone = TimeZone(abbreviation: "UTC")
@@ -120,8 +122,6 @@ extension ViewController {
             //get weather
             let lat = step["end_location"]["lat"].stringValue
             let long = step["end_location"]["lng"].stringValue
-            
-            directionArray.append(step["maneuver"].stringValue)
             
             getWeather(lat: lat, long: long, timeToLookFor: date) { condition in
             

@@ -33,13 +33,11 @@ class weatherMenu: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        
         let cell = tableView.dequeueReusableCell(withIdentifier: "WeatherTableViewCell", for: indexPath) as! WeatherTableViewCell
         let entry = weatherDataArray[indexPath.row]
-        cell.directionsImage.image = directionsImage(directions: entry.directions)
         cell.weatherImage.image = weatherImage(weather: entry.weather)
         cell.cityLabel.text = entry.city
-        cell.directionsLabel.text = entry.directions
+        cell.tempLabel.text = "\(Int(entry.highTemp.rounded()))/\(Int(entry.lowTemp.rounded()))"
         cell.backgroundColor = cellColor(weather: entry.weather)
         cell.layer.cornerRadius = 5
         cell.layer.borderWidth = 4
@@ -76,51 +74,6 @@ class weatherMenu: UITableViewController {
         }
         
         return color
-    }
-    
-
-    func directionsImage(directions: String) -> UIImage {
-        var image = UIImage()
-        if directions == "turn-sharp-left" || directions == "turn-slight-left" || directions == "turn-left" || directions == "ramp-left" || directions == "roundabout-left" || directions == "ramp-left" || directions == "keep-left" {
-            image = UIImage.fontAwesomeIcon(
-                name: .arrowAltCircleLeft,
-                style: .solid,
-                textColor: .white,
-                size: CGSize(width: 20, height: 15)
-            )
-        } else if directions == "turn-sharp-right" || directions == "turn-slight-right" || directions == "turn-right" || directions == "ramp-right" || directions == "roundabout-right" || directions == "ramp-right" || directions == "keep-right" {
-            image = UIImage.fontAwesomeIcon(
-                name: .arrowAltCircleRight,
-                style: .solid,
-                textColor: .white,
-                size: CGSize(width: 20, height: 15)
-            )
-        }
-        else if directions == "uturn-left"{
-            image = UIImage.fontAwesomeIcon(
-                name: .undo,
-                style: .solid,
-                textColor: .white,
-                size: CGSize(width: 20, height: 15)
-            )
-            
-        } else if directions == "uturn-right"{
-            image = UIImage.fontAwesomeIcon(
-                name: .redo,
-                style: .solid,
-                textColor: .white,
-                size: CGSize(width: 20, height: 15)
-            )
-        }
-        else {
-            image = UIImage.fontAwesomeIcon(
-                name: .arrowAltCircleUp,
-                style: .solid,
-                textColor: .white,
-                size: CGSize(width: 20, height: 15)
-            )
-        }
-        return image
     }
     
     func weatherImage(weather: String) -> UIImage {
