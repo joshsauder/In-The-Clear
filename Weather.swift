@@ -82,7 +82,7 @@ extension ViewController {
             let routesVal = routes[0]["legs"].arrayValue
             let stepsEval = routesVal[0]
             let steps = stepsEval["steps"].arrayValue
-            
+            self.polylineArray.forEach { $0.map = nil }
             
             for route in routes
             {
@@ -91,6 +91,7 @@ extension ViewController {
                 let path = GMSPath.init(fromEncodedPath: points!)
                 let polyline = GMSPolyline.init(path: path)
                 polyline.strokeWidth = 7
+                self.polylineArray.append(polyline)
                 self.colorPath(line: polyline, steps: steps)
                 polyline.map = self.mapView
                 self.mapView.animate(with: GMSCameraUpdate.fit(GMSCoordinateBounds(path: polyline.path!), withPadding: 50))

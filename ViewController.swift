@@ -22,11 +22,11 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
     
     var locationManager = CLLocationManager()
     var locationSelected = Location.startLocation
+    var polylineArray = [GMSPolyline]()
     
     @IBOutlet weak var startLocation: UITextField!
     @IBOutlet weak var destinationLocation: UITextField!
     @IBOutlet weak var weatherList: UIButton!
-    
     @IBOutlet weak var mapView: GMSMapView!
     
     
