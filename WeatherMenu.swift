@@ -39,8 +39,8 @@ class weatherMenu: UITableViewController {
         cell.cityLabel.text = entry.city
         cell.tempLabel.text = "\(Int(entry.highTemp.rounded()))/\(Int(entry.lowTemp.rounded()))"
         cell.backgroundColor = cellColor(weather: entry.weather)
-        cell.layer.cornerRadius = 5
-        cell.layer.borderWidth = 4
+        cell.layer.cornerRadius = 15
+        cell.layer.borderWidth = 6
         cell.layer.borderColor = tableView.backgroundColor?.cgColor
         
         return cell

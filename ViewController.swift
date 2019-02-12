@@ -68,12 +68,25 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
     
     func addGlyph(){
         
+        //set up weatherButton
         weatherList.layer.cornerRadius = 5
         weatherList.clipsToBounds = true
         weatherList.setTitle("Expanded City List" , for: .normal)
         weatherList.setTitleColor(UIColor.black, for: .normal)
         weatherList.titleLabel?.font = UIFont.systemFont(ofSize: 12)
         weatherList.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
+        
+        //add shadow to button
+        weatherList.layer.shadowColor = UIColor.black.cgColor
+        weatherList.layer.masksToBounds = false
+        weatherList.layer.shadowOffset = CGSize(width: 5, height: 5)
+        weatherList.layer.shadowRadius = 5
+        weatherList.layer.shadowOpacity = 1.0
+        
+        //disable button at start
+        weatherList.isEnabled = false
+        weatherList.alpha = 0.5
+        
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
@@ -160,9 +173,13 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
         
     }
     
+    //function that calls createLine to create directions line on map
     func showDirection(){
-        
+        //show line
         self.createLine(startLocation: locationStart, endLocation: locationEnd)
+        //enable button
+        weatherList.isEnabled = true
+        weatherList.alpha = 1
     }
 
     
