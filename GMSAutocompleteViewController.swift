@@ -13,20 +13,20 @@ import GooglePlaces
 
 extension ViewController: GMSAutocompleteViewControllerDelegate {
     func viewController(_ viewController: GMSAutocompleteViewController, didAutocompleteWith place: GMSPlace) {
-        let camera = GMSCameraPosition.camera(withLatitude: place.coordinate.latitude, longitude: place.coordinate.longitude, zoom: 16.0)
+        let camera = GMSCameraPosition.camera(withLatitude: place.coordinate.latitude, longitude: place.coordinate.longitude, zoom: 10.0)
         
         if(locationSelected == .startLocation){
             //replace text in box
-            startLocation.text = "\(place.name)"
+            startLocation.text = "\(place.name!)"
             locationStart = CLLocation(latitude: place.coordinate.latitude, longitude: place.coordinate.longitude)
             createMarker(titleMarker: "Location Start", latitude: place.coordinate.longitude, longitude: place.coordinate.longitude)
         } else{
-            destinationLocation.text = "\(place.name)"
+            destinationLocation.text = "\(place.name!)"
             locationEnd = CLLocation(latitude: place.coordinate.latitude, longitude: place.coordinate.longitude)
+            self.mapView.camera = camera
             createMarker(titleMarker: "Location End", latitude: place.coordinate.longitude, longitude: place.coordinate.longitude)
         }
         
-        self.mapView.camera = camera
         
         if locationStart.coordinate.longitude != 0 && locationEnd.coordinate.longitude != 0 {
             showDirection()
