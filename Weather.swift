@@ -111,9 +111,9 @@ extension ViewController {
         var distance: [Int] = []
         var totalTime = 0
         
-        let snow = GMSStrokeStyle.solidColor(UIColor.blue)
+        let snow = GMSStrokeStyle.solidColor(UIColor(red:0.43, green:0.39, blue:1.00, alpha:1.0))
         let rain = GMSStrokeStyle.solidColor(UIColor.green)
-        let storms = GMSStrokeStyle.solidColor(UIColor.red)
+        let storms = GMSStrokeStyle.solidColor(UIColor(red:0.89, green:0.11, blue:0.34, alpha:1.0))
         let sun = GMSStrokeStyle.solidColor(UIColor.yellow)
         
         for step in steps {
