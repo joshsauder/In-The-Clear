@@ -19,6 +19,7 @@ class weatherMenu: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpNav()
+        tableView.separatorStyle = .none
         
     }
     
@@ -64,10 +65,10 @@ class weatherMenu: UITableViewController {
             color = UIColor.green
             
         } else if weather == "Thunderstorm" {
-            color = UIColor.red
+            color = UIColor(red:0.89, green:0.11, blue:0.34, alpha:1.0)
             
         } else if weather == "Snow" {
-            color = UIColor.blue
+            color = UIColor(red:0.43, green:0.39, blue:1.00, alpha:1.0)
             
         } else {
             color = UIColor.yellow
