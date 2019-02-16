@@ -70,7 +70,11 @@ class weatherMenu: UITableViewController {
         } else if weather == "Snow" {
             color = UIColor(red:0.43, green:0.39, blue:1.00, alpha:1.0)
             
-        } else {
+        } else if weather == "Clouds" {
+            color = UIColor(red:0.63, green:0.62, blue:0.62, alpha:1.0)
+            
+        }
+        else {
             color = UIColor(red:0.98, green:0.93, blue:0.43, alpha:1.0)
         }
         
@@ -102,6 +106,13 @@ class weatherMenu: UITableViewController {
                 size: CGSize(width: 20, height: 15)
             )
             
+        } else if weather == "Clouds" {
+            image = UIImage.fontAwesomeIcon(
+                name: .cloud,
+                style: .solid,
+                textColor: .white,
+                size: CGSize(width: 20, height: 15)
+            )
         } else {
             image = UIImage.fontAwesomeIcon(
                 name: .sun,

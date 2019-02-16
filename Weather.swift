@@ -115,6 +115,7 @@ extension ViewController {
         let rain = GMSStrokeStyle.solidColor(UIColor(red:0.35, green:0.93, blue:0.35, alpha:1.0))
         let storms = GMSStrokeStyle.solidColor(UIColor(red:0.89, green:0.11, blue:0.34, alpha:1.0))
         let sun = GMSStrokeStyle.solidColor(UIColor.yellow)
+        let clouds = GMSStrokeStyle.solidColor(UIColor(red:0.63, green:0.62, blue:0.62, alpha:1.0))
         
         for step in steps {
             //get distance
@@ -136,6 +137,8 @@ extension ViewController {
                 colorSegs.append(GMSStyleSpan(style: storms))
             } else if condition == "Snow" {
                 colorSegs.append(GMSStyleSpan(style: snow))
+            } else if condition == "Clouds"{
+                colorSegs.append(GMSStyleSpan(style: clouds))
             } else {
                 colorSegs.append(GMSStyleSpan(style: sun))
             }
