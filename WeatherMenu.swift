@@ -62,7 +62,7 @@ class weatherMenu: UITableViewController {
         var color = UIColor()
         
         if weather == "Rain" {
-            color = UIColor.green
+            color = UIColor(red:0.35, green:0.93, blue:0.35, alpha:1.0)
             
         } else if weather == "Thunderstorm" {
             color = UIColor(red:0.89, green:0.11, blue:0.34, alpha:1.0)
@@ -71,7 +71,7 @@ class weatherMenu: UITableViewController {
             color = UIColor(red:0.43, green:0.39, blue:1.00, alpha:1.0)
             
         } else {
-            color = UIColor.yellow
+            color = UIColor(red:0.98, green:0.93, blue:0.43, alpha:1.0)
         }
         
         return color

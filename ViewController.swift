@@ -180,6 +180,12 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
         //enable button
         weatherList.isEnabled = true
         weatherList.alpha = 1
+        
+        //clear weather arrays
+        cities.removeAll()
+        lowTemps.removeAll()
+        highTemps.removeAll()
+        conditions.removeAll()
     }
 
     
@@ -197,20 +203,20 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "ShowNavigation"{
             var weatherDataVals: [weatherData.Entry] = []
-            while conditions.count > 0 {
-                let city = cities.remove(at: 0)
-                if !cities.contains(city){
+            var i = 0
+            var citiesUsed: [String] = []
+            while i < conditions.count {
+                let city = cities[i]
+                if !citiesUsed.contains(city){
+                    citiesUsed.append(city)
                     let entry = weatherData.Entry(weather: "", city: "", highTemp: 0, lowTemp: 0)
                     entry.city = city
-                    entry.weather = conditions.remove(at: 0)
-                    entry.highTemp = highTemps.remove(at: 0)
-                    entry.lowTemp = lowTemps.remove(at: 0)
+                    entry.weather = conditions[i]
+                    entry.highTemp = highTemps[i]
+                    entry.lowTemp = lowTemps[i]
                     weatherDataVals.append(entry)
-                }else{
-                    conditions.remove(at: 0)
-                    highTemps.remove(at: 0)
-                    lowTemps.remove(at: 0)
                 }
+                i = i + 1
             }
             
             let DestViewController = segue.destination as! UINavigationController

@@ -112,7 +112,7 @@ extension ViewController {
         var totalTime = 0
         
         let snow = GMSStrokeStyle.solidColor(UIColor(red:0.43, green:0.39, blue:1.00, alpha:1.0))
-        let rain = GMSStrokeStyle.solidColor(UIColor.green)
+        let rain = GMSStrokeStyle.solidColor(UIColor(red:0.35, green:0.93, blue:0.35, alpha:1.0))
         let storms = GMSStrokeStyle.solidColor(UIColor(red:0.89, green:0.11, blue:0.34, alpha:1.0))
         let sun = GMSStrokeStyle.solidColor(UIColor.yellow)
         
