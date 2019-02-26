@@ -59,7 +59,7 @@ extension ViewController {
         })
     }
     
-    func createLine(startLocation: CLLocation, endLocation: CLLocation){
+    func createLine(startLocation: CLLocation, endLocation: CLLocation) -> Int {
         
         //colors for lines based on condition
         
@@ -67,6 +67,7 @@ extension ViewController {
         let destination = "\(endLocation.coordinate.latitude),\(endLocation.coordinate.longitude)"
         
         let pathURL = url.PATH_URL + origin + "&destination=" + destination + "&mode=driving&key=" + "AIzaSyDznbmSUzLQ7dBofWqxHg-N6_jxxFBrxy0"
+        var totalTime = 0
         
         Alamofire.request(pathURL, method: .get).validate().responseJSON { response in
             
@@ -99,7 +100,8 @@ extension ViewController {
                     let polyline = GMSPolyline.init(path: path)
                     polyline.strokeWidth = 7
                     self.polylineArray.append(polyline)
-                    self.colorPath(line: polyline, steps: steps) {
+                    self.colorPath(line: polyline, steps: steps) { time in
+                        totalTime = time
                         polyline.map = self.mapView
                         self.mapView.animate(with: GMSCameraUpdate.fit(GMSCoordinateBounds(path: polyline.path!), withPadding: 50))
                     }
@@ -107,9 +109,10 @@ extension ViewController {
             }
             
         }
+        return totalTime
     }
     
-    func colorPath(line: GMSPolyline, steps: [JSON], completion: @escaping () -> Void) {
+    func colorPath(line: GMSPolyline, steps: [JSON], completion: @escaping (Int) -> ()) {
         //take each step and get weather at end location
         let refDate = Date.timeIntervalSinceReferenceDate
         var date = Date(timeIntervalSinceReferenceDate: refDate)
@@ -160,7 +163,7 @@ extension ViewController {
         
         myGroup.notify(queue: .main) {
             line.spans = colorSegs
-            completion()
+            completion(totalTime)
         }
         
         //take step time divided by total time

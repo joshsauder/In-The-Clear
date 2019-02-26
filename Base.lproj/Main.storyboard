@@ -48,7 +48,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IxU-i0-uud">
-                                        <rect key="frame" x="89" y="133" width="196" height="30"/>
+                                        <rect key="frame" x="89.666666666666686" y="133" width="196" height="30"/>
                                         <color key="backgroundColor" red="0.98344305200000004" green="0.98344305200000004" blue="0.98344305200000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="196" id="EzK-Xu-5Xs"/>
@@ -79,7 +79,23 @@
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MeT-bN-U9A" customClass="GMSMapView">
                                 <rect key="frame" x="0.0" y="172" width="375" height="640"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VPO-Up-Lz2">
+                                        <rect key="frame" x="49" y="555" width="144" height="43"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="144" id="9r8-L4-gMw"/>
+                                            <constraint firstAttribute="height" constant="43" id="K8o-NB-vlE"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="VPO-Up-Lz2" firstAttribute="bottom" secondItem="MeT-bN-U9A" secondAttribute="bottomMargin" id="VHz-K2-ole"/>
+                                    <constraint firstItem="VPO-Up-Lz2" firstAttribute="leading" secondItem="MeT-bN-U9A" secondAttribute="leading" constant="49" id="bQa-tA-drB"/>
+                                </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -99,6 +115,7 @@
                         <outlet property="destinationLocation" destination="epA-ie-vQH" id="o8T-Sf-s82"/>
                         <outlet property="mapView" destination="MeT-bN-U9A" id="GKc-Kf-vIJ"/>
                         <outlet property="startLocation" destination="NRT-9p-hDV" id="aAr-az-4Uy"/>
+                        <outlet property="timeLabel" destination="VPO-Up-Lz2" id="Txt-ZI-CcO"/>
                         <outlet property="weatherList" destination="IxU-i0-uud" id="Suv-eY-Anj"/>
                     </connections>
                 </viewController>

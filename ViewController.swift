@@ -28,6 +28,7 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
     @IBOutlet weak var destinationLocation: UITextField!
     @IBOutlet weak var weatherList: UIButton!
     @IBOutlet weak var mapView: GMSMapView!
+    @IBOutlet weak var timeLabel: UILabel!
     
     
     var locationStart = CLLocation()
@@ -86,6 +87,12 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
         //disable button at start
         weatherList.isEnabled = false
         weatherList.alpha = 0.5
+        
+        set up timelabel
+        timeLabel.isHidden = true
+        timeLabel.backgroundColor = UIColor(white: 0.0, alpha: 0.7)
+        timeLabel.layer.cornerRadius = 5
+        timeLabel.clipsToBounds = true
         
     }
     
@@ -176,10 +183,14 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
     //function that calls createLine to create directions line on map
     func showDirection(){
         //show line
-        self.createLine(startLocation: locationStart, endLocation: locationEnd)
+        let time = self.createLine(startLocation: locationStart, endLocation: locationEnd)
         //enable button
         weatherList.isEnabled = true
         weatherList.alpha = 1
+        
+        //enable time label
+        timeLabel.text = "Total Time: \(time)"
+        timeLabel.isEnabled = true
         
         //clear weather arrays
         cities.removeAll()
