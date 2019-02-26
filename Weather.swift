@@ -43,9 +43,9 @@ extension ViewController {
                     self.times.append(dateFromString!)
                     let weatherArray = weather["weather"].arrayValue
                     condition = weatherArray[0]["main"].stringValue
-                    print(dateFromString!.addingTimeInterval(60*60*3))
+                    //print(dateFromString!.addingTimeInterval(60*60*3))
                     if(dateFromString!.addingTimeInterval(60.0*60*3) > timeToLookFor || dateFromString!.addingTimeInterval(-60.0*60*3) < timeToLookFor) {
-                        print (condition)
+                        //print (condition)
                         completion(condition)
                         break;
                     }
@@ -85,24 +85,31 @@ extension ViewController {
                 let steps = stepsEval["steps"].arrayValue
                 self.polylineArray.forEach { $0.map = nil }
                 
-                for route in routes
-                {
-                    let routeOverviewPolyline = route["overview_polyline"].dictionary
-                    let points = routeOverviewPolyline?["points"]?.stringValue
-                    let path = GMSPath.init(fromEncodedPath: points!)
+  //              for route in routes
+ //               {
+                    //let routeOverviewPolyline = route["overview_polyline"].dictionary
+                    //let points = routeOverviewPolyline?["points"]?.stringValue
+                    let path = GMSMutablePath()
+                    for step in steps {
+                        let lat = step["end_location"]["lat"].doubleValue
+                        let long = step["end_location"]["lng"].doubleValue
+                        path.add(CLLocationCoordinate2D(latitude: lat, longitude: long))
+                    }
+                    //let path = GMSPath.init(fromEncodedPath: points!)
                     let polyline = GMSPolyline.init(path: path)
                     polyline.strokeWidth = 7
                     self.polylineArray.append(polyline)
-                    self.colorPath(line: polyline, steps: steps)
-                    polyline.map = self.mapView
-                    self.mapView.animate(with: GMSCameraUpdate.fit(GMSCoordinateBounds(path: polyline.path!), withPadding: 50))
-                }
+                    self.colorPath(line: polyline, steps: steps) {
+                        polyline.map = self.mapView
+                        self.mapView.animate(with: GMSCameraUpdate.fit(GMSCoordinateBounds(path: polyline.path!), withPadding: 50))
+                    }
+//                }
             }
             
         }
     }
     
-    func colorPath(line: GMSPolyline, steps: [JSON]) {
+    func colorPath(line: GMSPolyline, steps: [JSON], completion: @escaping () -> Void) {
         //take each step and get weather at end location
         let refDate = Date.timeIntervalSinceReferenceDate
         var date = Date(timeIntervalSinceReferenceDate: refDate)
@@ -117,7 +124,11 @@ extension ViewController {
         let sun = GMSStrokeStyle.solidColor(UIColor.yellow)
         let clouds = GMSStrokeStyle.solidColor(UIColor(red:0.63, green:0.62, blue:0.62, alpha:1.0))
         
+        let myGroup = DispatchGroup()
+        
         for step in steps {
+            
+            myGroup.enter()
             //get distance
             let time = step["duration"]["value"].intValue
             distance.append(time)
@@ -127,24 +138,31 @@ extension ViewController {
             let lat = step["end_location"]["lat"].stringValue
             let long = step["end_location"]["lng"].stringValue
             
+            
             getWeather(lat: lat, long: long, timeToLookFor: date) { condition in
             
                 self.conditions.append(condition)
                 
-            if condition == "Rain" {
-                colorSegs.append(GMSStyleSpan(style: rain))
-            } else if condition == "Thunderstorm" {
-                colorSegs.append(GMSStyleSpan(style: storms))
-            } else if condition == "Snow" {
-                colorSegs.append(GMSStyleSpan(style: snow))
-            } else if condition == "Clouds"{
-                colorSegs.append(GMSStyleSpan(style: clouds))
-            } else {
-                colorSegs.append(GMSStyleSpan(style: sun))
-            }
-            line.spans = colorSegs
+                if condition == "Rain" {
+                    colorSegs.append(GMSStyleSpan(style: rain))
+                } else if condition == "Thunderstorm" {
+                    colorSegs.append(GMSStyleSpan(style: storms))
+                } else if condition == "Snow" {
+                    colorSegs.append(GMSStyleSpan(style: snow))
+                } else if condition == "Clouds"{
+                    colorSegs.append(GMSStyleSpan(style: clouds))
+                } else {
+                    colorSegs.append(GMSStyleSpan(style: sun))
+                }
+                myGroup.leave()
             }
         }
+        
+        myGroup.notify(queue: .main) {
+            line.spans = colorSegs
+            completion()
+        }
+        
         //take step time divided by total time
        // line.spans = colorSegs
         //color path based on fraction
