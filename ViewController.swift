@@ -88,7 +88,7 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
         weatherList.isEnabled = false
         weatherList.alpha = 0.5
         
-        set up timelabel
+        //set up timelabel
         timeLabel.isHidden = true
         timeLabel.backgroundColor = UIColor(white: 0.0, alpha: 0.7)
         timeLabel.layer.cornerRadius = 5
