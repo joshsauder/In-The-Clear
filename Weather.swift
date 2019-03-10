@@ -150,7 +150,9 @@ extension ViewController {
             
                 self.conditions.append(condition)
                 
-                while pathCoordinates.latitude.rounded() == step["end_location"]["lat"].doubleValue.rounded() && pathCoordinates.longitude.rounded() == step["end_location"]["long"].doubleValue.rounded() {
+                var stepCoordinates = CLLocationCoordinate2D(latitude: step["end_location"]["lat"].doubleValue, longitude: step["end_location"]["lng"].doubleValue)
+                
+                while pathCoordinates.latitude.rounded() == stepCoordinates.latitude.rounded() && pathCoordinates.longitude.rounded() == stepCoordinates.longitude.rounded() {
                     
                     numberSegs = numberSegs + 1
                     i = i + 1
