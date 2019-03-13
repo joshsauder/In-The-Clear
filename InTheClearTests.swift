@@ -77,7 +77,18 @@ class InTheClearTests: XCTestCase {
         
         vc.createLine(startLocation: start, endLocation: destination)
         
-        let pathURL = url.PATH_URL + "42.33168,-83.048" + "&destination=" + "39.96199,-83.00275" + "&mode=driving&key=" + "AIzaSyDznbmSUzLQ7dBofWqxHg-N6_jxxFBrxy0"
+        let path = vc.polylineArray[0].path
+        
+        //get coordinates
+        let startCoordinates = path?.coordinate(at: UInt(0))
+        let endCoordinates = path?.coordinate(at: UInt((path?.count())!-1))
+        
+        //make sure start and end coordinates are equal
+        assert(startCoordinates?.latitude == CLLocationDegrees(exactly: 42.33168))
+        assert(startCoordinates?.longitude == CLLocationDegrees(exactly: -83.048))
+        
+        assert(endCoordinates?.latitude == CLLocationDegrees(exactly: 39.96199))
+        assert(endCoordinates?.longitude == CLLocationDegrees(exactly: -83.00275))
     }
     
     /*
@@ -112,6 +123,17 @@ class InTheClearTests: XCTestCase {
     */
     func testTotalTime(){
         
+        let vc = ViewController()
+        
+        //Detroit, MI coordinates
+        let start = CLLocation(latitude: CLLocationDegrees(exactly: 42.33168)!, longitude: CLLocationDegrees(exactly: -83.048)!)
+        
+        //Columbus, OH coordinates
+        let destination = CLLocation(latitude: CLLocationDegrees(exactly: 39.96199)!, longitude: CLLocationDegrees(exactly: -83.00275)!)
+        
+        let time = vc.createLine(startLocation: start, endLocation: destination)
+        
+        //TODO: Change total time to take in initial string in Leg
     }
     
     /*
