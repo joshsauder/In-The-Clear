@@ -12,6 +12,9 @@ import GoogleMaps
 
 class InTheClearTests: XCTestCase {
     
+    let vc = ViewController()
+    
+    
     override func setUp() {
         super.setUp()
     }
@@ -24,8 +27,6 @@ class InTheClearTests: XCTestCase {
      Should return a valid route
     */
     func testNormalRoute() {
-        
-        let vc = ViewController()
         
         //Detroit, MI coordinates
         let start = CLLocation(latitude: CLLocationDegrees(exactly: 42.33168)!, longitude: CLLocationDegrees(exactly: -83.048)!)
@@ -47,8 +48,6 @@ class InTheClearTests: XCTestCase {
     */
     func testOverseasRoute(){
         
-        let vc = ViewController()
-        
         //Madrid, Spain coordinates
         let start = CLLocation(latitude: CLLocationDegrees(exactly: 40.42028)!, longitude: CLLocationDegrees(exactly: -3.70577)!)
         
@@ -66,8 +65,6 @@ class InTheClearTests: XCTestCase {
      Test that will check to ensure line is being drawn correctly
     */
     func testRouteLine(){
-        
-        let vc = ViewController()
         
         //Detroit, MI coordinates
         let start = CLLocation(latitude: CLLocationDegrees(exactly: 42.33168)!, longitude: CLLocationDegrees(exactly: -83.048)!)
@@ -96,8 +93,6 @@ class InTheClearTests: XCTestCase {
     */
     func testSecondRoute(){
         
-        let vc = ViewController()
-        
         //Detroit, MI coordinates
         let start = CLLocation(latitude: CLLocationDegrees(exactly: 42.33168)!, longitude: CLLocationDegrees(exactly: -83.048)!)
         
@@ -122,9 +117,7 @@ class InTheClearTests: XCTestCase {
      Ensures correct route time is being displayed
     */
     func testTotalTime(){
-        
-        let vc = ViewController()
-        
+
         //Detroit, MI coordinates
         let start = CLLocation(latitude: CLLocationDegrees(exactly: 42.33168)!, longitude: CLLocationDegrees(exactly: -83.048)!)
         
@@ -134,13 +127,6 @@ class InTheClearTests: XCTestCase {
         let time = vc.createLine(startLocation: start, endLocation: destination)
         
         //TODO: Change total time to take in initial string in Leg
-    }
-    
-    /*
-     Test that ensures correct times are being pulled from weather service with respect to the time at which the driver will pass through
-    */
-    func testCorrectTimes(){
-        
     }
 
 }
