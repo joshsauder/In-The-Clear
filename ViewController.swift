@@ -90,13 +90,25 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
         
         //set up timelabel
         timeLabel.isHidden = true
-        timeLabel.backgroundColor = UIColor(white: 0.0, alpha: 0.7)
+        timeLabel.backgroundColor = UIColor(white: 1, alpha: 0.7)
         timeLabel.layer.cornerRadius = 5
         timeLabel.clipsToBounds = true
+        timeLabel.textAlignment = .center
+        timeLabel.font = UIFont.boldSystemFont(ofSize: 20.0)
         
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        
+        let location = locations.last
+        
+        let camera = GMSCameraPosition.camera(withLatitude: (location?.coordinate.latitude)!, longitude: (location?.coordinate.longitude)!, zoom: 17.0)
+        
+        self.mapView?.animate(to: camera)
+        
+        locationStart = location!
+        startLocation.text = "Current Location"
+
         
         self.locationManager.stopUpdatingLocation()
         
@@ -183,14 +195,15 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
     //function that calls createLine to create directions line on map
     func showDirection(){
         //show line
-        let time = self.createLine(startLocation: locationStart, endLocation: locationEnd)
+        self.createLine(startLocation: locationStart, endLocation: locationEnd) { time in
+        
+            //enable time label
+            self.timeLabel.text = "Total Time: \(time)"
+            self.timeLabel.isHidden = false
+        }
         //enable button
         weatherList.isEnabled = true
         weatherList.alpha = 1
-        
-        //enable time label
-        timeLabel.text = "Total Time: \(time)"
-        timeLabel.isEnabled = true
         
         //clear weather arrays
         cities.removeAll()

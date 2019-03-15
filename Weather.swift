@@ -59,7 +59,7 @@ extension ViewController {
         })
     }
     
-    func createLine(startLocation: CLLocation, endLocation: CLLocation) -> Int {
+    func createLine(startLocation: CLLocation, endLocation: CLLocation, completion: @escaping (String) -> ()) {
         
         //colors for lines based on condition
         
@@ -67,7 +67,6 @@ extension ViewController {
         let destination = "\(endLocation.coordinate.latitude),\(endLocation.coordinate.longitude)"
         
         let pathURL = url.PATH_URL + origin + "&destination=" + destination + "&mode=driving&key=" + "AIzaSyDznbmSUzLQ7dBofWqxHg-N6_jxxFBrxy0"
-        var totalTime = 0
         
         Alamofire.request(pathURL, method: .get).validate().responseJSON { response in
             
@@ -78,11 +77,13 @@ extension ViewController {
             print(response.data as Any)     // server data
             print(response.result as Any)
             
+            //begin parsing the response
             let json = JSON(response.data!)
             let routes = json["routes"].arrayValue
             if routes.count > 0 {
                 let routesVal = routes[0]["legs"].arrayValue
                 let stepsEval = routesVal[0]
+                let totalTime = stepsEval["duration"]["text"].stringValue
                 let steps = stepsEval["steps"].arrayValue
                 self.polylineArray.forEach { $0.map = nil }
                 
@@ -90,26 +91,22 @@ extension ViewController {
                 {
                     let routeOverviewPolyline = route["overview_polyline"].dictionary
                     let points = routeOverviewPolyline?["points"]?.stringValue
-//                    let path = GMSMutablePath()
-//                    for step in steps {
-//                        let lat = step["end_location"]["lat"].doubleValue
-//                        let long = step["end_location"]["lng"].doubleValue
-//                        path.add(CLLocationCoordinate2D(latitude: lat, longitude: long))
-//                    }
+                    
+                    //create path and polyline from encoded path
                     let path = GMSPath.init(fromEncodedPath: points!)
                     let polyline = GMSPolyline.init(path: path)
                     polyline.strokeWidth = 7
                     self.polylineArray.append(polyline)
                     self.colorPath(line: polyline, steps: steps, path: path!) { time in
-                        totalTime = time
                         polyline.map = self.mapView
                         self.mapView.animate(with: GMSCameraUpdate.fit(GMSCoordinateBounds(path: polyline.path!), withPadding: 50))
+                        //return total time val from json once colorpath method completes
+                        completion(totalTime)
                     }
                 }
             }
             
         }
-        return totalTime
     }
     
     func colorPath(line: GMSPolyline, steps: [JSON], path: GMSPath, completion: @escaping (Int) -> ()) {
@@ -121,12 +118,14 @@ extension ViewController {
         var distance: [Int] = []
         var totalTime = 0
         
+        //initialize stroke styles
         let snow = GMSStrokeStyle.solidColor(UIColor(red:0.43, green:0.39, blue:1.00, alpha:1.0))
         let rain = GMSStrokeStyle.solidColor(UIColor(red:0.35, green:0.93, blue:0.35, alpha:1.0))
         let storms = GMSStrokeStyle.solidColor(UIColor(red:0.89, green:0.11, blue:0.34, alpha:1.0))
         let sun = GMSStrokeStyle.solidColor(UIColor.yellow)
         let clouds = GMSStrokeStyle.solidColor(UIColor(red:0.63, green:0.62, blue:0.62, alpha:1.0))
         
+        //Needed for async
         let myGroup = DispatchGroup()
         
         var i = UInt(0)
@@ -152,6 +151,7 @@ extension ViewController {
                 
                 var stepCoordinates = CLLocationCoordinate2D(latitude: step["end_location"]["lat"].doubleValue, longitude: step["end_location"]["lng"].doubleValue)
                 
+                //add segments between each path coordinate
                 while pathCoordinates.latitude.rounded() == stepCoordinates.latitude.rounded() && pathCoordinates.longitude.rounded() == stepCoordinates.longitude.rounded() {
                     
                     numberSegs = numberSegs + 1
@@ -159,6 +159,7 @@ extension ViewController {
                     pathCoordinates = path.coordinate(at: i)
                 }
                 
+                //determine which style span to use
                 if condition == "Rain" {
                     colorSegs.append(GMSStyleSpan(style: rain, segments: Double(numberSegs)))
                 } else if condition == "Thunderstorm" {

@@ -79,33 +79,32 @@
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MeT-bN-U9A" customClass="GMSMapView">
                                 <rect key="frame" x="0.0" y="172" width="375" height="640"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VPO-Up-Lz2">
-                                        <rect key="frame" x="49" y="555" width="144" height="43"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="144" id="9r8-L4-gMw"/>
-                                            <constraint firstAttribute="height" constant="43" id="K8o-NB-vlE"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstItem="VPO-Up-Lz2" firstAttribute="bottom" secondItem="MeT-bN-U9A" secondAttribute="bottomMargin" id="VHz-K2-ole"/>
-                                    <constraint firstItem="VPO-Up-Lz2" firstAttribute="leading" secondItem="MeT-bN-U9A" secondAttribute="leading" constant="49" id="bQa-tA-drB"/>
-                                </constraints>
                             </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VPO-Up-Lz2">
+                                <rect key="frame" x="0.0" y="764" width="375" height="48"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="375" id="9r8-L4-gMw"/>
+                                    <constraint firstAttribute="height" constant="48" id="K8o-NB-vlE"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstAttribute="bottom" secondItem="VPO-Up-Lz2" secondAttribute="bottom" id="0kw-Z4-25d"/>
+                            <constraint firstItem="VPO-Up-Lz2" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="AbM-Yo-l5e"/>
+                            <constraint firstItem="VPO-Up-Lz2" firstAttribute="bottom" secondItem="MeT-bN-U9A" secondAttribute="bottom" id="FxR-MJ-GYb"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="5FJ-qe-Fmz" secondAttribute="bottom" constant="604" id="Gz3-ND-oUe"/>
                             <constraint firstItem="MeT-bN-U9A" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="OqD-uu-U0E"/>
                             <constraint firstItem="5FJ-qe-Fmz" firstAttribute="leading" secondItem="MeT-bN-U9A" secondAttribute="leading" id="V6C-4n-XFL"/>
+                            <constraint firstItem="VPO-Up-Lz2" firstAttribute="leading" secondItem="MeT-bN-U9A" secondAttribute="leading" id="dZ7-11-GPa"/>
                             <constraint firstItem="5FJ-qe-Fmz" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="dsM-44-Xan"/>
                             <constraint firstItem="5FJ-qe-Fmz" firstAttribute="trailing" secondItem="MeT-bN-U9A" secondAttribute="trailing" id="eeY-xD-sQb"/>
                             <constraint firstAttribute="trailing" secondItem="MeT-bN-U9A" secondAttribute="trailing" id="h0I-Fl-7iT"/>
+                            <constraint firstItem="VPO-Up-Lz2" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="rQ6-Gm-Aw3"/>
                             <constraint firstItem="MeT-bN-U9A" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="172" id="yCt-he-1yu"/>
                             <constraint firstAttribute="bottom" secondItem="MeT-bN-U9A" secondAttribute="bottom" id="yrV-Ds-oQx"/>
                         </constraints>
