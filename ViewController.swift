@@ -99,13 +99,12 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        
+        //set map to current location
         let location = locations.last
-        
         let camera = GMSCameraPosition.camera(withLatitude: (location?.coordinate.latitude)!, longitude: (location?.coordinate.longitude)!, zoom: 17.0)
-        
         self.mapView?.animate(to: camera)
         
+        //set start to current location
         locationStart = location!
         startLocation.text = "Current Location"
 
