@@ -214,12 +214,11 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
     
     // function to create a marker on map
     func createMarker(titleMarker: String, latitude: CLLocationDegrees, longitude: CLLocationDegrees) {
-        let marker = GMSMarker()
-        marker.position = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
-        marker.map = self.mapView
+        let marker = GMSMarker(position: CLLocationCoordinate2D(latitude: latitude, longitude: longitude))
         marker.title = titleMarker
-        marker.appearAnimation = .pop
-        marker.icon = GMSMarker.markerImage(with: UIColor.red)
+        //marker.appearAnimation = .pop
+        //marker.icon = GMSMarker.markerImage(with: UIColor.red)
+        marker.map = mapView
     }
 
     

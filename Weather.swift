@@ -15,7 +15,6 @@ extension ViewController {
     func getWeather(lat: String, long: String, timeToLookFor: Date, completion: @escaping (String) -> ()) {
         let urlBase = "http://api.openweathermap.org/data/2.5/forecast?"
         let urlComplete = urlBase + "lat=\(lat)&lon=\(long)&units=imperial&APPID=0c2beca9233adf894f6acded6d9a946c"
-        let url = URL(string: urlComplete)!
         var condition = ""
         Alamofire.request(urlComplete, method: .get).responseJSON(completionHandler: {
                 (response) in
@@ -149,7 +148,7 @@ extension ViewController {
             
                 self.conditions.append(condition)
                 
-                var stepCoordinates = CLLocationCoordinate2D(latitude: step["end_location"]["lat"].doubleValue, longitude: step["end_location"]["lng"].doubleValue)
+                let stepCoordinates = CLLocationCoordinate2D(latitude: step["end_location"]["lat"].doubleValue, longitude: step["end_location"]["lng"].doubleValue)
                 
                 //add segments between each path coordinate
                 while pathCoordinates.latitude.rounded() == stepCoordinates.latitude.rounded() && pathCoordinates.longitude.rounded() == stepCoordinates.longitude.rounded() {

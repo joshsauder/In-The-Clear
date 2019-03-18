@@ -144,30 +144,30 @@
                                                 <constraint firstAttribute="width" constant="80" id="VXG-zo-NhX"/>
                                             </constraints>
                                         </imageView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4i9-z8-dVM">
-                                            <rect key="frame" x="16" y="50" width="142" height="51"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4i9-z8-dVM">
+                                            <rect key="frame" x="16" y="36.666666666666664" width="142" height="79.333333333333343"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="142" id="Noc-b5-Ikz"/>
                                             </constraints>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hZa-3e-fyW">
-                                            <rect key="frame" x="183" y="50" width="63" height="51"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hZa-3e-fyW">
+                                            <rect key="frame" x="183" y="52.333333333333343" width="63" height="47.666666666666657"/>
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstAttribute="bottomMargin" secondItem="4i9-z8-dVM" secondAttribute="bottom" constant="41" id="0Xd-J8-RZe"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="4i9-z8-dVM" secondAttribute="bottom" constant="26" id="0Xd-J8-RZe"/>
                                         <constraint firstItem="4i9-z8-dVM" firstAttribute="leading" secondItem="T8F-2p-j5r" secondAttribute="leadingMargin" id="284-Ny-bWE"/>
                                         <constraint firstItem="4i9-z8-dVM" firstAttribute="centerY" secondItem="T8F-2p-j5r" secondAttribute="centerY" id="35v-Kr-dmr"/>
                                         <constraint firstItem="hZa-3e-fyW" firstAttribute="leading" secondItem="4i9-z8-dVM" secondAttribute="trailing" constant="25" id="CCJ-8F-vE6"/>
                                         <constraint firstItem="3XG-Tk-qKa" firstAttribute="trailing" secondItem="T8F-2p-j5r" secondAttribute="trailingMargin" id="D0M-JE-mf6"/>
-                                        <constraint firstItem="4i9-z8-dVM" firstAttribute="baseline" secondItem="hZa-3e-fyW" secondAttribute="baseline" id="HRr-nZ-AMf"/>
-                                        <constraint firstItem="4i9-z8-dVM" firstAttribute="firstBaseline" secondItem="hZa-3e-fyW" secondAttribute="firstBaseline" id="J1S-NC-hKq"/>
+                                        <constraint firstItem="4i9-z8-dVM" firstAttribute="baseline" secondItem="hZa-3e-fyW" secondAttribute="baseline" constant="15" id="HRr-nZ-AMf"/>
+                                        <constraint firstItem="4i9-z8-dVM" firstAttribute="firstBaseline" secondItem="hZa-3e-fyW" secondAttribute="firstBaseline" constant="-13" id="J1S-NC-hKq"/>
                                         <constraint firstItem="4i9-z8-dVM" firstAttribute="centerY" secondItem="3XG-Tk-qKa" secondAttribute="centerY" id="Zds-BH-rgD"/>
                                         <constraint firstItem="3XG-Tk-qKa" firstAttribute="leading" secondItem="hZa-3e-fyW" secondAttribute="trailing" constant="33" id="Zt4-5l-2sT"/>
                                         <constraint firstAttribute="bottomMargin" secondItem="3XG-Tk-qKa" secondAttribute="bottom" constant="26" id="mkn-dZ-wLO"/>
@@ -193,7 +193,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2ep-p2-hi7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1695.2" y="118.96551724137932"/>
+            <point key="canvasLocation" x="1848.8" y="118.96551724137932"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="lqs-ly-pt7">
