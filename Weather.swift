@@ -34,7 +34,6 @@ extension ViewController {
                     //get time
                     let time = weather["dt_txt"].stringValue
                     self.highTemps.append(weather["main"]["temp_max"].floatValue)
-                    self.lowTemps.append(weather["main"]["temp_min"].floatValue)
                     let dateFormatter = DateFormatter()
                     dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
                     dateFormatter.timeZone = TimeZone(abbreviation: "UTC")

@@ -38,7 +38,6 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
     var conditions: [String] = []
     var cities: [String] = []
     var highTemps: [Float] = []
-    var lowTemps: [Float] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -206,7 +205,6 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
         
         //clear weather arrays
         cities.removeAll()
-        lowTemps.removeAll()
         highTemps.removeAll()
         conditions.removeAll()
     }
@@ -235,7 +233,6 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
                     entry.city = city
                     entry.weather = conditions[i]
                     entry.highTemp = highTemps[i]
-                    entry.lowTemp = lowTemps[i]
                     weatherDataVals.append(entry)
                 }
                 i = i + 1

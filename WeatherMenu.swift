@@ -38,7 +38,7 @@ class weatherMenu: UITableViewController {
         let entry = weatherDataArray[indexPath.row]
         cell.weatherImage.image = weatherImage(weather: entry.weather)
         cell.cityLabel.text = entry.city
-        cell.tempLabel.text = "\(Int(entry.highTemp.rounded()))/\(Int(entry.lowTemp.rounded()))"
+        cell.tempLabel.text = "\(Int(entry.highTemp.rounded()))℉"
         cell.backgroundColor = cellColor(weather: entry.weather)
         cell.layer.cornerRadius = 15
         cell.layer.borderWidth = 6
@@ -56,26 +56,27 @@ class weatherMenu: UITableViewController {
     @objc func backButtonPressed() {
         dismiss(animated: true, completion: nil)
     }
+
     
     func cellColor(weather: String) -> UIColor {
         
         var color = UIColor()
         
         if weather == "Rain" {
-            color = UIColor(red:0.35, green:0.93, blue:0.35, alpha:1.0)
+            color = UIColor(red:0.08, green:0.79, blue:0.38, alpha:1.0)
             
         } else if weather == "Thunderstorm" {
-            color = UIColor(red:0.89, green:0.11, blue:0.34, alpha:1.0)
+            color = UIColor(red:0.88, green:0.11, blue:0.33, alpha:1.0)
             
         } else if weather == "Snow" {
-            color = UIColor(red:0.43, green:0.39, blue:1.00, alpha:1.0)
+            color = UIColor(red:0.28, green:0.42, blue:0.87, alpha:1.0)
             
         } else if weather == "Clouds" {
             color = UIColor(red:0.63, green:0.62, blue:0.62, alpha:1.0)
             
         }
         else {
-            color = UIColor(red:0.98, green:0.93, blue:0.43, alpha:1.0)
+            color = UIColor(red:0.91, green:0.76, blue:0.30, alpha:1.0)
         }
         
         return color
@@ -88,14 +89,14 @@ class weatherMenu: UITableViewController {
                 name: .tint,
                 style: .solid,
                 textColor: .white,
-                size: CGSize(width: 20, height: 15)
+                size: CGSize(width: 12, height: 10)
             )
         } else if weather == "Thunderstorm" {
             image = UIImage.fontAwesomeIcon(
                 name: .bolt,
                 style: .solid,
                 textColor: .white,
-                size: CGSize(width: 20, height: 15)
+                size: CGSize(width: 12, height: 10)
             )
             
         } else if weather == "Snow" {
@@ -103,7 +104,7 @@ class weatherMenu: UITableViewController {
                 name: .snowflake,
                 style: .solid,
                 textColor: .white,
-                size: CGSize(width: 20, height: 15)
+                size: CGSize(width: 12, height: 10)
             )
             
         } else if weather == "Clouds" {
@@ -111,14 +112,14 @@ class weatherMenu: UITableViewController {
                 name: .cloud,
                 style: .solid,
                 textColor: .white,
-                size: CGSize(width: 20, height: 15)
+                size: CGSize(width: 12, height: 10)
             )
         } else {
             image = UIImage.fontAwesomeIcon(
                 name: .sun,
                 style: .solid,
                 textColor: .white,
-                size: CGSize(width: 20, height: 15)
+                size: CGSize(width: 12, height: 10)
             )
         }
         return image
