@@ -33,17 +33,21 @@ extension ViewController {
                         
                     //get time
                     let time = weather["dt_txt"].stringValue
-                    self.highTemps.append(weather["main"]["temp_max"].floatValue)
+                    let temp = weather["main"]["temp_max"].floatValue
                     let dateFormatter = DateFormatter()
                     dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
                     dateFormatter.timeZone = TimeZone(abbreviation: "UTC")
                     let dateFromString = dateFormatter.date(from: time)
-                    self.times.append(dateFromString!)
                     let weatherArray = weather["weather"].arrayValue
                     condition = weatherArray[0]["main"].stringValue
+                    let description = weatherArray[0]["description"].stringValue
+                    
                     //print(dateFromString!.addingTimeInterval(60*60*3))
                     if(dateFromString!.addingTimeInterval(60.0*60*3) > timeToLookFor || dateFromString!.addingTimeInterval(-60.0*60*3) < timeToLookFor) {
                         //print (condition)
+                        self.times.append(dateFromString!)
+                        self.conditionDescription.append(description)
+                        self.highTemps.append(temp)
                         completion(condition)
                         break;
                     }

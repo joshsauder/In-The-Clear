@@ -38,6 +38,7 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
     var conditions: [String] = []
     var cities: [String] = []
     var highTemps: [Float] = []
+    var conditionDescription: [String] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -229,10 +230,11 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
                 let city = cities[i]
                 if !citiesUsed.contains(city){
                     citiesUsed.append(city)
-                    let entry = weatherData.Entry(weather: "", city: "", highTemp: 0, lowTemp: 0)
+                    let entry = weatherData.Entry(weather: "", city: "", highTemp: 0, condition: "")
                     entry.city = city
                     entry.weather = conditions[i]
                     entry.highTemp = highTemps[i]
+                    entry.condition = conditionDescription[i]
                     weatherDataVals.append(entry)
                 }
                 i = i + 1

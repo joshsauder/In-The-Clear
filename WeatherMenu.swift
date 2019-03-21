@@ -39,6 +39,7 @@ class weatherMenu: UITableViewController {
         cell.weatherImage.image = weatherImage(weather: entry.weather)
         cell.cityLabel.text = entry.city
         cell.tempLabel.text = "\(Int(entry.highTemp.rounded()))℉"
+        cell.conditionLabel.text = entry.condition.capitalized
         cell.backgroundColor = cellColor(weather: entry.weather)
         cell.layer.cornerRadius = 15
         cell.layer.borderWidth = 6
@@ -89,14 +90,14 @@ class weatherMenu: UITableViewController {
                 name: .tint,
                 style: .solid,
                 textColor: .white,
-                size: CGSize(width: 12, height: 10)
+                size: CGSize(width: 12, height: 9)
             )
         } else if weather == "Thunderstorm" {
             image = UIImage.fontAwesomeIcon(
                 name: .bolt,
                 style: .solid,
                 textColor: .white,
-                size: CGSize(width: 12, height: 10)
+                size: CGSize(width: 12, height: 9)
             )
             
         } else if weather == "Snow" {
@@ -104,7 +105,7 @@ class weatherMenu: UITableViewController {
                 name: .snowflake,
                 style: .solid,
                 textColor: .white,
-                size: CGSize(width: 12, height: 10)
+                size: CGSize(width: 12, height: 9)
             )
             
         } else if weather == "Clouds" {
@@ -112,14 +113,14 @@ class weatherMenu: UITableViewController {
                 name: .cloud,
                 style: .solid,
                 textColor: .white,
-                size: CGSize(width: 12, height: 10)
+                size: CGSize(width: 12, height: 9)
             )
         } else {
             image = UIImage.fontAwesomeIcon(
                 name: .sun,
                 style: .solid,
                 textColor: .white,
-                size: CGSize(width: 12, height: 10)
+                size: CGSize(width: 12, height: 9)
             )
         }
         return image
