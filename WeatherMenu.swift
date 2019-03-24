@@ -40,7 +40,13 @@ class weatherMenu: UITableViewController {
         cell.cityLabel.text = entry.city
         cell.tempLabel.text = "\(Int(entry.highTemp.rounded()))℉"
         cell.conditionLabel.text = entry.condition.capitalized
-        cell.backgroundColor = cellColor(weather: entry.weather)
+        
+        //needs to be clear so gradient shows
+        cell.backgroundColor = UIColor.clear
+        //Create gradient color
+        let colorArray = cellColor(weather: entry.weather)
+        cell.colorCell(firstColor: colorArray[0], secondColor: colorArray[1])
+        
         cell.layer.cornerRadius = 15
         cell.layer.borderWidth = 6
         cell.layer.borderColor = tableView.backgroundColor?.cgColor
@@ -59,28 +65,34 @@ class weatherMenu: UITableViewController {
     }
 
     
-    func cellColor(weather: String) -> UIColor {
+    func cellColor(weather: String) -> [UIColor] {
         
-        var color = UIColor()
+        var colorOne = UIColor()
+        var colorTwo = UIColor()
         
         if weather == "Rain" {
-            color = UIColor(red:0.08, green:0.79, blue:0.38, alpha:1.0)
+            colorOne = UIColor(red:0.40, green:0.73, blue:0.42, alpha:1.0)
+            colorTwo = UIColor(red:0.26, green:0.63, blue:0.28, alpha:1.0)
             
         } else if weather == "Thunderstorm" {
-            color = UIColor(red:0.88, green:0.11, blue:0.33, alpha:1.0)
+            colorOne = UIColor(red:0.94, green:0.33, blue:0.31, alpha:1.0)
+            colorTwo = UIColor(red:0.90, green:0.22, blue:0.21, alpha:1.0)
             
         } else if weather == "Snow" {
-            color = UIColor(red:0.28, green:0.42, blue:0.87, alpha:1.0)
+            colorOne = UIColor(red:0.26, green:0.65, blue:0.96, alpha:1.0)
+            colorTwo = UIColor(red:0.12, green:0.53, blue:0.90, alpha:1.0)
             
         } else if weather == "Clouds" {
-            color = UIColor(red:0.63, green:0.62, blue:0.62, alpha:1.0)
+            colorOne = UIColor(red:0.56, green:0.64, blue:0.68, alpha:1.0)
+            colorTwo = UIColor(red:0.38, green:0.49, blue:0.55, alpha:1.0)
             
         }
         else {
-            color = UIColor(red:0.91, green:0.76, blue:0.30, alpha:1.0)
+            colorOne = UIColor(red:1.00, green:0.93, blue:0.35, alpha:1.0)
+            colorTwo = UIColor(red:0.99, green:0.85, blue:0.21, alpha:1.0)
         }
         
-        return color
+        return [colorOne, colorTwo]
     }
     
     func weatherImage(weather: String) -> UIImage {

@@ -15,7 +15,7 @@ class WeatherTableViewCell: UITableViewCell {
     @IBOutlet weak var tempLabel: UILabel!
     @IBOutlet weak var conditionLabel: UILabel!
     
-    
+    var gradientLayer: CAGradientLayer?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -25,4 +25,21 @@ class WeatherTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
     }
     
+    override func layoutSublayers(of layer: CALayer) {
+        super.layoutSublayers(of: self.layer)
+        gradientLayer?.frame = self.bounds
+    }
+    
+    /*
+     Function allows for cells to have array of color (gradient)
+    */
+    func colorCell(firstColor: UIColor, secondColor:UIColor){
+        
+        let gradientLayer = CAGradientLayer()
+        gradientLayer.frame = self.bounds
+        gradientLayer.colors = [firstColor.cgColor, secondColor.cgColor]
+        gradientLayer.zPosition = -1
+        self.layer.addSublayer(gradientLayer)
+        self.gradientLayer = gradientLayer
+    }
 }
