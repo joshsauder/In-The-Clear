@@ -19,12 +19,12 @@ extension ViewController: GMSAutocompleteViewControllerDelegate {
             //replace text in box
             startLocation.text = "\(place.name!)"
             locationStart = CLLocation(latitude: place.coordinate.latitude, longitude: place.coordinate.longitude)
-            self.mapView.camera = camera
+            self.mapView.animate(to: camera)
             createMarker(titleMarker: "Location Start", latitude: place.coordinate.longitude, longitude: place.coordinate.longitude)
         } else{
             destinationLocation.text = "\(place.name!)"
             locationEnd = CLLocation(latitude: place.coordinate.latitude, longitude: place.coordinate.longitude)
-            self.mapView.camera = camera
+            self.mapView.animate(to: camera)
             createMarker(titleMarker: "Location End", latitude: place.coordinate.longitude, longitude: place.coordinate.longitude)
         }
         

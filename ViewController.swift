@@ -40,6 +40,8 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
     var highTemps: [Float] = []
     var conditionDescription: [String] = []
     
+    var totalDistance = String()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -90,11 +92,20 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
         
         //set up timelabel
         timeLabel.isHidden = true
-        timeLabel.backgroundColor = UIColor(white: 1, alpha: 0.7)
+        timeLabel.backgroundColor = UIColor(white: 1, alpha: 1)
         timeLabel.layer.cornerRadius = 5
         timeLabel.clipsToBounds = true
         timeLabel.textAlignment = .center
         timeLabel.font = UIFont.boldSystemFont(ofSize: 20.0)
+        timeLabel.layer.cornerRadius = 5
+        timeLabel.clipsToBounds = true
+        
+        timeLabel.layer.shadowColor = UIColor.black.cgColor
+        timeLabel.layer.masksToBounds = false
+        timeLabel.layer.shadowOffset = CGSize(width: 3, height: 3)
+        timeLabel.layer.shadowRadius = 5
+        timeLabel.layer.shadowOpacity = 1.0
+        
         
     }
     
@@ -197,8 +208,9 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
         self.createLine(startLocation: locationStart, endLocation: locationEnd) { time in
         
             //enable time label
-            self.timeLabel.text = "Total Time: \(time)"
+            self.timeLabel.text = "Time: \(time)  Distance: \(self.totalDistance)"
             self.timeLabel.isHidden = false
+            self.mapView.padding = UIEdgeInsetsMake(0, 0, 25, 0)
         }
         //enable button
         weatherList.isEnabled = true
@@ -213,12 +225,13 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
     
     // function to create a marker on map
     func createMarker(titleMarker: String, latitude: CLLocationDegrees, longitude: CLLocationDegrees) {
-        let marker = GMSMarker(position: CLLocationCoordinate2D(latitude: latitude, longitude: longitude))
-        marker.title = titleMarker
-        //marker.appearAnimation = .pop
-        //marker.icon = GMSMarker.markerImage(with: UIColor.red)
-        marker.map = mapView
-    }
+        
+            let marker = GMSMarker(position: CLLocationCoordinate2D(latitude: latitude, longitude: longitude))
+            marker.title = titleMarker
+            marker.appearAnimation = .pop
+            marker.icon = GMSMarker.markerImage(with: UIColor.red)
+            marker.map = self.mapView
+        }
 
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

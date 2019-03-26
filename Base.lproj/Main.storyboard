@@ -81,13 +81,13 @@
                                 <rect key="frame" x="0.0" y="172" width="375" height="640"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VPO-Up-Lz2">
-                                <rect key="frame" x="0.0" y="764" width="375" height="48"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="VPO-Up-Lz2">
+                                <rect key="frame" x="0.0" y="751" width="375" height="61"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="375" id="9r8-L4-gMw"/>
-                                    <constraint firstAttribute="height" constant="48" id="K8o-NB-vlE"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="223" id="9r8-L4-gMw"/>
+                                    <constraint firstAttribute="height" constant="61" id="K8o-NB-vlE"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
