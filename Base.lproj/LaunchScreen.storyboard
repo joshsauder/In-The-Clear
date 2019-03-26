@@ -19,11 +19,15 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="InTheClear.png" translatesAutoresizingMaskIntoConstraints="NO" id="ezd-lR-0Jd">
-                                <rect key="frame" x="0.0" y="87" width="375" height="199"/>
+                                <rect key="frame" x="19" y="100" width="336" height="185"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="logo.png" translatesAutoresizingMaskIntoConstraints="NO" id="vjH-ED-fQi">
+                                <rect key="frame" x="50" y="554" width="275" height="93"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                         </subviews>
-                        <color key="backgroundColor" red="0.48268276453018188" green="0.08773205429315567" blue="0.96084707975387573" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <color key="backgroundColor" red="0.4823529411764706" green="0.086274509803921567" blue="0.96078431372549022" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                 </viewController>
@@ -34,5 +38,6 @@
     </scenes>
     <resources>
         <image name="InTheClear.png" width="840" height="474"/>
+        <image name="logo.png" width="662" height="200"/>
     </resources>
 </document>
