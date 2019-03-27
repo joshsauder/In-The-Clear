@@ -30,8 +30,12 @@ class WeatherTableViewCell: UITableViewCell {
         gradientLayer?.frame = self.bounds
     }
     
-    /*
+    /**
      Function allows for cells to have array of color (gradient)
+     
+     - parameters:
+        - firstColor: The lighter UIColor
+        - secondColor: The darker UIColor
     */
     func colorCell(firstColor: UIColor, secondColor:UIColor){
         

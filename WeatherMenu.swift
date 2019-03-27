@@ -54,18 +54,29 @@ class weatherMenu: UITableViewController {
         return cell
     }
     
+    /**
+     Sets up navigation bar at top
+    */
     func setUpNav() {
         let backButton = UIBarButtonItem(title: "Back", style: .plain, target: self, action: #selector(self.backButtonPressed))
         backButton.title = "Back"
         navigationItem.leftBarButtonItem = backButton
     }
     
+    /**
+     Controls when back button pressed in navigation bar
+    */
     @objc func backButtonPressed() {
         dismiss(animated: true, completion: nil)
     }
 
-    
-    func cellColor(weather: String) -> [UIColor] {
+    /**
+     Function that determines cells colors depending on condition
+     
+     - parameter weather: The weather condition
+     - returns: An array containing two UIColors
+    */
+    private func cellColor(weather: String) -> [UIColor] {
         
         var colorOne = UIColor()
         var colorTwo = UIColor()
@@ -95,7 +106,13 @@ class weatherMenu: UITableViewController {
         return [colorOne, colorTwo]
     }
     
-    func weatherImage(weather: String) -> UIImage {
+    /**
+     Function that determines weather image depending on condition
+     
+     - parameter weather: The weather condition
+     - returns: A UIImage that relates to the weather condition
+    */
+    private func weatherImage(weather: String) -> UIImage {
         var image = UIImage()
         if weather == "Rain" {
             image = UIImage.fontAwesomeIcon(

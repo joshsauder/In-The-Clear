@@ -133,11 +133,11 @@ extension ViewController {
     /**
      Colors the GMSPath by what the weather condition is at each coordinate
      
-     - Parameters:
-     - line: The GMSPolyLine representation of the path
-     - steps: Each direction (step) from the JSON returned by the Google Directions API
-     - path: The directions path
-     - completion: After weather services callback, exit function
+     - parameters:
+        - line: The GMSPolyLine representation of the path
+        - steps: Each direction (step) from the JSON returned by the Google Directions API
+        - path: The directions path
+        - completion: After weather services callback, exit function
     */
     func colorPath(line: GMSPolyline, steps: [JSON], path: GMSPath, completion: @escaping (Int) -> ()) {
         //take each step and get weather at end location
