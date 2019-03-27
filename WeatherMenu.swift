@@ -88,8 +88,8 @@ class weatherMenu: UITableViewController {
             
         }
         else {
-            colorOne = UIColor(red:1.00, green:0.93, blue:0.35, alpha:1.0)
-            colorTwo = UIColor(red:0.99, green:0.85, blue:0.21, alpha:1.0)
+            colorOne = UIColor(red:1.00, green:0.92, blue:0.23, alpha:1.0)
+            colorTwo = UIColor(red:0.98, green:0.75, blue:0.18, alpha:1.0)
         }
         
         return [colorOne, colorTwo]
@@ -99,7 +99,7 @@ class weatherMenu: UITableViewController {
         var image = UIImage()
         if weather == "Rain" {
             image = UIImage.fontAwesomeIcon(
-                name: .tint,
+                name: .cloudShowersHeavy,
                 style: .solid,
                 textColor: .white,
                 size: CGSize(width: 12, height: 9)
