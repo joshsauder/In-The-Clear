@@ -12,6 +12,16 @@ import SwiftyJSON
 import GoogleMaps
 
 extension ViewController {
+    
+    /**
+     Calls the OpenWeather API service and populates the weather arrays and city arrays
+     
+     - parameters:
+        - lat: The latitutde coordinates
+        - long: The longitude coordinates
+        - timeToLookFor: The date and time that needs to be found
+        - completion: After request made, exit with the condition at specified time
+    */
     func getWeather(lat: String, long: String, timeToLookFor: Date, completion: @escaping (String) -> ()) {
         let urlBase = "http://api.openweathermap.org/data/2.5/forecast?"
         let urlComplete = urlBase + "lat=\(lat)&lon=\(long)&units=imperial&APPID=0c2beca9233adf894f6acded6d9a946c"
@@ -61,6 +71,14 @@ extension ViewController {
         })
     }
     
+    /**
+     Creates GMSPath on the Map
+     
+     - parameters:
+        - startLocation: The starting location
+        - endLocation: The destination location
+        - completion: Upon calling the service, return the total time string
+    */
     func createLine(startLocation: CLLocation, endLocation: CLLocation, completion: @escaping (String) -> ()) {
         
         //colors for lines based on condition
@@ -112,6 +130,15 @@ extension ViewController {
         }
     }
     
+    /**
+     Colors the GMSPath by what the weather condition is at each coordinate
+     
+     - Parameters:
+     - line: The GMSPolyLine representation of the path
+     - steps: Each direction (step) from the JSON returned by the Google Directions API
+     - path: The directions path
+     - completion: After weather services callback, exit function
+    */
     func colorPath(line: GMSPolyline, steps: [JSON], path: GMSPath, completion: @escaping (Int) -> ()) {
         //take each step and get weather at end location
         let refDate = Date.timeIntervalSinceReferenceDate

@@ -50,6 +50,9 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
         setupMap()
     }
     
+    /**
+      Sets up the Google Maps Map View
+    */
     func setupMap(){
         let camera = GMSCameraPosition.camera(withLatitude: -33.86, longitude: 151, zoom: 13.0)
         mapView.camera = camera
@@ -60,6 +63,9 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
         mapView.settings.zoomGestures = true
     }
     
+    /**
+     Asks user for location permissions
+    */
     func locationAuthorization(){
         
         locationManager.delegate = self
@@ -69,7 +75,10 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
         locationManager.startMonitoringSignificantLocationChanges()
     }
     
-    func addGlyph(){
+    /**
+     Adds and stylizes weather list button, and time label at bottom. Both are hidden by default
+    */
+    private func addGlyph(){
         
         //set up weatherButton
         weatherList.layer.cornerRadius = 5
@@ -156,9 +165,12 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
         return false
     }
     
+    /**
+     Function to request user location
+    */
     func showLocationDisabledPopUp() {
         let alertController = UIAlertController(title: "Background Location Access Disabled",
-                                                message: "In order to deliver pizza we need your location",
+                                                message: "Your Location is disabled. Enable if you'd like your location to be shown on map",
                                                 preferredStyle: .alert)
         
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
@@ -174,6 +186,9 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
         self.present(alertController, animated: true, completion: nil)
     }
     
+    /**
+     Controls action when start location button is tapped
+    */
     @IBAction func originStartLocation(_ sender: UIButton) {
         
         let autoCompleteControl = GMSAutocompleteViewController()
@@ -188,6 +203,9 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
         
     }
     
+    /**
+     Controls action when destination location button is tapped
+     */
     @IBAction func openDestinationLocation(_ sender: UIButton){
         
         let autoCompleteController = GMSAutocompleteViewController()
@@ -202,7 +220,9 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
         
     }
     
-    //function that calls createLine to create directions line on map
+    /**
+    Calls createLine to add polyline to map and also enables the weatherList button and time label at bottom
+     */
     func showDirection(){
         //show line
         self.createLine(startLocation: locationStart, endLocation: locationEnd) { time in
@@ -222,8 +242,9 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
         conditions.removeAll()
     }
 
-    
+    /**
     // function to create a marker on map
+     */
     func createMarker(titleMarker: String, latitude: CLLocationDegrees, longitude: CLLocationDegrees) {
         
             let marker = GMSMarker(position: CLLocationCoordinate2D(latitude: latitude, longitude: longitude))
