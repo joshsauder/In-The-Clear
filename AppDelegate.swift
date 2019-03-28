@@ -9,9 +9,10 @@
 import UIKit
 import GoogleMaps
 import GooglePlaces
+import StoreKit
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, SKPaymentTransactionObserver {
 
     var window: UIWindow?
 
@@ -23,8 +24,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         GMSServices.provideAPIKey(googleAPIKey)
         GMSPlacesClient.provideAPIKey(googlePlacesKey)
+        SKPaymentQueue.default().add(self)
         // Override point for customization after application launch.
         return true
+    }
+    
+    func paymentQueue(_ queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {
+        for transaction in transactions {
+            switch transaction.transactionState {
+            case .failed:
+                queue.finishTransaction(transaction)
+                print("Transaction Failed \(transaction)")
+            case .purchased, .restored:
+                queue.finishTransaction(transaction)
+                print("Transaction purchased or restored: \(transaction)")
+            case .deferred, .purchasing:
+                print("Transaction in progress: \(transaction)")
+            }
+        }
     }
 
     func applicationWillResignActive(_ application: UIApplication) {

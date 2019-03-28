@@ -10,6 +10,7 @@ import Foundation
 import Alamofire
 import SwiftyJSON
 import GoogleMaps
+import MapKit
 
 extension ViewController {
     
@@ -34,7 +35,18 @@ extension ViewController {
             case .success:
                 let json = JSON(response.data!)
                 let weatherList = json["list"].arrayValue
+                let location = CLLocation(latitude: Double(lat)!, longitude: Double(long)!)
                 
+                CLGeocoder().reverseGeocodeLocation(location, completionHandler: {
+                    (placemarks, errors) in
+                    if let error = errors as? CLError {
+                        print("CLError:", error)
+                    }
+                    else if let placemark = placemarks?.first {
+                        self.cities.append("\(String(describing: placemark.locality)), \(String(describing: placemark.administrativeArea))")
+                    }
+                    
+                })
                 self.cities.append(json["city"]["name"].stringValue)
                 
                 for weather in weatherList
