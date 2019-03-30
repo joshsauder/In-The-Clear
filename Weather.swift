@@ -35,6 +35,7 @@ extension ViewController {
             case .success:
                 let json = JSON(response.data!)
                 let weatherList = json["list"].arrayValue
+                print(lat + ", " + long)
                 let location = CLLocation(latitude: Double(lat)!, longitude: Double(long)!)
                 
                 CLGeocoder().reverseGeocodeLocation(location, completionHandler: {
@@ -43,11 +44,12 @@ extension ViewController {
                         print("CLError:", error)
                     }
                     else if let placemark = placemarks?.first {
-                        self.cities.append("\(String(describing: placemark.locality)), \(String(describing: placemark.administrativeArea))")
+                        print(placemark.locality)
+                        self.cities.append("\(placemark.locality ?? ""), \(placemark.administrativeArea ?? "")")
                     }
-                    
+
                 })
-                self.cities.append(json["city"]["name"].stringValue)
+                //self.cities.append(json["city"]["name"].stringValue)
                 
                 for weather in weatherList
                 {
@@ -186,7 +188,7 @@ extension ViewController {
             let long = step["end_location"]["lng"].stringValue
             var numberSegs = 1
             
-            
+            print(lat + ", " + long)
             getWeather(lat: lat, long: long, timeToLookFor: date) { condition in
             
                 self.conditions.append(condition)
