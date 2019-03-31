@@ -14,6 +14,14 @@ import MapKit
 
 extension ViewController {
     
+    struct pathColorSegs {
+        static let SNOW = GMSStrokeStyle.solidColor(UIColor(red:0.43, green:0.39, blue:1.00, alpha:1.0))
+        static let RAIN = GMSStrokeStyle.solidColor(UIColor(red:0.35, green:0.93, blue:0.35, alpha:1.0))
+        static let STORMS = GMSStrokeStyle.solidColor(UIColor(red:0.89, green:0.11, blue:0.34, alpha:1.0))
+        static let SUN = GMSStrokeStyle.solidColor(UIColor.yellow)
+        static let CLOUDS = GMSStrokeStyle.solidColor(UIColor(red:0.63, green:0.62, blue:0.62, alpha:1.0))
+    }
+    
     /**
      Calls the OpenWeather API service and populates the weather arrays and city arrays
      
@@ -155,77 +163,94 @@ extension ViewController {
     */
     func colorPath(line: GMSPolyline, steps: [JSON], path: GMSPath, completion: @escaping (Int) -> ()) {
         //take each step and get weather at end location
-        let refDate = Date.timeIntervalSinceReferenceDate
-        var date = Date(timeIntervalSinceReferenceDate: refDate)
         var colorSegs: [GMSStyleSpan] = []
 
-        var distance: [Int] = []
         var totalTime = 0
         
         //initialize stroke styles
-        let snow = GMSStrokeStyle.solidColor(UIColor(red:0.43, green:0.39, blue:1.00, alpha:1.0))
-        let rain = GMSStrokeStyle.solidColor(UIColor(red:0.35, green:0.93, blue:0.35, alpha:1.0))
-        let storms = GMSStrokeStyle.solidColor(UIColor(red:0.89, green:0.11, blue:0.34, alpha:1.0))
-        let sun = GMSStrokeStyle.solidColor(UIColor.yellow)
-        let clouds = GMSStrokeStyle.solidColor(UIColor(red:0.63, green:0.62, blue:0.62, alpha:1.0))
         
         //Needed for async
-        let myGroup = DispatchGroup()
         
-        var i = UInt(0)
-        var pathCoordinates = path.coordinate(at: i)
         
-        for step in steps {
+        weatherPerStep(steps: steps, path: path){ result in
             
-            myGroup.enter()
-            //get distance
-            let time = step["duration"]["value"].intValue
-            distance.append(time)
-            date = date.addingTimeInterval(TimeInterval(60 * totalTime))
-            totalTime = time + totalTime
-            //get weather
-            let lat = step["end_location"]["lat"].stringValue
-            let long = step["end_location"]["lng"].stringValue
-            var numberSegs = 1
+            colorSegs =  result[0] as! [GMSStyleSpan]
+            colorSegs.reverse()
             
-            print(lat + ", " + long)
-            getWeather(lat: lat, long: long, timeToLookFor: date) { condition in
-            
-                self.conditions.append(condition)
-                
-                let stepCoordinates = CLLocationCoordinate2D(latitude: step["end_location"]["lat"].doubleValue, longitude: step["end_location"]["lng"].doubleValue)
-                
-                //add segments between each path coordinate
-                while pathCoordinates.latitude.rounded() == stepCoordinates.latitude.rounded() && pathCoordinates.longitude.rounded() == stepCoordinates.longitude.rounded() {
-                    
-                    numberSegs = numberSegs + 1
-                    i = i + 1
-                    pathCoordinates = path.coordinate(at: i)
-                }
-                
-                //determine which style span to use
-                if condition == "Rain" {
-                    colorSegs.append(GMSStyleSpan(style: rain, segments: Double(numberSegs)))
-                } else if condition == "Thunderstorm" {
-                    colorSegs.append(GMSStyleSpan(style: storms, segments: Double(numberSegs)))
-                } else if condition == "Snow" {
-                    colorSegs.append(GMSStyleSpan(style: snow, segments: Double(numberSegs)))
-                } else if condition == "Clouds"{
-                    colorSegs.append(GMSStyleSpan(style: clouds, segments: Double(numberSegs)))
-                } else {
-                    colorSegs.append(GMSStyleSpan(style: sun, segments: Double(numberSegs)))
-                }
-                myGroup.leave()
-            }
-        }
-        
-        myGroup.notify(queue: .main) {
             line.spans = colorSegs
+            totalTime = result[2] as! Int
             completion(totalTime)
         }
         
-        //take step time divided by total time
-       // line.spans = colorSegs
-        //color path based on fraction
+    }
+    
+    func weatherPerStep(steps: [JSON], path: GMSPath, completion: @escaping ([Any]) -> ()) {
+        //any will contain colorseg, date, totalTime, pathCoordinates
+        let refDate = Date.timeIntervalSinceReferenceDate
+        var date = Date(timeIntervalSinceReferenceDate: refDate)
+        var colorSegs: [GMSStyleSpan] = []
+        var totalTime = 0
+        var i = UInt(0)
+        var pathCoordinates = path.coordinate(at: i)
+
+        let group = DispatchGroup()
+
+        if steps.count > 0 {
+            
+            group.enter()
+            
+            let step = steps[0]
+            var newSteps = steps
+            newSteps.remove(at: 0)
+            
+            weatherPerStep(steps: newSteps, path: path) { completion in
+                
+                colorSegs = completion[0] as! [GMSStyleSpan]
+                date = completion[1] as! Date
+                totalTime = completion[2] as! Int
+                pathCoordinates = completion[3] as! CLLocationCoordinate2D
+            
+                let time = step["duration"]["value"].intValue
+                date = date.addingTimeInterval(TimeInterval(60 * totalTime))
+                totalTime = time + totalTime
+                //get weather
+                let lat = step["end_location"]["lat"].stringValue
+                let long = step["end_location"]["lng"].stringValue
+                var numberSegs = 1
+                
+                print(lat + ", " + long)
+                self.getWeather(lat: lat, long: long, timeToLookFor: date) { condition in
+                    
+                    self.conditions.append(condition)
+                    
+                    let stepCoordinates = CLLocationCoordinate2D(latitude: step["end_location"]["lat"].doubleValue, longitude: step["end_location"]["lng"].doubleValue)
+                    
+                    //add segments between each path coordinate
+                    while pathCoordinates.latitude.rounded() != stepCoordinates.latitude.rounded() && pathCoordinates.longitude.rounded() != stepCoordinates.longitude.rounded() {
+                        
+                        numberSegs = numberSegs + 1
+                        i = i + 1
+                        pathCoordinates = path.coordinate(at: i)
+                    }
+                    
+                    //determine which style span to use
+                    if condition == "Rain" {
+                        colorSegs.append(GMSStyleSpan(style: pathColorSegs.RAIN, segments: Double(numberSegs)))
+                    } else if condition == "Thunderstorm" {
+                        colorSegs.append(GMSStyleSpan(style: pathColorSegs.STORMS, segments: Double(numberSegs)))
+                    } else if condition == "Snow" {
+                        colorSegs.append(GMSStyleSpan(style: pathColorSegs.SNOW, segments: Double(numberSegs)))
+                    } else if condition == "Clouds"{
+                        colorSegs.append(GMSStyleSpan(style: pathColorSegs.CLOUDS, segments: Double(numberSegs)))
+                    } else {
+                        colorSegs.append(GMSStyleSpan(style: pathColorSegs.SUN, segments: Double(numberSegs)))
+                    }
+                    group.leave()
+                }
+            }
+        }
+        group.notify(queue: DispatchQueue.main){
+            completion([colorSegs, date, totalTime, pathCoordinates])
+        }
     }
 }

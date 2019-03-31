@@ -240,6 +240,8 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
         cities.removeAll()
         highTemps.removeAll()
         conditions.removeAll()
+        conditionDescription.removeAll()
+        times.removeAll()
     }
 
     /**
@@ -258,9 +260,9 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "ShowNavigation"{
             var weatherDataVals: [weatherData.Entry] = []
-            var i = 0
+            var i = conditions.count - 1
             var citiesUsed: [String] = []
-            while i < conditions.count {
+            while i >= 0 {
                 let city = cities[i]
                 if !citiesUsed.contains(city){
                     citiesUsed.append(city)
@@ -271,7 +273,7 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
                     entry.condition = conditionDescription[i]
                     weatherDataVals.append(entry)
                 }
-                i = i + 1
+                i = i - 1
             }
             
             let DestViewController = segue.destination as! UINavigationController
