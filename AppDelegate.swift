@@ -9,10 +9,9 @@
 import UIKit
 import GoogleMaps
 import GooglePlaces
-import StoreKit
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate, SKPaymentTransactionObserver {
+class AppDelegate: UIResponder, UIApplicationDelegate{
 
     var window: UIWindow?
 
@@ -24,25 +23,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, SKPaymentTransactionObser
         
         GMSServices.provideAPIKey(googleAPIKey)
         GMSPlacesClient.provideAPIKey(googlePlacesKey)
-        SKPaymentQueue.default().add(self)
+   
         // Override point for customization after application launch.
         return true
     }
     
-    func paymentQueue(_ queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {
-        for transaction in transactions {
-            switch transaction.transactionState {
-            case .failed:
-                queue.finishTransaction(transaction)
-                print("Transaction Failed \(transaction)")
-            case .purchased, .restored:
-                queue.finishTransaction(transaction)
-                print("Transaction purchased or restored: \(transaction)")
-            case .deferred, .purchasing:
-                print("Transaction in progress: \(transaction)")
-            }
-        }
-    }
 
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

@@ -43,7 +43,6 @@ extension ViewController {
             case .success:
                 let json = JSON(response.data!)
                 let weatherList = json["list"].arrayValue
-                print(lat + ", " + long)
                 let location = CLLocation(latitude: Double(lat)!, longitude: Double(long)!)
                 
                 CLGeocoder().reverseGeocodeLocation(location, completionHandler: {
@@ -80,6 +79,7 @@ extension ViewController {
                         self.times.append(dateFromString!)
                         self.conditionDescription.append(description)
                         self.highTemps.append(temp)
+                        print(condition)
                         completion(condition)
                         break;
                     }
