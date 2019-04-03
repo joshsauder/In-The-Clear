@@ -188,7 +188,6 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
     }
     
     func mapView(_ mapView: GMSMapView, didTapAt coordinate: CLLocationCoordinate2D) {
-        print("COORDINATE \(coordinate)") // when you tapped coordinate
     }
     
     func didTapMyLocationButton(for mapView: GMSMapView) -> Bool {
@@ -250,6 +249,25 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
         
         self.present(autoCompleteController, animated: true, completion: nil)
         
+    }
+    /*
+     Controls when open maps button is clicked
+    */
+    @IBAction func openGoogleMaps(_ sender: UIButton){
+        
+        if (UIApplication.shared.canOpenURL(NSURL(string:"comgooglemaps://")! as URL)){
+            
+            let url = URL(string:
+        "comgooglemaps://?saddr=\(Float(locationStart.coordinate.latitude)),\(locationStart.coordinate.longitude))&daddr=\(Float(locationEnd.coordinate.latitude)),\(Float(locationEnd.coordinate.longitude))&directionsmode=driving")
+            
+            UIApplication.shared.open(url!, options: [:])
+
+        } else
+        {
+            let url = URL(string: "https://www.google.co.in/maps/dir/?saddr=\(Float(locationStart.coordinate.latitude)),\(locationStart.coordinate.longitude))&daddr=\(String(describing: locationEnd.coordinate.latitude)),\(String(describing: locationEnd.coordinate.longitude))")
+            
+            UIApplication.shared.open(url!, options: [:], completionHandler: nil)
+        }
     }
     
     /**

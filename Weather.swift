@@ -112,12 +112,6 @@ extension ViewController {
         
         Alamofire.request(pathURL, method: .get).validate().responseJSON { response in
             
-            print(response.request as Any)
-            
-            print(response.request as Any)  // original URL request
-            print(response.response as Any) // HTTP URL response
-            print(response.data as Any)     // server data
-            print(response.result as Any)
             
             //begin parsing the response
             let json = JSON(response.data!)
@@ -218,7 +212,7 @@ extension ViewController {
                 let long = step["end_location"]["lng"].stringValue
                 var numberSegs = 1
                 
-                print(lat + ", " + long)
+            
                 self.getWeather(lat: lat, long: long, timeToLookFor: date) { condition in
                     
                     self.conditions.append(condition)
