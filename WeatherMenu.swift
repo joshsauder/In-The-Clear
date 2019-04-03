@@ -76,7 +76,7 @@ class weatherMenu: UITableViewController {
      - parameter weather: The weather condition
      - returns: An array containing two UIColors
     */
-    private func cellColor(weather: String) -> [UIColor] {
+    func cellColor(weather: String) -> [UIColor] {
         
         var colorOne = UIColor()
         var colorTwo = UIColor()
@@ -112,7 +112,7 @@ class weatherMenu: UITableViewController {
      - parameter weather: The weather condition
      - returns: A UIImage that relates to the weather condition
     */
-    private func weatherImage(weather: String) -> UIImage {
+    func weatherImage(weather: String) -> UIImage {
         var image = UIImage()
         if weather == "Rain" {
             image = UIImage.fontAwesomeIcon(

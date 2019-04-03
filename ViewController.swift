@@ -29,6 +29,7 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
     @IBOutlet weak var weatherList: UIButton!
     @IBOutlet weak var mapView: GMSMapView!
     @IBOutlet weak var timeLabel: UILabel!
+    @IBOutlet weak var openGoogleMaps: UIButton!
     
     
     var locationStart = CLLocation()
@@ -114,6 +115,37 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
         timeLabel.layer.shadowOffset = CGSize(width: 3, height: 3)
         timeLabel.layer.shadowRadius = 5
         timeLabel.layer.shadowOpacity = 1.0
+        
+        openGoogleMaps.isHidden = true
+        openGoogleMaps.backgroundColor = UIColor(white: 1, alpha: 1)
+        openGoogleMaps.layer.cornerRadius = 5
+        openGoogleMaps.clipsToBounds = true
+       
+        //Create Attachment
+        let imageAttachment =  NSTextAttachment()
+        imageAttachment.image = UIImage(named:"icons8-google-maps-48")
+        imageAttachment.bounds = CGRect(x: 0, y: -5, width: 25, height: 25)
+        
+        //Create string with attachment
+        let attachmentString = NSAttributedString(attachment: imageAttachment)
+        //Initialize mutable string
+        let completeText = NSMutableAttributedString(string: "")
+        //Add image to mutable string
+        completeText.append(attachmentString)
+        //Add your text to mutable string
+        let  textAfterIcon = NSMutableAttributedString(string: "Open In Google Maps")
+        completeText.append(textAfterIcon)
+        
+        openGoogleMaps.setTitleColor(UIColor.black, for: .normal)
+        openGoogleMaps.titleLabel?.font = UIFont.boldSystemFont(ofSize: 15.0)
+        openGoogleMaps.titleLabel?.textAlignment = .center
+        openGoogleMaps.setAttributedTitle(completeText, for: .normal)
+        
+        openGoogleMaps.layer.shadowColor = UIColor.black.cgColor
+        openGoogleMaps.layer.masksToBounds = false
+        openGoogleMaps.layer.shadowOffset = CGSize(width: 3, height: 3)
+        openGoogleMaps.layer.shadowRadius = 5
+        openGoogleMaps.layer.shadowOpacity = 1.0
         
         
     }
@@ -231,10 +263,12 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
             self.timeLabel.text = "Time: \(time)  Distance: \(self.totalDistance)"
             self.timeLabel.isHidden = false
             self.mapView.padding = UIEdgeInsetsMake(0, 0, 25, 0)
+            //enable weather list button
+            self.weatherList.isEnabled = true
+            self.weatherList.alpha = 1
+            //enable google maps button
+            self.openGoogleMaps.isHidden = false
         }
-        //enable button
-        weatherList.isEnabled = true
-        weatherList.alpha = 1
         
         //clear weather arrays
         cities.removeAll()
