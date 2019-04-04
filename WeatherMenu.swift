@@ -36,10 +36,10 @@ class weatherMenu: UITableViewController {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "WeatherTableViewCell", for: indexPath) as! WeatherTableViewCell
         let entry = weatherDataArray[indexPath.row]
-        cell.weatherImage.image = weatherImage(weather: entry.weather)
-        cell.cityLabel.text = entry.city
-        cell.tempLabel.text = "\(Int(entry.highTemp.rounded()))℉"
-        cell.conditionLabel.text = entry.condition.capitalized
+        cell.weatherImage?.image = weatherImage(weather: entry.weather)
+        cell.cityLabel?.text = entry.city
+        cell.tempLabel?.text = "\(Int(entry.highTemp.rounded()))℉"
+        cell.conditionLabel?.text = entry.condition.capitalized
         
         //needs to be clear so gradient shows
         cell.backgroundColor = UIColor.clear

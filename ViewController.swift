@@ -258,8 +258,9 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
         if (UIApplication.shared.canOpenURL(NSURL(string:"comgooglemaps://")! as URL)){
             
             let url = URL(string:
-        "comgooglemaps://?saddr=\(Float(locationStart.coordinate.latitude)),\(locationStart.coordinate.longitude))&daddr=\(Float(locationEnd.coordinate.latitude)),\(Float(locationEnd.coordinate.longitude))&directionsmode=driving")
+        "comgooglemaps://?saddr=\(String(locationStart.coordinate.latitude)),\(String(locationStart.coordinate.longitude))&daddr=\(String(locationEnd.coordinate.latitude)),\(String(locationEnd.coordinate.longitude))&directionsmode=driving")
             
+            print(url?.absoluteString)
             UIApplication.shared.open(url!, options: [:])
 
         } else
