@@ -260,7 +260,6 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
             let url = URL(string:
         "comgooglemaps://?saddr=\(String(locationStart.coordinate.latitude)),\(String(locationStart.coordinate.longitude))&daddr=\(String(locationEnd.coordinate.latitude)),\(String(locationEnd.coordinate.longitude))&directionsmode=driving")
             
-            print(url?.absoluteString)
             UIApplication.shared.open(url!, options: [:])
 
         } else

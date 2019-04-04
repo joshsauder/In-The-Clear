@@ -15,11 +15,11 @@ import MapKit
 extension ViewController {
     
     struct pathColorSegs {
-        static let SNOW = GMSStrokeStyle.solidColor(UIColor(red:0.43, green:0.39, blue:1.00, alpha:1.0))
-        static let RAIN = GMSStrokeStyle.solidColor(UIColor(red:0.35, green:0.93, blue:0.35, alpha:1.0))
-        static let STORMS = GMSStrokeStyle.solidColor(UIColor(red:0.89, green:0.11, blue:0.34, alpha:1.0))
-        static let SUN = GMSStrokeStyle.solidColor(UIColor.yellow)
-        static let CLOUDS = GMSStrokeStyle.solidColor(UIColor(red:0.63, green:0.62, blue:0.62, alpha:1.0))
+        static let SNOW = GMSStrokeStyle.solidColor(UIColor(red:0.12, green:0.53, blue:0.90, alpha:1.0))
+        static let RAIN = GMSStrokeStyle.solidColor(UIColor(red:0.26, green:0.63, blue:0.28, alpha:1.0))
+        static let STORMS = GMSStrokeStyle.solidColor(UIColor(red:0.90, green:0.22, blue:0.21, alpha:1.0))
+        static let SUN = GMSStrokeStyle.solidColor(UIColor(red:0.98, green:0.75, blue:0.18, alpha:1.0))
+        static let CLOUDS = GMSStrokeStyle.solidColor(UIColor(red:0.38, green:0.49, blue:0.55, alpha:1.0))
     }
     
     /**
