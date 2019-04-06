@@ -32,7 +32,7 @@ extension ViewController {
         - completion: After request made, exit with the condition at specified time
     */
     func getWeather(lat: String, long: String, timeToLookFor: Date, completion: @escaping (String) -> ()) {
-        let urlBase = "http://api.openweathermap.org/data/2.5/forecast?"
+        let urlBase = url.WEATHER_URL
         let urlComplete = urlBase + "lat=\(lat)&lon=\(long)&units=imperial&APPID=0c2beca9233adf894f6acded6d9a946c"
         var condition = ""
         Alamofire.request(urlComplete, method: .get).responseJSON(completionHandler: {

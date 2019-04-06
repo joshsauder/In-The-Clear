@@ -90,10 +90,10 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
         //setup Google Maps button
         googleMapsButtonSetup()
         
-        
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        
         //set map to current location
         let location = locations.last
         let camera = GMSCameraPosition.camera(withLatitude: (location?.coordinate.latitude)!, longitude: (location?.coordinate.longitude)!, zoom: 17.0)
@@ -109,11 +109,13 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        
         print("Error to get location : \(error)")
     }
     
     
     func mapView(_ mapView: GMSMapView, idleAt position: GMSCameraPosition) {
+        
         mapView.isMyLocationEnabled = true
     }
     
@@ -126,6 +128,7 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
     }
     
     func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
+        
         mapView.isMyLocationEnabled = true
         return false
     }
@@ -134,6 +137,7 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
     }
     
     func didTapMyLocationButton(for mapView: GMSMapView) -> Bool {
+        
         mapView.isMyLocationEnabled = true
         mapView.selectedMarker = nil
         return false
@@ -143,6 +147,7 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
      Function to request user location
     */
     func showLocationDisabledPopUp() {
+        
         let alertController = UIAlertController(title: "Background Location Access Disabled",
                                                 message: "Your Location is disabled. Enable if you'd like your location to be shown on map",
                                                 preferredStyle: .alert)
@@ -207,7 +212,8 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
 
         } else
         {
-            let url = URL(string: "https://www.google.co.in/maps/dir/?saddr=\(Float(locationStart.coordinate.latitude)),\(locationStart.coordinate.longitude))&daddr=\(String(describing: locationEnd.coordinate.latitude)),\(String(describing: locationEnd.coordinate.longitude))")
+            let base = url.GOOGLEMAPS_URL
+            let url = URL(string: "\(base)\(Float(locationStart.coordinate.latitude)),\(locationStart.coordinate.longitude))&daddr=\(String(describing: locationEnd.coordinate.latitude)),\(String(describing: locationEnd.coordinate.longitude))")
             
             UIApplication.shared.open(url!, options: [:], completionHandler: nil)
         }
@@ -217,6 +223,7 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
     Calls createLine to add polyline to map and also enables the weatherList button and time label at bottom
      */
     func showDirection(){
+        
         //show line
         self.createLine(startLocation: locationStart, endLocation: locationEnd) { time in
             
@@ -247,6 +254,7 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "ShowNavigation"{
+            
             var weatherDataVals: [weatherData.Entry] = []
             var i = conditions.count - 1
             var citiesUsed: [String] = []
@@ -270,7 +278,5 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
 
         }
     }
-    
-    
 }
 

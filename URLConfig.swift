@@ -11,4 +11,5 @@ import Foundation
 struct url {
     static let PATH_URL = "https://maps.googleapis.com/maps/api/directions/json?origin="
     static let WEATHER_URL = "http://api.openweathermap.org/data/2.5/forecast?"
+    static let GOOGLEMAPS_URL = "https://www.google.co.in/maps/dir/?saddr="
 }
