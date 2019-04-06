@@ -51,7 +51,6 @@ extension ViewController {
                         print("CLError:", error)
                     }
                     else if let placemark = placemarks?.first {
-                        print(placemark.locality)
                         self.cities.append("\(placemark.locality ?? ""), \(placemark.administrativeArea ?? "")")
                     }
 
@@ -184,12 +183,12 @@ extension ViewController {
         var date = Date(timeIntervalSinceReferenceDate: refDate)
         var colorSegs: [GMSStyleSpan] = []
         var totalTime = 0
-        var i = UInt(0)
+        var i = UInt(path.count()-1)
         var pathCoordinates = path.coordinate(at: i)
 
         let group = DispatchGroup()
 
-        if steps.count > 0 {
+        if steps.count > 1 {
             
             group.enter()
             
@@ -203,6 +202,7 @@ extension ViewController {
                 date = completion[1] as! Date
                 totalTime = completion[2] as! Int
                 pathCoordinates = completion[3] as! CLLocationCoordinate2D
+                i = completion[4] as! UInt
             
                 let time = step["duration"]["value"].intValue
                 date = date.addingTimeInterval(TimeInterval(60 * totalTime))
@@ -210,7 +210,7 @@ extension ViewController {
                 //get weather
                 let lat = step["end_location"]["lat"].stringValue
                 let long = step["end_location"]["lng"].stringValue
-                var numberSegs = 1
+                var numberSegs = 0
                 
             
                 self.getWeather(lat: lat, long: long, timeToLookFor: date) { condition in
@@ -223,9 +223,11 @@ extension ViewController {
                     while pathCoordinates.latitude.rounded() != stepCoordinates.latitude.rounded() && pathCoordinates.longitude.rounded() != stepCoordinates.longitude.rounded() {
                         
                         numberSegs = numberSegs + 1
-                        i = i + 1
+                        i -= 1
                         pathCoordinates = path.coordinate(at: i)
                     }
+                    
+                    print("\(lat) \(long) \(pathCoordinates.latitude) \(pathCoordinates.longitude) \(String(numberSegs)) \(String(i))")
                     
                     //determine which style span to use
                     if condition == "Rain" {
@@ -244,7 +246,7 @@ extension ViewController {
             }
         }
         group.notify(queue: DispatchQueue.main){
-            completion([colorSegs, date, totalTime, pathCoordinates])
+            completion([colorSegs, date, totalTime, pathCoordinates, i])
         }
     }
 }
