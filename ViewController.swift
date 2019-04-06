@@ -46,7 +46,7 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        addGlyph()
+        addButtonsAndLables()
         locationAuthorization()
         setupMap()
     }
@@ -79,73 +79,16 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
     /**
      Adds and stylizes weather list button, and time label at bottom. Both are hidden by default
     */
-    private func addGlyph(){
+    private func addButtonsAndLables(){
         
-        //set up weatherButton
-        weatherList.layer.cornerRadius = 5
-        weatherList.clipsToBounds = true
-        weatherList.setTitle("Expanded City List" , for: .normal)
-        weatherList.setTitleColor(UIColor.black, for: .normal)
-        weatherList.titleLabel?.font = UIFont.systemFont(ofSize: 12)
-        weatherList.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
+        //setup weather list button
+        weatherListButtonSetup()
         
-        //add shadow to button
-        weatherList.layer.shadowColor = UIColor.black.cgColor
-        weatherList.layer.masksToBounds = false
-        weatherList.layer.shadowOffset = CGSize(width: 5, height: 5)
-        weatherList.layer.shadowRadius = 5
-        weatherList.layer.shadowOpacity = 1.0
+        //setup time and distance label
+        timeLabelSetup()
         
-        //disable button at start
-        weatherList.isEnabled = false
-        weatherList.alpha = 0.5
-        
-        //set up timelabel
-        timeLabel.isHidden = true
-        timeLabel.backgroundColor = UIColor(white: 1, alpha: 1)
-        timeLabel.layer.cornerRadius = 5
-        timeLabel.clipsToBounds = true
-        timeLabel.textAlignment = .center
-        timeLabel.font = UIFont.boldSystemFont(ofSize: 20.0)
-        timeLabel.layer.cornerRadius = 5
-        timeLabel.clipsToBounds = true
-        
-        timeLabel.layer.shadowColor = UIColor.black.cgColor
-        timeLabel.layer.masksToBounds = false
-        timeLabel.layer.shadowOffset = CGSize(width: 3, height: 3)
-        timeLabel.layer.shadowRadius = 5
-        timeLabel.layer.shadowOpacity = 1.0
-        
-        openGoogleMaps.isHidden = true
-        openGoogleMaps.backgroundColor = UIColor(white: 1, alpha: 1)
-        openGoogleMaps.layer.cornerRadius = 5
-        openGoogleMaps.clipsToBounds = true
-       
-        //Create Attachment
-        let imageAttachment =  NSTextAttachment()
-        imageAttachment.image = UIImage(named:"icons8-google-maps-48")
-        imageAttachment.bounds = CGRect(x: 0, y: -5, width: 25, height: 25)
-        
-        //Create string with attachment
-        let attachmentString = NSAttributedString(attachment: imageAttachment)
-        //Initialize mutable string
-        let completeText = NSMutableAttributedString(string: "")
-        //Add image to mutable string
-        completeText.append(attachmentString)
-        //Add your text to mutable string
-        let  textAfterIcon = NSMutableAttributedString(string: "Open In Google Maps")
-        completeText.append(textAfterIcon)
-        
-        openGoogleMaps.setTitleColor(UIColor.black, for: .normal)
-        openGoogleMaps.titleLabel?.font = UIFont.boldSystemFont(ofSize: 15.0)
-        openGoogleMaps.titleLabel?.textAlignment = .center
-        openGoogleMaps.setAttributedTitle(completeText, for: .normal)
-        
-        openGoogleMaps.layer.shadowColor = UIColor.black.cgColor
-        openGoogleMaps.layer.masksToBounds = false
-        openGoogleMaps.layer.shadowOffset = CGSize(width: 3, height: 3)
-        openGoogleMaps.layer.shadowRadius = 5
-        openGoogleMaps.layer.shadowOpacity = 1.0
+        //setup Google Maps button
+        googleMapsButtonSetup()
         
         
     }
@@ -276,16 +219,9 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
     func showDirection(){
         //show line
         self.createLine(startLocation: locationStart, endLocation: locationEnd) { time in
-        
-            //enable time label
-            self.timeLabel.text = "Time: \(time)  Distance: \(self.totalDistance)"
-            self.timeLabel.isHidden = false
-            self.mapView.padding = UIEdgeInsetsMake(0, 0, 25, 0)
-            //enable weather list button
-            self.weatherList.isEnabled = true
-            self.weatherList.alpha = 1
-            //enable google maps button
-            self.openGoogleMaps.isHidden = false
+            
+            //enable and show time/distance label, Google Maps button, and Weather List Button
+            self.showButtonsAndLabels()
         }
         
         //clear weather arrays
