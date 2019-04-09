@@ -256,7 +256,7 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
         if segue.identifier == "ShowNavigation"{
             
             var weatherDataVals: [weatherData.Entry] = []
-            var i = conditions.count - 1
+            var i = cities.count - 1
             var citiesUsed: [String] = []
             while i >= 0 {
                 let city = cities[i]

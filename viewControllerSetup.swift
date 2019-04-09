@@ -91,6 +91,7 @@ extension ViewController {
         openGoogleMaps.titleLabel?.font = UIFont.boldSystemFont(ofSize: 15.0)
         openGoogleMaps.titleLabel?.textAlignment = .center
         openGoogleMaps.setAttributedTitle(completeText, for: .normal)
+        openGoogleMaps.titleLabel?.adjustsFontForContentSizeCategory = true
         
         //add shadow to button
         openGoogleMaps.layer.shadowColor = UIColor.black.cgColor

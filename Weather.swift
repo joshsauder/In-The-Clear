@@ -120,7 +120,7 @@ extension ViewController {
                 let stepsEval = routesVal[0]
                 let totalTime = stepsEval["duration"]["text"].stringValue
                 self.totalDistance = stepsEval["distance"]["text"].stringValue
-                let steps = stepsEval["steps"].arrayValue
+                var steps = stepsEval["steps"].arrayValue
                 self.polylineArray.forEach { $0.map = nil }
                 
                 for route in routes
@@ -188,7 +188,7 @@ extension ViewController {
 
         let group = DispatchGroup()
 
-        if steps.count > 1 {
+        if steps.count > 0 {
             
             group.enter()
             
@@ -210,7 +210,7 @@ extension ViewController {
                 //get weather
                 let lat = step["end_location"]["lat"].stringValue
                 let long = step["end_location"]["lng"].stringValue
-                var numberSegs = 0
+                var numberSegs = 1
                 
             
                 self.getWeather(lat: lat, long: long, timeToLookFor: date) { condition in
@@ -220,14 +220,15 @@ extension ViewController {
                     let stepCoordinates = CLLocationCoordinate2D(latitude: step["end_location"]["lat"].doubleValue, longitude: step["end_location"]["lng"].doubleValue)
                     
                     //add segments between each path coordinate
-                    while pathCoordinates.latitude.rounded() != stepCoordinates.latitude.rounded() && pathCoordinates.longitude.rounded() != stepCoordinates.longitude.rounded() {
+                    while pathCoordinates.latitude.rounded() != stepCoordinates.latitude.rounded() || pathCoordinates.longitude.rounded() != stepCoordinates.longitude.rounded() {
                         
                         numberSegs = numberSegs + 1
                         i -= 1
                         pathCoordinates = path.coordinate(at: i)
                     }
+
                     
-                    print("\(lat) \(long) \(pathCoordinates.latitude) \(pathCoordinates.longitude) \(String(numberSegs)) \(String(i))")
+                    print("\(lat) \(long) \(pathCoordinates.latitude) \(pathCoordinates.longitude) \(String(numberSegs)) \(String(i)) \(condition)")
                     
                     //determine which style span to use
                     if condition == "Rain" {
