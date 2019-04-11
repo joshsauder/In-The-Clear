@@ -168,8 +168,6 @@ extension ViewController {
         weatherPerStep(steps: steps, path: path){ result in
             
             colorSegs =  result[0] as! [GMSStyleSpan]
-            colorSegs.reverse()
-            
             line.spans = colorSegs
             totalTime = result[2] as! Int
             completion(totalTime)
@@ -183,7 +181,7 @@ extension ViewController {
         var date = Date(timeIntervalSinceReferenceDate: refDate)
         var colorSegs: [GMSStyleSpan] = []
         var totalTime = 0
-        var i = UInt(path.count()-1)
+        var i = UInt(0)
         var pathCoordinates = path.coordinate(at: i)
 
         let group = DispatchGroup()
@@ -192,9 +190,9 @@ extension ViewController {
             
             group.enter()
             
-            let step = steps[0]
+            let step = steps[steps.count - 1]
             var newSteps = steps
-            newSteps.remove(at: 0)
+            newSteps.remove(at: steps.count - 1)
             
             weatherPerStep(steps: newSteps, path: path) { completion in
                 
@@ -219,17 +217,16 @@ extension ViewController {
                     
                     let stepCoordinates = CLLocationCoordinate2D(latitude: step["end_location"]["lat"].doubleValue, longitude: step["end_location"]["lng"].doubleValue)
                     
-                    //add segments between each path coordinate
-                    while pathCoordinates.latitude.rounded() != stepCoordinates.latitude.rounded() || pathCoordinates.longitude.rounded() != stepCoordinates.longitude.rounded() {
-                        
+                    //start from start and go to end... since using end for path
+                    while abs(pathCoordinates.latitude - stepCoordinates.latitude) > 0.5 || abs(pathCoordinates.longitude - stepCoordinates.longitude) > 0.5 {
+
                         numberSegs = numberSegs + 1
-                        i -= 1
+                        i += 1
                         pathCoordinates = path.coordinate(at: i)
                     }
-
                     
                     print("\(lat) \(long) \(pathCoordinates.latitude) \(pathCoordinates.longitude) \(String(numberSegs)) \(String(i)) \(condition)")
-                    
+                   // }
                     //determine which style span to use
                     if condition == "Rain" {
                         colorSegs.append(GMSStyleSpan(style: pathColorSegs.RAIN, segments: Double(numberSegs)))
