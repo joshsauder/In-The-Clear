@@ -46,7 +46,7 @@ class weatherMenu: UITableViewController {
         //Create gradient color
         let colorArray = cellColor(weather: entry.weather)
         cell.colorCell(firstColor: colorArray[0], secondColor: colorArray[1])
-        
+        //set cell radius and width.
         cell.layer.cornerRadius = 15
         cell.layer.borderWidth = 6
         cell.layer.borderColor = tableView.backgroundColor?.cgColor

@@ -110,8 +110,7 @@ extension ViewController {
         let pathURL = url.PATH_URL + origin + "&destination=" + destination + "&mode=driving&key=" + "AIzaSyDznbmSUzLQ7dBofWqxHg-N6_jxxFBrxy0"
         
         Alamofire.request(pathURL, method: .get).validate().responseJSON { response in
-            
-            
+
             //begin parsing the response
             let json = JSON(response.data!)
             let routes = json["routes"].arrayValue
@@ -141,6 +140,11 @@ extension ViewController {
                     }
                 }
             }
+            else {
+                //alert user invalid route was input
+                let alert = UIAlertController(title: "Invalid Route", message: "Uh oh. Looks like it's not possible to drive between these two locations.", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            }
             
         }
     }
@@ -157,14 +161,8 @@ extension ViewController {
     func colorPath(line: GMSPolyline, steps: [JSON], path: GMSPath, completion: @escaping (Int) -> ()) {
         //take each step and get weather at end location
         var colorSegs: [GMSStyleSpan] = []
-
         var totalTime = 0
-        
-        //initialize stroke styles
-        
-        //Needed for async
-        
-        
+    
         weatherPerStep(steps: steps, path: path){ result in
             
             colorSegs =  result[0] as! [GMSStyleSpan]
