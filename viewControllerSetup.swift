@@ -68,13 +68,13 @@ extension ViewController {
         
         openGoogleMaps.isHidden = true
         openGoogleMaps.backgroundColor = UIColor(white: 1, alpha: 1)
-        openGoogleMaps.layer.cornerRadius = 5
+        openGoogleMaps.layer.cornerRadius = 0.5 * openGoogleMaps.bounds.size.width
         openGoogleMaps.clipsToBounds = true
         
         //Create Attachment
         let imageAttachment =  NSTextAttachment()
         imageAttachment.image = UIImage(named:"icons8-google-maps-48")
-        imageAttachment.bounds = CGRect(x: 0, y: -5, width: 25, height: 25)
+        imageAttachment.bounds = CGRect(x: 0, y: -5, width: 30, height: 30)
         
         //Create string with attachment
         let attachmentString = NSAttributedString(attachment: imageAttachment)
@@ -82,23 +82,20 @@ extension ViewController {
         let completeText = NSMutableAttributedString(string: "")
         //Add image to mutable string
         completeText.append(attachmentString)
-        //Add your text to mutable string
-        let  textAfterIcon = NSMutableAttributedString(string: "Open In Google Maps")
-        completeText.append(textAfterIcon)
         
         //set up font
         openGoogleMaps.setTitleColor(UIColor.black, for: .normal)
         openGoogleMaps.titleLabel?.font = UIFont.boldSystemFont(ofSize: 15.0)
         openGoogleMaps.titleLabel?.textAlignment = .center
         openGoogleMaps.setAttributedTitle(completeText, for: .normal)
-        openGoogleMaps.titleLabel?.adjustsFontForContentSizeCategory = true
+        openGoogleMaps.titleLabel?.adjustsFontSizeToFitWidth = true
         
         //add shadow to button
         openGoogleMaps.layer.shadowColor = UIColor.black.cgColor
         openGoogleMaps.layer.masksToBounds = false
-        openGoogleMaps.layer.shadowOffset = CGSize(width: 3, height: 3)
-        openGoogleMaps.layer.shadowRadius = 5
-        openGoogleMaps.layer.shadowOpacity = 1.0
+        openGoogleMaps.layer.shadowOffset = CGSize(width: 0, height: 1)
+        openGoogleMaps.layer.shadowRadius = 1
+        openGoogleMaps.layer.shadowOpacity = 0.5
     }
     /**
      Shows time and distance label and Google Maps Button. Enables weather List button.

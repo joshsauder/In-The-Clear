@@ -31,6 +31,8 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var openGoogleMaps: UIButton!
     
+    var markerStart: GMSMarker?
+    var MarkerEnd: GMSMarker?
     
     var locationStart = CLLocation()
     var locationEnd = CLLocation()
@@ -242,13 +244,14 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
     /**
     // function to create a marker on map
      */
-    func createMarker(titleMarker: String, latitude: CLLocationDegrees, longitude: CLLocationDegrees) {
+    func createMarker(titleMarker: String, latitude: CLLocationDegrees, longitude: CLLocationDegrees) -> GMSMarker {
         
             let marker = GMSMarker(position: CLLocationCoordinate2D(latitude: latitude, longitude: longitude))
             marker.title = titleMarker
             marker.appearAnimation = .pop
             marker.icon = GMSMarker.markerImage(with: UIColor.red)
             marker.map = self.mapView
+            return marker
         }
 
     
