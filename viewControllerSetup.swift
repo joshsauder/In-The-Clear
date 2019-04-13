@@ -103,7 +103,7 @@ extension ViewController {
     /**
      Shows time and distance label and Google Maps Button. Enables weather List button.
     */
-    func showButtonsAndLabels(){
+    func showButtonsAndLabels(time: String){
         
         //enable time label
         self.timeLabel.text = "Time: \(time)  Distance: \(self.totalDistance)"

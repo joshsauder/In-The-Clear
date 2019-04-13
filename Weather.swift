@@ -119,7 +119,7 @@ extension ViewController {
                 let stepsEval = routesVal[0]
                 let totalTime = stepsEval["duration"]["text"].stringValue
                 self.totalDistance = stepsEval["distance"]["text"].stringValue
-                var steps = stepsEval["steps"].arrayValue
+                let steps = stepsEval["steps"].arrayValue
                 self.polylineArray.forEach { $0.map = nil }
                 
                 for route in routes

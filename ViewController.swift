@@ -228,7 +228,7 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
         self.createLine(startLocation: locationStart, endLocation: locationEnd) { time in
             
             //enable and show time/distance label, Google Maps button, and Weather List Button
-            self.showButtonsAndLabels()
+            self.showButtonsAndLabels(time: time)
         }
         
         //clear weather arrays

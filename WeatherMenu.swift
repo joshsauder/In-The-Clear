@@ -152,6 +152,7 @@ class weatherMenu: UITableViewController {
                 size: CGSize(width: 12, height: 9)
             )
         }
+        print(weather)
         return image
     }
 
