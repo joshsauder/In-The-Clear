@@ -173,6 +173,7 @@ extension ViewController {
         if steps.count > 0 {
             
             group.enter()
+            group.enter()
             
             let step = steps[steps.count - 1]
             var newSteps = steps
@@ -196,25 +197,25 @@ extension ViewController {
                 
                 self.getWeather(lat: lat, long: long, timeToLookFor: date) { condition in
                     
-                    self.getLocationName(lat: lat, long: long){ location in
-                        
-                        self.cities.append(location)
-                        self.conditions.append(condition)
-                        
-                        let stepCoordinates = CLLocationCoordinate2D(latitude: step["end_location"]["lat"].doubleValue, longitude: step["end_location"]["lng"].doubleValue)
+                    self.conditions.append(condition)
+                    
+                    let stepCoordinates = CLLocationCoordinate2D(latitude: step["end_location"]["lat"].doubleValue, longitude: step["end_location"]["lng"].doubleValue)
                         
                             //start from start and go to end... since using end for path
-                        while abs(pathCoordinates.latitude - stepCoordinates.latitude) > 0.5 || abs(pathCoordinates.longitude - stepCoordinates.longitude) > 0.5 {
+                    while abs(pathCoordinates.latitude - stepCoordinates.latitude) > 0.5 || abs(pathCoordinates.longitude - stepCoordinates.longitude) > 0.5 {
 
-                            numberSegs = numberSegs + 1
-                            i += 1
-                            pathCoordinates = path.coordinate(at: i)
-                        }
-                        
-                            //determine which style span to use
-                        colorSegs.append(self.determineColorSeg(condition: condition, numberSegs: numberSegs))
-                        group.leave()
+                        numberSegs = numberSegs + 1
+                        i += 1
+                        pathCoordinates = path.coordinate(at: i)
                     }
+                        
+                        //determine which style span to use
+                    colorSegs.append(self.determineColorSeg(condition: condition, numberSegs: numberSegs))
+                    group.leave()
+                }
+                self.getLocationName(lat: lat, long: long){ location in
+                    self.cities.append(location)
+                    group.leave()
                 }
             }
         }
