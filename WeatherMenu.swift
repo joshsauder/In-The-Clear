@@ -119,14 +119,14 @@ class weatherMenu: UITableViewController {
                 name: .cloudShowersHeavy,
                 style: .solid,
                 textColor: .white,
-                size: CGSize(width: 12, height: 9)
+                size: CGSize(width: 14, height: 9)
             )
         } else if weather == "Thunderstorm" {
             image = UIImage.fontAwesomeIcon(
                 name: .bolt,
                 style: .solid,
                 textColor: .white,
-                size: CGSize(width: 12, height: 9)
+                size: CGSize(width: 14, height: 9)
             )
             
         } else if weather == "Snow" {
@@ -134,7 +134,7 @@ class weatherMenu: UITableViewController {
                 name: .snowflake,
                 style: .solid,
                 textColor: .white,
-                size: CGSize(width: 12, height: 9)
+                size: CGSize(width: 14, height: 9)
             )
             
         } else if weather == "Clouds" {
@@ -142,17 +142,16 @@ class weatherMenu: UITableViewController {
                 name: .cloud,
                 style: .solid,
                 textColor: .white,
-                size: CGSize(width: 12, height: 9)
+                size: CGSize(width: 14, height: 9)
             )
         } else {
             image = UIImage.fontAwesomeIcon(
                 name: .sun,
                 style: .solid,
                 textColor: .white,
-                size: CGSize(width: 12, height: 9)
+                size: CGSize(width: 14, height: 9)
             )
         }
-        print(weather)
         return image
     }
 

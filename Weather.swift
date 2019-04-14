@@ -43,19 +43,6 @@ extension ViewController {
             case .success:
                 let json = JSON(response.data!)
                 let weatherList = json["list"].arrayValue
-                let location = CLLocation(latitude: Double(lat)!, longitude: Double(long)!)
-                
-                CLGeocoder().reverseGeocodeLocation(location, completionHandler: {
-                    (placemarks, errors) in
-                    if let error = errors as? CLError {
-                        print("CLError:", error)
-                    }
-                    else if let placemark = placemarks?.first {
-                        self.cities.append("\(placemark.locality ?? ""), \(placemark.administrativeArea ?? "")")
-                    }
-
-                })
-                //self.cities.append(json["city"]["name"].stringValue)
                 
                 for weather in weatherList
                 {
@@ -122,22 +109,21 @@ extension ViewController {
                 let steps = stepsEval["steps"].arrayValue
                 self.polylineArray.forEach { $0.map = nil }
                 
-                for route in routes
-                {
-                    let routeOverviewPolyline = route["overview_polyline"].dictionary
-                    let points = routeOverviewPolyline?["points"]?.stringValue
+                //take first route and use polyline to draw line
+                let route = routes[0]
+                let routeOverviewPolyline = route["overview_polyline"].dictionary
+                let points = routeOverviewPolyline?["points"]?.stringValue
                     
-                    //create path and polyline from encoded path
-                    let path = GMSPath.init(fromEncodedPath: points!)
-                    let polyline = GMSPolyline.init(path: path)
-                    polyline.strokeWidth = 7
-                    self.polylineArray.append(polyline)
-                    self.colorPath(line: polyline, steps: steps, path: path!) { time in
-                        polyline.map = self.mapView
-                        self.mapView.animate(with: GMSCameraUpdate.fit(GMSCoordinateBounds(path: polyline.path!), withPadding: 50))
+                //create path and polyline from encoded path
+                let path = GMSPath.init(fromEncodedPath: points!)
+                let polyline = GMSPolyline.init(path: path)
+                polyline.strokeWidth = 7
+                self.polylineArray.append(polyline)
+                self.colorPath(line: polyline, steps: steps, path: path!) { time in
+                    polyline.map = self.mapView
+                    self.mapView.animate(with: GMSCameraUpdate.fit(GMSCoordinateBounds(path: polyline.path!), withPadding: 50))
                         //return total time val from json once colorpath method completes
-                        completion(totalTime)
-                    }
+                    completion(totalTime)
                 }
             }
             else {
@@ -208,41 +194,83 @@ extension ViewController {
                 let long = step["end_location"]["lng"].stringValue
                 var numberSegs = 1
                 
-            
                 self.getWeather(lat: lat, long: long, timeToLookFor: date) { condition in
                     
-                    self.conditions.append(condition)
-                    
-                    let stepCoordinates = CLLocationCoordinate2D(latitude: step["end_location"]["lat"].doubleValue, longitude: step["end_location"]["lng"].doubleValue)
-                    
-                    //start from start and go to end... since using end for path
-                    while abs(pathCoordinates.latitude - stepCoordinates.latitude) > 0.5 || abs(pathCoordinates.longitude - stepCoordinates.longitude) > 0.5 {
+                    self.getLocationName(lat: lat, long: long){ location in
+                        
+                        self.cities.append(location)
+                        self.conditions.append(condition)
+                        
+                        let stepCoordinates = CLLocationCoordinate2D(latitude: step["end_location"]["lat"].doubleValue, longitude: step["end_location"]["lng"].doubleValue)
+                        
+                            //start from start and go to end... since using end for path
+                        while abs(pathCoordinates.latitude - stepCoordinates.latitude) > 0.5 || abs(pathCoordinates.longitude - stepCoordinates.longitude) > 0.5 {
 
-                        numberSegs = numberSegs + 1
-                        i += 1
-                        pathCoordinates = path.coordinate(at: i)
+                            numberSegs = numberSegs + 1
+                            i += 1
+                            pathCoordinates = path.coordinate(at: i)
+                        }
+                        
+                            //determine which style span to use
+                        colorSegs.append(self.determineColorSeg(condition: condition, numberSegs: numberSegs))
+                        group.leave()
                     }
-                    
-                    print("\(lat) \(long) \(pathCoordinates.latitude) \(pathCoordinates.longitude) \(String(numberSegs)) \(String(i)) \(condition)")
-                   // }
-                    //determine which style span to use
-                    if condition == "Rain" {
-                        colorSegs.append(GMSStyleSpan(style: pathColorSegs.RAIN, segments: Double(numberSegs)))
-                    } else if condition == "Thunderstorm" {
-                        colorSegs.append(GMSStyleSpan(style: pathColorSegs.STORMS, segments: Double(numberSegs)))
-                    } else if condition == "Snow" {
-                        colorSegs.append(GMSStyleSpan(style: pathColorSegs.SNOW, segments: Double(numberSegs)))
-                    } else if condition == "Clouds"{
-                        colorSegs.append(GMSStyleSpan(style: pathColorSegs.CLOUDS, segments: Double(numberSegs)))
-                    } else {
-                        colorSegs.append(GMSStyleSpan(style: pathColorSegs.SUN, segments: Double(numberSegs)))
-                    }
-                    group.leave()
                 }
             }
         }
         group.notify(queue: DispatchQueue.main){
             completion([colorSegs, date, totalTime, pathCoordinates, i])
         }
+    }
+    
+    
+    func getLocationName(lat: String, long: String, completion: @escaping (String) -> ()) {
+        
+        let urlComplete = "\(url.ARCGIS_GEOCODER_URL)\(long),\(lat)"
+        Alamofire.request(urlComplete, method: .get).responseJSON(completionHandler: {
+        (response) in
+            
+            switch response.result {
+                
+            case .success:
+                let json = JSON(response.data!)
+                let city = json["address"]["City"].stringValue
+                let state = json["address"]["Region"].stringValue
+                completion("\(city), \(state)")
+                break
+                
+            case .failure(let error):
+                print(error)
+                break
+            }
+            
+        })
+    }
+    
+    /**
+     Determines what color each segment in polyline should be
+     
+     - parameters:
+     - condition: The weather condition for the segment(s)
+     - numberSegs: The number of segments that need to be colored
+     - returns: The GMSStyleSpan for a specific segment(s)
+     
+    */
+    func determineColorSeg(condition: String, numberSegs: Int) -> GMSStyleSpan {
+        let colorSeg: GMSStyleSpan
+        
+        if condition == "Rain" {
+            colorSeg = GMSStyleSpan(style: pathColorSegs.RAIN, segments: Double(numberSegs))
+        } else if condition == "Thunderstorm" {
+            colorSeg = GMSStyleSpan(style: pathColorSegs.STORMS, segments: Double(numberSegs))
+        } else if condition == "Snow" {
+            colorSeg = GMSStyleSpan(style: pathColorSegs.SNOW, segments: Double(numberSegs))
+        } else if condition == "Clouds"{
+            colorSeg = GMSStyleSpan(style: pathColorSegs.CLOUDS, segments: Double(numberSegs))
+        } else {
+            colorSeg = GMSStyleSpan(style: pathColorSegs.SUN, segments: Double(numberSegs))
+        }
+        
+        return colorSeg
     }
 }

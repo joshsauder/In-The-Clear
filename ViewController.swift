@@ -242,7 +242,7 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
     }
 
     /**
-    // function to create a marker on map
+     Function to create a marker on map
      */
     func createMarker(titleMarker: String, latitude: CLLocationDegrees, longitude: CLLocationDegrees) -> GMSMarker {
         
@@ -257,6 +257,12 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "ShowNavigation"{
+            
+            //order from start location to finish
+            cities.reverse()
+            conditions.reverse()
+            highTemps.reverse()
+            conditionDescription.reverse()
             
             var weatherDataVals: [weatherData.Entry] = []
             var i = cities.count - 1
