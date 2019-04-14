@@ -13,7 +13,7 @@ import GoogleMaps
 
 class WeatherTableTests: XCTestCase {
     
-    var weatherMenu: weatherMenu!
+    let wm = weatherMenu()
     
     override func setUp() {
         super.setUp()
@@ -25,77 +25,26 @@ class WeatherTableTests: XCTestCase {
     func testTableCellColor() {
         
         //actual values
-        let rain = weatherMenu.cellColor(weather: "Rain")
-        let sun = weatherMenu.cellColor(weather: "Sun")
-        let snow = weatherMenu.cellColor(weather: "Snow")
-        let ts = weatherMenu.cellColor(weather: "Thunderstorm")
-        let cloud = weatherMenu.cellColor(weather: "Cloud")
+        let rain = wm.cellColor(weather: "Rain")
+        let sun = wm.cellColor(weather: "Sun")
+        let snow = wm.cellColor(weather: "Snow")
+        let ts = wm.cellColor(weather: "Thunderstorm")
+        let cloud = wm.cellColor(weather: "Clouds")
         
         //expected values
-        let expectedRain = UIColor(red:0.35, green:0.93, blue:0.35, alpha:1.0)
-        let expectedSun = UIColor(red:0.98, green:0.93, blue:0.43, alpha:1.0)
-        let expectedSnow = UIColor(red:0.43, green:0.39, blue:1.00, alpha:1.0)
-        let expectedTS = UIColor(red:0.89, green:0.11, blue:0.34, alpha:1.0)
-        let expectedCloud = UIColor(red:0.63, green:0.62, blue:0.62, alpha:1.0)
+        let expectedRain = [UIColor(red:0.40, green:0.73, blue:0.42, alpha:1.0), UIColor(red:0.26, green:0.63, blue:0.28, alpha:1.0)]
+        let expectedSun = [UIColor(red:1.00, green:0.92, blue:0.23, alpha:1.0), UIColor(red:0.98, green:0.75, blue:0.18, alpha:1.0)]
+        let expectedSnow = [UIColor(red:0.26, green:0.65, blue:0.96, alpha:1.0), UIColor(red:0.12, green:0.53, blue:0.90, alpha:1.0)]
+        let expectedTS = [UIColor(red:0.94, green:0.33, blue:0.31, alpha:1.0), UIColor(red:0.90, green:0.22, blue:0.21, alpha:1.0)]
+        let expectedCloud = [UIColor(red:0.56, green:0.64, blue:0.68, alpha:1.0), UIColor(red:0.38, green:0.49, blue:0.55, alpha:1.0)]
         
         //test actual vs expected
-        assert(rain == expectedRain)
-        assert(sun == expectedSun)
-        assert(cloud == expectedCloud)
-        assert(snow == expectedSnow)
-        assert(ts == expectedTS)
+        assert(rain[0].isEqual(expectedRain[0]) && rain[1].isEqual(expectedRain[1]))
+        assert(sun[0].isEqual(expectedSun[0]) && sun[1].isEqual(expectedSun[1]))
+        assert(cloud[0].isEqual(expectedCloud[0]) && cloud[1].isEqual(expectedCloud[1]))
+        assert(snow[0].isEqual(expectedSnow[0]) && snow[1].isEqual(expectedSnow[1]))
+        assert(ts[0].isEqual(expectedTS[0]) && ts[1].isEqual(expectedTS[1]))
         
-    }
-    
-    /*
-    Test to ensure correct image are being displayed
-    */
-    func testTableCellImage() {
-        //actual values
-        let rain = weatherMenu.weatherImage(weather: "Rain")
-        let sun = weatherMenu.weatherImage(weather: "Sun")
-        let snow = weatherMenu.weatherImage(weather: "Snow")
-        let ts = weatherMenu.weatherImage(weather: "Thunderstorm")
-        let cloud = weatherMenu.weatherImage(weather: "Cloud")
-        
-        //expected values
-        let expectedRain = UIImage.fontAwesomeIcon(
-            name: .tint,
-            style: .solid,
-            textColor: .white,
-            size: CGSize(width: 20, height: 15)
-        )
-        let expectedSun = UIImage.fontAwesomeIcon(
-            name: .sun,
-            style: .solid,
-            textColor: .white,
-            size: CGSize(width: 20, height: 15)
-        )
-        let expectedSnow = UIImage.fontAwesomeIcon(
-            name: .snowflake,
-            style: .solid,
-            textColor: .white,
-            size: CGSize(width: 20, height: 15)
-        )
-        let expectedTS = UIImage.fontAwesomeIcon(
-            name: .bolt,
-            style: .solid,
-            textColor: .white,
-            size: CGSize(width: 20, height: 15)
-        )
-        let expectedCloud = UIImage.fontAwesomeIcon(
-            name: .cloud,
-            style: .solid,
-            textColor: .white,
-            size: CGSize(width: 20, height: 15)
-        )
-        
-        //test actual vs expected
-        assert(rain == expectedRain)
-        assert(sun == expectedSun)
-        assert(cloud == expectedCloud)
-        assert(snow == expectedSnow)
-        assert(ts == expectedTS)
     }
     
     /*
@@ -110,26 +59,28 @@ class WeatherTableTests: XCTestCase {
         //Sacramento, CA coordinates
         let destination = CLLocation(latitude: CLLocationDegrees(exactly: 38.5816)!, longitude: CLLocationDegrees(exactly: 121.4944)!)
         
-        vc.createLine(startLocation: start, endLocation: destination)
-        
-        
-        //Miami, FL coordinates
-        let secondStart = CLLocation(latitude: CLLocationDegrees(exactly: 25.77481)!, longitude: CLLocationDegrees(exactly: -80.19773)!)
-        
-        //Columbus, OH coordinates
-        let secondDestination = CLLocation(latitude: CLLocationDegrees(exactly: 32.77815)!, longitude: CLLocationDegrees(exactly: -96.7954)!)
-        
-        vc.createLine(startLocation: secondStart, endLocation: secondDestination)
-        
-        var test = true
-        
-        //check for the first routes first and last cities
-        for entry in weatherMenu.weatherDataArray {
-            if entry.city == "Seattle" || entry.city == "Sacramento" {
-                test = false
+        vc.createLine(startLocation: start, endLocation: destination){ condition in
+            
+            //Miami, FL coordinates
+            let secondStart = CLLocation(latitude: CLLocationDegrees(exactly: 25.77481)!, longitude: CLLocationDegrees(exactly: -80.19773)!)
+            
+            //Columbus, OH coordinates
+            let secondDestination = CLLocation(latitude: CLLocationDegrees(exactly: 32.77815)!, longitude: CLLocationDegrees(exactly: -96.7954)!)
+            
+            vc.createLine(startLocation: secondStart, endLocation: secondDestination){ condition in
+                var test = true
+                
+                //check for the first routes first and last cities
+                for entry in self.wm.weatherDataArray {
+                    if entry.city == "Seattle" || entry.city == "Sacramento" {
+                        test = false
+                    }
+                }
+                
+                assert(test)
             }
+            
         }
         
-        assert(test)
     }
 }
