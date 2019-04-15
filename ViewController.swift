@@ -249,10 +249,9 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
             let marker = GMSMarker(position: CLLocationCoordinate2D(latitude: latitude, longitude: longitude))
             marker.title = titleMarker
             marker.appearAnimation = .pop
-            marker.icon = GMSMarker.markerImage(with: UIColor.red)
-            marker.map = self.mapView
+            marker.map = mapView
             return marker
-        }
+    }
 
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

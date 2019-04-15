@@ -201,7 +201,7 @@ extension ViewController {
                     
                     let stepCoordinates = CLLocationCoordinate2D(latitude: step["end_location"]["lat"].doubleValue, longitude: step["end_location"]["lng"].doubleValue)
                         
-                            //start from start and go to end... since using end for path
+                    //start from start and go to end... since using end for path
                     while abs(pathCoordinates.latitude - stepCoordinates.latitude) > 0.5 || abs(pathCoordinates.longitude - stepCoordinates.longitude) > 0.5 {
 
                         numberSegs = numberSegs + 1
@@ -209,7 +209,7 @@ extension ViewController {
                         pathCoordinates = path.coordinate(at: i)
                     }
                         
-                        //determine which style span to use
+                    //determine which style span to use
                     colorSegs.append(self.determineColorSeg(condition: condition, numberSegs: numberSegs))
                     group.leave()
                 }
