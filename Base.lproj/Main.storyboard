@@ -150,7 +150,7 @@
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="WeatherTableViewCell" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="WeatherTableViewCell" rowHeight="153" id="FzJ-fJ-Srz" customClass="WeatherTableViewCell" customModule="InTheClear" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="414" height="153"/>
                                 <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="FzJ-fJ-Srz" id="T8F-2p-j5r">
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="FzJ-fJ-Srz" id="T8F-2p-j5r">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="152.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
@@ -188,6 +188,7 @@
                                         <constraint firstItem="4i9-z8-dVM" firstAttribute="leading" secondItem="T8F-2p-j5r" secondAttribute="leadingMargin" id="284-Ny-bWE"/>
                                         <constraint firstItem="4i9-z8-dVM" firstAttribute="centerY" secondItem="T8F-2p-j5r" secondAttribute="centerY" constant="-22.833333333333329" id="35v-Kr-dmr"/>
                                         <constraint firstItem="3XG-Tk-qKa" firstAttribute="leading" secondItem="ihh-bS-ubh" secondAttribute="trailing" constant="18" id="73D-RF-vCq"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="3XG-Tk-qKa" secondAttribute="trailing" constant="15" id="Bpt-yR-fA6"/>
                                         <constraint firstItem="hZa-3e-fyW" firstAttribute="leading" secondItem="4i9-z8-dVM" secondAttribute="trailing" constant="-228" id="CCJ-8F-vE6"/>
                                         <constraint firstItem="4i9-z8-dVM" firstAttribute="baseline" secondItem="hZa-3e-fyW" secondAttribute="baseline" constant="-59.999999999999957" id="HRr-nZ-AMf"/>
                                         <constraint firstItem="4i9-z8-dVM" firstAttribute="firstBaseline" secondItem="hZa-3e-fyW" secondAttribute="firstBaseline" constant="-55.333333333333329" id="J1S-NC-hKq"/>
@@ -196,7 +197,9 @@
                                         <constraint firstItem="ihh-bS-ubh" firstAttribute="leading" secondItem="T8F-2p-j5r" secondAttribute="leadingMargin" constant="72" id="Pv6-OB-IrK"/>
                                         <constraint firstItem="3XG-Tk-qKa" firstAttribute="centerY" secondItem="T8F-2p-j5r" secondAttribute="centerY" id="RgD-8D-wdh"/>
                                         <constraint firstAttribute="bottomMargin" secondItem="3XG-Tk-qKa" secondAttribute="bottom" constant="32" id="bHW-yC-xT2"/>
+                                        <constraint firstItem="3XG-Tk-qKa" firstAttribute="leading" secondItem="ihh-bS-ubh" secondAttribute="trailing" constant="18" id="h3l-bD-zzK"/>
                                         <constraint firstItem="ihh-bS-ubh" firstAttribute="trailing" secondItem="4i9-z8-dVM" secondAttribute="trailing" constant="12" id="n6S-ox-Bvx"/>
+                                        <constraint firstItem="hZa-3e-fyW" firstAttribute="leading" secondItem="T8F-2p-j5r" secondAttribute="leadingMargin" id="nHK-yv-Bla"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <accessibility key="accessibilityConfiguration" identifier="WeatherTableViewCell"/>
