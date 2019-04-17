@@ -128,8 +128,9 @@ extension ViewController {
             }
             else {
                 //alert user invalid route was input
-                let alert = UIAlertController(title: "Invalid Route", message: "Uh oh. Looks like it's not possible to drive between these two locations.", preferredStyle: .alert)
+                let alert = UIAlertController(title: "Invalid Route", message: "Woops! Looks like it's not possible to drive between these two locations.", preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                self.present(alert, animated: true, completion: nil)
             }
             
         }
