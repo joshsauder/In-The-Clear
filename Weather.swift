@@ -119,7 +119,7 @@ extension ViewController {
                 let polyline = GMSPolyline.init(path: path)
                 polyline.strokeWidth = 7
                 self.polylineArray.append(polyline)
-                self.colorPath(line: polyline, steps: steps, path: path!) { time in
+                self.colorPath(line: polyline, steps: steps, path: path!) {
                     polyline.map = self.mapView
                     self.mapView.animate(with: GMSCameraUpdate.fit(GMSCoordinateBounds(path: polyline.path!), withPadding: 50))
                         //return total time val from json once colorpath method completes
@@ -145,17 +145,15 @@ extension ViewController {
         - path: The directions path
         - completion: After weather services callback, exit function
     */
-    func colorPath(line: GMSPolyline, steps: [JSON], path: GMSPath, completion: @escaping (Int) -> ()) {
+    func colorPath(line: GMSPolyline, steps: [JSON], path: GMSPath, completion: @escaping () -> ()) {
         //take each step and get weather at end location
         var colorSegs: [GMSStyleSpan] = []
-        var totalTime = 0
     
         weatherPerStep(steps: steps, path: path){ result in
             
             colorSegs =  result[0] as! [GMSStyleSpan]
             line.spans = colorSegs
-            totalTime = result[2] as! Int
-            completion(totalTime)
+            completion()
         }
         
     }
