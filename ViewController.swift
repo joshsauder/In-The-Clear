@@ -57,7 +57,7 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
       Sets up the Google Maps Map View
     */
     func setupMap(){
-        let camera = GMSCameraPosition.camera(withLatitude: -33.86, longitude: 151, zoom: 13.0)
+        let camera = GMSCameraPosition.camera(withLatitude: -33.86, longitude: 151, zoom: 11.0)
         mapView.camera = camera
         mapView.delegate = self
         mapView?.isMyLocationEnabled = true
@@ -98,7 +98,7 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
         
         //set map to current location
         let location = locations.last
-        let camera = GMSCameraPosition.camera(withLatitude: (location?.coordinate.latitude)!, longitude: (location?.coordinate.longitude)!, zoom: 17.0)
+        let camera = GMSCameraPosition.camera(withLatitude: (location?.coordinate.latitude)!, longitude: (location?.coordinate.longitude)!, zoom: 11.0)
         self.mapView?.animate(to: camera)
         
         //set start to current location
