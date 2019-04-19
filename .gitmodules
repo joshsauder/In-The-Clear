@@ -1,0 +1,6 @@
+[submodule "InTheClear"]
+	path = InTheClear
+	url = ./InTheClear
+[submodule "InTheClearTests"]
+	path = InTheClearTests
+	url = ./InTheClearTests
