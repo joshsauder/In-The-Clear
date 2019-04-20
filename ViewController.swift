@@ -256,9 +256,9 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
             self.startButton.isEnabled = true
             self.destinationButton.isEnabled = true
             
-            self.MarkerEnd = self.createMarker(titleMarker: "LocationEnd", latitude: self.locationEnd.coordinate.latitude, longitude: self.locationEnd.coordinate.longitude)
+            self.MarkerEnd = self.createMarker(titleMarker: self.cities[0], latitude: self.locationEnd.coordinate.latitude, longitude: self.locationEnd.coordinate.longitude)
             if self.startLocation.text != "Current Location" {
-                self.markerStart = self.createMarker(titleMarker: "LocationStart", latitude: self.locationStart.coordinate.latitude, longitude: self.locationStart.coordinate.longitude)
+                self.markerStart = self.createMarker(titleMarker: self.cities[self.cities.count - 1], latitude: self.locationStart.coordinate.latitude, longitude: self.locationStart.coordinate.longitude)
             }
             
         }
