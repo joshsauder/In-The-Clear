@@ -22,7 +22,6 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
     
     var locationManager = CLLocationManager()
     var locationSelected = Location.startLocation
-    var polylineArray = [GMSPolyline]()
     
     @IBOutlet weak var startLocation: UITextField!
     @IBOutlet weak var destinationLocation: UITextField!
@@ -103,6 +102,7 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
         let location = locations.last
         let camera = GMSCameraPosition.camera(withLatitude: (location?.coordinate.latitude)!, longitude: (location?.coordinate.longitude)!, zoom: 11.0)
         self.mapView?.animate(to: camera)
+
         
         //set start to current location
         locationStart = location!
@@ -239,6 +239,7 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
         conditions.removeAll()
         conditionDescription.removeAll()
         times.removeAll()
+        mapView.clear()
         
         //show line
         self.createLine(startLocation: locationStart, endLocation: locationEnd) { time in
@@ -254,6 +255,11 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
             //re-enable location buttons
             self.startButton.isEnabled = true
             self.destinationButton.isEnabled = true
+            
+            self.MarkerEnd = self.createMarker(titleMarker: "LocationEnd", latitude: self.locationEnd.coordinate.latitude, longitude: self.locationEnd.coordinate.longitude)
+            if self.startLocation.text != "Current Location" {
+                self.markerStart = self.createMarker(titleMarker: "LocationStart", latitude: self.locationStart.coordinate.latitude, longitude: self.locationStart.coordinate.longitude)
+            }
             
         }
     }

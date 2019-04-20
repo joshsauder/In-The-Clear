@@ -106,7 +106,6 @@ extension ViewController {
                 let totalTime = stepsEval["duration"]["text"].stringValue
                 self.totalDistance = stepsEval["distance"]["text"].stringValue
                 let steps = stepsEval["steps"].arrayValue
-                self.polylineArray.forEach { $0.map = nil }
                 
                 //take first route and use polyline to draw line
                 let route = routes[0]
@@ -117,7 +116,6 @@ extension ViewController {
                 let path = GMSPath.init(fromEncodedPath: points!)
                 let polyline = GMSPolyline.init(path: path)
                 polyline.strokeWidth = 7
-                self.polylineArray.append(polyline)
                 
                 //make sure geolocating is complete when Polyline is colored
                 let group = DispatchGroup()

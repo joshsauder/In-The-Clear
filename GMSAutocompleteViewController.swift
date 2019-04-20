@@ -24,8 +24,9 @@ extension ViewController: GMSAutocompleteViewControllerDelegate {
         } else{
             destinationLocation.text = "\(place.name!)"
             locationEnd = CLLocation(latitude: place.coordinate.latitude, longitude: place.coordinate.longitude)
-            self.mapView.camera = camera
-            MarkerEnd = createMarker(titleMarker: "Location End", latitude: place.coordinate.longitude, longitude: place.coordinate.longitude)
+            
+                self.mapView.camera = camera
+                //self.MarkerEnd = self.createMarker(titleMarker: "Location End", latitude: place.coordinate.longitude, longitude: place.coordinate.longitude)
         }
         
         
