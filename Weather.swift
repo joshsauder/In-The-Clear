@@ -46,8 +46,6 @@ extension ViewController {
                 
                 for weather in weatherList
                 {
-                    //get condition
-                        
                     //get time
                     let time = weather["dt_txt"].stringValue
                     let temp = weather["main"]["temp_max"].floatValue
@@ -59,7 +57,7 @@ extension ViewController {
                     condition = weatherArray[0]["main"].stringValue
                     let description = weatherArray[0]["description"].stringValue
                     
-                    //print(dateFromString!.addingTimeInterval(60*60*3))
+                    //if date time is in range, add it, else move to next time range
                     if(dateFromString!.addingTimeInterval(60.0*60*3) > timeToLookFor || dateFromString!.addingTimeInterval(-60.0*60*3) < timeToLookFor) {
                         //print (condition)
                         self.times.append(dateFromString!)
@@ -101,6 +99,7 @@ extension ViewController {
             //begin parsing the response
             let json = JSON(response.data!)
             let routes = json["routes"].arrayValue
+            //prevents invalid routes from being inputed
             if routes.count > 0 {
                 let routesVal = routes[0]["legs"].arrayValue
                 let stepsEval = routesVal[0]
@@ -125,6 +124,7 @@ extension ViewController {
                 group.enter()
                 group.enter()
                 
+                //let geolocating and path coloring run in a simultaneouly
                 self.getLocationName(steps: steps){
                     group.leave()
                 }
@@ -132,11 +132,11 @@ extension ViewController {
                 self.colorPath(line: polyline, steps: steps, path: path!) {
                     polyline.map = self.mapView
                     self.mapView.animate(with: GMSCameraUpdate.fit(GMSCoordinateBounds(path: polyline.path!), withPadding: 50))
-                    //return total time val from json once colorpath method completes
                     group.leave()
                 }
                 
                 group.notify(queue: DispatchQueue.main){
+                    //return total time val from json once colorpath and geolocating methods are complete
                     completion(totalTime)
                 }
             }
@@ -253,7 +253,7 @@ extension ViewController {
                 (response) in
                 
                     switch response.result {
-                    
+                        
                     case .success:
                         let json = JSON(response.data!)
                         let city = json["address"]["City"].stringValue
@@ -270,9 +270,8 @@ extension ViewController {
                     group.leave()
                 
                 })
-                
             }
-            }
+        }
         group.notify(queue: DispatchQueue.main){
             completion()
         }
