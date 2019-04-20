@@ -120,6 +120,7 @@ extension ViewController {
                 polyline.strokeWidth = 7
                 self.polylineArray.append(polyline)
                 
+                //make sure geolocating is complete when Polyline is colored
                 let group = DispatchGroup()
                 group.enter()
                 group.enter()
@@ -131,7 +132,7 @@ extension ViewController {
                 self.colorPath(line: polyline, steps: steps, path: path!) {
                     polyline.map = self.mapView
                     self.mapView.animate(with: GMSCameraUpdate.fit(GMSCoordinateBounds(path: polyline.path!), withPadding: 50))
-                        //return total time val from json once colorpath method completes
+                    //return total time val from json once colorpath method completes
                     group.leave()
                 }
                 
