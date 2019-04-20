@@ -26,6 +26,9 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
     
     @IBOutlet weak var startLocation: UITextField!
     @IBOutlet weak var destinationLocation: UITextField!
+    @IBOutlet weak var startButton: UIButton!
+    @IBOutlet weak var destinationButton: UIButton!
+    
     @IBOutlet weak var weatherList: UIButton!
     @IBOutlet weak var mapView: GMSMapView!
     @IBOutlet weak var timeLabel: UILabel!
@@ -226,11 +229,17 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
      */
     func showDirection(){
         
+        //disable location buttons
+        startButton.isEnabled = false
+        destinationButton.isEnabled = false
         //show line
         self.createLine(startLocation: locationStart, endLocation: locationEnd) { time in
             
             //enable and show time/distance label, Google Maps button, and Weather List Button
             self.showButtonsAndLabels(time: time)
+            //re-enable location buttons
+            self.startButton.isEnabled = true
+            self.destinationButton.isEnabled = true
         }
         
         //clear weather arrays

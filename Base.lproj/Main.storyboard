@@ -126,9 +126,11 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
+                        <outlet property="destinationButton" destination="Pei-xi-bFd" id="UWt-2B-AJA"/>
                         <outlet property="destinationLocation" destination="epA-ie-vQH" id="o8T-Sf-s82"/>
                         <outlet property="mapView" destination="MeT-bN-U9A" id="GKc-Kf-vIJ"/>
                         <outlet property="openGoogleMaps" destination="fEc-Uw-77w" id="CSx-dX-cHn"/>
+                        <outlet property="startButton" destination="46b-9j-VGI" id="ccg-zZ-jkl"/>
                         <outlet property="startLocation" destination="NRT-9p-hDV" id="aAr-az-4Uy"/>
                         <outlet property="timeLabel" destination="VPO-Up-Lz2" id="Txt-ZI-CcO"/>
                         <outlet property="weatherList" destination="IxU-i0-uud" id="Suv-eY-Anj"/>
