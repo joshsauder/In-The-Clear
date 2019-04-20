@@ -22,12 +22,10 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
     
     var locationManager = CLLocationManager()
     var locationSelected = Location.startLocation
+    var polylineArray = [GMSPolyline]()
     
     @IBOutlet weak var startLocation: UITextField!
     @IBOutlet weak var destinationLocation: UITextField!
-    @IBOutlet weak var startButton: UIButton!
-    @IBOutlet weak var destinationButton: UIButton!
-    
     @IBOutlet weak var weatherList: UIButton!
     @IBOutlet weak var mapView: GMSMapView!
     @IBOutlet weak var timeLabel: UILabel!
@@ -59,7 +57,7 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
       Sets up the Google Maps Map View
     */
     func setupMap(){
-        let camera = GMSCameraPosition.camera(withLatitude: -33.86, longitude: 151, zoom: 11.0)
+        let camera = GMSCameraPosition.camera(withLatitude: -33.86, longitude: 151, zoom: 13.0)
         mapView.camera = camera
         mapView.delegate = self
         mapView?.isMyLocationEnabled = true
@@ -100,9 +98,8 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
         
         //set map to current location
         let location = locations.last
-        let camera = GMSCameraPosition.camera(withLatitude: (location?.coordinate.latitude)!, longitude: (location?.coordinate.longitude)!, zoom: 11.0)
+        let camera = GMSCameraPosition.camera(withLatitude: (location?.coordinate.latitude)!, longitude: (location?.coordinate.longitude)!, zoom: 17.0)
         self.mapView?.animate(to: camera)
-
         
         //set start to current location
         locationStart = location!
@@ -229,9 +226,12 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
      */
     func showDirection(){
         
-        //disable location buttons
-        startButton.isEnabled = false
-        destinationButton.isEnabled = false
+        //show line
+        self.createLine(startLocation: locationStart, endLocation: locationEnd) { time in
+            
+            //enable and show time/distance label, Google Maps button, and Weather List Button
+            self.showButtonsAndLabels(time: time)
+        }
         
         //clear weather arrays
         cities.removeAll()
@@ -239,29 +239,6 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
         conditions.removeAll()
         conditionDescription.removeAll()
         times.removeAll()
-        mapView.clear()
-        
-        //show line
-        self.createLine(startLocation: locationStart, endLocation: locationEnd) { time in
-            
-            //order from start location to finish
-            self.cities.reverse()
-            self.conditions.reverse()
-            self.highTemps.reverse()
-            self.conditionDescription.reverse()
-            
-            //enable and show time/distance label, Google Maps button, and Weather List Button
-            self.showButtonsAndLabels(time: time)
-            //re-enable location buttons
-            self.startButton.isEnabled = true
-            self.destinationButton.isEnabled = true
-            
-            self.MarkerEnd = self.createMarker(titleMarker: self.cities[0], latitude: self.locationEnd.coordinate.latitude, longitude: self.locationEnd.coordinate.longitude)
-            if self.startLocation.text != "Current Location" {
-                self.markerStart = self.createMarker(titleMarker: self.cities[self.cities.count - 1], latitude: self.locationStart.coordinate.latitude, longitude: self.locationStart.coordinate.longitude)
-            }
-            
-        }
     }
 
     /**
@@ -280,6 +257,11 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "ShowNavigation"{
             
+            //order from start location to finish
+            cities.reverse()
+            conditions.reverse()
+            highTemps.reverse()
+            conditionDescription.reverse()
             
             var weatherDataVals: [weatherData.Entry] = []
             var i = cities.count - 1

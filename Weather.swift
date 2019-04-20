@@ -46,6 +46,8 @@ extension ViewController {
                 
                 for weather in weatherList
                 {
+                    //get condition
+                        
                     //get time
                     let time = weather["dt_txt"].stringValue
                     let temp = weather["main"]["temp_max"].floatValue
@@ -57,7 +59,7 @@ extension ViewController {
                     condition = weatherArray[0]["main"].stringValue
                     let description = weatherArray[0]["description"].stringValue
                     
-                    //if date time is in range, add it, else move to next time range
+                    //print(dateFromString!.addingTimeInterval(60*60*3))
                     if(dateFromString!.addingTimeInterval(60.0*60*3) > timeToLookFor || dateFromString!.addingTimeInterval(-60.0*60*3) < timeToLookFor) {
                         //print (condition)
                         self.times.append(dateFromString!)
@@ -99,13 +101,13 @@ extension ViewController {
             //begin parsing the response
             let json = JSON(response.data!)
             let routes = json["routes"].arrayValue
-            //prevents invalid routes from being inputed
             if routes.count > 0 {
                 let routesVal = routes[0]["legs"].arrayValue
                 let stepsEval = routesVal[0]
                 let totalTime = stepsEval["duration"]["text"].stringValue
                 self.totalDistance = stepsEval["distance"]["text"].stringValue
                 let steps = stepsEval["steps"].arrayValue
+                self.polylineArray.forEach { $0.map = nil }
                 
                 //take first route and use polyline to draw line
                 let route = routes[0]
@@ -116,33 +118,18 @@ extension ViewController {
                 let path = GMSPath.init(fromEncodedPath: points!)
                 let polyline = GMSPolyline.init(path: path)
                 polyline.strokeWidth = 7
-                
-                //make sure geolocating is complete when Polyline is colored
-                let group = DispatchGroup()
-                group.enter()
-                group.enter()
-                
-                //let geolocating and path coloring run in a simultaneouly
-                self.getLocationName(steps: steps){
-                    group.leave()
-                }
-                
-                self.colorPath(line: polyline, steps: steps, path: path!) {
+                self.polylineArray.append(polyline)
+                self.colorPath(line: polyline, steps: steps, path: path!) { time in
                     polyline.map = self.mapView
                     self.mapView.animate(with: GMSCameraUpdate.fit(GMSCoordinateBounds(path: polyline.path!), withPadding: 50))
-                    group.leave()
-                }
-                
-                group.notify(queue: DispatchQueue.main){
-                    //return total time val from json once colorpath and geolocating methods are complete
+                        //return total time val from json once colorpath method completes
                     completion(totalTime)
                 }
             }
             else {
                 //alert user invalid route was input
-                let alert = UIAlertController(title: "Invalid Route", message: "Woops! Looks like it's not possible to drive between these two locations.", preferredStyle: .alert)
+                let alert = UIAlertController(title: "Invalid Route", message: "Uh oh. Looks like it's not possible to drive between these two locations.", preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-                self.present(alert, animated: true, completion: nil)
             }
             
         }
@@ -157,15 +144,17 @@ extension ViewController {
         - path: The directions path
         - completion: After weather services callback, exit function
     */
-    func colorPath(line: GMSPolyline, steps: [JSON], path: GMSPath, completion: @escaping () -> ()) {
+    func colorPath(line: GMSPolyline, steps: [JSON], path: GMSPath, completion: @escaping (Int) -> ()) {
         //take each step and get weather at end location
         var colorSegs: [GMSStyleSpan] = []
+        var totalTime = 0
     
         weatherPerStep(steps: steps, path: path){ result in
             
             colorSegs =  result[0] as! [GMSStyleSpan]
             line.spans = colorSegs
-            completion()
+            totalTime = result[2] as! Int
+            completion(totalTime)
         }
         
     }
@@ -183,6 +172,7 @@ extension ViewController {
 
         if steps.count > 0 {
             
+            group.enter()
             group.enter()
             
             let step = steps[steps.count - 1]
@@ -212,7 +202,7 @@ extension ViewController {
                     let stepCoordinates = CLLocationCoordinate2D(latitude: step["end_location"]["lat"].doubleValue, longitude: step["end_location"]["lng"].doubleValue)
                         
                     //start from start and go to end... since using end for path
-                    while abs(pathCoordinates.latitude - stepCoordinates.latitude) > 0.3 || abs(pathCoordinates.longitude - stepCoordinates.longitude) > 0.3 {
+                    while abs(pathCoordinates.latitude - stepCoordinates.latitude) > 0.5 || abs(pathCoordinates.longitude - stepCoordinates.longitude) > 0.5 {
 
                         numberSegs = numberSegs + 1
                         i += 1
@@ -223,6 +213,10 @@ extension ViewController {
                     colorSegs.append(self.determineColorSeg(condition: condition, numberSegs: numberSegs))
                     group.leave()
                 }
+                self.getLocationName(lat: lat, long: long){ location in
+                    self.cities.append(location)
+                    group.leave()
+                }
             }
         }
         group.notify(queue: DispatchQueue.main){
@@ -231,49 +225,28 @@ extension ViewController {
     }
     
     
-    func getLocationName(steps: [JSON], completion: @escaping () -> ()) {
+    func getLocationName(lat: String, long: String, completion: @escaping (String) -> ()) {
         
-        let group = DispatchGroup()
-        
-        if steps.count > 0 {
+        let urlComplete = "\(url.ARCGIS_GEOCODER_URL)\(long),\(lat)"
+        Alamofire.request(urlComplete, method: .get).responseJSON(completionHandler: {
+        (response) in
             
-            group.enter()
-            
-            let step = steps[steps.count - 1]
-            var newSteps = steps
-            newSteps.remove(at: steps.count - 1)
-            getLocationName(steps: newSteps) {
+            switch response.result {
                 
-                let lat = step["end_location"]["lat"].stringValue
-                let long = step["end_location"]["lng"].stringValue
-                let urlComplete = "\(url.ARCGIS_GEOCODER_URL)\(long),\(lat)"
-                Alamofire.request(urlComplete, method: .get).responseJSON(completionHandler: {
-                (response) in
+            case .success:
+                let json = JSON(response.data!)
+                let city = json["address"]["City"].stringValue
+                let state = json["address"]["Region"].stringValue
+                completion("\(city), \(state)")
+                break
                 
-                    switch response.result {
-                        
-                    case .success:
-                        let json = JSON(response.data!)
-                        let city = json["address"]["City"].stringValue
-                        let state = json["address"]["Region"].stringValue
-                        let location = "\(city), \(state)"
-                        self.cities.append(location)
-                        break
-                        
-                    case .failure(let error):
-                        print(error)
-                        break
-                        
-                    }
-                    group.leave()
-                
-                })
+            case .failure(let error):
+                print(error)
+                break
             }
-        }
-        group.notify(queue: DispatchQueue.main){
-            completion()
-        }
-        }
+            
+        })
+    }
     
     /**
      Determines what color each segment in polyline should be
