@@ -232,15 +232,6 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
         //disable location buttons
         startButton.isEnabled = false
         destinationButton.isEnabled = false
-        //show line
-        self.createLine(startLocation: locationStart, endLocation: locationEnd) { time in
-            
-            //enable and show time/distance label, Google Maps button, and Weather List Button
-            self.showButtonsAndLabels(time: time)
-            //re-enable location buttons
-            self.startButton.isEnabled = true
-            self.destinationButton.isEnabled = true
-        }
         
         //clear weather arrays
         cities.removeAll()
@@ -248,6 +239,23 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
         conditions.removeAll()
         conditionDescription.removeAll()
         times.removeAll()
+        
+        //show line
+        self.createLine(startLocation: locationStart, endLocation: locationEnd) { time in
+            
+            //order from start location to finish
+            self.cities.reverse()
+            self.conditions.reverse()
+            self.highTemps.reverse()
+            self.conditionDescription.reverse()
+            
+            //enable and show time/distance label, Google Maps button, and Weather List Button
+            self.showButtonsAndLabels(time: time)
+            //re-enable location buttons
+            self.startButton.isEnabled = true
+            self.destinationButton.isEnabled = true
+            
+        }
     }
 
     /**
@@ -266,11 +274,6 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "ShowNavigation"{
             
-            //order from start location to finish
-            cities.reverse()
-            conditions.reverse()
-            highTemps.reverse()
-            conditionDescription.reverse()
             
             var weatherDataVals: [weatherData.Entry] = []
             var i = cities.count - 1
