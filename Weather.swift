@@ -23,7 +23,7 @@ extension ViewController {
     }
     
     /**
-     Calls the OpenWeather API service and populates the weather arrays and city arrays
+     Calls the OpenWeather API service and populates the weather array
      
      - parameters:
         - lat: The latitutde coordinates
@@ -170,6 +170,13 @@ extension ViewController {
         
     }
     
+    /**
+     Gets the weather at each directions step and colors the GMS path accordingly
+     - parameters:
+        - steps: The array containing each directions step
+        - path: The GMSPath that will be displayed on the map
+        - completion: An array containing the color segments for the polyline, the date that you will arrive to a certain step, the total amount of time, the current path coordinates, and a counter to keep track of where you are in the path.
+    */
     func weatherPerStep(steps: [JSON], path: GMSPath, completion: @escaping ([Any]) -> ()) {
         //any will contain colorseg, date, totalTime, pathCoordinates
         let refDate = Date.timeIntervalSinceReferenceDate
@@ -230,7 +237,12 @@ extension ViewController {
         }
     }
     
-    
+    /**
+     Gets the location name at each directions step
+     - parameters:
+        - steps: The array containing each direction step
+        - completion: Allows each location to be inserted in the city array in order
+    */
     func getLocationName(steps: [JSON], completion: @escaping () -> ()) {
         
         let group = DispatchGroup()

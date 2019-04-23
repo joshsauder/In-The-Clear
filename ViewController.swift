@@ -266,6 +266,11 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
 
     /**
      Function to create a marker on map
+     - parameters:
+        - titleMarker: The markers title that pops up when the marker is tapped
+        - latitude: The markers latitude coordinate
+        - longitude: The markers longitude
+     - Returns: The Marker to be placed on the map
      */
     func createMarker(titleMarker: String, latitude: CLLocationDegrees, longitude: CLLocationDegrees) -> GMSMarker {
         
@@ -276,7 +281,9 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
             return marker
     }
 
-    
+    /*
+     Function called that sends the weather data values to the weather table
+    */
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "ShowNavigation"{
             
