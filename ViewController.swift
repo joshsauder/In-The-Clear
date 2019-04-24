@@ -49,9 +49,11 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        //add buttons and labels to UIView
         addButtonsAndLables()
+        //make sure user has enabled current location
         locationAuthorization()
+        //set up GMSMap
         setupMap()
     }
     
@@ -149,7 +151,7 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
     }
     
     /**
-     Function to request user location
+     Function to request user enable location services in settings
     */
     func showLocationDisabledPopUp() {
         
@@ -174,7 +176,7 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
      Controls action when start location button is tapped
     */
     @IBAction func originStartLocation(_ sender: UIButton) {
-        
+        //open GMSAutocomplete controllerand present
         let autoCompleteControl = GMSAutocompleteViewController()
         autoCompleteControl.delegate = self
         
@@ -191,7 +193,7 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
      Controls action when destination location button is tapped
      */
     @IBAction func openDestinationLocation(_ sender: UIButton){
-        
+        //open GMSAutocomplete controllerand present
         let autoCompleteController = GMSAutocompleteViewController()
         autoCompleteController.delegate = self
         
@@ -207,7 +209,7 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
      Controls when open maps button is clicked
     */
     @IBAction func openGoogleMaps(_ sender: UIButton){
-        
+        //if user has Google Maps App downloaded, open in Google Maps app
         if (UIApplication.shared.canOpenURL(NSURL(string:"comgooglemaps://")! as URL)){
             
             let url = URL(string:
@@ -217,6 +219,7 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
 
         } else
         {
+            //else open in web browser
             let base = url.GOOGLEMAPS_URL
             let url = URL(string: "\(base)\(Float(locationStart.coordinate.latitude)),\(locationStart.coordinate.longitude))&daddr=\(String(describing: locationEnd.coordinate.latitude)),\(String(describing: locationEnd.coordinate.longitude))")
             
@@ -256,7 +259,10 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
             self.startButton.isEnabled = true
             self.destinationButton.isEnabled = true
             
+            //show destination marker on map
             self.MarkerEnd = self.createMarker(titleMarker: self.cities[0], latitude: self.locationEnd.coordinate.latitude, longitude: self.locationEnd.coordinate.longitude)
+            
+            //show start location maker only if not using current location
             if self.startLocation.text != "Current Location" {
                 self.markerStart = self.createMarker(titleMarker: self.cities[self.cities.count - 1], latitude: self.locationStart.coordinate.latitude, longitude: self.locationStart.coordinate.longitude)
             }
@@ -273,7 +279,7 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
      - Returns: The Marker to be placed on the map
      */
     func createMarker(titleMarker: String, latitude: CLLocationDegrees, longitude: CLLocationDegrees) -> GMSMarker {
-        
+            //set up marker using given title and place the marker on the map
             let marker = GMSMarker(position: CLLocationCoordinate2D(latitude: latitude, longitude: longitude))
             marker.title = titleMarker
             marker.appearAnimation = .pop
@@ -287,24 +293,30 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "ShowNavigation"{
             
-            
+            //set up weatherDataVals array
             var weatherDataVals: [weatherData.Entry] = []
+            //create counter equal to the number of cities in city array
             var i = cities.count - 1
             var citiesUsed: [String] = []
             while i >= 0 {
+                //Prevents cities from being listed in weather table multiple times
                 let city = cities[i]
                 if !citiesUsed.contains(city){
                     citiesUsed.append(city)
+                    //create weatherData entry
                     let entry = weatherData.Entry(weather: "", city: "", highTemp: 0, condition: "")
                     entry.city = city
+                    
+                    //get weathers, temperature, and condition
                     entry.weather = conditions[i]
                     entry.highTemp = highTemps[i]
                     entry.condition = conditionDescription[i]
                     weatherDataVals.append(entry)
                 }
+                //decrement counter
                 i = i - 1
             }
-            
+            //set weatherData array equal to weatherDataVals array in WeatherMenu
             let DestViewController = segue.destination as! UINavigationController
             let targetController = DestViewController.topViewController as! weatherMenu
             targetController.weatherDataArray = weatherDataVals

@@ -32,9 +32,12 @@ extension ViewController {
         - completion: After request made, exit with the condition at specified time
     */
     func getWeather(lat: String, long: String, timeToLookFor: Date, completion: @escaping (String) -> ()) {
+        
         let urlBase = url.WEATHER_URL
         let urlComplete = urlBase + "lat=\(lat)&lon=\(long)&units=imperial&APPID=0c2beca9233adf894f6acded6d9a946c"
         var condition = ""
+        
+        //make url request to OpenWeatherAPI
         Alamofire.request(urlComplete, method: .get).responseJSON(completionHandler: {
                 (response) in
          
@@ -44,6 +47,7 @@ extension ViewController {
                 let json = JSON(response.data!)
                 let weatherList = json["list"].arrayValue
                 
+                //go through each time increment for a specific location till timeToLookFor is found
                 for weather in weatherList
                 {
                     //get time
@@ -53,17 +57,21 @@ extension ViewController {
                     dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
                     dateFormatter.timeZone = TimeZone(abbreviation: "UTC")
                     let dateFromString = dateFormatter.date(from: time)
+                    
+                    //get condition and weather description
                     let weatherArray = weather["weather"].arrayValue
                     condition = weatherArray[0]["main"].stringValue
                     let description = weatherArray[0]["description"].stringValue
                     
                     //if date time is in range, add it, else move to next time range
                     if(dateFromString!.addingTimeInterval(60.0*60*3) > timeToLookFor || dateFromString!.addingTimeInterval(-60.0*60*3) < timeToLookFor) {
-                        //print (condition)
+                        
+                        //Append time, weather condition and high temp to appropriate arrays
                         self.times.append(dateFromString!)
                         self.conditionDescription.append(description)
                         self.highTemps.append(temp)
-                        print(condition)
+                        
+                        //return weather condition on completion
                         completion(condition)
                         break;
                     }
@@ -99,8 +107,11 @@ extension ViewController {
             //begin parsing the response
             let json = JSON(response.data!)
             let routes = json["routes"].arrayValue
+            
             //prevents invalid routes from being inputed
             if routes.count > 0 {
+                
+                //get the direction steps from the directions array
                 let routesVal = routes[0]["legs"].arrayValue
                 let stepsEval = routesVal[0]
                 let totalTime = stepsEval["duration"]["text"].stringValue
@@ -122,11 +133,11 @@ extension ViewController {
                 group.enter()
                 group.enter()
                 
-                //let geolocating and path coloring run in a simultaneouly
+                //let geolocating and path coloring run simultaneouly
                 self.getLocationName(steps: steps){
                     group.leave()
                 }
-                
+                //color the polyline and on completion show polyline on map
                 self.colorPath(line: polyline, steps: steps, path: path!) {
                     polyline.map = self.mapView
                     self.mapView.animate(with: GMSCameraUpdate.fit(GMSCoordinateBounds(path: polyline.path!), withPadding: 50))
@@ -162,7 +173,7 @@ extension ViewController {
         var colorSegs: [GMSStyleSpan] = []
     
         weatherPerStep(steps: steps, path: path){ result in
-            
+            //on completion get the colorSegs array and set it equal to the style span of the polyline
             colorSegs =  result[0] as! [GMSStyleSpan]
             line.spans = colorSegs
             completion()
@@ -179,59 +190,66 @@ extension ViewController {
     */
     func weatherPerStep(steps: [JSON], path: GMSPath, completion: @escaping ([Any]) -> ()) {
         //any will contain colorseg, date, totalTime, pathCoordinates
+        //get the time for the current weather step
         let refDate = Date.timeIntervalSinceReferenceDate
         var date = Date(timeIntervalSinceReferenceDate: refDate)
         var colorSegs: [GMSStyleSpan] = []
         var totalTime = 0
         var i = UInt(0)
         var pathCoordinates = path.coordinate(at: i)
-
+        
+        //needed so each api call is called in order
         let group = DispatchGroup()
 
         if steps.count > 0 {
             
             group.enter()
             
+            //move on to next step and remove the previous step in newSteps array
             let step = steps[steps.count - 1]
             var newSteps = steps
             newSteps.remove(at: steps.count - 1)
             
             weatherPerStep(steps: newSteps, path: path) { completion in
-                
+                //get completion values from previous recursive call
                 colorSegs = completion[0] as! [GMSStyleSpan]
                 date = completion[1] as! Date
                 totalTime = completion[2] as! Int
                 pathCoordinates = completion[3] as! CLLocationCoordinate2D
                 i = completion[4] as! UInt
-            
+                
+                //get the time it takes to traverse a step and add on to totalTime
                 let time = step["duration"]["value"].intValue
                 date = date.addingTimeInterval(TimeInterval(60 * totalTime))
                 totalTime = time + totalTime
-                //get weather
+                
+                //get latitude and logitude
                 let lat = step["end_location"]["lat"].stringValue
                 let long = step["end_location"]["lng"].stringValue
                 var numberSegs = 1
                 
+                //get weather
                 self.getWeather(lat: lat, long: long, timeToLookFor: date) { condition in
-                    
+                    //append condition to conditions array
                     self.conditions.append(condition)
                     
                     let stepCoordinates = CLLocationCoordinate2D(latitude: step["end_location"]["lat"].doubleValue, longitude: step["end_location"]["lng"].doubleValue)
                         
                     //start from start and go to end... since using end for path
                     while abs(pathCoordinates.latitude - stepCoordinates.latitude) > 0.3 || abs(pathCoordinates.longitude - stepCoordinates.longitude) > 0.3 {
-
+                        //increment the number of segs and the path counter
                         numberSegs = numberSegs + 1
                         i += 1
                         pathCoordinates = path.coordinate(at: i)
                     }
                         
-                    //determine which style span to use
+                    //determine which style span to use and append to colorsegs array with the specified number of segments
                     colorSegs.append(self.determineColorSeg(condition: condition, numberSegs: numberSegs))
                     group.leave()
                 }
             }
         }
+        
         group.notify(queue: DispatchQueue.main){
             completion([colorSegs, date, totalTime, pathCoordinates, i])
         }
@@ -244,27 +262,32 @@ extension ViewController {
         - completion: Allows each location to be inserted in the city array in order
     */
     func getLocationName(steps: [JSON], completion: @escaping () -> ()) {
-        
+        //needed so each API call is in order
         let group = DispatchGroup()
         
         if steps.count > 0 {
             
             group.enter()
-            
+            //get the current step and remove the previous step in new step array
             let step = steps[steps.count - 1]
             var newSteps = steps
             newSteps.remove(at: steps.count - 1)
+            
+            //recursivve call
             getLocationName(steps: newSteps) {
-                
+                //get coordinates and include in ARCGIS Reverse Geolocator URL
                 let lat = step["end_location"]["lat"].stringValue
                 let long = step["end_location"]["lng"].stringValue
                 let urlComplete = "\(url.ARCGIS_GEOCODER_URL)\(long),\(lat)"
+                
+                //make API call to ARCGIS Reverse Geolocation service
                 Alamofire.request(urlComplete, method: .get).responseJSON(completionHandler: {
                 (response) in
                 
                     switch response.result {
                         
                     case .success:
+                        //get the city and state and place in cities array
                         let json = JSON(response.data!)
                         let city = json["address"]["City"].stringValue
                         let state = json["address"]["Region"].stringValue

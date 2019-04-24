@@ -18,7 +18,9 @@ extension ViewController: GMSAutocompleteViewControllerDelegate {
         if(locationSelected == .startLocation){
             //replace text in box
             startLocation.text = "\(place.name!)"
+            //set start location to the locations coordinates
             locationStart = CLLocation(latitude: place.coordinate.latitude, longitude: place.coordinate.longitude)
+            //move camera to specified location
             self.mapView.camera = camera
         } else{
             destinationLocation.text = "\(place.name!)"
@@ -26,7 +28,7 @@ extension ViewController: GMSAutocompleteViewControllerDelegate {
             self.mapView.camera = camera
         }
         
-        
+        //if both locations are filled begin getting directions and weather
         if locationStart.coordinate.longitude != 0 && locationEnd.coordinate.longitude != 0 {
             showDirection()
         }

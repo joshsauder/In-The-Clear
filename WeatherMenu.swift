@@ -12,12 +12,14 @@ import FontAwesome_swift
 
 class weatherMenu: UITableViewController {
     
+    //will be equal to the weatherDataVals array in ViewController
     var weatherDataArray: [weatherData.Entry] = []
     
     var backgroundColor = UIColor.init(red: 132, green: 29, blue: 132, alpha: 1)
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        //set up weatherTable
         setUpNav()
         tableView.separatorStyle = .none
         
@@ -33,9 +35,10 @@ class weatherMenu: UITableViewController {
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
+        //create single weather cell at specified row
         let cell = tableView.dequeueReusableCell(withIdentifier: "WeatherTableViewCell", for: indexPath) as! WeatherTableViewCell
         let entry = weatherDataArray[indexPath.row]
+        //set image, cityLabel, tempLabel, and conditionLabel equal to corresponding values
         cell.weatherImage?.image = weatherImage(weather: entry.weather)
         cell.cityLabel?.text = entry.city
         cell.tempLabel?.text = "\(Int(entry.highTemp.rounded()))℉"
@@ -77,7 +80,7 @@ class weatherMenu: UITableViewController {
      - returns: An array containing two UIColors
     */
     func cellColor(weather: String) -> [UIColor] {
-        
+        //two colors needed for gradient
         var colorOne = UIColor()
         var colorTwo = UIColor()
         
@@ -102,7 +105,7 @@ class weatherMenu: UITableViewController {
             colorOne = UIColor(red:1.00, green:0.92, blue:0.23, alpha:1.0)
             colorTwo = UIColor(red:0.98, green:0.75, blue:0.18, alpha:1.0)
         }
-        
+
         return [colorOne, colorTwo]
     }
     
