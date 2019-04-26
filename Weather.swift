@@ -117,6 +117,9 @@ extension ViewController {
                 let totalTime = stepsEval["duration"]["text"].stringValue
                 self.totalDistance = stepsEval["distance"]["text"].stringValue
                 let steps = stepsEval["steps"].arrayValue
+                //remove any existing polylines
+                self.polylineArray.forEach { $0.map = nil }
+
                 
                 //take first route and use polyline to draw line
                 let route = routes[0]
@@ -140,6 +143,7 @@ extension ViewController {
                 //color the polyline and on completion show polyline on map
                 self.colorPath(line: polyline, steps: steps, path: path!) {
                     polyline.map = self.mapView
+                    self.polylineArray.append(polyline)
                     self.mapView.animate(with: GMSCameraUpdate.fit(GMSCoordinateBounds(path: polyline.path!), withPadding: 50))
                     group.leave()
                 }

@@ -29,10 +29,11 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
     @IBOutlet weak var destinationButton: UIButton!
     
     @IBOutlet weak var weatherList: UIButton!
-    @IBOutlet weak var mapView: GMSMapView!
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var openGoogleMaps: UIButton!
     
+    @IBOutlet weak var mapView: GMSMapView!
+    var polylineArray = [GMSPolyline]()
     var markerStart: GMSMarker?
     var MarkerEnd: GMSMarker?
     
