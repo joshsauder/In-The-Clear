@@ -12,6 +12,21 @@ import UIKit
 extension ViewController {
     
     /**
+     Sets up map key
+    */
+    func mapkeySetup(){
+        
+        //hide map key
+        mapKey.isHidden = true
+        
+        //add shadow to map key
+        mapKey.layer.shadowColor = UIColor.black.cgColor
+        mapKey.layer.masksToBounds = false
+        mapKey.layer.shadowOffset = CGSize(width: 3, height: 3)
+        mapKey.layer.shadowRadius = 3
+        mapKey.layer.shadowOpacity = 1.0
+    }
+    /**
      Sets up weathet list button
     */
     func weatherListButtonSetup() {
@@ -45,20 +60,20 @@ extension ViewController {
         //set up time and weather label
         timeLabel.isHidden = true
         timeLabel.backgroundColor = UIColor(white: 1, alpha: 1)
-        timeLabel.layer.cornerRadius = 5
-        timeLabel.clipsToBounds = true
+        timeLabel.layer.cornerRadius = 15
+        //timeLabel.clipsToBounds = true
+        timeLabel.layer.masksToBounds = true
         timeLabel.textAlignment = .center
         timeLabel.font = UIFont.boldSystemFont(ofSize: 20.0)
         timeLabel.adjustsFontForContentSizeCategory = true
-        timeLabel.layer.cornerRadius = 5
-        timeLabel.clipsToBounds = true
         
-        //add shadow to time and weather label
-        timeLabel.layer.shadowColor = UIColor.black.cgColor
-        timeLabel.layer.masksToBounds = false
-        timeLabel.layer.shadowOffset = CGSize(width: 3, height: 3)
-        timeLabel.layer.shadowRadius = 5
-        timeLabel.layer.shadowOpacity = 1.0
+//        //add shadow to time and weather label
+//        timeLabel.layer.shadowPath = UIBezierPath(rect: timeLabel.bounds).cgPath
+//        timeLabel.layer.shadowRadius = 15
+//        timeLabel.layer.shadowColor = UIColor.black.cgColor
+//        timeLabel.layer.shadowOffset = .zero
+//        timeLabel.layer.shadowOpacity = 1.0
+
     }
     
     /**
@@ -114,5 +129,9 @@ extension ViewController {
         //enable google maps button
         self.openGoogleMaps.isHidden = false
         
+        self.mapKey.isHidden = false
+        
     }
 }
+
+
