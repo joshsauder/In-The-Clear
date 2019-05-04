@@ -53,6 +53,9 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
         super.viewDidLoad()
         //add buttons and labels to UIView
         addButtonsAndLables()
+        
+        //set up mapkey
+        mapkeySetup()
         //make sure user has enabled current location
         locationAuthorization()
         //set up GMSMap
