@@ -64,7 +64,8 @@ extension ViewController {
         //timeLabel.clipsToBounds = true
         timeLabel.layer.masksToBounds = true
         timeLabel.textAlignment = .center
-        timeLabel.font = UIFont.boldSystemFont(ofSize: 20.0)
+        //timeLabel.font = UIFont.boldSystemFont(ofSize: 20.0)
+        timeLabel.font = UIFont.systemFont(ofSize: 22.0)
         timeLabel.adjustsFontForContentSizeCategory = true
     }
     
@@ -91,8 +92,6 @@ extension ViewController {
         completeText.append(attachmentString)
         
         //set up font
-        openGoogleMaps.setTitleColor(UIColor.black, for: .normal)
-        openGoogleMaps.titleLabel?.font = UIFont.boldSystemFont(ofSize: 15.0)
         openGoogleMaps.titleLabel?.textAlignment = .center
         openGoogleMaps.setAttributedTitle(completeText, for: .normal)
         openGoogleMaps.titleLabel?.adjustsFontSizeToFitWidth = true
