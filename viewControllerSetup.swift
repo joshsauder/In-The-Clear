@@ -22,8 +22,8 @@ extension ViewController {
         //add shadow to map key
         mapKey.layer.shadowColor = UIColor.black.cgColor
         mapKey.layer.masksToBounds = false
-        mapKey.layer.shadowOffset = CGSize(width: 3, height: 3)
-        mapKey.layer.shadowRadius = 3
+        mapKey.layer.shadowOffset = CGSize(width: 1, height: 1)
+        mapKey.layer.shadowRadius = 2
         mapKey.layer.shadowOpacity = 1.0
     }
     /**
@@ -42,8 +42,8 @@ extension ViewController {
         //add shadow to button
         weatherList.layer.shadowColor = UIColor.black.cgColor
         weatherList.layer.masksToBounds = false
-        weatherList.layer.shadowOffset = CGSize(width: 5, height: 5)
-        weatherList.layer.shadowRadius = 5
+        weatherList.layer.shadowOffset = CGSize(width: 3, height: 3)
+        weatherList.layer.shadowRadius = 3
         weatherList.layer.shadowOpacity = 1.0
         
         //disable button at start
@@ -66,14 +66,6 @@ extension ViewController {
         timeLabel.textAlignment = .center
         timeLabel.font = UIFont.boldSystemFont(ofSize: 20.0)
         timeLabel.adjustsFontForContentSizeCategory = true
-        
-//        //add shadow to time and weather label
-//        timeLabel.layer.shadowPath = UIBezierPath(rect: timeLabel.bounds).cgPath
-//        timeLabel.layer.shadowRadius = 15
-//        timeLabel.layer.shadowColor = UIColor.black.cgColor
-//        timeLabel.layer.shadowOffset = .zero
-//        timeLabel.layer.shadowOpacity = 1.0
-
     }
     
     /**
@@ -122,7 +114,13 @@ extension ViewController {
         //enable time label
         self.timeLabel.text = "Time: \(time)  Distance: \(self.totalDistance)"
         self.timeLabel.isHidden = false
-        self.mapView.padding = UIEdgeInsetsMake(0, 0, 25, 0)
+        //need to scale google maps icons/buttons for diffenent screen sizes
+        if view.bounds.height > 800 {
+            self.mapView.padding = UIEdgeInsetsMake(0, 0, 25, 0)
+        }
+        else{
+            self.mapView.padding = UIEdgeInsetsMake(0, 0, 60, 0)
+        }
         //enable weather list button
         self.weatherList.isEnabled = true
         self.weatherList.alpha = 1

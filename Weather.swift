@@ -144,7 +144,7 @@ extension ViewController {
                 self.colorPath(line: polyline, steps: steps, path: path!) {
                     polyline.map = self.mapView
                     self.polylineArray.append(polyline)
-                    self.mapView.animate(with: GMSCameraUpdate.fit(GMSCoordinateBounds(path: polyline.path!), withPadding: 90))
+                    self.mapView.animate(with: GMSCameraUpdate.fit(GMSCoordinateBounds(path: polyline.path!), withPadding: 100))
                     group.leave()
                 }
                 
