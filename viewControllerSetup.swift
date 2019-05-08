@@ -67,6 +67,8 @@ extension ViewController {
         //timeLabel.font = UIFont.boldSystemFont(ofSize: 20.0)
         timeLabel.font = UIFont.systemFont(ofSize: 22.0)
         timeLabel.adjustsFontForContentSizeCategory = true
+        
+
     }
     
     /**
@@ -113,6 +115,7 @@ extension ViewController {
         //enable time label
         self.timeLabel.text = "Time: \(time)  Distance: \(self.totalDistance)"
         self.timeLabel.isHidden = false
+        
         //need to scale google maps icons/buttons for diffenent screen sizes
         if view.bounds.height > 800 {
             self.mapView.padding = UIEdgeInsetsMake(0, 0, 25, 0)
