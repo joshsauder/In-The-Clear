@@ -117,21 +117,5 @@ class InTheClearTests: XCTestCase {
         
         //if there is a valid route, the associated polyline will be added to the polyline array
     }
-    
-//    /*
-//     Ensures correct route time is being displayed
-//    */
-//    func testTotalTime(){
-//
-//        //Detroit, MI coordinates
-//        let start = CLLocation(latitude: CLLocationDegrees(exactly: 42.33168)!, longitude: CLLocationDegrees(exactly: -83.048)!)
-//
-//        //Columbus, OH coordinates
-//        let destination = CLLocation(latitude: CLLocationDegrees(exactly: 39.96199)!, longitude: CLLocationDegrees(exactly: -83.00275)!)
-//
-//        let time = vc.createLine(startLocation: start, endLocation: destination)
-//
-//        //TODO: Change total time to take in initial string in Leg
-//    }
 
 }
