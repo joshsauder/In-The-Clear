@@ -241,6 +241,8 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
         //disable location buttons
         startButton.isEnabled = false
         destinationButton.isEnabled = false
+        weatherList.isEnabled = false
+        weatherList.alpha = 0.5
         
         //clear weather arrays
         cities.removeAll()
