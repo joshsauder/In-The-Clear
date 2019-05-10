@@ -117,6 +117,9 @@ extension ViewController {
                 let totalTime = stepsEval["duration"]["text"].stringValue
                 self.totalDistance = stepsEval["distance"]["text"].stringValue
                 let steps = stepsEval["steps"].arrayValue
+                
+                //prevent routes that are too long too handle
+                if stepsEval["duration"]["value"].intValue < 147600 {
                 //remove any existing polylines
                 self.polylineArray.forEach { $0.map = nil }
 
@@ -152,12 +155,29 @@ extension ViewController {
                     //return total time val from json once colorpath and geolocating methods are complete
                     completion(totalTime)
                 }
+                }
+                else{
+                    //alert user route is currently too long
+                    let alert = UIAlertController(title: "Invalid Route", message: "Woops! At this time, In The Clear does not support routes longer than 51 hours.", preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                    self.present(alert, animated: true, completion: nil)
+                    //need to stop spinner since completion will not be used
+                    self.stopSpinner()
+                    //re-enable location buttons
+                    self.startButton.isEnabled = true
+                    self.destinationButton.isEnabled = true
+                }
             }
             else {
                 //alert user invalid route was input
                 let alert = UIAlertController(title: "Invalid Route", message: "Woops! Looks like it's not possible to drive between these two locations.", preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
                 self.present(alert, animated: true, completion: nil)
+                //need to stop spinner since completion will not be used
+                self.stopSpinner()
+                //re-enable location buttons
+                self.startButton.isEnabled = true
+                self.destinationButton.isEnabled = true
             }
             
         }
