@@ -32,6 +32,7 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var openGoogleMaps: UIButton!
     @IBOutlet weak var mapKey: UIImageView!
+    var spinner: UIView?
     
     @IBOutlet weak var mapView: GMSMapView!
     var polylineArray = [GMSPolyline]()
@@ -248,6 +249,7 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
         conditionDescription.removeAll()
         times.removeAll()
         mapView.clear()
+        showSpinner(view: view)
         
         //show line
         self.createLine(startLocation: locationStart, endLocation: locationEnd) { time in
@@ -271,6 +273,8 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
             if self.startLocation.text != "Current Location" {
                 self.markerStart = self.createMarker(titleMarker: self.cities[self.cities.count - 1], latitude: self.locationStart.coordinate.latitude, longitude: self.locationStart.coordinate.longitude)
             }
+            
+            self.stopSpinner()
             
         }
     }

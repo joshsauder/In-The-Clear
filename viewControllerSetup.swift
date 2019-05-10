@@ -132,6 +132,28 @@ extension ViewController {
         self.mapKey.isHidden = false
         
     }
+    
+    func showSpinner(view: UIView){
+        let spinnerView = UIView.init(frame: view.bounds)
+        spinnerView.backgroundColor = UIColor.init(red: 0.5, green: 0.5, blue: 0.5, alpha: 0.5)
+        let activityIV = UIActivityIndicatorView.init(activityIndicatorStyle: .whiteLarge)
+        activityIV.startAnimating()
+        activityIV.center = view.center
+        
+        DispatchQueue.main.async {
+            spinnerView.addSubview(activityIV)
+            view.addSubview(spinnerView)
+        }
+        
+        spinner = spinnerView
+    }
+    
+    func stopSpinner(){
+        DispatchQueue.main.async {
+            self.spinner?.removeFromSuperview()
+            self.spinner = nil
+        }
+    }
 }
 
 
