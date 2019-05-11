@@ -147,18 +147,18 @@ extension ViewController {
                 self.colorPath(line: polyline, steps: steps, path: path!) {
                     polyline.map = self.mapView
                     self.polylineArray.append(polyline)
-                    self.mapView.animate(with: GMSCameraUpdate.fit(GMSCoordinateBounds(path: polyline.path!), withPadding: 100))
+                    self.mapView.animate(with: GMSCameraUpdate.fit(GMSCoordinateBounds(path: polyline.path!), withPadding: 80))
                     group.leave()
                 }
                 
                 group.notify(queue: DispatchQueue.main){
-                    //return total time val from json once colorpath and geolocating methods are complete
+                    //return total time value from json once colorpath and geolocating methods are complete
                     completion(totalTime)
                 }
                 }
                 else{
                     //alert user route is currently too long
-                    let alert = UIAlertController(title: "Invalid Route", message: "Woops! At this time, In The Clear does not support routes longer than 51 hours.", preferredStyle: .alert)
+                    let alert = UIAlertController(title: "Invalid Route", message: "Sorry! At this time, In The Clear does not support routes longer than 51 hours.", preferredStyle: .alert)
                     alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
                     self.present(alert, animated: true, completion: nil)
                     //need to stop spinner since completion will not be used

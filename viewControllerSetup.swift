@@ -60,7 +60,7 @@ extension ViewController {
         //set up time and weather label
         timeLabel.isHidden = true
         timeLabel.backgroundColor = UIColor(white: 1, alpha: 1)
-        timeLabel.layer.cornerRadius = 15
+        timeLabel.layer.cornerRadius = 12
         //timeLabel.clipsToBounds = true
         timeLabel.layer.masksToBounds = true
         timeLabel.textAlignment = .center
@@ -133,6 +133,11 @@ extension ViewController {
         
     }
     
+    /**
+     Displays a spinner while a process is executing
+     - parameters:
+     - view: The view in which the spinner will appear in
+     */
     func showSpinner(view: UIView){
         let spinnerView = UIView.init(frame: view.bounds)
         spinnerView.backgroundColor = UIColor.init(red: 0.5, green: 0.5, blue: 0.5, alpha: 0.5)
@@ -148,6 +153,9 @@ extension ViewController {
         spinner = spinnerView
     }
     
+    /**
+     Removes the spinner from the superview
+    */
     func stopSpinner(){
         DispatchQueue.main.async {
             self.spinner?.removeFromSuperview()
