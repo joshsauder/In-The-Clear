@@ -338,7 +338,7 @@ extension ViewController {
         group.notify(queue: DispatchQueue.main){
             completion()
         }
-        }
+    }
     
     /**
      Determines what color each segment in polyline should be

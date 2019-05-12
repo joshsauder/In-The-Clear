@@ -52,6 +52,7 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         //add buttons and labels to UIView
         addButtonsAndLables()
         
@@ -95,10 +96,8 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
         
         //setup weather list button
         weatherListButtonSetup()
-        
         //setup time and distance label
         timeLabelSetup()
-        
         //setup Google Maps button
         googleMapsButtonSetup()
         
