@@ -133,6 +133,14 @@ extension ViewController {
         
     }
     
+    func showAlert(title: String, message: String){
+        //display alert based on tyle
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+        
+    }
+    
     /**
      Displays a spinner while a process is executing
      - parameters:

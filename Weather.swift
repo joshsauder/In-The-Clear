@@ -158,9 +158,8 @@ extension ViewController {
                 }
                 else{
                     //alert user route is currently too long
-                    let alert = UIAlertController(title: "Invalid Route", message: "Sorry! At this time, In The Clear does not support routes longer than 51 hours.", preferredStyle: .alert)
-                    alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-                    self.present(alert, animated: true, completion: nil)
+                    self.showAlert(title: "Invalid Route", message: "Sorry! At this time, In The Clear does not support routes longer than 51 hours.")
+
                     //need to stop spinner since completion will not be used
                     self.stopSpinner()
                     //re-enable location buttons
@@ -170,9 +169,8 @@ extension ViewController {
             }
             else {
                 //alert user invalid route was input
-                let alert = UIAlertController(title: "Invalid Route", message: "Woops! Looks like it's not possible to drive between these two locations.", preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-                self.present(alert, animated: true, completion: nil)
+                self.showAlert(title: "Invalid Route", message: "Woops! Looks like it's not possible to drive between these two locations.")
+            
                 //need to stop spinner since completion will not be used
                 self.stopSpinner()
                 //re-enable location buttons
