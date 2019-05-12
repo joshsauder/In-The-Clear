@@ -65,7 +65,7 @@ extension ViewController {
         timeLabel.layer.masksToBounds = true
         timeLabel.textAlignment = .center
         //timeLabel.font = UIFont.boldSystemFont(ofSize: 20.0)
-        timeLabel.font = UIFont.systemFont(ofSize: 22.0)
+        timeLabel.font = UIFont.systemFont(ofSize: 21.0)
         timeLabel.adjustsFontForContentSizeCategory = true
         
 
