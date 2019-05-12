@@ -159,7 +159,11 @@ extension ViewController {
                 else{
                     //alert user route is currently too long
                     self.showAlert(title: "Invalid Route", message: "Sorry! At this time, In The Clear does not support routes longer than 51 hours.")
-
+                    
+                    //animate back to start location
+                    let camera = GMSCameraPosition.camera(withLatitude: (self.locationStart.coordinate.latitude), longitude: (self.locationStart.coordinate.longitude), zoom: 11.0)
+                    self.mapView.animate(to: camera)
+                    
                     //need to stop spinner since completion will not be used
                     self.stopSpinner()
                     //re-enable location buttons
@@ -170,7 +174,11 @@ extension ViewController {
             else {
                 //alert user invalid route was input
                 self.showAlert(title: "Invalid Route", message: "Woops! Looks like it's not possible to drive between these two locations.")
-            
+                
+                //animate back to start location
+                let camera = GMSCameraPosition.camera(withLatitude: (self.locationStart.coordinate.latitude), longitude: (self.locationStart.coordinate.longitude), zoom: 11.0)
+                self.mapView.animate(to: camera)
+                
                 //need to stop spinner since completion will not be used
                 self.stopSpinner()
                 //re-enable location buttons
