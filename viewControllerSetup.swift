@@ -117,8 +117,11 @@ extension ViewController {
         self.timeLabel.isHidden = false
         
         //need to scale google maps icons/buttons for diffenent screen sizes
-        if view.bounds.height > 800 {
+        if view.bounds.height > 800 && view.bounds.height < 900 {
             self.mapView.padding = UIEdgeInsetsMake(0, 0, 25, 0)
+        }
+        else if view.bounds.height >= 900{
+            self.mapView.padding = UIEdgeInsetsMake(0, 0, 36, 0)
         }
         else{
             self.mapView.padding = UIEdgeInsetsMake(0, 0, 60, 0)
