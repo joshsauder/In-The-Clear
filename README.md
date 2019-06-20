@@ -1,14 +1,14 @@
-#In The Clear
+# In The Clear
 In The Clear is an iOS directions app that shows the user the weather they can expect as they are driving. It not only shows the weather via the Google Maps polyline (directions path displayed on map), but also in a table that shows the weather in each city the user will be driving through. If you are ever driving over a long distance, especially if you're traveling through an area that commonly receives unfavorable weather, this app can be a great tool that can help you predict what weather conditions you can expect to drive through. 
 
-#Requirements
+## Requirements
 - iOS 12.0+
 - XCode 10.0+
 - Swift 4.0
 
-#Getting Started
-##CocoaPods
-- Add to your 'Podfile':
+## Getting Started
+### CocoaPods
+Add to your 'Podfile':
 
 ```ruby
 platform :ios, '12.0'
@@ -26,22 +26,22 @@ end
 
 Then run 'pod install' you will have all the necessary CocoaPods installed.
 
-##Setting up Google Maps, Google Places, and OpenWeatherAPI
-To run this project you will need an API key for GoogleMaps, Google Places, and OpenWeatherAPI. Insert the API keys in the following locations
+### Setting up Google Maps, Google Places, and OpenWeatherAPI
+To run this project you will need an API key for GoogleMaps, Google Places, and OpenWeatherAPI. Insert the API keys in the following locations:
 
-- Google Maps
+Google Maps
 In AppDelegate.swift:
 ```swift
 var googleAPIKey = "Your-API-Key"
 ```
 
-- Google Places
+Google Places
 In AppDelegate.swift:
 ```swift
 var googlePlacesKey = "Your-API-Key"
 ```
 
-- OpenWeatherAPI
+OpenWeatherAPI
 ```swift
 let urlComplete = urlBase + "lat=\(lat)&lon=\(long)&units=imperial&APPID=Your-API-Key"
 ```
