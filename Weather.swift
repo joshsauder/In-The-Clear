@@ -121,40 +121,40 @@ extension ViewController {
                 //prevent routes that are too long too handle
                 if stepsEval["duration"]["value"].intValue < 147600 {
                 //remove any existing polylines
-                self.polylineArray.forEach { $0.map = nil }
+                    self.polylineArray.forEach { $0.map = nil }
 
-                
-                //take first route and use polyline to draw line
-                let route = routes[0]
-                let routeOverviewPolyline = route["overview_polyline"].dictionary
-                let points = routeOverviewPolyline?["points"]?.stringValue
                     
-                //create path and polyline from encoded path
-                let path = GMSPath.init(fromEncodedPath: points!)
-                let polyline = GMSPolyline.init(path: path)
-                polyline.strokeWidth = 7
-                
-                //make sure geolocating is complete when Polyline is colored
-                let group = DispatchGroup()
-                group.enter()
-                group.enter()
-                
-                //let geolocating and path coloring run simultaneouly
-                self.getLocationName(steps: steps){
-                    group.leave()
-                }
-                //color the polyline and on completion show polyline on map
-                self.colorPath(line: polyline, steps: steps, path: path!) {
-                    polyline.map = self.mapView
-                    self.polylineArray.append(polyline)
-                    self.mapView.animate(with: GMSCameraUpdate.fit(GMSCoordinateBounds(path: polyline.path!), withPadding: 80))
-                    group.leave()
-                }
-                
-                group.notify(queue: DispatchQueue.main){
-                    //return total time value from json once colorpath and geolocating methods are complete
-                    completion(totalTime)
-                }
+                    //take first route and use polyline to draw line
+                    let route = routes[0]
+                    let routeOverviewPolyline = route["overview_polyline"].dictionary
+                    let points = routeOverviewPolyline?["points"]?.stringValue
+                    
+                    //create path and polyline from encoded path
+                    let path = GMSPath.init(fromEncodedPath: points!)
+                    let polyline = GMSPolyline.init(path: path)
+                    polyline.strokeWidth = 7
+                    
+                    //make sure geolocating is complete when Polyline is colored
+                    let group = DispatchGroup()
+                    group.enter()
+                    group.enter()
+                    
+                    //let geolocating and path coloring run simultaneouly
+                    self.getLocationName(steps: steps){
+                        group.leave()
+                    }
+                    //color the polyline and on completion show polyline on map
+                    self.colorPath(line: polyline, steps: steps, path: path!) {
+                        polyline.map = self.mapView
+                        self.polylineArray.append(polyline)
+                        self.mapView.animate(with: GMSCameraUpdate.fit(GMSCoordinateBounds(path: polyline.path!), withPadding: 80))
+                        group.leave()
+                    }
+                    
+                    group.notify(queue: DispatchQueue.main){
+                        //return total time value from json once colorpath and geolocating methods are complete
+                        completion(totalTime)
+                    }
                 }
                 else{
                     //alert user route is currently too long
@@ -185,7 +185,6 @@ extension ViewController {
                 self.startButton.isEnabled = true
                 self.destinationButton.isEnabled = true
             }
-            
         }
     }
     
@@ -227,6 +226,7 @@ extension ViewController {
         var totalTime = 0
         var i = UInt(0)
         var pathCoordinates = path.coordinate(at: i)
+        
         
         //needed so each api call is called in order
         let group = DispatchGroup()
@@ -297,43 +297,42 @@ extension ViewController {
         
         if steps.count > 0 {
             
-            group.enter()
-            //get the current step and remove the previous step in new step array
-            let step = steps[steps.count - 1]
-            var newSteps = steps
-            newSteps.remove(at: steps.count - 1)
+            var coordinatesJSON: Parameters = ["List": []]
+            var listarray: [[String: Any]] = []
+            for step in steps {
+                var dictionaryItem: [String: Any] = [:]
+                dictionaryItem["Latitude"] = step["end_location"]["lat"].stringValue
+                dictionaryItem["Longitude"] = step["end_location"]["lng"].stringValue
+                listarray.append(dictionaryItem)
+            }
+            coordinatesJSON["List"] = listarray
             
-            //recursivve call
-            getLocationName(steps: newSteps) {
-                //get coordinates and include in ARCGIS Reverse Geolocator URL
-                let lat = step["end_location"]["lat"].stringValue
-                let long = step["end_location"]["lng"].stringValue
-                let urlComplete = "\(url.ARCGIS_GEOCODER_URL)\(long),\(lat)"
+            
+            group.enter()
+            
+            let urlComplete = url.AWS_REVERSE_GEOLOCATION_URL
                 
                 //make API call to ARCGIS Reverse Geolocation service
-                Alamofire.request(urlComplete, method: .get).responseJSON(completionHandler: {
-                (response) in
+            Alamofire.request(urlComplete, method: .post, parameters: coordinatesJSON, encoding: JSONEncoding.default).responseJSON(completionHandler: {
+            (response) in
                 
-                    switch response.result {
+                switch response.result {
                         
-                    case .success:
-                        //get the city and state and place in cities array
-                        let json = JSON(response.data!)
-                        let city = json["address"]["City"].stringValue
-                        let state = json["address"]["Region"].stringValue
-                        let location = "\(city), \(state)"
-                        self.cities.append(location)
-                        break
+                case .success(let JSON):
+                    //get the city and state and place in cities array
+                    let jsonData = JSON as? [String]
                         
-                    case .failure(let error):
-                        print(error)
-                        break
+                    print(jsonData![0]) 
+                    self.cities.append(contentsOf: jsonData!)
                         
-                    }
-                    group.leave()
+                case .failure(let error):
+                    print(error)
+                    break
+                        
+                }
+                group.leave()
                 
-                })
-            }
+            })
         }
         group.notify(queue: DispatchQueue.main){
             completion()
