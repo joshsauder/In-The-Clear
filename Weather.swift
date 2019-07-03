@@ -297,32 +297,36 @@ extension ViewController {
         
         if steps.count > 0 {
             
-            var coordinatesJSON: Parameters = ["List": []]
+            //create array of dictionaries for each individual coordinate
             var listarray: [[String: Any]] = []
             for step in steps {
                 var dictionaryItem: [String: Any] = [:]
-                dictionaryItem["Latitude"] = step["end_location"]["lat"].stringValue
-                dictionaryItem["Longitude"] = step["end_location"]["lng"].stringValue
+                //need to flip in order to comply with WGS84 coordinates format
+                dictionaryItem["long"] = step["end_location"]["lat"].stringValue
+                dictionaryItem["lat"] = step["end_location"]["lng"].stringValue
                 listarray.append(dictionaryItem)
             }
-            coordinatesJSON["List"] = listarray
+            
+            //create dictionary of coordinates with key being list
+            let coordinatesJSON: Parameters = ["list" : listarray]
             
             
             group.enter()
             
             let urlComplete = url.AWS_REVERSE_GEOLOCATION_URL
                 
-                //make API call to ARCGIS Reverse Geolocation service
+            //make API call to AWS Lambda Reverse Geolocating function
             Alamofire.request(urlComplete, method: .post, parameters: coordinatesJSON, encoding: JSONEncoding.default).responseJSON(completionHandler: {
             (response) in
                 
                 switch response.result {
                         
                 case .success(let JSON):
-                    //get the city and state and place in cities array
+                    print(JSON)
+                    
+                    //An array is returned so cast the response as an array
                     let jsonData = JSON as? [String]
-                        
-                    print(jsonData![0]) 
+                    //append response array to cities array
                     self.cities.append(contentsOf: jsonData!)
                         
                 case .failure(let error):
