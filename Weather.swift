@@ -29,7 +29,7 @@ extension ViewController {
      - parameters: The API request body
         - completion: After request made, exit with the condition at specified time
     */
-    func getWeather(parameters: Parameters, completion: @escaping (JSON) -> ()) {
+    func getWeather(parameters: Parameters, completion: @escaping ([JSON]) -> ()) {
         
         let AWSURL = url.AWS_WEATHER_URL
 
@@ -40,7 +40,7 @@ extension ViewController {
             switch response.result {
             
             case .success(let JSON):
-                completion(JSON as! JSON)
+                completion(JSON as! [JSON])
                 break;
                 
             case .failure(let error):
@@ -189,8 +189,8 @@ extension ViewController {
         var date = Date(timeIntervalSinceReferenceDate: refDate)
         var colorSegs: [GMSStyleSpan] = []
         var totalTime = 0
-        var i = UInt(0)
-        var pathCoordinates = path.coordinate(at: i)
+        let i = UInt(0)
+        let pathCoordinates = path.coordinate(at: i)
         
         var listarray: [[String: Any]] = []
         
@@ -220,57 +220,19 @@ extension ViewController {
             group.enter()
             
             getWeather(parameters: weatherJSON){ json in
-                for item in json {
-                    let condition = item["Condition"]
-                    determineSegCount(condition: condition, steps: steps, path: path)
-                    self.conditions.append(condition)
-                    self.description.append(item["Description"])
-                    self.highTemps.append(item["Temperature"])
-                }
-            }
-            
-            //move on to next step and remove the previous step in newSteps array
-            let step = steps[steps.count - 1]
-            var newSteps = steps
-            newSteps.remove(at: steps.count - 1)
-            
-            weatherPerStep(steps: newSteps, path: path) { completion in
-                //get completion values from previous recursive call
-                colorSegs = completion[0] as! [GMSStyleSpan]
-                date = completion[1] as! Date
-                totalTime = completion[2] as! Int
-                pathCoordinates = completion[3] as! CLLocationCoordinate2D
-                i = completion[4] as! UInt
-                
-                //get the time it takes to traverse a step and add on to totalTime
-                let time = step["duration"]["value"].intValue
-                date = date.addingTimeInterval(TimeInterval(60 * totalTime))
-                totalTime = time + totalTime
-                
-                //get latitude and logitude
-                let lat = step["end_location"]["lat"].stringValue
-                let long = step["end_location"]["lng"].stringValue
-                var numberSegs = 1
-                
-                //get weather
-                self.getWeather(lat: lat, long: long, timeToLookFor: date) { condition in
-                    //append condition to conditions array
-                    self.conditions.append(condition)
+                var i = UInt(0)
+                for (index, item) in json.enumerated() {
                     
-                    let stepCoordinates = CLLocationCoordinate2D(latitude: step["end_location"]["lat"].doubleValue, longitude: step["end_location"]["lng"].doubleValue)
-                        
-                    //start from start and go to end... since using end for path
-                    while abs(pathCoordinates.latitude - stepCoordinates.latitude) > 0.3 || abs(pathCoordinates.longitude - stepCoordinates.longitude) > 0.3 {
-                        //increment the number of segs and the path counter
-                        numberSegs = numberSegs + 1
-                        i += 1
-                        pathCoordinates = path.coordinate(at: i)
-                    }
-                        
-                    //determine which style span to use and append to colorsegs array with the specified number of segments
-                    colorSegs.append(self.determineColorSeg(condition: condition, numberSegs: numberSegs))
-                    group.leave()
+                    let condition = item["Condition"].stringValue
+                    let valArray = self.determineSegCount(step: steps[index], path: path, index: i)
+                    i = valArray[0] as! UInt
+                    colorSegs.append(self.determineColorSeg(condition: condition, numberSegs: valArray[1] as! Int))
+                    
+                    self.conditions.append(condition)
+                    self.conditionDescription.append(item["Description"].stringValue)
+                    self.highTemps.append(item["Temperature"].floatValue)
                 }
+                group.leave()
             }
         }
         
@@ -279,8 +241,25 @@ extension ViewController {
         }
     }
     
-    func determineSegCount(condition: String, steps: [JSON], path: GMSPath){
+    func determineSegCount(step: JSON, path: GMSPath, index: UInt) -> [Any]{
+        //array will contain path index and number of segs
+        var i = index
+        //get path index
+        var pathCoordinates = path.coordinate(at: i)
+        //determine step location
+        let stepCoordinates = CLLocationCoordinate2D(latitude: step["end_location"]["lat"].doubleValue, longitude: step["end_location"]["lng"].doubleValue)
         
+        //while path is in range of step add segs
+        var numberSegs = 0
+        //start from start and go to end... since using end for path
+        while abs(pathCoordinates.latitude - stepCoordinates.latitude) > 0.3 || abs(pathCoordinates.longitude - stepCoordinates.longitude) > 0.3 {
+            //increment the number of segs and the path counter
+            numberSegs += 1
+            i += 1
+            pathCoordinates = path.coordinate(at: i)
+        }
+        
+        return [i, numberSegs]
     }
     
     /**
