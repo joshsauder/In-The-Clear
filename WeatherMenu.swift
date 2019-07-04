@@ -84,7 +84,7 @@ class weatherMenu: UITableViewController {
         var colorOne = UIColor()
         var colorTwo = UIColor()
         
-        if weather == "Rain" {
+        if weather == "rain" {
             colorOne = UIColor(red:0.40, green:0.73, blue:0.42, alpha:1.0)
             colorTwo = UIColor(red:0.26, green:0.63, blue:0.28, alpha:1.0)
             
@@ -92,11 +92,11 @@ class weatherMenu: UITableViewController {
             colorOne = UIColor(red:0.94, green:0.33, blue:0.31, alpha:1.0)
             colorTwo = UIColor(red:0.90, green:0.22, blue:0.21, alpha:1.0)
             
-        } else if weather == "Snow" {
+        } else if weather == "snow" || weather == "sleet" {
             colorOne = UIColor(red:0.26, green:0.65, blue:0.96, alpha:1.0)
             colorTwo = UIColor(red:0.12, green:0.53, blue:0.90, alpha:1.0)
             
-        } else if weather == "Clouds" {
+        } else if weather == "clouds" || weather == "partly-cloudy-day" || weather == "partly-cloudy-night" {
             colorOne = UIColor(red:0.56, green:0.64, blue:0.68, alpha:1.0)
             colorTwo = UIColor(red:0.38, green:0.49, blue:0.55, alpha:1.0)
             
@@ -117,7 +117,7 @@ class weatherMenu: UITableViewController {
     */
     func weatherImage(weather: String) -> UIImage {
         var image = UIImage()
-        if weather == "Rain" {
+        if weather == "rain" {
             image = UIImage.fontAwesomeIcon(
                 name: .cloudShowersHeavy,
                 style: .solid,
@@ -132,7 +132,7 @@ class weatherMenu: UITableViewController {
                 size: CGSize(width: 14, height: 9)
             )
             
-        } else if weather == "Snow" {
+        } else if weather == "snow" || weather == "sleet" {
             image = UIImage.fontAwesomeIcon(
                 name: .snowflake,
                 style: .solid,
@@ -140,7 +140,7 @@ class weatherMenu: UITableViewController {
                 size: CGSize(width: 14, height: 9)
             )
             
-        } else if weather == "Clouds" {
+        } else if weather == "Clouds"  || weather == "partly-cloudy-day" || weather == "partly-cloudy-night" {
             image = UIImage.fontAwesomeIcon(
                 name: .cloud,
                 style: .solid,
