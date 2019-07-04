@@ -26,56 +26,21 @@ extension ViewController {
      Calls the OpenWeather API service and populates the weather array
      
      - parameters:
-        - lat: The latitutde coordinates
-        - long: The longitude coordinates
-        - timeToLookFor: The date and time that needs to be found
+     - parameters: The API request body
         - completion: After request made, exit with the condition at specified time
     */
-    func getWeather(lat: String, long: String, timeToLookFor: Date, completion: @escaping (String) -> ()) {
+    func getWeather(parameters: Parameters, completion: @escaping (JSON) -> ()) {
         
-        let urlBase = url.WEATHER_URL
-        let urlComplete = urlBase + "lat=\(lat)&lon=\(long)&units=imperial&APPID=0c2beca9233adf894f6acded6d9a946c"
-        var condition = ""
-        
-        //make url request to OpenWeatherAPI
-        Alamofire.request(urlComplete, method: .get).responseJSON(completionHandler: {
+        let AWSURL = url.AWS_WEATHER_URL
+
+        //make url request to AWS Weather Fuction
+        Alamofire.request(AWSURL, method: .post, parameters: parameters).responseJSON(completionHandler: {
                 (response) in
          
             switch response.result {
             
-            case .success:
-                let json = JSON(response.data!)
-                let weatherList = json["list"].arrayValue
-                
-                //go through each time increment for a specific location till timeToLookFor is found
-                for weather in weatherList
-                {
-                    //get time
-                    let time = weather["dt_txt"].stringValue
-                    let temp = weather["main"]["temp_max"].floatValue
-                    let dateFormatter = DateFormatter()
-                    dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-                    dateFormatter.timeZone = TimeZone(abbreviation: "UTC")
-                    let dateFromString = dateFormatter.date(from: time)
-                    
-                    //get condition and weather description
-                    let weatherArray = weather["weather"].arrayValue
-                    condition = weatherArray[0]["main"].stringValue
-                    let description = weatherArray[0]["description"].stringValue
-                    
-                    //if date time is in range, add it, else move to next time range
-                    if(dateFromString!.addingTimeInterval(60.0*60*3) > timeToLookFor || dateFromString!.addingTimeInterval(-60.0*60*3) < timeToLookFor) {
-                        
-                        //Append time, weather condition and high temp to appropriate arrays
-                        self.times.append(dateFromString!)
-                        self.conditionDescription.append(description)
-                        self.highTemps.append(temp)
-                        
-                        //return weather condition on completion
-                        completion(condition)
-                        break;
-                    }
-                }
+            case .success(let JSON):
+                completion(JSON as! JSON)
                 break;
                 
             case .failure(let error):
@@ -220,20 +185,49 @@ extension ViewController {
     func weatherPerStep(steps: [JSON], path: GMSPath, completion: @escaping ([Any]) -> ()) {
         //any will contain colorseg, date, totalTime, pathCoordinates
         //get the time for the current weather step
-        let refDate = Date.timeIntervalSinceReferenceDate
+        let refDate = Date().timeIntervalSince1970
         var date = Date(timeIntervalSinceReferenceDate: refDate)
         var colorSegs: [GMSStyleSpan] = []
         var totalTime = 0
         var i = UInt(0)
         var pathCoordinates = path.coordinate(at: i)
         
+        var listarray: [[String: Any]] = []
         
-        //needed so each api call is called in order
+        for step in steps {
+            var dictionaryItem: [String: Any] = [:]
+            
+            //time in seconds
+            let stepTime = step["duration"]["value"].intValue
+            totalTime += stepTime
+            date = date.addingTimeInterval(TimeInterval(stepTime))
+            dictionaryItem["time"] = date
+            
+            //add latitude and longitude
+            dictionaryItem["lat"] = step["end_location"]["lat"].stringValue
+            dictionaryItem["long"] = step["end_location"]["lng"].stringValue
+            
+            listarray.append(dictionaryItem)
+        }
+        
+        let weatherJSON: Parameters = ["list" : listarray]
+        
+        
         let group = DispatchGroup()
 
         if steps.count > 0 {
             
             group.enter()
+            
+            getWeather(parameters: weatherJSON){ json in
+                for item in json {
+                    let condition = item["Condition"]
+                    determineSegCount(condition: condition, steps: steps, path: path)
+                    self.conditions.append(condition)
+                    self.description.append(item["Description"])
+                    self.highTemps.append(item["Temperature"])
+                }
+            }
             
             //move on to next step and remove the previous step in newSteps array
             let step = steps[steps.count - 1]
@@ -283,6 +277,10 @@ extension ViewController {
         group.notify(queue: DispatchQueue.main){
             completion([colorSegs, date, totalTime, pathCoordinates, i])
         }
+    }
+    
+    func determineSegCount(condition: String, steps: [JSON], path: GMSPath){
+        
     }
     
     /**
@@ -355,13 +353,13 @@ extension ViewController {
     func determineColorSeg(condition: String, numberSegs: Int) -> GMSStyleSpan {
         let colorSeg: GMSStyleSpan
         
-        if condition == "Rain" {
+        if condition == "rain" {
             colorSeg = GMSStyleSpan(style: pathColorSegs.RAIN, segments: Double(numberSegs))
         } else if condition == "Thunderstorm" {
             colorSeg = GMSStyleSpan(style: pathColorSegs.STORMS, segments: Double(numberSegs))
-        } else if condition == "Snow" {
+        } else if condition == "snow" || condition == "sleet" {
             colorSeg = GMSStyleSpan(style: pathColorSegs.SNOW, segments: Double(numberSegs))
-        } else if condition == "Clouds"{
+        } else if condition == "clouds" || condition == "partly-cloudy-day" || condition == "partly-cloudy-night" {
             colorSeg = GMSStyleSpan(style: pathColorSegs.CLOUDS, segments: Double(numberSegs))
         } else {
             colorSeg = GMSStyleSpan(style: pathColorSegs.SUN, segments: Double(numberSegs))
