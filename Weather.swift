@@ -29,18 +29,19 @@ extension ViewController {
      - parameters: The API request body
         - completion: After request made, exit with the condition at specified time
     */
-    func getWeather(parameters: Parameters, completion: @escaping ([JSON]) -> ()) {
+    func getWeather(parameters: Parameters, completion: @escaping ([[String: Any]]) -> ()) {
         
         let AWSURL = url.AWS_WEATHER_URL
 
         //make url request to AWS Weather Fuction
-        Alamofire.request(AWSURL, method: .post, parameters: parameters).responseJSON(completionHandler: {
+        Alamofire.request(AWSURL, method: .post, parameters: parameters, encoding: JSONEncoding.default).responseJSON(completionHandler: {
                 (response) in
          
             switch response.result {
             
-            case .success(let JSON):
-                completion(JSON as! [JSON])
+            case .success(let json):
+                print(json)
+                completion(json as! [[String:Any]])
                 break;
                 
             case .failure(let error):
@@ -186,7 +187,9 @@ extension ViewController {
         //any will contain colorseg, date, totalTime, pathCoordinates
         //get the time for the current weather step
         let refDate = Date().timeIntervalSince1970
-        var date = Date(timeIntervalSinceReferenceDate: refDate)
+        let timeInterval = TimeInterval(refDate)
+        var date = Date(timeIntervalSince1970: timeInterval)
+        
         var colorSegs: [GMSStyleSpan] = []
         var totalTime = 0
         let i = UInt(0)
@@ -201,16 +204,16 @@ extension ViewController {
             let stepTime = step["duration"]["value"].intValue
             totalTime += stepTime
             date = date.addingTimeInterval(TimeInterval(stepTime))
-            dictionaryItem["time"] = date
+            dictionaryItem["time"] = date.timeIntervalSince1970.rounded()
             
-            //add latitude and longitude
-            dictionaryItem["lat"] = step["end_location"]["lat"].stringValue
-            dictionaryItem["long"] = step["end_location"]["lng"].stringValue
+            //add latitude and longitude in WGS84 format
+            dictionaryItem["long"] = step["end_location"]["lat"].stringValue
+            dictionaryItem["lat"] = step["end_location"]["lng"].stringValue
             
             listarray.append(dictionaryItem)
         }
         
-        let weatherJSON: Parameters = ["list" : listarray]
+        let weatherJSON: Parameters = ["List" : listarray]
         
         
         let group = DispatchGroup()
@@ -218,19 +221,19 @@ extension ViewController {
         if steps.count > 0 {
             
             group.enter()
-            
+            print(weatherJSON)
             getWeather(parameters: weatherJSON){ json in
                 var i = UInt(0)
                 for (index, item) in json.enumerated() {
-                    
-                    let condition = item["Condition"].stringValue
+                    let condition = item["Condition"] as! String
                     let valArray = self.determineSegCount(step: steps[index], path: path, index: i)
                     i = valArray[0] as! UInt
                     colorSegs.append(self.determineColorSeg(condition: condition, numberSegs: valArray[1] as! Int))
                     
                     self.conditions.append(condition)
-                    self.conditionDescription.append(item["Description"].stringValue)
-                    self.highTemps.append(item["Temperature"].floatValue)
+                    self.conditionDescription.append(item["Description"] as! String)
+                    let temp = item["Temperature"] as! NSNumber
+                    self.highTemps.append(temp.floatValue)
                 }
                 group.leave()
             }
@@ -250,7 +253,7 @@ extension ViewController {
         let stepCoordinates = CLLocationCoordinate2D(latitude: step["end_location"]["lat"].doubleValue, longitude: step["end_location"]["lng"].doubleValue)
         
         //while path is in range of step add segs
-        var numberSegs = 0
+        var numberSegs = 1
         //start from start and go to end... since using end for path
         while abs(pathCoordinates.latitude - stepCoordinates.latitude) > 0.3 || abs(pathCoordinates.longitude - stepCoordinates.longitude) > 0.3 {
             //increment the number of segs and the path counter
