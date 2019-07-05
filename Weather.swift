@@ -214,37 +214,24 @@ extension ViewController {
         }
         
         let weatherJSON: Parameters = ["List" : listarray]
-        
-        
-        let group = DispatchGroup()
 
-        if steps.count > 0 {
-            
-            group.enter()
-            print(weatherJSON)
-            getWeather(parameters: weatherJSON){ json in
-                var i = UInt(0)
-                for (index, item) in json.enumerated() {
-                    let condition = item["Condition"] as! String
-                    let valArray = self.determineSegCount(step: steps[index], path: path, index: i)
-                    i = valArray[0] as! UInt
-                    colorSegs.append(self.determineColorSeg(condition: condition, numberSegs: valArray[1] as! Int))
-                    
-                    self.conditions.append(condition)
-                    self.conditionDescription.append(item["Description"] as! String)
-                    let temp = item["Temperature"] as! NSNumber
-                    self.highTemps.append(temp.floatValue)
-                }
-                group.leave()
+        getWeather(parameters: weatherJSON){ json in
+            var i = UInt(0)
+            for (index, item) in json.enumerated() {
+                let condition = item["Condition"] as! String
+                let (numSegs, index) = self.determineSegCount(step: steps[index], path: path, index: i)
+                i = index
+                colorSegs.append(self.determineColorSeg(condition: condition, numberSegs: numSegs))
+                self.conditions.append(condition)
+                self.conditionDescription.append(item["Description"] as! String)
+                let temp = item["Temperature"] as! NSNumber
+                self.highTemps.append(temp.floatValue)
             }
-        }
-        
-        group.notify(queue: DispatchQueue.main){
             completion([colorSegs, date, totalTime, pathCoordinates, i])
         }
     }
     
-    func determineSegCount(step: JSON, path: GMSPath, index: UInt) -> [Any]{
+    func determineSegCount(step: JSON, path: GMSPath, index: UInt) -> (Int, UInt){
         //array will contain path index and number of segs
         var i = index
         //get path index
@@ -262,7 +249,7 @@ extension ViewController {
             pathCoordinates = path.coordinate(at: i)
         }
         
-        return [i, numberSegs]
+        return (numberSegs, i)
     }
     
     /**
@@ -272,11 +259,7 @@ extension ViewController {
         - completion: Allows each location to be inserted in the city array in order
     */
     func getLocationName(steps: [JSON], completion: @escaping () -> ()) {
-        //needed so each API call is in order
-        let group = DispatchGroup()
-        
-        if steps.count > 0 {
-            
+
             //create array of dictionaries for each individual coordinate
             var listarray: [[String: Any]] = []
             for step in steps {
@@ -289,10 +272,6 @@ extension ViewController {
             
             //create dictionary of coordinates with key being list
             let coordinatesJSON: Parameters = ["list" : listarray]
-            
-            
-            group.enter()
-            
             let urlComplete = url.AWS_REVERSE_GEOLOCATION_URL
                 
             //make API call to AWS Lambda Reverse Geolocating function
@@ -314,13 +293,8 @@ extension ViewController {
                     break
                         
                 }
-                group.leave()
-                
+                completion()
             })
-        }
-        group.notify(queue: DispatchQueue.main){
-            completion()
-        }
     }
     
     /**
