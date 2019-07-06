@@ -39,7 +39,9 @@ class weatherMenu: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "WeatherTableViewCell", for: indexPath) as! WeatherTableViewCell
         let entry = weatherDataArray[indexPath.row]
         //set image, cityLabel, tempLabel, and conditionLabel equal to corresponding values
-        cell.weatherImage?.image = weatherImage(weather: entry.weather)
+        let size = cell.weatherImage?.bounds.size
+        cell.weatherImage?.image = weatherImage(weather: entry.weather, size: size!)
+        cell.weatherImage?.setImageColor(color: UIColor.white)
         cell.cityLabel?.text = entry.city
         cell.tempLabel?.text = "\(Int(entry.highTemp.rounded()))℉"
         cell.conditionLabel?.text = entry.condition.capitalized
@@ -115,47 +117,49 @@ class weatherMenu: UITableViewController {
      - parameter weather: The weather condition
      - returns: A UIImage that relates to the weather condition
     */
-    func weatherImage(weather: String) -> UIImage {
+    func weatherImage(weather: String, size: CGSize) -> UIImage {
         var image = UIImage()
+
         if weather == "rain" {
-            image = UIImage.fontAwesomeIcon(
-                name: .cloudShowersHeavy,
-                style: .solid,
-                textColor: .white,
-                size: CGSize(width: 14, height: 9)
-            )
-        } else if weather == "Thunderstorm" {
-            image = UIImage.fontAwesomeIcon(
-                name: .bolt,
-                style: .solid,
-                textColor: .white,
-                size: CGSize(width: 14, height: 9)
-            )
+            image = UIImage(named: "rain")!
+            image = image.resize(targetSize: size)
             
         } else if weather == "snow" || weather == "sleet" {
-            image = UIImage.fontAwesomeIcon(
-                name: .snowflake,
-                style: .solid,
-                textColor: .white,
-                size: CGSize(width: 14, height: 9)
-            )
+            image = UIImage(named: "snow")!
+            image = image.resize(targetSize: size)
             
         } else if weather == "Clouds"  || weather == "partly-cloudy-day" || weather == "partly-cloudy-night" {
-            image = UIImage.fontAwesomeIcon(
-                name: .cloud,
-                style: .solid,
-                textColor: .white,
-                size: CGSize(width: 14, height: 9)
-            )
+            image = UIImage(named: "cloud")!
+            image = image.resize(targetSize: size)
+            
+        } else if weather == "partly-cloudy-day" || weather == "partly-cloudy-night" {
+            image = UIImage(named: "partlyCloudy")!
+            image = image.resize(targetSize: size)
+            
         } else {
-            image = UIImage.fontAwesomeIcon(
-                name: .sun,
-                style: .solid,
-                textColor: .white,
-                size: CGSize(width: 14, height: 9)
-            )
+            image = UIImage(named: "sun")!
+            image = image.resize(targetSize: size)
         }
         return image
     }
 
+}
+
+extension UIImage {
+    //needed to resize each UIImage to UIImageView size
+    func resize(targetSize: CGSize) -> UIImage {
+        return UIGraphicsImageRenderer(size:targetSize).image { _ in
+            self.draw(in: CGRect(origin: .zero, size: targetSize))
+        }
+    }
+    
+}
+
+extension UIImageView {
+    //sets each image to a white color
+    func setImageColor(color: UIColor) {
+        let templateImage = self.image?.withRenderingMode(.alwaysTemplate)
+        self.image = templateImage
+        self.tintColor = color
+    }
 }

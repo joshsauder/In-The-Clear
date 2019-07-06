@@ -41,12 +41,14 @@ extension ViewController {
             
             case .success(let json):
                 print(json)
-                completion(json as! [[String:Any]])
+                guard let responseJSON = json as? [[String:Any]] else{
+                    break;
+                }
+                completion(responseJSON)
                 break;
                 
             case .failure(let error):
                 print(error)
-                break;
             }
         })
     }
@@ -216,6 +218,7 @@ extension ViewController {
         let weatherJSON: Parameters = ["List" : listarray]
 
         getWeather(parameters: weatherJSON){ json in
+            
             var i = UInt(0)
             for (index, item) in json.enumerated() {
                 let condition = item["Condition"] as! String
@@ -269,6 +272,7 @@ extension ViewController {
                 dictionaryItem["lat"] = step["end_location"]["lng"].stringValue
                 listarray.append(dictionaryItem)
             }
+        
             
             //create dictionary of coordinates with key being list
             let coordinatesJSON: Parameters = ["list" : listarray]
@@ -281,20 +285,22 @@ extension ViewController {
                 switch response.result {
                         
                 case .success(let JSON):
-                    print(JSON)
                     
                     //An array is returned so cast the response as an array
-                    let jsonData = JSON as? [String]
+                    guard let jsonData = JSON as? [String] else{
+                        break;
+                    }
                     //append response array to cities array
-                    self.cities.append(contentsOf: jsonData!)
+                    self.cities.append(contentsOf: jsonData)
+                    completion()
                         
                 case .failure(let error):
                     print(error)
-                    break
+                    completion()
                         
                 }
-                completion()
             })
+        
     }
     
     /**
