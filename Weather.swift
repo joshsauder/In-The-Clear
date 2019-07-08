@@ -34,13 +34,12 @@ extension ViewController {
         let AWSURL = url.AWS_WEATHER_URL
 
         //make url request to AWS Weather Fuction
-        Alamofire.request(AWSURL, method: .post, parameters: parameters, encoding: JSONEncoding.default).responseJSON(completionHandler: {
+        Alamofire.request(AWSURL, method: .post, parameters: parameters, encoding: JSONEncoding.default).validate(statusCode: 200..<300).responseJSON(completionHandler: {
                 (response) in
          
             switch response.result {
             
             case .success(let json):
-                print(json)
                 guard let responseJSON = json as? [[String:Any]] else{
                     break;
                 }
@@ -49,6 +48,17 @@ extension ViewController {
                 
             case .failure(let error):
                 print(error)
+                self.showAlert(title: "Invalid Route", message: "Woops! Our bad, looks like there was an issue procesing your route")
+                
+                //animate back to start location
+                let camera = GMSCameraPosition.camera(withLatitude: (self.locationStart.coordinate.latitude), longitude: (self.locationStart.coordinate.longitude), zoom: 11.0)
+                self.mapView.animate(to: camera)
+                
+                //need to stop spinner since completion will not be used
+                self.stopSpinner()
+                //re-enable location buttons
+                self.startButton.isEnabled = true
+                self.destinationButton.isEnabled = true
             }
         })
     }
@@ -113,9 +123,11 @@ extension ViewController {
                     }
                     //color the polyline and on completion show polyline on map
                     self.colorPath(line: polyline, steps: steps, path: path!) {
-                        polyline.map = self.mapView
-                        self.polylineArray.append(polyline)
-                        self.mapView.animate(with: GMSCameraUpdate.fit(GMSCoordinateBounds(path: polyline.path!), withPadding: 80))
+                        if(self.conditions.count > 0){
+                            polyline.map = self.mapView
+                            self.polylineArray.append(polyline)
+                            self.mapView.animate(with: GMSCameraUpdate.fit(GMSCoordinateBounds(path: polyline.path!), withPadding: 80))
+                        }
                         group.leave()
                     }
                     
@@ -279,7 +291,7 @@ extension ViewController {
             let urlComplete = url.AWS_REVERSE_GEOLOCATION_URL
                 
             //make API call to AWS Lambda Reverse Geolocating function
-            Alamofire.request(urlComplete, method: .post, parameters: coordinatesJSON, encoding: JSONEncoding.default).responseJSON(completionHandler: {
+            Alamofire.request(urlComplete, method: .post, parameters: coordinatesJSON, encoding: JSONEncoding.default).validate(statusCode: 200..<300).responseJSON(completionHandler: {
             (response) in
                 
                 switch response.result {
@@ -296,7 +308,17 @@ extension ViewController {
                         
                 case .failure(let error):
                     print(error)
-                    completion()
+                    self.showAlert(title: "Invalid Route", message: "Woops! Our bad, looks like there was an issue procesing your route")
+                    
+                    //animate back to start location
+                    let camera = GMSCameraPosition.camera(withLatitude: (self.locationStart.coordinate.latitude), longitude: (self.locationStart.coordinate.longitude), zoom: 11.0)
+                    self.mapView.animate(to: camera)
+                    
+                    //need to stop spinner since completion will not be used
+                    self.stopSpinner()
+                    //re-enable location buttons
+                    self.startButton.isEnabled = true
+                    self.destinationButton.isEnabled = true
                         
                 }
             })
