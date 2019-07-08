@@ -267,9 +267,9 @@ extension ViewController {
             var listarray: [[String: Any]] = []
             for step in steps {
                 var dictionaryItem: [String: Any] = [:]
-                //need to flip in order to comply with WGS84 coordinates format
-                dictionaryItem["long"] = step["end_location"]["lat"].stringValue
-                dictionaryItem["lat"] = step["end_location"]["lng"].stringValue
+                //add lat and long coordinate pairs
+                dictionaryItem["lat"] = step["end_location"]["lat"].stringValue
+                dictionaryItem["long"] = step["end_location"]["lng"].stringValue
                 listarray.append(dictionaryItem)
             }
         
