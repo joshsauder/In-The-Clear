@@ -237,7 +237,11 @@ extension ViewController {
                 let (numSegs, index) = self.determineSegCount(step: steps[index], path: path, index: i)
                 i = index
                 colorSegs.append(self.determineColorSeg(condition: condition, numberSegs: numSegs))
-                self.conditions.append(condition)
+                if item["severe"] as! Bool == true {
+                    self.conditions.append("danger")
+                } else{
+                    self.conditions.append(condition)
+                }
                 self.conditionDescription.append(item["Description"] as! String)
                 let temp = item["Temperature"] as! NSNumber
                 self.highTemps.append(temp.floatValue)
@@ -339,7 +343,7 @@ extension ViewController {
         
         if condition == "rain" {
             colorSeg = GMSStyleSpan(style: pathColorSegs.RAIN, segments: Double(numberSegs))
-        } else if condition == "Thunderstorm" {
+        } else if condition == "danger" {
             colorSeg = GMSStyleSpan(style: pathColorSegs.STORMS, segments: Double(numberSegs))
         } else if condition == "snow" || condition == "sleet" {
             colorSeg = GMSStyleSpan(style: pathColorSegs.SNOW, segments: Double(numberSegs))

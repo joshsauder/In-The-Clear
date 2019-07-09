@@ -90,7 +90,7 @@ class weatherMenu: UITableViewController {
             colorOne = UIColor(red:0.40, green:0.73, blue:0.42, alpha:1.0)
             colorTwo = UIColor(red:0.26, green:0.63, blue:0.28, alpha:1.0)
             
-        } else if weather == "Thunderstorm" {
+        } else if weather == "danger" {
             colorOne = UIColor(red:0.94, green:0.33, blue:0.31, alpha:1.0)
             colorTwo = UIColor(red:0.90, green:0.22, blue:0.21, alpha:1.0)
             
@@ -136,7 +136,11 @@ class weatherMenu: UITableViewController {
             image = UIImage(named: "partlyCloudy")!
             image = image.resize(targetSize: size)
             
-        } else {
+        }else if weather == "severe" {
+            image = UIImage(named: "danger")!
+            image = image.resize(targetSize: size)
+        }
+        else {
             image = UIImage(named: "sun")!
             image = image.resize(targetSize: size)
         }
