@@ -86,7 +86,7 @@ extension ViewController {
         let origin = "\(startLocation.coordinate.latitude),\(startLocation.coordinate.longitude)"
         let destination = "\(endLocation.coordinate.latitude),\(endLocation.coordinate.longitude)"
         
-        let pathURL = url.PATH_URL + origin + "&destination=" + destination + "&mode=driving&key=" + "AIzaSyDznbmSUzLQ7dBofWqxHg-N6_jxxFBrxy0"
+        let pathURL = url.PATH_URL + origin + "&destination=" + destination + "&mode=driving&key=" + Constants.GOOGLE_DIRECTIONS_KEY
         
         Alamofire.request(pathURL, method: .get).validate().responseJSON { response in
 
