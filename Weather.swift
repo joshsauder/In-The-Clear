@@ -22,6 +22,21 @@ extension ViewController {
         static let CLOUDS = GMSStrokeStyle.solidColor(UIColor(red:0.38, green:0.49, blue:0.55, alpha:1.0))
     }
     
+    
+    func alertTool(title: String, message: String){
+        self.showAlert(title: title, message: message)
+        
+        //animate back to start location
+        let camera = GMSCameraPosition.camera(withLatitude: (self.locationStart.coordinate.latitude), longitude: (self.locationStart.coordinate.longitude), zoom: 11.0)
+        self.mapView.animate(to: camera)
+        
+        //need to stop spinner since completion will not be used
+        self.stopSpinner()
+        //re-enable location buttons
+        self.startButton.isEnabled = true
+        self.destinationButton.isEnabled = true
+    }
+    
     /**
      Calls the OpenWeather API service and populates the weather array
      
@@ -48,17 +63,10 @@ extension ViewController {
                 
             case .failure(let error):
                 print(error)
-                self.showAlert(title: "Invalid Route", message: "Woops! Our bad, looks like there was an issue procesing your route")
+                let title = "Invalid Route"
+                let message = "Woops! Our bad, looks like there was an issue procesing your route"
                 
-                //animate back to start location
-                let camera = GMSCameraPosition.camera(withLatitude: (self.locationStart.coordinate.latitude), longitude: (self.locationStart.coordinate.longitude), zoom: 11.0)
-                self.mapView.animate(to: camera)
-                
-                //need to stop spinner since completion will not be used
-                self.stopSpinner()
-                //re-enable location buttons
-                self.startButton.isEnabled = true
-                self.destinationButton.isEnabled = true
+                self.alertTool(title: title, message: message)
             }
         })
     }
@@ -137,36 +145,21 @@ extension ViewController {
                     }
                 }
                 else{
-                    //alert user route is currently too long
-                    self.showAlert(title: "Invalid Route", message: "Sorry! At this time, In The Clear does not support routes longer than 51 hours.")
+                    let title = "Invalid Route"
+                    let message = "Sorry! At this time, In The Clear does not support routes longer than 51 hours."
                     
-                    //animate back to start location
-                    let camera = GMSCameraPosition.camera(withLatitude: (self.locationStart.coordinate.latitude), longitude: (self.locationStart.coordinate.longitude), zoom: 11.0)
-                    self.mapView.animate(to: camera)
-                    
-                    //need to stop spinner since completion will not be used
-                    self.stopSpinner()
-                    //re-enable location buttons
-                    self.startButton.isEnabled = true
-                    self.destinationButton.isEnabled = true
+                    self.alertTool(title: title, message: message)
                 }
             }
             else {
-                //alert user invalid route was input
-                self.showAlert(title: "Invalid Route", message: "Woops! Looks like it's not possible to drive between these two locations.")
+                let title = "Invalid Route"
+                let message = "Woops! Looks like it's not possible to drive between these two locations."
                 
-                //animate back to start location
-                let camera = GMSCameraPosition.camera(withLatitude: (self.locationStart.coordinate.latitude), longitude: (self.locationStart.coordinate.longitude), zoom: 11.0)
-                self.mapView.animate(to: camera)
-                
-                //need to stop spinner since completion will not be used
-                self.stopSpinner()
-                //re-enable location buttons
-                self.startButton.isEnabled = true
-                self.destinationButton.isEnabled = true
+                self.alertTool(title: title, message: message)
             }
         }
     }
+
     
     /**
      Colors the GMSPath by what the weather condition is at each coordinate
@@ -237,7 +230,7 @@ extension ViewController {
                 let (numSegs, index) = self.determineSegCount(step: steps[index], path: path, index: i)
                 i = index
                 colorSegs.append(self.determineColorSeg(condition: condition, numberSegs: numSegs))
-                if item["severe"] as! Bool == true {
+                if item["Severe"] as! Bool == true {
                     self.conditions.append("danger")
                 } else{
                     self.conditions.append(condition)
@@ -249,6 +242,7 @@ extension ViewController {
             completion([colorSegs, date, totalTime, pathCoordinates, i])
         }
     }
+    
     
     func determineSegCount(step: JSON, path: GMSPath, index: UInt) -> (Int, UInt){
         //array will contain path index and number of segs
@@ -312,17 +306,10 @@ extension ViewController {
                         
                 case .failure(let error):
                     print(error)
-                    self.showAlert(title: "Invalid Route", message: "Woops! Our bad, looks like there was an issue procesing your route")
+                    let title = "Routing Issue"
+                    let message = "Woops! Our bad, looks like there was an issue procesing your route"
                     
-                    //animate back to start location
-                    let camera = GMSCameraPosition.camera(withLatitude: (self.locationStart.coordinate.latitude), longitude: (self.locationStart.coordinate.longitude), zoom: 11.0)
-                    self.mapView.animate(to: camera)
-                    
-                    //need to stop spinner since completion will not be used
-                    self.stopSpinner()
-                    //re-enable location buttons
-                    self.startButton.isEnabled = true
-                    self.destinationButton.isEnabled = true
+                    self.alertTool(title: title, message: message)
                         
                 }
             })
