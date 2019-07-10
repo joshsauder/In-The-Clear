@@ -43,9 +43,9 @@ class weatherMenu: UITableViewController {
         cell.weatherImage?.image = weatherImage(weather: entry.weather, size: size!)
         cell.weatherImage?.setImageColor(color: UIColor.white)
         cell.cityLabel?.text = entry.city
-        cell.tempLabel?.text = "\(Int(entry.highTemp.rounded()))℉"
         cell.conditionLabel?.text = entry.condition.capitalized
-        
+        cell.tempLabel?.text = "\(Int(entry.highTemp.rounded()))℉"
+        cell.tempLabel?.font.withSize((cell.conditionLabel?.font.pointSize)!)
         //needs to be clear so gradient shows
         cell.backgroundColor = UIColor.clear
         //Create gradient color
