@@ -22,7 +22,14 @@ extension ViewController {
         static let CLOUDS = GMSStrokeStyle.solidColor(UIColor(red:0.38, green:0.49, blue:0.55, alpha:1.0))
     }
     
-    
+    /**
+     Creates an alert on error on the users device
+     Stops the spinner and moves the camera back to the users start location
+     
+     - parameters:
+     - title: The title of the alert
+     - message: The message contained in the alert
+ `  */
     func alertTool(title: String, message: String){
         self.showAlert(title: title, message: message)
         
@@ -36,6 +43,7 @@ extension ViewController {
         self.startButton.isEnabled = true
         self.destinationButton.isEnabled = true
     }
+    
     
     /**
      Calls the OpenWeather API service and populates the weather array
@@ -176,7 +184,7 @@ extension ViewController {
     
         weatherPerStep(steps: steps, path: path){ result in
             //on completion get the colorSegs array and set it equal to the style span of the polyline
-            colorSegs =  result[0] as! [GMSStyleSpan]
+            colorSegs =  result
             line.spans = colorSegs
             completion()
         }
@@ -190,7 +198,7 @@ extension ViewController {
         - path: The GMSPath that will be displayed on the map
         - completion: An array containing the color segments for the polyline, the date that you will arrive to a certain step, the total amount of time, the current path coordinates, and a counter to keep track of where you are in the path.
     */
-    func weatherPerStep(steps: [JSON], path: GMSPath, completion: @escaping ([Any]) -> ()) {
+    func weatherPerStep(steps: [JSON], path: GMSPath, completion: @escaping ([GMSStyleSpan]) -> ()) {
         //any will contain colorseg, date, totalTime, pathCoordinates
         //get the time for the current weather step
         let refDate = Date().timeIntervalSince1970
@@ -199,8 +207,6 @@ extension ViewController {
         
         var colorSegs: [GMSStyleSpan] = []
         var totalTime = 0
-        let i = UInt(0)
-        let pathCoordinates = path.coordinate(at: i)
         
         var listarray: [[String: Any]] = []
         
@@ -239,11 +245,18 @@ extension ViewController {
                 let temp = item["Temperature"] as! NSNumber
                 self.highTemps.append(temp.floatValue)
             }
-            completion([colorSegs, date, totalTime, pathCoordinates, i])
+            completion(colorSegs)
         }
     }
     
-    
+    /**
+     Determines the number of segments on the GMSPolyline each step requires
+     - parameters:
+     - steps: The single directions step
+     - path: The path displayed on the users device
+     - index: the coordinate index on the GMSPath
+     - returns: The number of segs and the last segment index on the GMSPath
+    */
     func determineSegCount(step: JSON, path: GMSPath, index: UInt) -> (Int, UInt){
         //array will contain path index and number of segs
         var i = index
@@ -269,7 +282,7 @@ extension ViewController {
      Gets the location name at each directions step
      - parameters:
         - steps: The array containing each direction step
-        - completion: Allows each location to be inserted in the city array in order
+        - completion: Allows the Alamofire request to complete before returning
     */
     func getLocationName(steps: [JSON], completion: @escaping () -> ()) {
 
