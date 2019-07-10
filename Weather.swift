@@ -27,8 +27,8 @@ extension ViewController {
      Stops the spinner and moves the camera back to the users start location
      
      - parameters:
-     - title: The title of the alert
-     - message: The message contained in the alert
+        - title: The title of the alert
+        - message: The message contained in the alert
  `  */
     func alertTool(title: String, message: String){
         self.showAlert(title: title, message: message)
@@ -42,6 +42,42 @@ extension ViewController {
         //re-enable location buttons
         self.startButton.isEnabled = true
         self.destinationButton.isEnabled = true
+    }
+    
+    func createParamters(steps: [JSON]) -> (Parameters, Parameters){
+        
+        //get the time for the current weather step
+        let refDate = Date().timeIntervalSince1970
+        let timeInterval = TimeInterval(refDate)
+        var date = Date(timeIntervalSince1970: timeInterval)
+        
+        var weatherArray: [[String: Any]] = []
+        var geolocationArray: [[String: Any]] = []
+        
+        for step in steps {
+            var weatherDictionaryItem: [String: Any] = [:]
+            var geolocationDictionaryItem: [String: Any] = [:]
+            
+            //add latitude and longitude in WGS84 format
+            geolocationDictionaryItem["lat"] = step["end_location"]["lat"].stringValue
+            geolocationDictionaryItem["long"] = step["end_location"]["lng"].stringValue
+        
+            geolocationArray.append(geolocationDictionaryItem)
+            
+            weatherDictionaryItem["long"] = step["end_location"]["lat"].stringValue
+            weatherDictionaryItem["lat"] = step["end_location"]["lng"].stringValue
+            //time in seconds
+            let stepTime = step["duration"]["value"].intValue
+            date = date.addingTimeInterval(TimeInterval(stepTime))
+            weatherDictionaryItem["time"] = date.timeIntervalSince1970.rounded()
+            
+            weatherArray.append(weatherDictionaryItem)
+        }
+        
+        let weatherParameters: Parameters = ["List" : weatherArray]
+        let geolocationParamters: Parameters = ["list": geolocationArray]
+        return (weatherParameters, geolocationParamters)
+        
     }
     
     
@@ -95,12 +131,13 @@ extension ViewController {
                     group.enter()
                     group.enter()
                     
+                    let (weatherParam, geolocationParam) = self.createParamters(steps: steps)
                     //let geolocating and path coloring run simultaneouly
-                    self.getLocationName(steps: steps){
+                    self.getLocationName(parameters: geolocationParam){
                         group.leave()
                     }
                     //color the polyline and on completion show polyline on map
-                    self.colorPath(line: polyline, steps: steps, path: path!) {
+                    self.colorPath(line: polyline, steps: steps, path: path!, parameters: weatherParam) {
                         if(self.conditions.count > 0){
                             polyline.map = self.mapView
                             self.polylineArray.append(polyline)
@@ -138,13 +175,14 @@ extension ViewController {
         - line: The GMSPolyLine representation of the path
         - steps: Each direction (step) from the JSON returned by the Google Directions API
         - path: The directions path
+        - parameters: The API request body
         - completion: After weather services callback, exit function
     */
-    func colorPath(line: GMSPolyline, steps: [JSON], path: GMSPath, completion: @escaping () -> ()) {
+    func colorPath(line: GMSPolyline, steps: [JSON], path: GMSPath, parameters: Parameters, completion: @escaping () -> ()) {
         //take each step and get weather at end location
         var colorSegs: [GMSStyleSpan] = []
     
-        weatherPerStep(steps: steps, path: path){ result in
+        weatherPerStep(steps: steps, path: path, parameters: parameters){ result in
             //on completion get the colorSegs array and set it equal to the style span of the polyline
             colorSegs =  result
             line.spans = colorSegs
@@ -158,13 +196,14 @@ extension ViewController {
      - parameters:
         - steps: The array containing each directions step
         - path: The GMSPath that will be displayed on the map
+        - parameters: The API request body
         - completion: An array containing the color segments for the polyline, the date that you will arrive to a certain step, the total amount of time, the current path coordinates, and a counter to keep track of where you are in the path.
     */
-    func weatherPerStep(steps: [JSON], path: GMSPath, completion: @escaping ([GMSStyleSpan]) -> ()) {
+    func weatherPerStep(steps: [JSON], path: GMSPath, parameters: Parameters, completion: @escaping ([GMSStyleSpan]) -> ()) {
         
         var colorSegs: [GMSStyleSpan] = []
 
-        getWeather(steps: steps){ json in
+        getWeather(parameters: parameters){ json in
             
             var i = UInt(0)
             for (index, item) in json.enumerated() {
@@ -188,9 +227,9 @@ extension ViewController {
     /**
      Determines the number of segments on the GMSPolyline each step requires
      - parameters:
-     - steps: The single directions step
-     - path: The path displayed on the users device
-     - index: the coordinate index on the GMSPath
+        - steps: The single directions step
+        - path: The path displayed on the users device
+        - index: the coordinate index on the GMSPath
      - returns: The number of segs and the last segment index on the GMSPath
     */
     func determineSegCount(step: JSON, path: GMSPath, index: UInt) -> (Int, UInt){
@@ -219,8 +258,8 @@ extension ViewController {
      Determines what color each segment in polyline should be
      
      - parameters:
-     - condition: The weather condition for the segment(s)
-     - numberSegs: The number of segments that need to be colored
+        - condition: The weather condition for the segment(s)
+        - numberSegs: The number of segments that need to be colored
      - returns: The GMSStyleSpan for a specific segment(s)
      
     */
