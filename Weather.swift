@@ -52,10 +52,33 @@ extension ViewController {
      - parameters: The API request body
         - completion: After request made, exit with the condition at specified time
     */
-    func getWeather(parameters: Parameters, completion: @escaping ([[String: Any]]) -> ()) {
+    func getWeather(steps: [JSON], completion: @escaping ([[String: Any]]) -> ()) {
+        
+        //get the time for the current weather step
+        let refDate = Date().timeIntervalSince1970
+        let timeInterval = TimeInterval(refDate)
+        var date = Date(timeIntervalSince1970: timeInterval)
+        
+        var listarray: [[String: Any]] = []
+        
+        for step in steps {
+            var dictionaryItem: [String: Any] = [:]
+            
+            //time in seconds
+            let stepTime = step["duration"]["value"].intValue
+            date = date.addingTimeInterval(TimeInterval(stepTime))
+            dictionaryItem["time"] = date.timeIntervalSince1970.rounded()
+            
+            //add latitude and longitude in WGS84 format
+            dictionaryItem["long"] = step["end_location"]["lat"].stringValue
+            dictionaryItem["lat"] = step["end_location"]["lng"].stringValue
+            
+            listarray.append(dictionaryItem)
+        }
+        
+        let parameters: Parameters = ["List" : listarray]
         
         let AWSURL = url.AWS_WEATHER_URL
-
         //make url request to AWS Weather Fuction
         Alamofire.request(AWSURL, method: .post, parameters: parameters, encoding: JSONEncoding.default).validate(statusCode: 200..<300).responseJSON(completionHandler: {
                 (response) in
@@ -199,36 +222,10 @@ extension ViewController {
         - completion: An array containing the color segments for the polyline, the date that you will arrive to a certain step, the total amount of time, the current path coordinates, and a counter to keep track of where you are in the path.
     */
     func weatherPerStep(steps: [JSON], path: GMSPath, completion: @escaping ([GMSStyleSpan]) -> ()) {
-        //any will contain colorseg, date, totalTime, pathCoordinates
-        //get the time for the current weather step
-        let refDate = Date().timeIntervalSince1970
-        let timeInterval = TimeInterval(refDate)
-        var date = Date(timeIntervalSince1970: timeInterval)
         
         var colorSegs: [GMSStyleSpan] = []
-        var totalTime = 0
-        
-        var listarray: [[String: Any]] = []
-        
-        for step in steps {
-            var dictionaryItem: [String: Any] = [:]
-            
-            //time in seconds
-            let stepTime = step["duration"]["value"].intValue
-            totalTime += stepTime
-            date = date.addingTimeInterval(TimeInterval(stepTime))
-            dictionaryItem["time"] = date.timeIntervalSince1970.rounded()
-            
-            //add latitude and longitude in WGS84 format
-            dictionaryItem["long"] = step["end_location"]["lat"].stringValue
-            dictionaryItem["lat"] = step["end_location"]["lng"].stringValue
-            
-            listarray.append(dictionaryItem)
-        }
-        
-        let weatherJSON: Parameters = ["List" : listarray]
 
-        getWeather(parameters: weatherJSON){ json in
+        getWeather(steps: steps){ json in
             
             var i = UInt(0)
             for (index, item) in json.enumerated() {
