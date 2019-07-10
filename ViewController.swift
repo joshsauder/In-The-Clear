@@ -11,7 +11,6 @@ import CoreLocation
 import GoogleMaps
 import GooglePlaces
 import Alamofire
-import FontAwesome_swift
 
 enum Location {
     case startLocation

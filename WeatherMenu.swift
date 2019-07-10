@@ -8,7 +8,6 @@
 
 import Foundation
 import UIKit
-import FontAwesome_swift
 
 class weatherMenu: UITableViewController {
     
