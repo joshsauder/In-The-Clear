@@ -119,6 +119,12 @@ extension ViewController {
         
     }
     
+    /**
+     Calls Google Maps Directions API Service and returns a JSON array containing directions information
+     - parameters:
+     - url: the full url containing lat and long coordinates
+     - completions: the directions JSON array
+    */
     func getDirections(url: String, completion: @escaping ([JSON]) -> ()){
         
         Alamofire.request(url, method: .get).validate(statusCode: 200..<300).responseJSON { response in
