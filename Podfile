@@ -5,7 +5,7 @@ target 'InTheClear' do
   use_frameworks!
 
   pod 'GoogleMaps', '~> 3.0.2'
-  pod 'GooglePlaces', '~> 3.0.2'
+  pod 'GooglePlaces'
   pod 'Alamofire', '~> 4.7' 
   pod 'SwiftyJSON', '~> 4.0' 
   pod 'FontAwesome.swift', '~> 1.6.0'
@@ -15,7 +15,7 @@ target 'InTheClearTests' do
   use_frameworks!
 
   pod 'GoogleMaps', '~> 3.0.2'
-  pod 'GooglePlaces', '~> 3.0.2'
+  pod 'GooglePlaces'
   pod 'Alamofire', '~> 4.7' 
   pod 'SwiftyJSON', '~> 4.0' 
   pod 'FontAwesome.swift', '~> 1.6.0'

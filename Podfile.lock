@@ -14,7 +14,7 @@ DEPENDENCIES:
   - Alamofire (~> 4.7)
   - FontAwesome.swift (~> 1.6.0)
   - GoogleMaps (~> 3.0.2)
-  - GooglePlaces (~> 3.0.2)
+  - GooglePlaces
   - SwiftyJSON (~> 4.0)
 
 SPEC REPOS:
@@ -32,6 +32,6 @@ SPEC CHECKSUMS:
   GooglePlaces: c086e0055dc5f0177d7c9d65fc77a1734f9a4825
   SwiftyJSON: c4bcba26dd9ec7a027fc8eade48e2c911f229e96
 
-PODFILE CHECKSUM: cd63851923751285a1df347c145cdb9550063845
+PODFILE CHECKSUM: 1bb2860a19c82c143447999e8a0b15eb585c2fab
 
 COCOAPODS: 1.6.0
