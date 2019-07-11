@@ -64,7 +64,7 @@ extension ViewController {
         for step in steps {
             var dictionaryItem: [String: Any] = [:]
             
-            //add latitude and longitude in WGS84 format
+            //add latitude and longitude coordinates to dictionary
             dictionaryItem["lat"] = step["end_location"]["lat"].stringValue
             dictionaryItem["long"] = step["end_location"]["lng"].stringValue
         
@@ -91,7 +91,7 @@ extension ViewController {
      - parameters:
         - startLocation: The starting location
         - endLocation: The destination location
-        - completion: Upon calling the service, return the total time string
+        - completion: Upon calling the service, return the total time and distance strings
     */
     func createLine(startLocation: CLLocation, endLocation: CLLocation, completion: @escaping (String, String) -> ()) {
         
@@ -212,8 +212,10 @@ extension ViewController {
             var i = UInt(0)
             for (index, item) in json.enumerated() {
                 let condition = item["Condition"] as! String
+                //determine number of segs for each step
                 let (numSegs, index) = self.determineSegCount(step: steps[index], path: path, index: i)
                 i = index
+                //append each value to corresponding array
                 colorSegs.append(self.determineColorSeg(condition: condition, numberSegs: numSegs))
                 if item["Severe"] as! Bool == true {
                     self.conditions.append("danger")
@@ -224,6 +226,7 @@ extension ViewController {
                 let temp = item["Temperature"] as! NSNumber
                 self.highTemps.append(temp.floatValue)
             }
+            //return colorsegs on completion
             completion(colorSegs)
         }
     }

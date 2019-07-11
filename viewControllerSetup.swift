@@ -109,6 +109,7 @@ extension ViewController {
      Shows time and distance label and Google Maps Button. Enables weather List button.
      - parameters:
         - time: The total time it takes to travel the route
+        - distance: The distance it takes to travel the route
     */
     func showButtonsAndLabels(time: String, distance: String){
         
