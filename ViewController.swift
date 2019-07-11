@@ -47,8 +47,6 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
     var highTemps: [Float] = []
     var conditionDescription: [String] = []
     
-    var totalDistance = String()
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -252,7 +250,7 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
         showSpinner(view: view)
         
         //show line
-        self.createLine(startLocation: locationStart, endLocation: locationEnd) { time in
+        self.createLine(startLocation: locationStart, endLocation: locationEnd) { time, distance in
             
             //order from start location to finish
             self.cities.reverse()
@@ -261,7 +259,7 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
             self.conditionDescription.reverse()
             
             //enable and show time/distance label, Google Maps button, and Weather List Button
-            self.showButtonsAndLabels(time: time)
+            self.showButtonsAndLabels(time: time, distance: distance)
             //re-enable location buttons
             self.startButton.isEnabled = true
             self.destinationButton.isEnabled = true

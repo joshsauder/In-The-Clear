@@ -89,7 +89,7 @@ extension ViewController {
         - endLocation: The destination location
         - completion: Upon calling the service, return the total time string
     */
-    func createLine(startLocation: CLLocation, endLocation: CLLocation, completion: @escaping (String) -> ()) {
+    func createLine(startLocation: CLLocation, endLocation: CLLocation, completion: @escaping (String, String) -> ()) {
         
         //colors for lines based on condition
         
@@ -107,7 +107,7 @@ extension ViewController {
                 let routesVal = routes[0]["legs"].arrayValue
                 let stepsEval = routesVal[0]
                 let totalTime = stepsEval["duration"]["text"].stringValue
-                self.totalDistance = stepsEval["distance"]["text"].stringValue
+                let totalDistance = stepsEval["distance"]["text"].stringValue
                 let steps = stepsEval["steps"].arrayValue
                 
                 //prevent routes that are too long too handle
@@ -141,14 +141,14 @@ extension ViewController {
                         if(self.conditions.count > 0){
                             polyline.map = self.mapView
                             self.polylineArray.append(polyline)
-                            self.mapView.animate(with: GMSCameraUpdate.fit(GMSCoordinateBounds(path: polyline.path!), withPadding: 80))
+                            self.mapView.animate(with: GMSCameraUpdate.fit(GMSCoordinateBounds(path: polyline.path!), withPadding: 95))
                         }
                         group.leave()
                     }
                     
                     group.notify(queue: DispatchQueue.main){
                         //return total time value from json once colorpath and geolocating methods are complete
-                        completion(totalTime)
+                        completion(totalTime, totalDistance)
                     }
                 }
                 else{
