@@ -71,7 +71,7 @@ class WeatherTableTests: XCTestCase {
                 
                 //check for the first routes first and last cities
                 for entry in self.wm.weatherDataArray {
-                    if entry.city == "Seattle" || entry.city == "Sacramento" {
+                    if entry.city == "Seattle, WA" || entry.city == "Sacramento, CA" {
                         test = false
                     }
                 }
@@ -80,6 +80,6 @@ class WeatherTableTests: XCTestCase {
             }
             
         }
-        
     }
+    
 }
