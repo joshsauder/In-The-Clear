@@ -148,7 +148,7 @@ extension ViewController {
     /**
      Displays a spinner while a process is executing
      - parameters:
-     - view: The view in which the spinner will appear in
+        - view: The view in which the spinner will appear in
      */
     func showSpinner(view: UIView){
         let spinnerView = UIView.init(frame: view.bounds)
