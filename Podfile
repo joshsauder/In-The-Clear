@@ -8,7 +8,6 @@ target 'InTheClear' do
   pod 'GooglePlaces'
   pod 'Alamofire', '~> 4.7' 
   pod 'SwiftyJSON', '~> 4.0' 
-  pod 'FontAwesome.swift', '~> 1.6.0'
 end
 
 target 'InTheClearTests' do
@@ -18,5 +17,4 @@ target 'InTheClearTests' do
   pod 'GooglePlaces'
   pod 'Alamofire', '~> 4.7' 
   pod 'SwiftyJSON', '~> 4.0' 
-  pod 'FontAwesome.swift', '~> 1.6.0'
 end
