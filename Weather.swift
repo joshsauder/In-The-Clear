@@ -44,6 +44,13 @@ extension ViewController {
         self.destinationButton.isEnabled = true
     }
     
+    /**
+     Creates the parameters needed for both API requests
+     
+     - parameters:
+        - steps: The directions JSON array
+     - returns: Two sets of parameters for the two AWS Lambda functions
+    */
     func createParamters(steps: [JSON]) -> (Parameters, Parameters){
         
         //get the time for the current weather step
@@ -55,27 +62,24 @@ extension ViewController {
         var geolocationArray: [[String: Any]] = []
         
         for step in steps {
-            var weatherDictionaryItem: [String: Any] = [:]
-            var geolocationDictionaryItem: [String: Any] = [:]
+            var dictionaryItem: [String: Any] = [:]
             
             //add latitude and longitude in WGS84 format
-            geolocationDictionaryItem["lat"] = step["end_location"]["lat"].stringValue
-            geolocationDictionaryItem["long"] = step["end_location"]["lng"].stringValue
+            dictionaryItem["lat"] = step["end_location"]["lat"].stringValue
+            dictionaryItem["long"] = step["end_location"]["lng"].stringValue
         
-            geolocationArray.append(geolocationDictionaryItem)
+            geolocationArray.append(dictionaryItem)
             
-            weatherDictionaryItem["long"] = step["end_location"]["lat"].stringValue
-            weatherDictionaryItem["lat"] = step["end_location"]["lng"].stringValue
             //time in seconds
             let stepTime = step["duration"]["value"].intValue
             date = date.addingTimeInterval(TimeInterval(stepTime))
-            weatherDictionaryItem["time"] = date.timeIntervalSince1970.rounded()
+            dictionaryItem["time"] = date.timeIntervalSince1970.rounded()
             
-            weatherArray.append(weatherDictionaryItem)
+            weatherArray.append(dictionaryItem)
         }
         
         let weatherParameters: Parameters = ["List" : weatherArray]
-        let geolocationParamters: Parameters = ["list": geolocationArray]
+        let geolocationParamters: Parameters = ["List": geolocationArray]
         return (weatherParameters, geolocationParamters)
         
     }
