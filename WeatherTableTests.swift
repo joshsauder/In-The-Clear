@@ -8,7 +8,6 @@
 
 import XCTest
 @testable import InTheClear
-import FontAwesome_swift
 import GoogleMaps
 
 class WeatherTableTests: XCTestCase {
@@ -25,11 +24,11 @@ class WeatherTableTests: XCTestCase {
     func testTableCellColor() {
         
         //actual values
-        let rain = wm.cellColor(weather: "Rain")
-        let sun = wm.cellColor(weather: "Sun")
-        let snow = wm.cellColor(weather: "Snow")
-        let ts = wm.cellColor(weather: "Thunderstorm")
-        let cloud = wm.cellColor(weather: "Clouds")
+        let rain = wm.cellColor(weather: "rain")
+        let sun = wm.cellColor(weather: "sun")
+        let snow = wm.cellColor(weather: "snow")
+        let ts = wm.cellColor(weather: "danger")
+        let cloud = wm.cellColor(weather: "clouds")
         
         //expected values
         let expectedRain = [UIColor(red:0.40, green:0.73, blue:0.42, alpha:1.0), UIColor(red:0.26, green:0.63, blue:0.28, alpha:1.0)]
@@ -59,7 +58,7 @@ class WeatherTableTests: XCTestCase {
         //Sacramento, CA coordinates
         let destination = CLLocation(latitude: CLLocationDegrees(exactly: 38.5816)!, longitude: CLLocationDegrees(exactly: 121.4944)!)
         
-        vc.createLine(startLocation: start, endLocation: destination){ condition in
+        vc.createLine(startLocation: start, endLocation: destination){ time, distance in
             
             //Miami, FL coordinates
             let secondStart = CLLocation(latitude: CLLocationDegrees(exactly: 25.77481)!, longitude: CLLocationDegrees(exactly: -80.19773)!)
@@ -67,7 +66,7 @@ class WeatherTableTests: XCTestCase {
             //Columbus, OH coordinates
             let secondDestination = CLLocation(latitude: CLLocationDegrees(exactly: 32.77815)!, longitude: CLLocationDegrees(exactly: -96.7954)!)
             
-            vc.createLine(startLocation: secondStart, endLocation: secondDestination){ condition in
+            vc.createLine(startLocation: secondStart, endLocation: secondDestination){ time, distance in
                 var test = true
                 
                 //check for the first routes first and last cities
