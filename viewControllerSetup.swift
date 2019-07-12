@@ -1,5 +1,5 @@
 //
-//  viewControllerSetup.swift
+//  ViewControllerSetup.swift
 //  InTheClear
 //
 //  Created by Josh Sauder on 4/6/19.
@@ -136,7 +136,12 @@ extension ViewController {
         self.mapKey.isHidden = false
         
     }
-    
+    /**
+     Displays a UIAlert
+     - parameters:
+        - title: title of alert
+        - message: the message of alert
+    */
     func showAlert(title: String, message: String){
         //display alert based on tyle
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)

@@ -113,8 +113,10 @@ class weatherMenu: UITableViewController {
     /**
      Function that determines weather image depending on condition
      
-     - parameter weather: The weather condition
-     - returns: A UIImage that relates to the weather condition
+     - parameters:
+        - weather: The weather condition
+        - size: the image size
+     - returns: A UIImage that relates to the weather condition correctly sized
     */
     func weatherImage(weather: String, size: CGSize) -> UIImage {
         var image = UIImage()

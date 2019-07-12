@@ -196,12 +196,12 @@ extension ViewController {
     }
     
     /**
-     Gets the weather at each directions step and colors the GMS path accordingly
+     Gets the weather at each directions step and colors the GMSPath accordingly
      - parameters:
         - steps: The array containing each directions step
         - path: The GMSPath that will be displayed on the map
         - parameters: The API request body
-        - completion: An array containing the color segments for the polyline, the date that you will arrive to a certain step, the total amount of time, the current path coordinates, and a counter to keep track of where you are in the path.
+        - completion: An array containing the color segments for the polyline.
     */
     func weatherPerStep(steps: [JSON], path: GMSPath, parameters: Parameters, completion: @escaping ([GMSStyleSpan]) -> ()) {
         
@@ -272,7 +272,7 @@ extension ViewController {
     */
     func determineColorSeg(condition: String, numberSegs: Int) -> GMSStyleSpan {
         let colorSeg: GMSStyleSpan
-        
+        //determine condition and set segment color accordingly
         if condition == "rain" {
             colorSeg = GMSStyleSpan(style: pathColorSegs.RAIN, segments: Double(numberSegs))
         } else if condition == "danger" {
