@@ -43,7 +43,7 @@
 	<string>Main</string>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
-		<string>armv7</string>
+		<string>armv7, armv7s, arm64, i386</string>
 	</array>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
