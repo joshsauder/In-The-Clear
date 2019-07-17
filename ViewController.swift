@@ -30,6 +30,7 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
     @IBOutlet weak var weatherList: UIButton!
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var openGoogleMaps: UIButton!
+    @IBOutlet weak var setTime: UIButton!
     @IBOutlet weak var mapKey: UIImageView!
     var spinner: UIView?
     
@@ -229,10 +230,19 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
         }
     }
     
+    @IBAction func showTimePopup(_ sender: UIButton) {
+        let tripDetailVC = storyboard?.instantiateViewController(withIdentifier: "customizeTripDetails") as! CustomizeTripDetails
+        tripDetailVC.modalPresentationStyle = .overCurrentContext
+        self.present(tripDetailVC, animated: true, completion: nil)
+        tripDetailVC.date = { (dateReturned) -> () in
+            self.showDirection(date: dateReturned)
+        }
+    }
+    
     /**
     Calls createLine to add polyline to map and also enables the weatherList button and time label at bottom
      */
-    func showDirection(){
+    func showDirection(date: Date? = Date()){
         
         //disable location buttons
         startButton.isEnabled = false
@@ -250,7 +260,7 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
         showSpinner(view: view)
         
         //show line
-        self.createLine(startLocation: locationStart, endLocation: locationEnd) { time, distance in
+        self.createLine(startLocation: locationStart, endLocation: locationEnd, date: date!) { time, distance in
             
             //order from start location to finish
             self.cities.reverse()

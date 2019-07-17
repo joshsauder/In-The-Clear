@@ -51,10 +51,10 @@ extension ViewController {
         - steps: The directions JSON array
      - returns: Two sets of parameters for the two AWS Lambda functions
     */
-    func createParamters(steps: [JSON]) -> (Parameters, Parameters){
+    func createParamters(steps: [JSON], date: Date) -> (Parameters, Parameters){
         
         //get the time for the current weather step
-        let refDate = Date().timeIntervalSince1970
+        let refDate = date.timeIntervalSince1970
         let timeInterval = TimeInterval(refDate)
         var date = Date(timeIntervalSince1970: timeInterval)
         
@@ -93,7 +93,7 @@ extension ViewController {
         - endLocation: The destination location
         - completion: Upon calling the service, return the total time and distance strings
     */
-    func createLine(startLocation: CLLocation, endLocation: CLLocation, completion: @escaping (String, String) -> ()) {
+    func createLine(startLocation: CLLocation, endLocation: CLLocation, date: Date, completion: @escaping (String, String) -> ()) {
         
         //colors for lines based on condition
         
@@ -135,7 +135,7 @@ extension ViewController {
                     group.enter()
                     group.enter()
                     
-                    let (weatherParam, geolocationParam) = self.createParamters(steps: steps)
+                    let (weatherParam, geolocationParam) = self.createParamters(steps: steps, date: date)
                     //let geolocating and path coloring run simultaneouly
                     self.getLocationName(parameters: geolocationParam){
                         group.leave()
