@@ -169,20 +169,20 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gPA-Xj-wrF">
-                                <rect key="frame" x="65" y="188" width="240" height="300"/>
+                                <rect key="frame" x="64" y="188" width="246" height="300"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select a Start Time" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OTl-7R-QE9">
-                                        <rect key="frame" x="0.0" y="0.0" width="240" height="43"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="246" height="43"/>
                                         <color key="backgroundColor" red="0.47464728355407715" green="0.15095242857933044" blue="0.50199043750762939" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="43" id="TyP-gi-KrL"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="21"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="okp-FV-ytU">
-                                        <rect key="frame" x="0.0" y="257" width="240" height="43"/>
+                                        <rect key="frame" x="0.0" y="257" width="246" height="43"/>
                                         <color key="backgroundColor" red="0.47464728360000003" green="0.15095242859999999" blue="0.50199043750000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="43" id="ds6-ef-1Nh"/>
@@ -196,7 +196,7 @@
                                         </connections>
                                     </button>
                                     <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="kgL-di-T0R">
-                                        <rect key="frame" x="0.0" y="43" width="240" height="214"/>
+                                        <rect key="frame" x="0.0" y="43" width="246" height="214"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="214" id="I7L-E0-U02"/>
                                         </constraints>
@@ -214,17 +214,17 @@
                                     <constraint firstItem="kgL-di-T0R" firstAttribute="leading" secondItem="gPA-Xj-wrF" secondAttribute="leadingMargin" constant="-8" id="QbJ-Fz-uQw"/>
                                     <constraint firstItem="OTl-7R-QE9" firstAttribute="top" secondItem="gPA-Xj-wrF" secondAttribute="top" id="WlS-ts-M7S"/>
                                     <constraint firstAttribute="trailing" secondItem="OTl-7R-QE9" secondAttribute="trailing" id="b2V-vh-PpE"/>
-                                    <constraint firstItem="kgL-di-T0R" firstAttribute="top" secondItem="gPA-Xj-wrF" secondAttribute="top" constant="43" id="fhX-r7-UeE"/>
+                                    <constraint firstItem="kgL-di-T0R" firstAttribute="top" secondItem="OTl-7R-QE9" secondAttribute="bottom" id="fhX-r7-UeE"/>
                                     <constraint firstItem="okp-FV-ytU" firstAttribute="trailing" secondItem="OTl-7R-QE9" secondAttribute="trailing" id="qu6-CB-4kO"/>
                                 </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="Brl-bT-qop" firstAttribute="trailing" secondItem="gPA-Xj-wrF" secondAttribute="trailing" constant="70" id="1wS-cD-7aB"/>
+                            <constraint firstItem="Brl-bT-qop" firstAttribute="trailing" secondItem="gPA-Xj-wrF" secondAttribute="trailing" constant="65" id="1wS-cD-7aB"/>
                             <constraint firstItem="gPA-Xj-wrF" firstAttribute="top" secondItem="Brl-bT-qop" secondAttribute="top" constant="144" id="7UL-cx-UIH"/>
                             <constraint firstItem="Brl-bT-qop" firstAttribute="bottom" secondItem="gPA-Xj-wrF" secondAttribute="bottom" constant="290" id="SvA-w9-Svg"/>
-                            <constraint firstItem="gPA-Xj-wrF" firstAttribute="leading" secondItem="Brl-bT-qop" secondAttribute="leading" constant="65" id="mfp-tt-8nj"/>
+                            <constraint firstItem="gPA-Xj-wrF" firstAttribute="leading" secondItem="Brl-bT-qop" secondAttribute="leading" constant="64" id="mfp-tt-8nj"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Brl-bT-qop"/>
                     </view>
