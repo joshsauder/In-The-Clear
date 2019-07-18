@@ -26,6 +26,8 @@ class CustomizeTripDetails: UIViewController {
     func setupView(){
         dateView.layer.cornerRadius = 10
         dateView.layer.masksToBounds = true
+        view.backgroundColor = UIColor.init(red: 0.5, green: 0.5, blue: 0.5, alpha: 0.5)
+        
     }
     
     func createDatePicker(){
