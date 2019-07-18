@@ -98,6 +98,8 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
         timeLabelSetup()
         //setup Google Maps button
         googleMapsButtonSetup()
+        //setup time button
+        setTimeButtonSetup()
         
     }
     

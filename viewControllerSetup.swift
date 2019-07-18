@@ -1,5 +1,5 @@
 //
-//  ViewControllerSetup.swift
+//  viewControllerSetup.swift
 //  InTheClear
 //
 //  Created by Josh Sauder on 4/6/19.
@@ -105,6 +105,37 @@ extension ViewController {
         openGoogleMaps.layer.shadowRadius = 1
         openGoogleMaps.layer.shadowOpacity = 0.5
     }
+
+    func setTimeButtonSetup(){
+        setTime.isHidden = true
+        setTime.backgroundColor = UIColor(white: 1, alpha: 1)
+        setTime.layer.cornerRadius = 0.5 * setTime.bounds.size.width
+        setTime.clipsToBounds = true
+        
+        //Create Attachment
+        let imageAttachment =  NSTextAttachment()
+        imageAttachment.image = UIImage(named:"time")
+        imageAttachment.bounds = CGRect(x: 0, y: -5, width: 30, height: 30)
+        
+        //Create string with attachment
+        let attachmentString = NSAttributedString(attachment: imageAttachment)
+        //Initialize mutable string
+        let completeText = NSMutableAttributedString(string: "")
+        //Add image to mutable string
+        completeText.append(attachmentString)
+        
+        //set up font
+        setTime.titleLabel?.textAlignment = .center
+        setTime.setAttributedTitle(completeText, for: .normal)
+        setTime.titleLabel?.adjustsFontSizeToFitWidth = true
+        
+        //add shadow to button
+        setTime.layer.shadowColor = UIColor.black.cgColor
+        setTime.layer.masksToBounds = false
+        setTime.layer.shadowOffset = CGSize(width: 0, height: 1)
+        setTime.layer.shadowRadius = 1
+        setTime.layer.shadowOpacity = 0.5
+    }
     /**
      Shows time and distance label and Google Maps Button. Enables weather List button.
      - parameters:
@@ -132,7 +163,7 @@ extension ViewController {
         self.weatherList.alpha = 1
         //enable google maps button
         self.openGoogleMaps.isHidden = false
-        
+        self.setTime.isHidden = false
         self.mapKey.isHidden = false
         
     }
