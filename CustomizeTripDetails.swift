@@ -46,4 +46,8 @@ class CustomizeTripDetails: UIViewController {
         dismiss(animated: true)
     }
     
+    @IBAction func onCancel(_ sender: UIButton) {
+        dismiss(animated: true)
+    }
+    
 }

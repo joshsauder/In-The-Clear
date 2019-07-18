@@ -237,6 +237,7 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
         tripDetailVC.modalPresentationStyle = .overCurrentContext
         self.present(tripDetailVC, animated: true, completion: nil)
         tripDetailVC.date = { (dateReturned) -> () in
+            print(dateReturned)
             self.showDirection(date: dateReturned)
         }
     }
