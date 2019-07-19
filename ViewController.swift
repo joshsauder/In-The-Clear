@@ -69,6 +69,7 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
         let camera = GMSCameraPosition.camera(withLatitude: -33.86, longitude: 151, zoom: 11.0)
         mapView.camera = camera
         mapView.delegate = self
+
         mapView?.isMyLocationEnabled = true
         mapView.settings.myLocationButton = true
         mapView.settings.compassButton = true
@@ -96,10 +97,8 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
         weatherListButtonSetup()
         //setup time and distance label
         timeLabelSetup()
-        //setup Google Maps button
-        googleMapsButtonSetup()
-        //setup time button
-        setTimeButtonSetup()
+        //setup Google Maps and Set Time button
+        mapButtonsSetup()
         
     }
     

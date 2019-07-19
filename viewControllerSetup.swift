@@ -71,19 +71,16 @@ extension ViewController {
 
     }
     
-    /**
-     Sets up Google Maps button
-    */
-    func googleMapsButtonSetup(){
+    func configureMapButtons(button: UIButton, imageString: String){
         
-        openGoogleMaps.isHidden = true
-        openGoogleMaps.backgroundColor = UIColor(white: 1, alpha: 1)
-        openGoogleMaps.layer.cornerRadius = 0.5 * openGoogleMaps.bounds.size.width
-        openGoogleMaps.clipsToBounds = true
+        button.isHidden = true
+        button.backgroundColor = UIColor(white: 1, alpha: 1)
+        button.layer.cornerRadius = 0.5 * button.bounds.size.width
+        button.clipsToBounds = true
         
         //Create Attachment
         let imageAttachment =  NSTextAttachment()
-        imageAttachment.image = UIImage(named:"icons8-google-maps-48")
+        imageAttachment.image = UIImage(named: imageString)
         imageAttachment.bounds = CGRect(x: 0, y: -5, width: 30, height: 30)
         
         //Create string with attachment
@@ -94,48 +91,27 @@ extension ViewController {
         completeText.append(attachmentString)
         
         //set up font
-        openGoogleMaps.titleLabel?.textAlignment = .center
-        openGoogleMaps.setAttributedTitle(completeText, for: .normal)
-        openGoogleMaps.titleLabel?.adjustsFontSizeToFitWidth = true
+        button.titleLabel?.textAlignment = .center
+        button.setAttributedTitle(completeText, for: .normal)
+        button.titleLabel?.adjustsFontSizeToFitWidth = true
         
         //add shadow to button
-        openGoogleMaps.layer.shadowColor = UIColor.black.cgColor
-        openGoogleMaps.layer.masksToBounds = false
-        openGoogleMaps.layer.shadowOffset = CGSize(width: 0, height: 1)
-        openGoogleMaps.layer.shadowRadius = 1
-        openGoogleMaps.layer.shadowOpacity = 0.5
+        button.layer.shadowColor = UIColor.black.cgColor
+        button.layer.masksToBounds = false
+        button.layer.shadowOffset = CGSize(width: 0, height: 1)
+        button.layer.shadowRadius = 1
+        button.layer.shadowOpacity = 0.5
+    }
+    
+    /**
+     Sets up Google Maps and Set Time buttons
+    */
+    func mapButtonsSetup(){
+        
+        configureMapButtons(button: openGoogleMaps, imageString: "icons8-google-maps-48")
+        configureMapButtons(button: setTime, imageString: "time")
     }
 
-    func setTimeButtonSetup(){
-        setTime.isHidden = true
-        setTime.backgroundColor = UIColor(white: 1, alpha: 1)
-        setTime.layer.cornerRadius = 0.5 * setTime.bounds.size.width
-        setTime.clipsToBounds = true
-        
-        //Create Attachment
-        let imageAttachment =  NSTextAttachment()
-        imageAttachment.image = UIImage(named:"time")
-        imageAttachment.bounds = CGRect(x: 0, y: -5, width: 30, height: 30)
-        
-        //Create string with attachment
-        let attachmentString = NSAttributedString(attachment: imageAttachment)
-        //Initialize mutable string
-        let completeText = NSMutableAttributedString(string: "")
-        //Add image to mutable string
-        completeText.append(attachmentString)
-        
-        //set up font
-        setTime.titleLabel?.textAlignment = .center
-        setTime.setAttributedTitle(completeText, for: .normal)
-        setTime.titleLabel?.adjustsFontSizeToFitWidth = true
-        
-        //add shadow to button
-        setTime.layer.shadowColor = UIColor.black.cgColor
-        setTime.layer.masksToBounds = false
-        setTime.layer.shadowOffset = CGSize(width: 0, height: 1)
-        setTime.layer.shadowRadius = 1
-        setTime.layer.shadowOpacity = 0.5
-    }
     /**
      Shows time and distance label and Google Maps Button. Enables weather List button.
      - parameters:
