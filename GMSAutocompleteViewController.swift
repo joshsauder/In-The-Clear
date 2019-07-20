@@ -30,7 +30,8 @@ extension ViewController: GMSAutocompleteViewControllerDelegate {
         
         //if both locations are filled begin getting directions and weather
         if locationStart.coordinate.longitude != 0 && locationEnd.coordinate.longitude != 0 {
-            showDirection()
+            self.dismiss(animated: true, completion: nil)
+            showTimePopupInitially()
         }
         self.dismiss(animated: true, completion: nil)
     }

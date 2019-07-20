@@ -14,7 +14,7 @@ class CustomizeTripDetails: UIViewController {
     
     @IBOutlet weak var datePicker: UIDatePicker!
     @IBOutlet weak var dateView: UIView!
-    var date: ((_ date: Date) -> ())?
+    var date: ((_ date: Date, _ cancel: Bool) -> ())?
 
     
     override func viewDidLoad() {
@@ -54,17 +54,18 @@ class CustomizeTripDetails: UIViewController {
         - sender: The UIBUtton that is tapped
     */
     @IBAction func onSubmit(_ sender: UIButton) {
-        date?(datePicker.date)
+        date?(datePicker.date, false)
         dismiss(animated: true)
     }
     
     /**
-     On cancel, dismiss the view.
+     On cancel, dismiss the view and set the cancel variable to true.
      
      - parameters:
         - sender: The UIBUtton that is tapped
      */
     @IBAction func onCancel(_ sender: UIButton) {
+        date?(Date(), true)
         dismiss(animated: true)
     }
     

@@ -231,12 +231,32 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
         }
     }
     
+    /**
+     Shows the time popup when the start and end locations are given
+    */
+    func showTimePopupInitially(){
+        let tripDetailVC = storyboard?.instantiateViewController(withIdentifier: "customizeTripDetails") as! CustomizeTripDetails
+        tripDetailVC.modalPresentationStyle = .overCurrentContext
+        self.present(tripDetailVC, animated: true, completion: nil)
+        tripDetailVC.date = { (dateReturned, cancel) -> () in
+            self.showDirection(date: dateReturned)
+        }
+    }
+    
+    /**
+     Shows the time popup when the UIButton is clicked
+     - parameters:
+        - sender: the UIButton being interacted with
+    */
     @IBAction func showTimePopup(_ sender: UIButton) {
         let tripDetailVC = storyboard?.instantiateViewController(withIdentifier: "customizeTripDetails") as! CustomizeTripDetails
         tripDetailVC.modalPresentationStyle = .overCurrentContext
         self.present(tripDetailVC, animated: true, completion: nil)
-        tripDetailVC.date = { (dateReturned) -> () in
-            self.showDirection(date: dateReturned)
+        tripDetailVC.date = { (dateReturned, cancel) -> () in
+            //if cancel is not clicked, return updated results
+            if !cancel {
+                self.showDirection(date: dateReturned)
+            }
         }
     }
     

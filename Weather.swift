@@ -217,7 +217,7 @@ extension ViewController {
                 i = index
                 //append each value to corresponding array
                 colorSegs.append(self.determineColorSeg(condition: condition, numberSegs: numSegs))
-                if item["Severe"] as! Bool == true {
+                if item["Severe"] as! Bool {
                     self.conditions.append("danger")
                 } else{
                     self.conditions.append(condition)
