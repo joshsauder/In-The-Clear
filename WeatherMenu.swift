@@ -97,12 +97,15 @@ class weatherMenu: UITableViewController {
             colorOne = UIColor(red:0.26, green:0.65, blue:0.96, alpha:1.0)
             colorTwo = UIColor(red:0.12, green:0.53, blue:0.90, alpha:1.0)
             
-        } else if weather == "clouds" || weather == "partly-cloudy-day" || weather == "partly-cloudy-night" {
+        } else if weather == "cloudy" || weather == "partly-cloudy-day" || weather == "partly-cloudy-night" {
             colorOne = UIColor(red:0.56, green:0.64, blue:0.68, alpha:1.0)
             colorTwo = UIColor(red:0.38, green:0.49, blue:0.55, alpha:1.0)
             
-        }
-        else {
+        } else if weather == "clear-night" {
+            colorOne = UIColor(red:0.38, green:0.38, blue:0.38, alpha:1.0)
+            colorTwo = UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0)
+            
+        } else {
             colorOne = UIColor(red:1.00, green:0.92, blue:0.23, alpha:1.0)
             colorTwo = UIColor(red:0.98, green:0.75, blue:0.18, alpha:1.0)
         }
@@ -129,17 +132,26 @@ class weatherMenu: UITableViewController {
             image = UIImage(named: "snow")!
             image = image.resize(targetSize: size)
             
-        } else if weather == "clouds"  || weather == "partly-cloudy-day"  {
+        } else if weather == "cloudy"  {
             image = UIImage(named: "cloud")!
             image = image.resize(targetSize: size)
             
-        } else if weather == "partly-cloudy-day" || weather == "partly-cloudy-night" {
+        } else if weather == "partly-cloudy-day" {
             image = UIImage(named: "partlyCloudy")!
             image = image.resize(targetSize: size)
             
-        }else if weather == "danger" {
+        } else if weather == "partly-cloudy-night" {
+            image = UIImage(named: "CloudyNight")!
+            image = image.resize(targetSize: size)
+            
+        } else if weather == "danger" {
             image = UIImage(named: "danger")!
             image = image.resize(targetSize: size)
+            
+        } else if weather == "clear-night" {
+            image = UIImage(named: "Night")!
+            image = image.resize(targetSize: size)
+            
         }
         else {
             image = UIImage(named: "sun")!
