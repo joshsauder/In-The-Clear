@@ -71,6 +71,12 @@ extension ViewController {
 
     }
     
+    /**
+     Configures the on map buttons
+     - parameters:
+        - button: The UIButton that is configured
+        - imageString: The image name
+    */
     func configureMapButtons(button: UIButton, imageString: String){
         
         button.isHidden = true

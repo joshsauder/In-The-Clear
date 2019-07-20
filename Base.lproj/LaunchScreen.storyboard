@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
-    <device id="retina6_5" orientation="portrait">
+    <device id="ipad10_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -15,17 +15,17 @@
             <objects>
                 <viewController id="01J-lp-oVM" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="834" height="1112"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="InTheClear.png" translatesAutoresizingMaskIntoConstraints="NO" id="ezd-lR-0Jd">
-                                <rect key="frame" x="20" y="100.00000000000001" width="374" height="216.33333333333337"/>
+                                <rect key="frame" x="20" y="76" width="794" height="477.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="ezd-lR-0Jd" secondAttribute="height" multiplier="156:97" constant="26.175257731958766" id="pjs-us-6qF"/>
                                 </constraints>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="newLogo.png" translatesAutoresizingMaskIntoConstraints="NO" id="vjH-ED-fQi">
-                                <rect key="frame" x="50" y="735.66666666666663" width="314" height="106.33333333333337"/>
+                                <rect key="frame" x="50" y="844" width="734" height="248"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="vjH-ED-fQi" secondAttribute="height" multiplier="275:93" id="EpD-2E-QA4"/>
                                 </constraints>

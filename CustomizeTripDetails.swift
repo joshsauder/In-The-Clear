@@ -23,6 +23,9 @@ class CustomizeTripDetails: UIViewController {
         createDatePicker()
     }
     
+    /**
+     Sets up the date picker view
+    */
     func setupView(){
         dateView.layer.cornerRadius = 10
         dateView.layer.masksToBounds = true
@@ -30,6 +33,9 @@ class CustomizeTripDetails: UIViewController {
         
     }
     
+    /**
+     Configure the date picker
+    */
     func createDatePicker(){
         
         datePicker.datePickerMode = UIDatePickerMode.dateAndTime
@@ -41,11 +47,23 @@ class CustomizeTripDetails: UIViewController {
         datePicker.maximumDate = maxDate
     }
     
+    /**
+     On submit, set date to the selected date and dismiss the view.
+     
+     - parameters:
+        - sender: The UIBUtton that is tapped
+    */
     @IBAction func onSubmit(_ sender: UIButton) {
         date?(datePicker.date)
         dismiss(animated: true)
     }
     
+    /**
+     On cancel, dismiss the view.
+     
+     - parameters:
+        - sender: The UIBUtton that is tapped
+     */
     @IBAction func onCancel(_ sender: UIButton) {
         dismiss(animated: true)
     }

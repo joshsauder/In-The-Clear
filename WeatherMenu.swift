@@ -152,8 +152,7 @@ class weatherMenu: UITableViewController {
             image = UIImage(named: "Night")!
             image = image.resize(targetSize: size)
             
-        }
-        else {
+        } else {
             image = UIImage(named: "sun")!
             image = image.resize(targetSize: size)
         }
