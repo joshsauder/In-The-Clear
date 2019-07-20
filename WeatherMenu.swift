@@ -129,7 +129,7 @@ class weatherMenu: UITableViewController {
             image = UIImage(named: "snow")!
             image = image.resize(targetSize: size)
             
-        } else if weather == "Clouds"  || weather == "partly-cloudy-day" || weather == "partly-cloudy-night" {
+        } else if weather == "Clouds"  || weather == "partly-cloudy-day"  {
             image = UIImage(named: "cloud")!
             image = image.resize(targetSize: size)
             
