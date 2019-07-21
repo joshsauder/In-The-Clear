@@ -29,6 +29,7 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
     
     @IBOutlet weak var weatherList: UIButton!
     @IBOutlet weak var timeLabel: UILabel!
+    @IBOutlet weak var myLocationButton: UIButton!
     @IBOutlet weak var openGoogleMaps: UIButton!
     @IBOutlet weak var setTime: UIButton!
     @IBOutlet weak var mapKey: UIImageView!
@@ -53,7 +54,6 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
         
         //add buttons and labels to UIView
         addButtonsAndLables()
-        
         //set up mapkey
         mapkeySetup()
         //make sure user has enabled current location
@@ -71,7 +71,7 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
         mapView.delegate = self
 
         mapView?.isMyLocationEnabled = true
-        mapView.settings.myLocationButton = true
+        myLocationButton.isHidden = false
         mapView.settings.compassButton = true
         mapView.settings.zoomGestures = true
     }
@@ -177,7 +177,25 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
     }
     
     /**
+     Moves map camera to current location when location button is clicked
+     - parameters:
+        - sender: the UIButton being interacted with
+    */
+    @IBAction func moveToCurrentLocation(_ sender: UIButton) {
+        //Since location is not always enabled
+        guard let lat = self.mapView.myLocation?.coordinate.latitude,
+              let long = self.mapView.myLocation?.coordinate.longitude
+        else {return}
+            
+        let camera = GMSCameraPosition.camera(withLatitude: lat ,longitude: long , zoom: 11.0)
+        self.mapView.animate(to: camera)
+        
+    }
+    
+    /**
      Controls action when start location button is tapped
+     - parameters:
+        - sender: the UIButton being interacted with
     */
     @IBAction func originStartLocation(_ sender: UIButton) {
         //open GMSAutocomplete controllerand present
@@ -195,6 +213,8 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
     
     /**
      Controls action when destination location button is tapped
+     - parameters:
+        - sender: the UIButton being interacted with
      */
     @IBAction func openDestinationLocation(_ sender: UIButton){
         //open GMSAutocomplete controllerand present
@@ -211,6 +231,8 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
     }
     /*
      Controls when open maps button is clicked
+     - parameters:
+        - sender: the UIButton being interacted with
     */
     @IBAction func openGoogleMaps(_ sender: UIButton){
         //if user has Google Maps App downloaded, open in Google Maps app
@@ -233,6 +255,8 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
     
     /**
      Shows the time popup when the start and end locations are given
+     - parameters:
+        - sender: the UIButton being interacted with
     */
     func showTimePopupInitially(){
         let tripDetailVC = storyboard?.instantiateViewController(withIdentifier: "customizeTripDetails") as! CustomizeTripDetails

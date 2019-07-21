@@ -279,7 +279,7 @@ extension ViewController {
             colorSeg = GMSStyleSpan(style: pathColorSegs.STORMS, segments: Double(numberSegs))
         } else if condition == "snow" || condition == "sleet" {
             colorSeg = GMSStyleSpan(style: pathColorSegs.SNOW, segments: Double(numberSegs))
-        } else if condition == "clouds" || condition == "partly-cloudy-day" || condition == "partly-cloudy-night" {
+        } else if condition == "cloudy" || condition == "partly-cloudy-day" || condition == "partly-cloudy-night" {
             colorSeg = GMSStyleSpan(style: pathColorSegs.CLOUDS, segments: Double(numberSegs))
         } else {
             colorSeg = GMSStyleSpan(style: pathColorSegs.SUN, segments: Double(numberSegs))

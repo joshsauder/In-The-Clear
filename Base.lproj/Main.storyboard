@@ -106,6 +106,13 @@
                                     <action selector="showTimePopup:" destination="BYZ-38-t0r" eventType="touchUpInside" id="HAC-mg-myC"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BuA-yv-0eC" userLabel="My Location Button">
+                                <rect key="frame" x="347" y="772" width="57" height="57"/>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="moveToCurrentLocation:" destination="BYZ-38-t0r" eventType="touchUpInside" id="CfC-iS-WiV"/>
+                                </connections>
+                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fEc-Uw-77w">
                                 <rect key="frame" x="347" y="705" width="57" height="57"/>
                                 <constraints>
@@ -121,7 +128,9 @@
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="VPO-Up-Lz2" secondAttribute="bottom" constant="-6" id="0kw-Z4-25d"/>
+                            <constraint firstItem="VPO-Up-Lz2" firstAttribute="top" secondItem="BuA-yv-0eC" secondAttribute="bottom" constant="12" id="3oj-ld-kzK"/>
                             <constraint firstItem="fEc-Uw-77w" firstAttribute="top" secondItem="iRQ-nk-2T0" secondAttribute="bottom" constant="10" id="4mE-6c-Hns"/>
+                            <constraint firstItem="BuA-yv-0eC" firstAttribute="trailing" secondItem="fEc-Uw-77w" secondAttribute="trailing" id="7cK-E0-fwU"/>
                             <constraint firstItem="VPO-Up-Lz2" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="AbM-Yo-l5e"/>
                             <constraint firstItem="cBk-DE-G9b" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="110" id="CSI-2o-Z9k"/>
                             <constraint firstItem="iRQ-nk-2T0" firstAttribute="leading" secondItem="fEc-Uw-77w" secondAttribute="leading" id="Dtq-Qc-mBG"/>
@@ -129,8 +138,10 @@
                             <constraint firstItem="VPO-Up-Lz2" firstAttribute="top" secondItem="cBk-DE-G9b" secondAttribute="bottom" constant="17" id="Gmh-Ua-ShG"/>
                             <constraint firstItem="MeT-bN-U9A" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="OqD-uu-U0E"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="cBk-DE-G9b" secondAttribute="trailing" constant="110" id="QvO-2b-Tpb"/>
+                            <constraint firstItem="BuA-yv-0eC" firstAttribute="leading" secondItem="fEc-Uw-77w" secondAttribute="leading" id="Swq-uT-n1b"/>
                             <constraint firstItem="5FJ-qe-Fmz" firstAttribute="leading" secondItem="MeT-bN-U9A" secondAttribute="leading" id="V6C-4n-XFL"/>
                             <constraint firstItem="VPO-Up-Lz2" firstAttribute="top" secondItem="fEc-Uw-77w" secondAttribute="bottom" constant="79" id="VdC-zy-0IP"/>
+                            <constraint firstItem="BuA-yv-0eC" firstAttribute="top" secondItem="fEc-Uw-77w" secondAttribute="bottom" constant="10" id="X9g-NR-XMN"/>
                             <constraint firstItem="VPO-Up-Lz2" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="Yc9-Bn-aaH"/>
                             <constraint firstItem="5FJ-qe-Fmz" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="dsM-44-Xan"/>
                             <constraint firstItem="5FJ-qe-Fmz" firstAttribute="trailing" secondItem="MeT-bN-U9A" secondAttribute="trailing" id="eeY-xD-sQb"/>
@@ -148,6 +159,7 @@
                         <outlet property="destinationLocation" destination="epA-ie-vQH" id="o8T-Sf-s82"/>
                         <outlet property="mapKey" destination="cBk-DE-G9b" id="QNI-je-CYP"/>
                         <outlet property="mapView" destination="MeT-bN-U9A" id="GKc-Kf-vIJ"/>
+                        <outlet property="myLocationButton" destination="BuA-yv-0eC" id="bDj-5j-8hg"/>
                         <outlet property="openGoogleMaps" destination="fEc-Uw-77w" id="CSx-dX-cHn"/>
                         <outlet property="setTime" destination="iRQ-nk-2T0" id="Y8g-In-LHF"/>
                         <outlet property="startButton" destination="46b-9j-VGI" id="ccg-zZ-jkl"/>

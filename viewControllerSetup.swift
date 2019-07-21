@@ -76,8 +76,9 @@ extension ViewController {
      - parameters:
         - button: The UIButton that is configured
         - imageString: The image name
+        - size: Size of image
     */
-    func configureMapButtons(button: UIButton, imageString: String){
+    func configureMapButtons(button: UIButton, imageString: String, size: Int){
         
         button.isHidden = true
         button.backgroundColor = UIColor(white: 1, alpha: 1)
@@ -87,7 +88,7 @@ extension ViewController {
         //Create Attachment
         let imageAttachment =  NSTextAttachment()
         imageAttachment.image = UIImage(named: imageString)
-        imageAttachment.bounds = CGRect(x: 0, y: -5, width: 30, height: 30)
+        imageAttachment.bounds = CGRect(x: 0, y: -5, width: size, height: size)
         
         //Create string with attachment
         let attachmentString = NSAttributedString(attachment: imageAttachment)
@@ -110,12 +111,13 @@ extension ViewController {
     }
     
     /**
-     Sets up Google Maps and Set Time buttons
+     Sets up Google Maps, Set Time, and location buttons
     */
     func mapButtonsSetup(){
         
-        configureMapButtons(button: openGoogleMaps, imageString: "icons8-google-maps-48")
-        configureMapButtons(button: setTime, imageString: "time")
+        configureMapButtons(button: openGoogleMaps, imageString: "icons8-google-maps-48", size: 30)
+        configureMapButtons(button: setTime, imageString: "time", size: 30)
+        configureMapButtons(button: myLocationButton, imageString: "baseline_my_location_black_36dp", size: 22)
     }
 
     /**
