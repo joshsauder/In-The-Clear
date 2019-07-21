@@ -161,6 +161,7 @@
                         <outlet property="mapView" destination="MeT-bN-U9A" id="GKc-Kf-vIJ"/>
                         <outlet property="myLocationButton" destination="BuA-yv-0eC" id="bDj-5j-8hg"/>
                         <outlet property="openGoogleMaps" destination="fEc-Uw-77w" id="CSx-dX-cHn"/>
+                        <outlet property="openMapsBottomContraints" destination="VdC-zy-0IP" id="zgr-uh-2ab"/>
                         <outlet property="setTime" destination="iRQ-nk-2T0" id="Y8g-In-LHF"/>
                         <outlet property="startButton" destination="46b-9j-VGI" id="ccg-zZ-jkl"/>
                         <outlet property="startLocation" destination="NRT-9p-hDV" id="aAr-az-4Uy"/>

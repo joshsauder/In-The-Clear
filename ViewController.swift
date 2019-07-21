@@ -40,6 +40,8 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
     var markerStart: GMSMarker?
     var MarkerEnd: GMSMarker?
     
+    @IBOutlet weak var openMapsBottomContraints: NSLayoutConstraint!
+    
     var locationStart = CLLocation()
     var locationEnd = CLLocation()
     
@@ -69,9 +71,8 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
         let camera = GMSCameraPosition.camera(withLatitude: -33.86, longitude: 151, zoom: 11.0)
         mapView.camera = camera
         mapView.delegate = self
-
         mapView?.isMyLocationEnabled = true
-        myLocationButton.isHidden = false
+        //myLocationButton.isHidden = false
         mapView.settings.compassButton = true
         mapView.settings.zoomGestures = true
     }
@@ -86,6 +87,19 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
         locationManager.startUpdatingLocation()
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.startMonitoringSignificantLocationChanges()
+        
+        //if location services are not enabled google maps and set time buttons down
+        //else show location button
+        if CLLocationManager.locationServicesEnabled() {
+            switch CLLocationManager.authorizationStatus() {
+            case .notDetermined, .restricted, .denied:
+                openMapsBottomContraints.constant = 10
+            case .authorizedAlways, .authorizedWhenInUse:
+                myLocationButton.isHidden = false
+            }
+        } else {
+            openMapsBottomContraints.constant = 10
+        }
     }
     
     /**
