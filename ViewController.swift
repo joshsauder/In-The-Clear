@@ -87,19 +87,7 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
         locationManager.startUpdatingLocation()
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.startMonitoringSignificantLocationChanges()
-        
-        //if location services are not enabled google maps and set time buttons down
-        //else show location button
-        if CLLocationManager.locationServicesEnabled() {
-            switch CLLocationManager.authorizationStatus() {
-            case .notDetermined, .restricted, .denied:
-                openMapsBottomContraints.constant = 10
-            case .authorizedAlways, .authorizedWhenInUse:
-                myLocationButton.isHidden = false
-            }
-        } else {
-            openMapsBottomContraints.constant = 10
-        }
+
     }
     
     /**
@@ -127,6 +115,20 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
         //set start to current location
         locationStart = location!
         startLocation.text = "Current Location"
+        
+        //if location services are not enabled google maps and set time buttons down
+        //else show location button
+        if CLLocationManager.locationServicesEnabled() {
+            switch CLLocationManager.authorizationStatus() {
+            case .notDetermined, .restricted, .denied:
+                openMapsBottomContraints.constant = 10
+            case .authorizedAlways, .authorizedWhenInUse:
+                myLocationButton.isHidden = false
+                openMapsBottomContraints.constant = 77
+            }
+        } else {
+            openMapsBottomContraints.constant = 10
+        }
 
         
         self.locationManager.stopUpdatingLocation()

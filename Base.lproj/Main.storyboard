@@ -97,7 +97,7 @@
                                 <size key="shadowOffset" width="0.0" height="0.0"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iRQ-nk-2T0">
-                                <rect key="frame" x="347" y="638" width="57" height="57"/>
+                                <rect key="frame" x="347" y="640" width="57" height="57"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="57" id="oV8-HK-nub"/>
                                 </constraints>
@@ -107,14 +107,14 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BuA-yv-0eC" userLabel="My Location Button">
-                                <rect key="frame" x="347" y="772" width="57" height="57"/>
+                                <rect key="frame" x="347" y="774" width="57" height="55"/>
                                 <state key="normal" title="Button"/>
                                 <connections>
                                     <action selector="moveToCurrentLocation:" destination="BYZ-38-t0r" eventType="touchUpInside" id="CfC-iS-WiV"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fEc-Uw-77w">
-                                <rect key="frame" x="347" y="705" width="57" height="57"/>
+                                <rect key="frame" x="347" y="707" width="57" height="57"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="57" id="a3g-CX-Xkd"/>
                                     <constraint firstAttribute="height" constant="57" id="pLT-bl-2uW"/>
@@ -140,7 +140,7 @@
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="cBk-DE-G9b" secondAttribute="trailing" constant="110" id="QvO-2b-Tpb"/>
                             <constraint firstItem="BuA-yv-0eC" firstAttribute="leading" secondItem="fEc-Uw-77w" secondAttribute="leading" id="Swq-uT-n1b"/>
                             <constraint firstItem="5FJ-qe-Fmz" firstAttribute="leading" secondItem="MeT-bN-U9A" secondAttribute="leading" id="V6C-4n-XFL"/>
-                            <constraint firstItem="VPO-Up-Lz2" firstAttribute="top" secondItem="fEc-Uw-77w" secondAttribute="bottom" constant="79" id="VdC-zy-0IP"/>
+                            <constraint firstItem="VPO-Up-Lz2" firstAttribute="top" secondItem="fEc-Uw-77w" secondAttribute="bottom" constant="77" id="VdC-zy-0IP"/>
                             <constraint firstItem="BuA-yv-0eC" firstAttribute="top" secondItem="fEc-Uw-77w" secondAttribute="bottom" constant="10" id="X9g-NR-XMN"/>
                             <constraint firstItem="VPO-Up-Lz2" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="Yc9-Bn-aaH"/>
                             <constraint firstItem="5FJ-qe-Fmz" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="dsM-44-Xan"/>
