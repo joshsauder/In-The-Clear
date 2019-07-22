@@ -14,6 +14,9 @@
 		190E4414210BF951005160C7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 190E4412210BF951005160C7 /* Main.storyboard */; };
 		190E4416210BF958005160C7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 190E4415210BF958005160C7 /* Assets.xcassets */; };
 		190E4419210BF958005160C7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 190E4417210BF958005160C7 /* LaunchScreen.storyboard */; };
+		191E3F9C22E2A08200F0893D /* CloudyNight.png in Resources */ = {isa = PBXBuildFile; fileRef = 191E3F9A22E2A08200F0893D /* CloudyNight.png */; };
+		191E3F9D22E2A08200F0893D /* Night.png in Resources */ = {isa = PBXBuildFile; fileRef = 191E3F9B22E2A08200F0893D /* Night.png */; };
+		191E3F9F22E3FADE00F0893D /* baseline_my_location_black_36dp.png in Resources */ = {isa = PBXBuildFile; fileRef = 191E3F9E22E3FADE00F0893D /* baseline_my_location_black_36dp.png */; };
 		19294C922252FEA600D09673 /* icons8-google-maps-48.png in Resources */ = {isa = PBXBuildFile; fileRef = 19294C912252FEA600D09673 /* icons8-google-maps-48.png */; };
 		1939B5E322CADAD600E63F32 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1939B5E222CADAD600E63F32 /* Constants.swift */; };
 		1939B5E922D0247000E63F32 /* partlyCloudy.png in Resources */ = {isa = PBXBuildFile; fileRef = 1939B5E622D0247000E63F32 /* partlyCloudy.png */; };
@@ -60,6 +63,9 @@
 		190E4415210BF958005160C7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		190E4418210BF958005160C7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		190E441A210BF958005160C7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		191E3F9A22E2A08200F0893D /* CloudyNight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CloudyNight.png; sourceTree = "<group>"; };
+		191E3F9B22E2A08200F0893D /* Night.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Night.png; sourceTree = "<group>"; };
+		191E3F9E22E3FADE00F0893D /* baseline_my_location_black_36dp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = baseline_my_location_black_36dp.png; sourceTree = "<group>"; };
 		19294C912252FEA600D09673 /* icons8-google-maps-48.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icons8-google-maps-48.png"; sourceTree = "<group>"; };
 		1939B5E222CADAD600E63F32 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		1939B5E622D0247000E63F32 /* partlyCloudy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = partlyCloudy.png; sourceTree = "<group>"; };
@@ -160,16 +166,19 @@
 		19C914C52184B701002EA1DB /* supportingFiles */ = {
 			isa = PBXGroup;
 			children = (
-				193AAD3222DFFD0100C6C6DA /* time.png */,
+				191E3F9A22E2A08200F0893D /* CloudyNight.png */,
+				191E3F9B22E2A08200F0893D /* Night.png */,
 				1939B5ED22D0248900E63F32 /* cloud.png */,
 				1939B5EC22D0248900E63F32 /* rain.png */,
 				1939B5E622D0247000E63F32 /* partlyCloudy.png */,
 				1939B5E722D0247000E63F32 /* snow.png */,
 				1939B5E822D0247000E63F32 /* sun.png */,
 				1939B5F222D4180000E63F32 /* danger.png */,
+				193AAD3222DFFD0100C6C6DA /* time.png */,
+				19294C912252FEA600D09673 /* icons8-google-maps-48.png */,
+				191E3F9E22E3FADE00F0893D /* baseline_my_location_black_36dp.png */,
 				1939B5F422D41FB700E63F32 /* mapKey.png */,
 				19B03A3122792CDA009979CB /* newLogo.png */,
-				19294C912252FEA600D09673 /* icons8-google-maps-48.png */,
 				19017515223F3E3E00B6793A /* InTheClear.png */,
 			);
 			path = supportingFiles;
@@ -304,8 +313,11 @@
 				1939B5EB22D0247000E63F32 /* sun.png in Resources */,
 				1939B5F022D0248900E63F32 /* cloud.png in Resources */,
 				1939B5EA22D0247000E63F32 /* snow.png in Resources */,
+				191E3F9D22E2A08200F0893D /* Night.png in Resources */,
+				191E3F9C22E2A08200F0893D /* CloudyNight.png in Resources */,
 				1939B5F322D4180000E63F32 /* danger.png in Resources */,
 				190E4419210BF958005160C7 /* LaunchScreen.storyboard in Resources */,
+				191E3F9F22E3FADE00F0893D /* baseline_my_location_black_36dp.png in Resources */,
 				1939B5EF22D0248900E63F32 /* rain.png in Resources */,
 				190E4416210BF958005160C7 /* Assets.xcassets in Resources */,
 				19B03A3222792CDA009979CB /* newLogo.png in Resources */,
