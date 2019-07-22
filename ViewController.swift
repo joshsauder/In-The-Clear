@@ -300,8 +300,10 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
     
     /**
     Calls createLine to add polyline to map and also enables the weatherList button and time label at bottom
+     - parameters:
+        - date: Planned departure date
      */
-    func showDirection(date: Date? = Date()){
+    func showDirection(date: Date){
         
         //disable location buttons
         startButton.isEnabled = false
@@ -319,7 +321,7 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
         showSpinner(view: view)
         
         //show line
-        self.createLine(startLocation: locationStart, endLocation: locationEnd, date: date!) { time, distance in
+        self.createLine(startLocation: locationStart, endLocation: locationEnd, date: date) { time, distance in
             
             //order from start location to finish
             self.cities.reverse()

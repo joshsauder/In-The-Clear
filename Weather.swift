@@ -49,6 +49,7 @@ extension ViewController {
      
      - parameters:
         - steps: The directions JSON array
+        - date: Planned departure date
      - returns: Two sets of parameters for the two AWS Lambda functions
     */
     func createParamters(steps: [JSON], date: Date) -> (Parameters, Parameters){
@@ -91,6 +92,7 @@ extension ViewController {
      - parameters:
         - startLocation: The starting location
         - endLocation: The destination location
+        - date: The planned departere date
         - completion: Upon calling the service, return the total time and distance strings
     */
     func createLine(startLocation: CLLocation, endLocation: CLLocation, date: Date, completion: @escaping (String, String) -> ()) {
