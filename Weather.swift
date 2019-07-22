@@ -115,7 +115,7 @@ extension ViewController {
                 let steps = stepsEval["steps"].arrayValue
                 
                 //prevent routes that are too long too handle
-                if stepsEval["duration"]["value"].intValue < 147600 {
+                if stepsEval["duration"]["value"].intValue < 216000 {
                 //remove any existing polylines
                     self.polylineArray.forEach { $0.map = nil }
 
@@ -157,7 +157,7 @@ extension ViewController {
                 }
                 else{
                     let title = "Invalid Route"
-                    let message = "Sorry! At this time, In The Clear does not support routes longer than 51 hours."
+                    let message = "Sorry! At this time, In The Clear does not support routes longer than 60 hours."
                     
                     self.alertTool(title: title, message: message)
                 }
