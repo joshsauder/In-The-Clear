@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import CoreLocation
 
 extension ViewController {
     
@@ -150,6 +151,26 @@ extension ViewController {
         self.setTime.isHidden = false
         self.mapKey.isHidden = false
         
+    }
+    
+    /**
+    Shows location button, if enabled.
+     Else, moves Google maps button and time button down
+    */
+    func showLocationButton(){
+        //if location services are not enabled google maps and set time buttons down
+        //else show location button
+        if CLLocationManager.locationServicesEnabled() {
+            switch CLLocationManager.authorizationStatus() {
+            case .notDetermined, .restricted, .denied:
+                openMapsBottomContraints.constant = 10
+            case .authorizedAlways, .authorizedWhenInUse:
+                myLocationButton.isHidden = false
+                openMapsBottomContraints.constant = 77
+            }
+        } else {
+            openMapsBottomContraints.constant = 10
+        }
     }
     /**
      Displays a UIAlert

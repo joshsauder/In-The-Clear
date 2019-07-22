@@ -75,6 +75,9 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
         //myLocationButton.isHidden = false
         mapView.settings.compassButton = true
         mapView.settings.zoomGestures = true
+        
+        //show location button, if enabled
+        showLocationButton()
     }
     
     /**
@@ -87,6 +90,9 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
         locationManager.startUpdatingLocation()
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.startMonitoringSignificantLocationChanges()
+        
+        //show location button, if enabled
+        showLocationButton()
 
     }
     
