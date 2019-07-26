@@ -17,10 +17,12 @@ enum Location {
     case destinationLocation
 }
 
+
 class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDelegate {
     
     var locationManager = CLLocationManager()
     var locationSelected = Location.startLocation
+    @IBOutlet weak var mapView: GMSMapView!
     
     @IBOutlet weak var startLocation: UITextField!
     @IBOutlet weak var destinationLocation: UITextField!
@@ -33,14 +35,14 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
     @IBOutlet weak var openGoogleMaps: UIButton!
     @IBOutlet weak var setTime: UIButton!
     @IBOutlet weak var mapKey: UIImageView!
+    
     var spinner: UIView?
     
-    @IBOutlet weak var mapView: GMSMapView!
+    @IBOutlet weak var openMapsBottomContraints: NSLayoutConstraint!
+    
     var polylineArray = [GMSPolyline]()
     var markerStart: GMSMarker?
     var MarkerEnd: GMSMarker?
-    
-    @IBOutlet weak var openMapsBottomContraints: NSLayoutConstraint!
     
     var locationStart = CLLocation()
     var locationEnd = CLLocation()

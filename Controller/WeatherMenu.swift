@@ -160,22 +160,3 @@ class weatherMenu: UITableViewController {
     }
 
 }
-
-extension UIImage {
-    //needed to resize each UIImage to UIImageView size
-    func resize(targetSize: CGSize) -> UIImage {
-        return UIGraphicsImageRenderer(size:targetSize).image { _ in
-            self.draw(in: CGRect(origin: .zero, size: targetSize))
-        }
-    }
-    
-}
-
-extension UIImageView {
-    //sets each image to a white color
-    func setImageColor(color: UIColor) {
-        let templateImage = self.image?.withRenderingMode(.alwaysTemplate)
-        self.image = templateImage
-        self.tintColor = color
-    }
-}
