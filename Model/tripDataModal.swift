@@ -24,8 +24,10 @@ class tripDataModal {
         self.conditionDescription = []
     }
     
+    /**
+     Removes all values from trip value arrays
+    */
     func removeAll(){
-        //removes all from trip data arrays
         times.removeAll()
         conditions.removeAll()
         cities.removeAll()
@@ -33,8 +35,10 @@ class tripDataModal {
         conditionDescription.removeAll()
     }
     
+    /**
+     Reverses all arrays so the order is start to finish
+    */
     func reverse(){
-        //order from start location to finish
         cities.reverse()
         conditions.reverse()
         highTemps.reverse()

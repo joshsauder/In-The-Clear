@@ -54,6 +54,17 @@ extension ViewController {
     }
     
     /**
+     Disables all input buttons when loading a new route
+    */
+    func disableInputButtons(){
+        //disable location buttons
+        startButton.isEnabled = false
+        destinationButton.isEnabled = false
+        weatherList.isEnabled = false
+        weatherList.alpha = 0.5
+    }
+    
+    /**
      Sets up time and distance label
     */
     func timeLabelSetup(){

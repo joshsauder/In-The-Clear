@@ -310,11 +310,7 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
      */
     func showDirection(date: Date){
         
-        //disable location buttons
-        startButton.isEnabled = false
-        destinationButton.isEnabled = false
-        weatherList.isEnabled = false
-        weatherList.alpha = 0.5
+        disableInputButtons()
         
         //clear weather arrays
         tripData.removeAll()
