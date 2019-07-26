@@ -282,7 +282,8 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
         tripDetailVC.modalPresentationStyle = .overCurrentContext
         self.present(tripDetailVC, animated: true, completion: nil)
         tripDetailVC.date = { (dateReturned, cancel) -> () in
-            self.showDirection(date: dateReturned)
+            self.tripData.requestedDate = dateReturned
+            self.showDirection()
         }
     }
     
@@ -298,17 +299,16 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
         tripDetailVC.date = { (dateReturned, cancel) -> () in
             //if cancel is not clicked, return updated results
             if !cancel {
-                self.showDirection(date: dateReturned)
+                self.tripData.requestedDate = dateReturned
+                self.showDirection()
             }
         }
     }
     
     /**
     Calls createLine to add polyline to map and also enables the weatherList button and time label at bottom
-     - parameters:
-        - date: Planned departure date
      */
-    func showDirection(date: Date){
+    func showDirection(){
         
         disableInputButtons()
         
@@ -318,7 +318,7 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
         showSpinner(view: view)
         
         //show line
-        self.createLine(startLocation: locationStart, endLocation: locationEnd, date: date) { time, distance in
+        self.createLine(startLocation: locationStart, endLocation: locationEnd) { time, distance in
             
             self.tripData.reverse()
             

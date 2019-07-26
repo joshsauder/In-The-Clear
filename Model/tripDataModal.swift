@@ -15,6 +15,7 @@ class tripDataModal {
     var cities: [String] = []
     var highTemps: [Float] = []
     var conditionDescription: [String] = []
+    var requestedDate: Date
     
     init() {
         self.times = []
@@ -22,6 +23,7 @@ class tripDataModal {
         self.cities = []
         self.highTemps = []
         self.conditionDescription = []
+        self.requestedDate = Date()
     }
     
     /**
