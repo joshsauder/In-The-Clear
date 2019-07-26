@@ -37,6 +37,7 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
     @IBOutlet weak var mapKey: UIImageView!
     
     var spinner: UIView?
+    var tripData = tripDataModal()
     
     @IBOutlet weak var openMapsBottomContraints: NSLayoutConstraint!
     
@@ -46,12 +47,6 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
     
     var locationStart = CLLocation()
     var locationEnd = CLLocation()
-    
-    var times: [Date] = []
-    var conditions: [String] = []
-    var cities: [String] = []
-    var highTemps: [Float] = []
-    var conditionDescription: [String] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -322,22 +317,14 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
         weatherList.alpha = 0.5
         
         //clear weather arrays
-        cities.removeAll()
-        highTemps.removeAll()
-        conditions.removeAll()
-        conditionDescription.removeAll()
-        times.removeAll()
+        tripData.removeAll()
         mapView.clear()
         showSpinner(view: view)
         
         //show line
         self.createLine(startLocation: locationStart, endLocation: locationEnd, date: date) { time, distance in
             
-            //order from start location to finish
-            self.cities.reverse()
-            self.conditions.reverse()
-            self.highTemps.reverse()
-            self.conditionDescription.reverse()
+            self.tripData.reverse()
             
             //enable and show time/distance label, Google Maps button, and Weather List Button
             self.showButtonsAndLabels(time: time, distance: distance)
@@ -346,11 +333,11 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
             self.destinationButton.isEnabled = true
             
             //show destination marker on map
-            self.MarkerEnd = self.createMarker(titleMarker: self.cities[0], latitude: self.locationEnd.coordinate.latitude, longitude: self.locationEnd.coordinate.longitude)
+            self.MarkerEnd = self.createMarker(titleMarker: self.tripData.cities[0], latitude: self.locationEnd.coordinate.latitude, longitude: self.locationEnd.coordinate.longitude)
             
             //show start location maker only if not using current location
             if self.startLocation.text != "Current Location" {
-                self.markerStart = self.createMarker(titleMarker: self.cities[self.cities.count - 1], latitude: self.locationStart.coordinate.latitude, longitude: self.locationStart.coordinate.longitude)
+                self.markerStart = self.createMarker(titleMarker: self.tripData.cities[self.tripData.cities.count - 1], latitude: self.locationStart.coordinate.latitude, longitude: self.locationStart.coordinate.longitude)
             }
             
             self.stopSpinner()
@@ -384,11 +371,11 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
             //set up weatherDataVals array
             var weatherDataVals: [weatherData.Entry] = []
             //create counter equal to the number of cities in city array
-            var i = cities.count - 1
+            var i = tripData.cities.count - 1
             var citiesUsed: [String] = []
             while i >= 0 {
                 //Prevents cities from being listed in weather table multiple times
-                let city = cities[i]
+                let city = tripData.cities[i]
                 if !citiesUsed.contains(city){
                     citiesUsed.append(city)
                     //create weatherData entry
@@ -396,9 +383,9 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
                     entry.city = city
                     
                     //get weathers, temperature, and condition
-                    entry.weather = conditions[i]
-                    entry.highTemp = highTemps[i]
-                    entry.condition = conditionDescription[i]
+                    entry.weather = tripData.conditions[i]
+                    entry.highTemp = tripData.highTemps[i]
+                    entry.condition = tripData.conditionDescription[i]
                     weatherDataVals.append(entry)
                 }
                 //decrement counter

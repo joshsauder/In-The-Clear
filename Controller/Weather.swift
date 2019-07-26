@@ -144,7 +144,7 @@ extension ViewController {
                     }
                     //color the polyline and on completion show polyline on map
                     self.colorPath(line: polyline, steps: steps, path: path!, parameters: weatherParam) {
-                        if(self.conditions.count > 0){
+                        if(self.tripData.conditions.count > 0){
                             polyline.map = self.mapView
                             self.polylineArray.append(polyline)
                             self.mapView.animate(with: GMSCameraUpdate.fit(GMSCoordinateBounds(path: polyline.path!), withPadding: 95))
@@ -220,13 +220,13 @@ extension ViewController {
                 //append each value to corresponding array
                 colorSegs.append(self.determineColorSeg(condition: condition, numberSegs: numSegs))
                 if item["Severe"] as! Bool {
-                    self.conditions.append("danger")
+                    self.tripData.conditions.append("danger")
                 } else{
-                    self.conditions.append(condition)
+                    self.tripData.conditions.append(condition)
                 }
-                self.conditionDescription.append(item["Description"] as! String)
+                self.tripData.conditionDescription.append(item["Description"] as! String)
                 let temp = item["Temperature"] as! NSNumber
-                self.highTemps.append(temp.floatValue)
+                self.tripData.highTemps.append(temp.floatValue)
             }
             //return colorsegs on completion
             completion(colorSegs)

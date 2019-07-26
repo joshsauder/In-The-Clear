@@ -67,7 +67,7 @@ extension ViewController {
                     break;
                 }
                 //append response array to cities array
-                self.cities.append(contentsOf: jsonData)
+                self.tripData.cities.append(contentsOf: jsonData)
                 completion()
                 
             case .failure(let error):
