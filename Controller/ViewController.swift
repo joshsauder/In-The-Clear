@@ -22,6 +22,9 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
     
     var locationManager = CLLocationManager()
     var locationSelected = Location.startLocation
+    var locationStart = CLLocation()
+    var locationEnd = CLLocation()
+    
     @IBOutlet weak var mapView: GMSMapView!
     
     @IBOutlet weak var startLocation: UITextField!
@@ -36,17 +39,14 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
     @IBOutlet weak var setTime: UIButton!
     @IBOutlet weak var mapKey: UIImageView!
     
+    @IBOutlet weak var openMapsBottomContraints: NSLayoutConstraint!
+    
     var spinner: UIView?
     var tripData = tripDataModal()
-    
-    @IBOutlet weak var openMapsBottomContraints: NSLayoutConstraint!
     
     var polylineArray = [GMSPolyline]()
     var markerStart: GMSMarker?
     var MarkerEnd: GMSMarker?
-    
-    var locationStart = CLLocation()
-    var locationEnd = CLLocation()
     
     override func viewDidLoad() {
         super.viewDidLoad()
