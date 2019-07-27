@@ -9,19 +9,29 @@
 import Foundation
 import UIKit
 
-class CustomizeTripDetails: UIViewController {
-    
-    
+class CustomizeTripDetails: UIViewController, UITableViewDataSource {
+    @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var datePicker: UIDatePicker!
     @IBOutlet weak var dateView: UIView!
+    var tripDetails = tripDetailsModal().tripDetails
     var date: ((_ date: Date, _ cancel: Bool) -> ())?
-
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.dataSource = self
         setupView()
         createDatePicker()
     }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        return tripDetails.count
+    }
+    
+    
     
     /**
      Sets up the date picker view
@@ -45,6 +55,7 @@ class CustomizeTripDetails: UIViewController {
         let maxDate = Calendar.current.date(byAdding: .day, value: 3, to: Date())
         datePicker.minimumDate = minDate
         datePicker.maximumDate = maxDate
+        
     }
     
     /**
