@@ -11,7 +11,7 @@ import UIKit
 
 class TripDetailsTableViewCell: UITableViewCell {
     
-    @IBOutlet weak var CityName: UILabel!
+    @IBOutlet weak var CityName: UIButton!
     @IBOutlet weak var DatePicker: UIDatePicker!
     @IBOutlet weak var CancelButton: UIButton!
     @IBOutlet weak var MoveButton: UIButton!
@@ -39,4 +39,5 @@ class TripDetailsTableViewCell: UITableViewCell {
         DatePicker.maximumDate = maxDate
         
     }
+    
 }

@@ -8,30 +8,21 @@
 
 import Foundation
 import UIKit
+import GooglePlaces
 
-class CustomizeTripDetails: UIViewController, UITableViewDataSource {
+class CustomizeTripDetails: UIViewController {
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var datePicker: UIDatePicker!
     @IBOutlet weak var dateView: UIView!
-    var tripDetails = tripDetailsModal().tripDetails
     var date: ((_ date: Date, _ cancel: Bool) -> ())?
+    var tripDetails = tripDetailsModal().tripDetails
+    var cities: [String] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.dataSource = self
         setupView()
-        createDatePicker()
+        setAddCell()
     }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return tripDetails.count
-    }
-    
-    
     
     /**
      Sets up the date picker view
@@ -43,19 +34,45 @@ class CustomizeTripDetails: UIViewController, UITableViewDataSource {
         
     }
     
-    /**
-     Configure the date picker
-    */
-    func createDatePicker(){
+    func setAddCell(){
+        cities.insert("Add City", at: 1)
+    }
+    
+    func setButtonImage(button: UIButton, imageString: String, size: Int){
+        //Create Attachment
+        let imageAttachment =  NSTextAttachment()
+        imageAttachment.image = UIImage(named: imageString)
+        imageAttachment.bounds = CGRect(x: 0, y: -5, width: size, height: size)
         
-        datePicker.datePickerMode = UIDatePickerMode.dateAndTime
+        //Create string with attachment
+        let attachmentString = NSAttributedString(attachment: imageAttachment)
+        //Initialize mutable string
+        let completeText = NSMutableAttributedString(string: "")
+        //Add image to mutable string
+        completeText.append(attachmentString)
         
-        //set min and max date values for date picker
-        let minDate = Calendar.current.date(byAdding: .day, value: .zero, to: Date())
-        let maxDate = Calendar.current.date(byAdding: .day, value: 3, to: Date())
-        datePicker.minimumDate = minDate
-        datePicker.maximumDate = maxDate
+        //set up font
+        button.titleLabel?.textAlignment = .center
+        button.setAttributedTitle(completeText, for: .normal)
+        button.titleLabel?.adjustsFontSizeToFitWidth = true
+    }
+    
+    @objc func addButtonTapped(_ sender: UIButton){
+        insertCityToTable()
+    }
+    
+    func insertCityToTable(){
+        //open GMSAutocomplete controllerand present
+        let autoCompleteController = GMSAutocompleteViewController()
+        autoCompleteController.delegate = self
+        self.present(autoCompleteController, animated: true, completion: nil)
         
+        //TODO: need to check new value was inputed
+        let indexPath = IndexPath(row: cities.count-2, section: 0)
+        
+        tableView.beginUpdates()
+        tableView.insertRows(at: [indexPath], with: .automatic)
+        tableView.endUpdates()
     }
     
     /**
@@ -65,7 +82,6 @@ class CustomizeTripDetails: UIViewController, UITableViewDataSource {
         - sender: The UIBUtton that is tapped
     */
     @IBAction func onSubmit(_ sender: UIButton) {
-        date?(datePicker.date, false)
         dismiss(animated: true)
     }
     
@@ -79,5 +95,22 @@ class CustomizeTripDetails: UIViewController, UITableViewDataSource {
         date?(Date(), true)
         dismiss(animated: true)
     }
-    
+
 }
+
+extension CustomizeTripDetails: UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return tripDetails.count + 1
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        let tripCell = tableView.dequeueReusableCell(withIdentifier: "TripDetailsTableViewCell", for: indexPath) as! TripDetailsTableViewCell
+        tripCell.CityName.titleLabel?.text = cities[indexPath.row]
+        tripCell.CityName.addTarget(self, action: #selector(addButtonTapped(_:)), for: .touchUpInside)
+        setButtonImage(button: tripCell.MoveButton, imageString: "baseline_reorder_black_36pt_2x", size: 20)
+        return tripCell
+    }
+}
+
