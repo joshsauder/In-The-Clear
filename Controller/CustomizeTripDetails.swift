@@ -13,7 +13,6 @@ import GooglePlaces
 class CustomizeTripDetails: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var dateView: UIView!
-    var date: ((_ date: Date, _ cancel: Bool) -> ())?
     var tripDetails = tripDetailsModal().tripDetails
     var cities: [String] = []
     
@@ -24,48 +23,20 @@ class CustomizeTripDetails: UIViewController {
         setAddCell()
     }
     
-    /**
-     Sets up the date picker view
-    */
-    func setupView(){
-        dateView.layer.cornerRadius = 10
-        dateView.layer.masksToBounds = true
-        view.backgroundColor = UIColor.init(red: 0.5, green: 0.5, blue: 0.5, alpha: 0.5)
-        
-    }
     
     func setAddCell(){
         cities.insert("Add City", at: 1)
     }
     
-    func setButtonImage(button: UIButton, imageString: String, size: Int){
-        //Create Attachment
-        let imageAttachment =  NSTextAttachment()
-        imageAttachment.image = UIImage(named: imageString)
-        imageAttachment.bounds = CGRect(x: 0, y: -5, width: size, height: size)
-        
-        //Create string with attachment
-        let attachmentString = NSAttributedString(attachment: imageAttachment)
-        //Initialize mutable string
-        let completeText = NSMutableAttributedString(string: "")
-        //Add image to mutable string
-        completeText.append(attachmentString)
-        
-        //set up font
-        button.titleLabel?.textAlignment = .center
-        button.setAttributedTitle(completeText, for: .normal)
-        button.titleLabel?.adjustsFontSizeToFitWidth = true
-    }
     
     @objc func addButtonTapped(_ sender: UIButton){
-        insertCityToTable()
-    }
-    
-    func insertCityToTable(){
         //open GMSAutocomplete controllerand present
         let autoCompleteController = GMSAutocompleteViewController()
         autoCompleteController.delegate = self
         self.present(autoCompleteController, animated: true, completion: nil)
+    }
+    
+    func insertCityToTable(){
         
         //TODO: need to check new value was inputed
         let indexPath = IndexPath(row: cities.count-2, section: 0)
@@ -73,6 +44,10 @@ class CustomizeTripDetails: UIViewController {
         tableView.beginUpdates()
         tableView.insertRows(at: [indexPath], with: .automatic)
         tableView.endUpdates()
+    }
+    
+    @objc func removeButtonTapped(_ sender: UIButton){
+        
     }
     
     /**
@@ -92,7 +67,6 @@ class CustomizeTripDetails: UIViewController {
         - sender: The UIBUtton that is tapped
      */
     @IBAction func onCancel(_ sender: UIButton) {
-        date?(Date(), true)
         dismiss(animated: true)
     }
 
@@ -101,7 +75,7 @@ class CustomizeTripDetails: UIViewController {
 extension CustomizeTripDetails: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return tripDetails.count + 1
+        return cities.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -109,7 +83,9 @@ extension CustomizeTripDetails: UITableViewDataSource {
         let tripCell = tableView.dequeueReusableCell(withIdentifier: "TripDetailsTableViewCell", for: indexPath) as! TripDetailsTableViewCell
         tripCell.CityName.titleLabel?.text = cities[indexPath.row]
         tripCell.CityName.addTarget(self, action: #selector(addButtonTapped(_:)), for: .touchUpInside)
-        setButtonImage(button: tripCell.MoveButton, imageString: "baseline_reorder_black_36pt_2x", size: 20)
+        self.setButtonImage(button: tripCell.MoveButton, imageString: "baseline_reorder_black_36pt_2x", size: 20)
+        self.setButtonImage(button: tripCell.CancelButton, imageString: "baseline_clear_black_36pt_2x", size: 20)
+        tripCell.CancelButton.addTarget(self, action: #selector(removeButtonTapped(_:)), for: .touchUpInside)
         return tripCell
     }
 }

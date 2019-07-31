@@ -280,11 +280,8 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
     func showTimePopupInitially(){
         let tripDetailVC = storyboard?.instantiateViewController(withIdentifier: "customizeTripDetails") as! CustomizeTripDetails
         tripDetailVC.modalPresentationStyle = .overCurrentContext
+        tripDetailVC.cities.append(contentsOf: [startLocation.text!, destinationLocation.text!])
         self.present(tripDetailVC, animated: true, completion: nil)
-        tripDetailVC.date = { (dateReturned, cancel) -> () in
-            self.tripData.requestedDate = dateReturned
-            self.showDirection()
-        }
     }
     
     /**
@@ -295,14 +292,8 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
     @IBAction func showTimePopup(_ sender: UIButton) {
         let tripDetailVC = storyboard?.instantiateViewController(withIdentifier: "customizeTripDetails") as! CustomizeTripDetails
         tripDetailVC.modalPresentationStyle = .overCurrentContext
+        tripDetailVC.cities.append(contentsOf: [startLocation.text!, destinationLocation.text!])
         self.present(tripDetailVC, animated: true, completion: nil)
-        tripDetailVC.date = { (dateReturned, cancel) -> () in
-            //if cancel is not clicked, return updated results
-            if !cancel {
-                self.tripData.requestedDate = dateReturned
-                self.showDirection()
-            }
-        }
     }
     
     /**

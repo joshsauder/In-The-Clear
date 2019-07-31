@@ -16,6 +16,7 @@ extension CustomizeTripDetails: GMSAutocompleteViewControllerDelegate {
         //add city to cities array
         cities.append(place.name!)
         self.dismiss(animated: true, completion: nil)
+        insertCityToTable()
     }
     
     func viewController(_ viewController: GMSAutocompleteViewController, didFailAutocompleteWithError error: Error) {

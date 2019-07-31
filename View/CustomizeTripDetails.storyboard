@@ -49,7 +49,7 @@
                                         <rect key="frame" x="0.0" y="42" width="335" height="430"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <prototypes>
-                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="141" id="O2Z-77-fRu" customClass="TripDetailsTableViewCell" customModule="InTheClear" customModuleProvider="target">
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="TripDetailsTableViewCell" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="TripDetailsTableViewCell" rowHeight="141" id="O2Z-77-fRu" customClass="TripDetailsTableViewCell" customModule="InTheClear" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="28" width="335" height="141"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="O2Z-77-fRu" id="qT2-Oh-bgO">
@@ -147,10 +147,7 @@
                         <viewLayoutGuide key="safeArea" id="Brl-bT-qop"/>
                     </view>
                     <connections>
-                        <outlet property="datePicker" destination="h4g-Om-g63" id="cRH-UI-C5N"/>
-                        <outlet property="dateView" destination="gPA-Xj-wrF" id="xvp-Pi-fxg"/>
-                        <outlet property="moveButton" destination="kf8-dA-3q1" id="FTo-g1-yz9"/>
-                        <outlet property="removeButton" destination="aKt-Nq-lSt" id="4UP-YC-iWD"/>
+                        <outlet property="dateView" destination="gPA-Xj-wrF" id="He3-rZ-ISG"/>
                         <outlet property="tableView" destination="uhN-Vg-s4s" id="WvF-So-lmP"/>
                     </connections>
                 </viewController>
