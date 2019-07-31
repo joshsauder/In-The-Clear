@@ -56,6 +56,16 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="335" height="140.66666666666666"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
+                                                        <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="h4g-Om-g63">
+                                                            <rect key="frame" x="0.0" y="45" width="335" height="103"/>
+                                                            <date key="date" timeIntervalSinceReferenceDate="585883423.03691804">
+                                                                <!--2019-07-27 01:23:43 +0000-->
+                                                            </date>
+                                                        </datePicker>
+                                                        <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eZt-vl-ANW">
+                                                            <rect key="frame" x="15" y="7" width="175" height="30"/>
+                                                            <state key="normal" title="Button"/>
+                                                        </button>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kf8-dA-3q1">
                                                             <rect key="frame" x="290" y="7" width="30" height="30"/>
                                                             <constraints>
@@ -63,41 +73,20 @@
                                                             </constraints>
                                                             <state key="normal" title="Button"/>
                                                         </button>
-                                                        <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="h4g-Om-g63">
-                                                            <rect key="frame" x="0.0" y="54" width="335" height="87"/>
-                                                            <date key="date" timeIntervalSinceReferenceDate="585883423.03691804">
-                                                                <!--2019-07-27 01:23:43 +0000-->
-                                                            </date>
-                                                        </datePicker>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aKt-Nq-lSt">
-                                                            <rect key="frame" x="232" y="7" width="30" height="30"/>
-                                                            <constraints>
-                                                                <constraint firstAttribute="width" constant="30" id="ue4-Hz-Y4e"/>
-                                                            </constraints>
-                                                            <state key="normal" title="Button"/>
-                                                        </button>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eZt-vl-ANW">
-                                                            <rect key="frame" x="15" y="7" width="188" height="30"/>
-                                                            <state key="normal" title="Button"/>
-                                                        </button>
                                                     </subviews>
                                                     <constraints>
-                                                        <constraint firstItem="h4g-Om-g63" firstAttribute="top" secondItem="aKt-Nq-lSt" secondAttribute="bottom" constant="17" id="6V5-YC-x1n"/>
+                                                        <constraint firstItem="h4g-Om-g63" firstAttribute="top" secondItem="kf8-dA-3q1" secondAttribute="bottom" constant="8" id="72C-wQ-J54"/>
                                                         <constraint firstItem="eZt-vl-ANW" firstAttribute="leading" secondItem="qT2-Oh-bgO" secondAttribute="leadingMargin" id="Buc-lp-w1S"/>
-                                                        <constraint firstItem="h4g-Om-g63" firstAttribute="bottom" secondItem="qT2-Oh-bgO" secondAttribute="bottomMargin" constant="11" id="GgH-Iy-Ov2"/>
+                                                        <constraint firstItem="h4g-Om-g63" firstAttribute="bottom" secondItem="qT2-Oh-bgO" secondAttribute="bottomMargin" constant="18" id="GgH-Iy-Ov2"/>
                                                         <constraint firstItem="h4g-Om-g63" firstAttribute="leading" secondItem="qT2-Oh-bgO" secondAttribute="leading" id="I8j-AK-7YK"/>
                                                         <constraint firstAttribute="trailing" secondItem="h4g-Om-g63" secondAttribute="trailing" id="Pfp-r1-YcL"/>
-                                                        <constraint firstItem="eZt-vl-ANW" firstAttribute="baseline" secondItem="aKt-Nq-lSt" secondAttribute="baseline" id="S3r-Sy-93E"/>
-                                                        <constraint firstItem="kf8-dA-3q1" firstAttribute="baseline" secondItem="aKt-Nq-lSt" secondAttribute="firstBaseline" id="ifY-WU-Ve7"/>
-                                                        <constraint firstItem="aKt-Nq-lSt" firstAttribute="top" secondItem="qT2-Oh-bgO" secondAttribute="topMargin" constant="-4" id="jdo-on-sMv"/>
-                                                        <constraint firstItem="kf8-dA-3q1" firstAttribute="leading" secondItem="aKt-Nq-lSt" secondAttribute="trailing" constant="28" id="nbb-kq-QWf"/>
-                                                        <constraint firstItem="aKt-Nq-lSt" firstAttribute="leading" secondItem="eZt-vl-ANW" secondAttribute="trailing" constant="29" id="ngC-wn-XqC"/>
-                                                        <constraint firstItem="aKt-Nq-lSt" firstAttribute="top" secondItem="kf8-dA-3q1" secondAttribute="top" id="qCg-Z6-mtZ"/>
+                                                        <constraint firstItem="eZt-vl-ANW" firstAttribute="firstBaseline" secondItem="kf8-dA-3q1" secondAttribute="baseline" id="b6E-0C-Lml"/>
+                                                        <constraint firstItem="eZt-vl-ANW" firstAttribute="baseline" secondItem="kf8-dA-3q1" secondAttribute="firstBaseline" id="bbM-la-i9T"/>
+                                                        <constraint firstItem="eZt-vl-ANW" firstAttribute="top" secondItem="qT2-Oh-bgO" secondAttribute="topMargin" constant="-4" id="kyp-NT-eUv"/>
                                                         <constraint firstAttribute="trailingMargin" secondItem="kf8-dA-3q1" secondAttribute="trailing" id="vbA-hQ-NsG"/>
                                                     </constraints>
                                                 </tableViewCellContentView>
                                                 <connections>
-                                                    <outlet property="CancelButton" destination="aKt-Nq-lSt" id="HQ2-G9-9cY"/>
                                                     <outlet property="CityName" destination="eZt-vl-ANW" id="SZK-po-VDp"/>
                                                     <outlet property="DatePicker" destination="h4g-Om-g63" id="rdF-RU-tcf"/>
                                                     <outlet property="MoveButton" destination="kf8-dA-3q1" id="XFp-Ea-kG2"/>

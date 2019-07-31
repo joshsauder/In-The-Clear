@@ -46,10 +46,6 @@ class CustomizeTripDetails: UIViewController {
         tableView.endUpdates()
     }
     
-    @objc func removeButtonTapped(_ sender: UIButton){
-        
-    }
-    
     /**
      On submit, set date to the selected date and dismiss the view.
      
@@ -81,12 +77,26 @@ extension CustomizeTripDetails: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let tripCell = tableView.dequeueReusableCell(withIdentifier: "TripDetailsTableViewCell", for: indexPath) as! TripDetailsTableViewCell
-        tripCell.CityName.titleLabel?.text = cities[indexPath.row]
+        tripCell.CityName.setTitle(cities[indexPath.row], for: .normal)
+        if(cities[indexPath.row] != "Add City"){
+            tripCell.CityName.isEnabled = false
+        }
         tripCell.CityName.addTarget(self, action: #selector(addButtonTapped(_:)), for: .touchUpInside)
         self.setButtonImage(button: tripCell.MoveButton, imageString: "baseline_reorder_black_36pt_2x", size: 20)
-        self.setButtonImage(button: tripCell.CancelButton, imageString: "baseline_clear_black_36pt_2x", size: 20)
-        tripCell.CancelButton.addTarget(self, action: #selector(removeButtonTapped(_:)), for: .touchUpInside)
         return tripCell
+    }
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            cities.remove(at: indexPath.row)
+            tableView.beginUpdates()
+            tableView.deleteRows(at: [indexPath], with: .automatic)
+            tableView.endUpdates()
+        }
     }
 }
 
