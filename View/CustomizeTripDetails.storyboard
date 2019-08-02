@@ -49,47 +49,25 @@
                                         <rect key="frame" x="0.0" y="42" width="335" height="430"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <prototypes>
-                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="TripDetailsTableViewCell" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="TripDetailsTableViewCell" rowHeight="141" id="O2Z-77-fRu" customClass="TripDetailsTableViewCell" customModule="InTheClear" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="28" width="335" height="141"/>
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="TripDetailsTableViewCell" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="TripDetailsTableViewCell" rowHeight="52" id="O2Z-77-fRu" customClass="TripDetailsTableViewCell" customModule="InTheClear" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="28" width="335" height="52"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="O2Z-77-fRu" id="qT2-Oh-bgO">
-                                                    <rect key="frame" x="0.0" y="0.0" width="335" height="140.66666666666666"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="335" height="51.666666666666664"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
-                                                        <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="h4g-Om-g63">
-                                                            <rect key="frame" x="0.0" y="45" width="335" height="103"/>
-                                                            <date key="date" timeIntervalSinceReferenceDate="585883423.03691804">
-                                                                <!--2019-07-27 01:23:43 +0000-->
-                                                            </date>
-                                                        </datePicker>
                                                         <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eZt-vl-ANW">
-                                                            <rect key="frame" x="15" y="7" width="175" height="30"/>
-                                                            <state key="normal" title="Button"/>
-                                                        </button>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kf8-dA-3q1">
-                                                            <rect key="frame" x="290" y="7" width="30" height="30"/>
-                                                            <constraints>
-                                                                <constraint firstAttribute="width" constant="30" id="6ox-61-UoA"/>
-                                                            </constraints>
+                                                            <rect key="frame" x="15" y="11" width="179" height="30"/>
                                                             <state key="normal" title="Button"/>
                                                         </button>
                                                     </subviews>
                                                     <constraints>
-                                                        <constraint firstItem="h4g-Om-g63" firstAttribute="top" secondItem="kf8-dA-3q1" secondAttribute="bottom" constant="8" id="72C-wQ-J54"/>
                                                         <constraint firstItem="eZt-vl-ANW" firstAttribute="leading" secondItem="qT2-Oh-bgO" secondAttribute="leadingMargin" id="Buc-lp-w1S"/>
-                                                        <constraint firstItem="h4g-Om-g63" firstAttribute="bottom" secondItem="qT2-Oh-bgO" secondAttribute="bottomMargin" constant="18" id="GgH-Iy-Ov2"/>
-                                                        <constraint firstItem="h4g-Om-g63" firstAttribute="leading" secondItem="qT2-Oh-bgO" secondAttribute="leading" id="I8j-AK-7YK"/>
-                                                        <constraint firstAttribute="trailing" secondItem="h4g-Om-g63" secondAttribute="trailing" id="Pfp-r1-YcL"/>
-                                                        <constraint firstItem="eZt-vl-ANW" firstAttribute="firstBaseline" secondItem="kf8-dA-3q1" secondAttribute="baseline" id="b6E-0C-Lml"/>
-                                                        <constraint firstItem="eZt-vl-ANW" firstAttribute="baseline" secondItem="kf8-dA-3q1" secondAttribute="firstBaseline" id="bbM-la-i9T"/>
-                                                        <constraint firstItem="eZt-vl-ANW" firstAttribute="top" secondItem="qT2-Oh-bgO" secondAttribute="topMargin" constant="-4" id="kyp-NT-eUv"/>
-                                                        <constraint firstAttribute="trailingMargin" secondItem="kf8-dA-3q1" secondAttribute="trailing" id="vbA-hQ-NsG"/>
+                                                        <constraint firstItem="eZt-vl-ANW" firstAttribute="top" secondItem="qT2-Oh-bgO" secondAttribute="topMargin" id="kyp-NT-eUv"/>
                                                     </constraints>
                                                 </tableViewCellContentView>
                                                 <connections>
                                                     <outlet property="CityName" destination="eZt-vl-ANW" id="SZK-po-VDp"/>
-                                                    <outlet property="DatePicker" destination="h4g-Om-g63" id="rdF-RU-tcf"/>
-                                                    <outlet property="MoveButton" destination="kf8-dA-3q1" id="XFp-Ea-kG2"/>
                                                 </connections>
                                             </tableViewCell>
                                         </prototypes>

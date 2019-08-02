@@ -19,6 +19,7 @@ class CustomizeTripDetails: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.dataSource = self
+        self.tableView.isEditing = true
         setupView()
         setAddCell()
     }
@@ -82,7 +83,7 @@ extension CustomizeTripDetails: UITableViewDataSource {
             tripCell.CityName.isEnabled = false
         }
         tripCell.CityName.addTarget(self, action: #selector(addButtonTapped(_:)), for: .touchUpInside)
-        self.setButtonImage(button: tripCell.MoveButton, imageString: "baseline_reorder_black_36pt_2x", size: 20)
+        //tripCell.DatePicker.isHidden = true
         return tripCell
     }
     
@@ -97,6 +98,16 @@ extension CustomizeTripDetails: UITableViewDataSource {
             tableView.deleteRows(at: [indexPath], with: .automatic)
             tableView.endUpdates()
         }
+    }
+    
+    func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        let item = cities[sourceIndexPath.row]
+        cities.remove(at: sourceIndexPath.row)
+        cities.insert(item, at: destinationIndexPath.row)
     }
 }
 
