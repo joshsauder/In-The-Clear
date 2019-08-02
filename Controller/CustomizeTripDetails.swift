@@ -15,17 +15,30 @@ class CustomizeTripDetails: UIViewController {
     @IBOutlet weak var dateView: UIView!
     var tripDetails = tripDetailsModal().tripDetails
     var cities: [String] = []
+    var selectedIndex = IndexPath()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.dataSource = self
-        self.tableView.isEditing = true
         setupView()
-        setAddCell()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        configureTableView()
+    }
+    
+    func configureTableView(){
+        tableView.dataSource = self
+        tableView.delegate = self
+        self.tableView.isEditing = true
+        self.tableView.allowsSelection = true
+        self.tableView.isUserInteractionEnabled = true
+        setAddCityCell()
+        tableView.register(UINib(nibName: "TimePicker", bundle: nil), forCellReuseIdentifier: "TimePicker")
     }
     
     
-    func setAddCell(){
+    func setAddCityCell(){
         cities.insert("Add City", at: 1)
     }
     
@@ -69,7 +82,7 @@ class CustomizeTripDetails: UIViewController {
 
 }
 
-extension CustomizeTripDetails: UITableViewDataSource {
+extension CustomizeTripDetails: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return cities.count
@@ -108,6 +121,25 @@ extension CustomizeTripDetails: UITableViewDataSource {
         let item = cities[sourceIndexPath.row]
         cities.remove(at: sourceIndexPath.row)
         cities.insert(item, at: destinationIndexPath.row)
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.tableView.beginUpdates()
+        
+        if indexPath == selectedIndex {
+            selectedIndex = IndexPath()
+        } else {
+            selectedIndex = indexPath
+        }
+        
+        self.tableView.endUpdates()
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath == selectedIndex {
+            return 295
+        }
+        return 44
     }
 }
 

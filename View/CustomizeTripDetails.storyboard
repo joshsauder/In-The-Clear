@@ -45,25 +45,25 @@
                                             <action selector="onSubmit:" destination="oEp-kz-6sl" eventType="touchUpInside" id="rYh-bk-aKV"/>
                                         </connections>
                                     </button>
-                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="uhN-Vg-s4s">
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelectionDuringEditing="YES" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="uhN-Vg-s4s">
                                         <rect key="frame" x="0.0" y="42" width="335" height="430"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <prototypes>
-                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="TripDetailsTableViewCell" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="TripDetailsTableViewCell" rowHeight="52" id="O2Z-77-fRu" customClass="TripDetailsTableViewCell" customModule="InTheClear" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="28" width="335" height="52"/>
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="TripDetailsTableViewCell" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="TripDetailsTableViewCell" rowHeight="44" id="O2Z-77-fRu" customClass="TripDetailsTableViewCell" customModule="InTheClear" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="28" width="335" height="44"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="O2Z-77-fRu" id="qT2-Oh-bgO">
-                                                    <rect key="frame" x="0.0" y="0.0" width="335" height="51.666666666666664"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="335" height="43.666666666666664"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eZt-vl-ANW">
-                                                            <rect key="frame" x="15" y="11" width="179" height="30"/>
+                                                            <rect key="frame" x="15" y="6" width="179" height="30"/>
                                                             <state key="normal" title="Button"/>
                                                         </button>
                                                     </subviews>
                                                     <constraints>
                                                         <constraint firstItem="eZt-vl-ANW" firstAttribute="leading" secondItem="qT2-Oh-bgO" secondAttribute="leadingMargin" id="Buc-lp-w1S"/>
-                                                        <constraint firstItem="eZt-vl-ANW" firstAttribute="top" secondItem="qT2-Oh-bgO" secondAttribute="topMargin" id="kyp-NT-eUv"/>
+                                                        <constraint firstItem="eZt-vl-ANW" firstAttribute="top" secondItem="qT2-Oh-bgO" secondAttribute="topMargin" constant="-5" id="kyp-NT-eUv"/>
                                                     </constraints>
                                                 </tableViewCellContentView>
                                                 <connections>
