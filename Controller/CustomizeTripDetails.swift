@@ -20,11 +20,11 @@ class CustomizeTripDetails: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
+        configureTableView()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        configureTableView()
     }
     
     func configureTableView(){
@@ -34,7 +34,6 @@ class CustomizeTripDetails: UIViewController {
         self.tableView.allowsSelection = true
         self.tableView.isUserInteractionEnabled = true
         setAddCityCell()
-        tableView.register(UINib(nibName: "TimePicker", bundle: nil), forCellReuseIdentifier: "TimePicker")
     }
     
     
@@ -43,7 +42,7 @@ class CustomizeTripDetails: UIViewController {
     }
     
     
-    @objc func addButtonTapped(_ sender: UIButton){
+    @objc func addButtonTapped(){
         //open GMSAutocomplete controllerand present
         let autoCompleteController = GMSAutocompleteViewController()
         autoCompleteController.delegate = self
@@ -53,10 +52,9 @@ class CustomizeTripDetails: UIViewController {
     func insertCityToTable(){
         
         //TODO: need to check new value was inputed
-        let indexPath = IndexPath(row: cities.count-2, section: 0)
         
         tableView.beginUpdates()
-        tableView.insertRows(at: [indexPath], with: .automatic)
+        tableView.insertSections(IndexSet(integer: selectedIndex.section), with: .automatic)
         tableView.endUpdates()
     }
     
@@ -102,7 +100,7 @@ extension CustomizeTripDetails: UITableViewDelegate, UITableViewDataSource {
             if(cities[indexPath.section] != "Add City"){
                 tripCell.CityName.isEnabled = false
             }
-            tripCell.CityName.addTarget(self, action: #selector(addButtonTapped(_:)), for: .touchUpInside)
+            //tripCell.CityName.addTarget(self, action: #selector(addButtonTapped(_:)), for: .touchUpInside)
             return tripCell
         }
         else if indexPath.row == 1 {
@@ -141,6 +139,11 @@ extension CustomizeTripDetails: UITableViewDelegate, UITableViewDataSource {
         
         if indexPath.row == 0 {
             selectedIndex = indexPath
+            let cell = self.tableView.cellForRow(at: indexPath) as! TripDetailsTableViewCell
+            if cell.CityName.currentTitle == "Add City" {
+                addButtonTapped()
+                tableView.deselectRow(at: selectedIndex, animated: false)
+            }
         }
         
         self.tableView.endUpdates()
