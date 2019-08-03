@@ -70,6 +70,26 @@
                                                     <outlet property="CityName" destination="eZt-vl-ANW" id="SZK-po-VDp"/>
                                                 </connections>
                                             </tableViewCell>
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="TripDetailsTimeTableViewCell" rowHeight="140" id="4YE-Ha-ITS" customClass="TripDetailsTimeTableViewCell" customModule="InTheClear" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="72" width="335" height="140"/>
+                                                <autoresizingMask key="autoresizingMask"/>
+                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="4YE-Ha-ITS" id="CkT-7D-rcV">
+                                                    <rect key="frame" x="0.0" y="0.0" width="335" height="139.66666666666666"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <subviews>
+                                                        <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="keZ-0e-Xuz">
+                                                            <rect key="frame" x="0.0" y="0.0" width="335" height="140"/>
+                                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                                            <date key="date" timeIntervalSinceReferenceDate="586489631.35340405">
+                                                                <!--2019-08-03 01:47:11 +0000-->
+                                                            </date>
+                                                        </datePicker>
+                                                    </subviews>
+                                                </tableViewCellContentView>
+                                                <connections>
+                                                    <outlet property="DatePicker" destination="keZ-0e-Xuz" id="sON-Wt-DF7"/>
+                                                </connections>
+                                            </tableViewCell>
                                         </prototypes>
                                     </tableView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gaa-4G-K13">
