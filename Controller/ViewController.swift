@@ -280,7 +280,8 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
     func showTimePopupInitially(){
         let tripDetailVC = storyboard?.instantiateViewController(withIdentifier: "customizeTripDetails") as! CustomizeTripDetails
         tripDetailVC.modalPresentationStyle = .overCurrentContext
-        tripDetailVC.cities.append(contentsOf: [startLocation.text!, destinationLocation.text!])
+        tripDetailVC.tripDetails.cityStops.append(contentsOf: [startLocation.text!, destinationLocation.text!])
+        tripDetailVC.tripDetails.startTimes.append(Date())
         self.present(tripDetailVC, animated: true, completion: nil)
     }
     
@@ -292,7 +293,6 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
     @IBAction func showTimePopup(_ sender: UIButton) {
         let tripDetailVC = storyboard?.instantiateViewController(withIdentifier: "customizeTripDetails") as! CustomizeTripDetails
         tripDetailVC.modalPresentationStyle = .overCurrentContext
-        tripDetailVC.cities.append(contentsOf: [startLocation.text!, destinationLocation.text!])
         self.present(tripDetailVC, animated: true, completion: nil)
     }
     
