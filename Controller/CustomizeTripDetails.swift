@@ -10,21 +10,39 @@ import Foundation
 import UIKit
 import GooglePlaces
 
-class CustomizeTripDetails: UIViewController {
+protocol CellDataDelegate: class {
+    func modifyTime(time: Date)
+}
+
+
+class CustomizeTripDetails: UIViewController, CellDataDelegate{
+    
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var dateView: UIView!
-    var tripDetails = tripDetailsModal().tripDetails
+    var tripDetails = tripDetailsModal()
     var cities: [String] = []
     var selectedIndex = IndexPath(row: 0, section: 0)
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        tripDetails.cityStops = cities
+        tripDetails.startTimes = [Date()]
         setupView()
         configureTableView()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+    }
+    
+    func addCity(city: String, index: Int) {
+        cities.insert(city, at: index)
+        tripDetails.cityStops.insert(city, at: index)
+        tripDetails.startTimes.insert(Date(), at: index)
+    }
+    
+    func modifyTime(time: Date) {
+        tripDetails.startTimes[selectedIndex.section] = time
     }
     
     func configureTableView(){
@@ -105,6 +123,7 @@ extension CustomizeTripDetails: UITableViewDelegate, UITableViewDataSource {
         }
         else if indexPath.row == 1 {
             let tripCell = tableView.dequeueReusableCell(withIdentifier: "TripDetailsTimeTableViewCell", for: indexPath) as! TripDetailsTimeTableViewCell
+            tripCell.cellData = self
             return tripCell
         }
         //need to change this
@@ -117,7 +136,8 @@ extension CustomizeTripDetails: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            cities.remove(at: indexPath.row)
+            cities.remove(at: indexPath.section)
+            tripDetails.removeItems(index: indexPath.section)
             tableView.beginUpdates()
             tableView.deleteRows(at: [indexPath], with: .automatic)
             tableView.endUpdates()
@@ -129,9 +149,10 @@ extension CustomizeTripDetails: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-        let item = cities[sourceIndexPath.row]
-        cities.remove(at: sourceIndexPath.row)
-        cities.insert(item, at: destinationIndexPath.row)
+        let item = cities[sourceIndexPath.section]
+        cities.remove(at: sourceIndexPath.section)
+        cities.insert(item, at: destinationIndexPath.section)
+        tripDetails.reorderItems(startIndex: sourceIndexPath.section, destIndex: destinationIndexPath.section)
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

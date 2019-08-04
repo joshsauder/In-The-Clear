@@ -83,6 +83,9 @@
                                                             <date key="date" timeIntervalSinceReferenceDate="586489631.35340405">
                                                                 <!--2019-08-03 01:47:11 +0000-->
                                                             </date>
+                                                            <connections>
+                                                                <action selector="datePickerChange:" destination="4YE-Ha-ITS" eventType="valueChanged" id="oal-23-dig"/>
+                                                            </connections>
                                                         </datePicker>
                                                     </subviews>
                                                 </tableViewCellContentView>

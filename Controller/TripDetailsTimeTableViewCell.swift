@@ -9,13 +9,19 @@
 import Foundation
 import UIKit
 
-class TripDetailsTimeTableViewCell: UITableViewCell {
+
+class TripDetailsTimeTableViewCell: UITableViewCell{
+    
     
     
     @IBOutlet weak var DatePicker: UIDatePicker!
     
+    weak var cellData: CellDataDelegate?
+    
     override func awakeFromNib() {
         super.awakeFromNib()
+        
+        
         //createDatePicker()
     }
     
@@ -37,6 +43,11 @@ class TripDetailsTimeTableViewCell: UITableViewCell {
             DatePicker.maximumDate = maxDate
     
         }
+    
+    @IBAction func datePickerChange(_ sender: Any) {
+        cellData?.modifyTime(time: DatePicker.date)
+    }
+    
     
     
 }

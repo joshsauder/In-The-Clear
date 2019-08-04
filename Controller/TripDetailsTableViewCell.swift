@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class TripDetailsTableViewCell: UITableViewCell {
+class TripDetailsTableViewCell: UITableViewCell  {
     
     @IBOutlet weak var CityName: UIButton!
     
