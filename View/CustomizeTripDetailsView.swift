@@ -11,11 +11,11 @@ import UIKit
 
 extension CustomizeTripDetails {
     
-    func setButtonImage(button: UIButton, imageString: String, size: Int){
+    func setLabelImage(imageString: String, labelString: String, size: Int) -> NSMutableAttributedString{
         //Create Attachment
         let imageAttachment =  NSTextAttachment()
         imageAttachment.image = UIImage(named: imageString)
-        imageAttachment.bounds = CGRect(x: 0, y: -5, width: size, height: size)
+        imageAttachment.bounds = CGRect(x: 0, y: -3, width: size, height: size)
         
         //Create string with attachment
         let attachmentString = NSAttributedString(attachment: imageAttachment)
@@ -24,10 +24,10 @@ extension CustomizeTripDetails {
         //Add image to mutable string
         completeText.append(attachmentString)
         
-        //set up font
-        button.titleLabel?.textAlignment = .center
-        button.setAttributedTitle(completeText, for: .normal)
-        button.titleLabel?.adjustsFontSizeToFitWidth = true
+        let textAfterIcon = NSMutableAttributedString(string: " " + labelString)
+        completeText.append(textAfterIcon)
+        
+        return completeText
     }
     
     /**

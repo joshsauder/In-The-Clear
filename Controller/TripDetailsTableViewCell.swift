@@ -11,7 +11,7 @@ import UIKit
 
 class TripDetailsTableViewCell: UITableViewCell  {
     
-    @IBOutlet weak var CityName: UIButton!
+    @IBOutlet weak var CityName: UILabel!
     @IBOutlet weak var DatePicker: UIDatePicker!
     
     weak var cellData: CellDataDelegate?

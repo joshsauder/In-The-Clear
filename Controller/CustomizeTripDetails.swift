@@ -20,7 +20,7 @@ class CustomizeTripDetails: UIViewController, CellDataDelegate{
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var dateView: UIView!
     var tripDetails = tripDetailsModal()
-    var selectedIndex = IndexPath()
+    var selectedIndex = IndexPath(row: 0, section: 0)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,7 +56,7 @@ class CustomizeTripDetails: UIViewController, CellDataDelegate{
     }
     
     
-    @objc func addButtonTapped(){
+    func addButtonTapped(){
         //open GMSAutocomplete controllerand present
         let autoCompleteController = GMSAutocompleteViewController()
         autoCompleteController.delegate = self
@@ -105,9 +105,9 @@ extension CustomizeTripDetails: UITableViewDelegate, UITableViewDataSource {
         
         
         let tripCell = tableView.dequeueReusableCell(withIdentifier: "TripDetailsTableViewCell", for: indexPath) as! TripDetailsTableViewCell
-        tripCell.CityName.setTitle(tripDetails.cityStops[indexPath.row], for: .normal)
-        if(tripDetails.cityStops[indexPath.row] != "Add City"){
-            tripCell.CityName.isEnabled = false
+        tripCell.CityName.text = tripDetails.cityStops[indexPath.row]
+        if(tripDetails.cityStops[indexPath.row] == "Add City"){
+            tripCell.CityName.attributedText = setLabelImage(imageString: "addIcon", labelString: tripDetails.cityStops[indexPath.row], size: 19)
         }
         tripCell.cellData = self
 
@@ -138,15 +138,15 @@ extension CustomizeTripDetails: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.tableView.beginUpdates()
-        
+        let cell = self.tableView.cellForRow(at: indexPath) as! TripDetailsTableViewCell
         if selectedIndex == indexPath {
+            cell.DatePicker.isHidden = true
             selectedIndex = IndexPath()
         } else{
+            cell.DatePicker.isHidden = false
             selectedIndex = indexPath
-            let cell = self.tableView.cellForRow(at: indexPath) as! TripDetailsTableViewCell
-            if cell.CityName.currentTitle == "Add City" {
+            if cell.CityName.text! == "Add City" {
                 addButtonTapped()
-                
             }
         }
         tableView.deselectRow(at: indexPath, animated: false)
