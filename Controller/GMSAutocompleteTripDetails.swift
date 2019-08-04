@@ -14,7 +14,7 @@ import GooglePlaces
 extension CustomizeTripDetails: GMSAutocompleteViewControllerDelegate {
     func viewController(_ viewController: GMSAutocompleteViewController, didAutocompleteWith place: GMSPlace) {
         //add city to cities array
-        addCity(city: place.name!, index: selectedIndex.section)
+        addCity(city: place.name!, index: selectedIndex.row)
         self.dismiss(animated: true, completion: nil)
         insertCityToTable()
     }

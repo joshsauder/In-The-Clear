@@ -122,7 +122,7 @@ extension CustomizeTripDetails: UITableViewDelegate, UITableViewDataSource {
         if editingStyle == .delete {
             tripDetails.removeItems(index: indexPath.row)
             tableView.beginUpdates()
-            tableView.deleteRows(at: [selectedIndex], with: .automatic)
+            tableView.deleteRows(at: [indexPath], with: .automatic)
             //will need to prevent target city from being removed
             tableView.endUpdates()
         }
@@ -139,15 +139,17 @@ extension CustomizeTripDetails: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.tableView.beginUpdates()
         
-        if indexPath.row == 0 {
+        if selectedIndex == indexPath {
+            selectedIndex = IndexPath()
+        } else{
             selectedIndex = indexPath
             let cell = self.tableView.cellForRow(at: indexPath) as! TripDetailsTableViewCell
             if cell.CityName.currentTitle == "Add City" {
                 addButtonTapped()
-                tableView.deselectRow(at: selectedIndex, animated: false)
+                
             }
         }
-        
+        tableView.deselectRow(at: indexPath, animated: false)
         self.tableView.endUpdates()
     }
     

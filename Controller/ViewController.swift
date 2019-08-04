@@ -281,7 +281,7 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
         let tripDetailVC = storyboard?.instantiateViewController(withIdentifier: "customizeTripDetails") as! CustomizeTripDetails
         tripDetailVC.modalPresentationStyle = .overCurrentContext
         tripDetailVC.tripDetails.cityStops.append(contentsOf: [startLocation.text!, destinationLocation.text!])
-        tripDetailVC.tripDetails.startTimes.append(Date())
+        tripDetailVC.tripDetails.startTimes.append(contentsOf: [Date(), Date()])
         self.present(tripDetailVC, animated: true, completion: nil)
     }
     
