@@ -12,6 +12,9 @@ import UIKit
 class TripDetailsTableViewCell: UITableViewCell  {
     
     @IBOutlet weak var CityName: UIButton!
+    @IBOutlet weak var DatePicker: UIDatePicker!
+    
+    weak var cellData: CellDataDelegate?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -22,5 +25,23 @@ class TripDetailsTableViewCell: UITableViewCell  {
         super.setSelected(selected, animated: animated)
     }
     
+    /**
+     Configure the date picker
+     */
+    func createDatePicker(){
+        
+        DatePicker.datePickerMode = UIDatePickerMode.dateAndTime
+        
+        //set min and max date values for date picker
+        let minDate = Calendar.current.date(byAdding: .day, value: .zero, to: Date())
+        let maxDate = Calendar.current.date(byAdding: .day, value: 3, to: Date())
+        DatePicker.minimumDate = minDate
+        DatePicker.maximumDate = maxDate
+        
+    }
+    
+    @IBAction func datePickerChange(_ sender: Any) {
+        cellData?.modifyTime(time: DatePicker.date)
+    }
     
 }

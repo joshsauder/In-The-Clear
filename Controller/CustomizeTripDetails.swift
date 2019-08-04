@@ -20,7 +20,7 @@ class CustomizeTripDetails: UIViewController, CellDataDelegate{
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var dateView: UIView!
     var tripDetails = tripDetailsModal()
-    var selectedIndex = IndexPath(row: 0, section: 0)
+    var selectedIndex = IndexPath()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,7 +38,7 @@ class CustomizeTripDetails: UIViewController, CellDataDelegate{
     }
     
     func modifyTime(time: Date) {
-        tripDetails.startTimes[selectedIndex.section] = time
+        tripDetails.startTimes[selectedIndex.row] = time
     }
     
     func configureTableView(){
@@ -68,7 +68,7 @@ class CustomizeTripDetails: UIViewController, CellDataDelegate{
         //TODO: need to check new value was inputed
         
         tableView.beginUpdates()
-        tableView.insertSections(IndexSet(integer: selectedIndex.section), with: .automatic)
+        tableView.insertRows(at: [selectedIndex], with: .automatic)
         tableView.endUpdates()
     }
     
@@ -95,35 +95,23 @@ class CustomizeTripDetails: UIViewController, CellDataDelegate{
 }
 
 extension CustomizeTripDetails: UITableViewDelegate, UITableViewDataSource {
-    
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return tripDetails.cityStops.count
-    }
 
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2
+        return tripDetails.cityStops.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        if indexPath.row == 0{
         
-            let tripCell = tableView.dequeueReusableCell(withIdentifier: "TripDetailsTableViewCell", for: indexPath) as! TripDetailsTableViewCell
-            tripCell.CityName.setTitle(tripDetails.cityStops[indexPath.section], for: .normal)
-            if(tripDetails.cityStops[indexPath.section] != "Add City"){
-                tripCell.CityName.isEnabled = false
-            }
-            //tripCell.CityName.addTarget(self, action: #selector(addButtonTapped(_:)), for: .touchUpInside)
-            return tripCell
+        let tripCell = tableView.dequeueReusableCell(withIdentifier: "TripDetailsTableViewCell", for: indexPath) as! TripDetailsTableViewCell
+        tripCell.CityName.setTitle(tripDetails.cityStops[indexPath.row], for: .normal)
+        if(tripDetails.cityStops[indexPath.row] != "Add City"){
+            tripCell.CityName.isEnabled = false
         }
-        else if indexPath.row == 1 {
-            let tripCell = tableView.dequeueReusableCell(withIdentifier: "TripDetailsTimeTableViewCell", for: indexPath) as! TripDetailsTimeTableViewCell
-            tripCell.cellData = self
-            return tripCell
-        }
-        //need to change this
-        return UITableViewCell()
+        tripCell.cellData = self
+
+        return tripCell
     }
     
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
@@ -132,9 +120,9 @@ extension CustomizeTripDetails: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            tripDetails.removeItems(index: indexPath.section)
+            tripDetails.removeItems(index: indexPath.row)
             tableView.beginUpdates()
-            tableView.deleteSections(IndexSet(integer: selectedIndex.section), with: .automatic)
+            tableView.deleteRows(at: [selectedIndex], with: .automatic)
             //will need to prevent target city from being removed
             tableView.endUpdates()
         }
@@ -145,7 +133,7 @@ extension CustomizeTripDetails: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-        tripDetails.reorderItems(startIndex: sourceIndexPath.section, destIndex: destinationIndexPath.section)
+        tripDetails.reorderItems(startIndex: sourceIndexPath.row, destIndex: destinationIndexPath.row)
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -164,10 +152,8 @@ extension CustomizeTripDetails: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if indexPath.section == selectedIndex.section && indexPath.row == 1 && indexPath.section != tripDetails.cityStops.count - 1 {
-            return 140
-        }else if indexPath.row == 1 {
-            return 0
+        if indexPath == selectedIndex && indexPath.row != tripDetails.cityStops.count - 1 {
+            return 184
         }
         return 44
     }

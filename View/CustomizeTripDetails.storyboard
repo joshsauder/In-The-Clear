@@ -49,17 +49,24 @@
                                         <rect key="frame" x="0.0" y="42" width="335" height="430"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <prototypes>
-                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="TripDetailsTableViewCell" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="TripDetailsTableViewCell" rowHeight="44" id="O2Z-77-fRu" customClass="TripDetailsTableViewCell" customModule="InTheClear" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="28" width="335" height="44"/>
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="TripDetailsTableViewCell" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="TripDetailsTableViewCell" rowHeight="184" id="O2Z-77-fRu" customClass="TripDetailsTableViewCell" customModule="InTheClear" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="28" width="335" height="184"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="O2Z-77-fRu" id="qT2-Oh-bgO">
-                                                    <rect key="frame" x="0.0" y="0.0" width="335" height="43.666666666666664"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="335" height="183.66666666666666"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eZt-vl-ANW">
                                                             <rect key="frame" x="15" y="6" width="179" height="30"/>
                                                             <state key="normal" title="Button"/>
                                                         </button>
+                                                        <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="KAa-yq-1Sf">
+                                                            <rect key="frame" x="0.0" y="44" width="335" height="140"/>
+                                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                                            <date key="date" timeIntervalSinceReferenceDate="586577904.22887599">
+                                                                <!--2019-08-04 02:18:24 +0000-->
+                                                            </date>
+                                                        </datePicker>
                                                     </subviews>
                                                     <constraints>
                                                         <constraint firstItem="eZt-vl-ANW" firstAttribute="leading" secondItem="qT2-Oh-bgO" secondAttribute="leadingMargin" id="Buc-lp-w1S"/>
@@ -68,29 +75,7 @@
                                                 </tableViewCellContentView>
                                                 <connections>
                                                     <outlet property="CityName" destination="eZt-vl-ANW" id="SZK-po-VDp"/>
-                                                </connections>
-                                            </tableViewCell>
-                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="TripDetailsTimeTableViewCell" rowHeight="140" id="4YE-Ha-ITS" customClass="TripDetailsTimeTableViewCell" customModule="InTheClear" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="72" width="335" height="140"/>
-                                                <autoresizingMask key="autoresizingMask"/>
-                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="4YE-Ha-ITS" id="CkT-7D-rcV">
-                                                    <rect key="frame" x="0.0" y="0.0" width="335" height="139.66666666666666"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <subviews>
-                                                        <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="keZ-0e-Xuz">
-                                                            <rect key="frame" x="0.0" y="0.0" width="335" height="140"/>
-                                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                                            <date key="date" timeIntervalSinceReferenceDate="586489631.35340405">
-                                                                <!--2019-08-03 01:47:11 +0000-->
-                                                            </date>
-                                                            <connections>
-                                                                <action selector="datePickerChange:" destination="4YE-Ha-ITS" eventType="valueChanged" id="oal-23-dig"/>
-                                                            </connections>
-                                                        </datePicker>
-                                                    </subviews>
-                                                </tableViewCellContentView>
-                                                <connections>
-                                                    <outlet property="DatePicker" destination="keZ-0e-Xuz" id="sON-Wt-DF7"/>
+                                                    <outlet property="DatePicker" destination="KAa-yq-1Sf" id="re2-nM-493"/>
                                                 </connections>
                                             </tableViewCell>
                                         </prototypes>
