@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import GooglePlaces
+import CoreLocation
 
 protocol CellDataDelegate: class {
     func modifyTime(time: Date)
@@ -21,6 +22,7 @@ class CustomizeTripDetails: UIViewController, CellDataDelegate{
     @IBOutlet weak var dateView: UIView!
     var tripDetails = tripDetailsModal()
     var selectedIndex = IndexPath(row: 0, section: 0)
+    weak var delegate: TripDetailsDetegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,9 +34,10 @@ class CustomizeTripDetails: UIViewController, CellDataDelegate{
         super.viewWillAppear(animated)
     }
     
-    func addCity(city: String, index: Int) {
+    func addCity(city: String, loc: CLLocation, index: Int) {
         tripDetails.cityStops.insert(city, at: index)
         tripDetails.startTimes.insert(Date(), at: index)
+        tripDetails.cityLocations.insert(loc, at: index)
     }
     
     func modifyTime(time: Date) {
@@ -42,6 +45,7 @@ class CustomizeTripDetails: UIViewController, CellDataDelegate{
     }
     
     func configureTableView(){
+        tripDetails = (delegate?.intializeLocationData())!
         tableView.dataSource = self
         tableView.delegate = self
         self.tableView.isEditing = true
@@ -79,6 +83,7 @@ class CustomizeTripDetails: UIViewController, CellDataDelegate{
         - sender: The UIBUtton that is tapped
     */
     @IBAction func onSubmit(_ sender: UIButton) {
+        delegate?.recieveLocationData(tripDetials: tripDetails)
         dismiss(animated: true)
     }
     

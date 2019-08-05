@@ -11,11 +11,11 @@ import Foundation
 class tripDataModal {
 
     var times: [Date] = []
+    var stops: [String] = []
     var conditions: [String] = []
     var cities: [String] = []
     var highTemps: [Float] = []
     var conditionDescription: [String] = []
-    var requestedDate: Date
     
     init() {
         self.times = []
@@ -23,14 +23,13 @@ class tripDataModal {
         self.cities = []
         self.highTemps = []
         self.conditionDescription = []
-        self.requestedDate = Date()
+        self.stops = []
     }
     
     /**
      Removes all values from trip value arrays
     */
     func removeAll(){
-        times.removeAll()
         conditions.removeAll()
         cities.removeAll()
         highTemps.removeAll()

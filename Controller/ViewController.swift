@@ -17,8 +17,13 @@ enum Location {
     case destinationLocation
 }
 
+protocol TripDetailsDetegate: class {
+    func intializeLocationData() -> tripDetailsModal
+    func recieveLocationData(tripDetials: tripDetailsModal)
+}
 
-class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDelegate {
+
+class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDelegate, TripDetailsDetegate {
     
     var locationManager = CLLocationManager()
     var locationSelected = Location.startLocation
@@ -193,6 +198,30 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
         alertController.addAction(openAction)
         
         self.present(alertController, animated: true, completion: nil)
+    }
+    
+    func intializeLocationData() -> tripDetailsModal {
+        
+        let tripDetails = tripDetailsModal()
+        //append first and last city
+        tripDetails.cityStops.append(contentsOf: [tripData.cities[0], tripData.cities[tripData.cities.count - 1]])
+        //need two dates in the case first or last city are reordered
+        tripDetails.startTimes.append(contentsOf: [Date(), Date()])
+        
+        return tripDetails
+    }
+    
+    func recieveLocationData(tripDetials: tripDetailsModal) {
+        
+        //append data from trip data given by user
+        tripData.times.append(contentsOf: tripDetials.startTimes)
+        tripData.stops.append(contentsOf: tripDetials.cityStops)
+        processTripData()
+        
+    }
+    
+    func processTripData(){
+        
     }
     
     /**
