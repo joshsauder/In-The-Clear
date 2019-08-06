@@ -203,13 +203,16 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
     
     func intializeLocationData() -> tripDetailsModal {
         
-        let tripDetails = tripDetailsModal()
-        //append first and last city
-        tripDetails.cityStops.append(contentsOf: [startLocation.text!, destinationLocation.text!])
-        //need two dates in the case first or last city are reordered
-        tripDetails.startTimes.append(contentsOf: [Date(), Date()])
-        //add start and end locations
-        tripDetails.cityLocations.append(contentsOf: [locationStart, locationEnd])
+        let tripDetails = userTripDetails
+        
+        if userTripDetails.cityStops.count == 0 {
+            //append first and last city
+            tripDetails.cityStops.append(contentsOf: [startLocation.text!, "Add City", destinationLocation.text!])
+            //need two dates in the case first or last city are reordered
+            tripDetails.startTimes.append(contentsOf: [Date(), Date()])
+            //add start and end locations
+            tripDetails.cityLocations.append(contentsOf: [locationStart, locationEnd])
+        }
         
         return tripDetails
     }
@@ -322,6 +325,7 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
     @IBAction func showTimePopup(_ sender: UIButton) {
         let tripDetailVC = storyboard?.instantiateViewController(withIdentifier: "customizeTripDetails") as! CustomizeTripDetails
         tripDetailVC.modalPresentationStyle = .overCurrentContext
+        tripDetailVC.delegate = self
         self.present(tripDetailVC, animated: true, completion: nil)
     }
     

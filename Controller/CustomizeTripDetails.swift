@@ -51,13 +51,9 @@ class CustomizeTripDetails: UIViewController, CellDataDelegate{
         self.tableView.isEditing = true
         self.tableView.allowsSelection = true
         self.tableView.isUserInteractionEnabled = true
-        setAddCityCell()
     }
     
-    
-    func setAddCityCell(){
-        tripDetails.cityStops.insert("Add City", at: 1)
-    }
+
     
     
     func addButtonTapped(){
