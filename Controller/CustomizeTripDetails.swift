@@ -111,9 +111,6 @@ extension CustomizeTripDetails: UITableViewDelegate, UITableViewDataSource {
         
         let tripCell = tableView.dequeueReusableCell(withIdentifier: "TripDetailsTableViewCell", for: indexPath) as! TripDetailsTableViewCell
         tripCell.CityName.text = tripDetails.cityStops[indexPath.row]
-        if(tripDetails.cityStops[indexPath.row] == "Add City"){
-            tripCell.CityName.attributedText = setLabelImage(imageString: "addIcon", labelString: tripDetails.cityStops[indexPath.row], size: 19)
-        }
         tripCell.cellData = self
 
         return tripCell

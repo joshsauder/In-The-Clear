@@ -94,9 +94,8 @@ extension ViewController {
         - endLocation: The destination location
         - completion: Upon calling the service, return the total time and distance strings
     */
-    func createLine(startLocation: CLLocation, endLocation: CLLocation, completion: @escaping (String, String) -> ()) {
+    func createLine(startLocation: CLLocation, endLocation: CLLocation, time: Date, completion: @escaping (String, String) -> ()) {
         
-        //colors for lines based on condition
         
         let origin = "\(startLocation.coordinate.latitude),\(startLocation.coordinate.longitude)"
         let destination = "\(endLocation.coordinate.latitude),\(endLocation.coordinate.longitude)"
@@ -117,9 +116,6 @@ extension ViewController {
                 
                 //prevent routes that are too long too handle
                 if stepsEval["duration"]["value"].intValue < 216000 {
-                //remove any existing polylines
-                    self.polylineArray.forEach { $0.map = nil }
-
                     
                     //take first route and use polyline to draw line
                     let route = routes[0]
@@ -136,7 +132,7 @@ extension ViewController {
                     group.enter()
                     group.enter()
                     
-                    let (weatherParam, geolocationParam) = self.createParamters(steps: steps, date: self.tripData.requestedDate)
+                    let (weatherParam, geolocationParam) = self.createParamters(steps: steps, date: time)
                     //let geolocating and path coloring run simultaneouly
                     self.getLocationName(parameters: geolocationParam){
                         group.leave()

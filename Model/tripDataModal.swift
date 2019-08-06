@@ -7,11 +7,13 @@
 //
 
 import Foundation
+import CoreLocation
 
 class tripDataModal {
 
     var times: [Date] = []
     var stops: [String] = []
+    var stopLocations: [CLLocation] = []
     var conditions: [String] = []
     var cities: [String] = []
     var highTemps: [Float] = []
@@ -24,6 +26,7 @@ class tripDataModal {
         self.highTemps = []
         self.conditionDescription = []
         self.stops = []
+        self.stopLocations = []
     }
     
     /**

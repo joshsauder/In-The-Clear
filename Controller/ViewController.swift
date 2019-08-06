@@ -48,6 +48,7 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
     
     var spinner: UIView?
     var tripData = tripDataModal()
+    var userTripDetails = tripDetailsModal()
     
     var polylineArray = [GMSPolyline]()
     var markerStart: GMSMarker?
@@ -204,24 +205,24 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
         
         let tripDetails = tripDetailsModal()
         //append first and last city
-        tripDetails.cityStops.append(contentsOf: [tripData.cities[0], tripData.cities[tripData.cities.count - 1]])
+        tripDetails.cityStops.append(contentsOf: [startLocation.text!, destinationLocation.text!])
         //need two dates in the case first or last city are reordered
         tripDetails.startTimes.append(contentsOf: [Date(), Date()])
+        //add start and end locations
+        tripDetails.cityLocations.append(contentsOf: [locationStart, locationEnd])
         
         return tripDetails
     }
     
     func recieveLocationData(tripDetials: tripDetailsModal) {
         
-        //append data from trip data given by user
-        tripData.times.append(contentsOf: tripDetials.startTimes)
-        tripData.stops.append(contentsOf: tripDetials.cityStops)
+        userTripDetails = tripDetials
         processTripData()
         
     }
     
     func processTripData(){
-        
+        showDirection()
     }
     
     /**
@@ -309,8 +310,7 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
     func showTimePopupInitially(){
         let tripDetailVC = storyboard?.instantiateViewController(withIdentifier: "customizeTripDetails") as! CustomizeTripDetails
         tripDetailVC.modalPresentationStyle = .overCurrentContext
-        tripDetailVC.tripDetails.cityStops.append(contentsOf: [startLocation.text!, destinationLocation.text!])
-        tripDetailVC.tripDetails.startTimes.append(contentsOf: [Date(), Date()])
+        tripDetailVC.delegate = self
         self.present(tripDetailVC, animated: true, completion: nil)
     }
     
@@ -335,10 +335,12 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
         //clear weather arrays
         tripData.removeAll()
         mapView.clear()
+        //remove any existing polylines
+        self.polylineArray.forEach { $0.map = nil }
         showSpinner(view: view)
         
         //show line
-        self.createLine(startLocation: locationStart, endLocation: locationEnd) { time, distance in
+        self.processStops(index: self.userTripDetails.cityLocations.count - 1) { time, distance in
             
             self.tripData.reverse()
             
@@ -358,6 +360,28 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
             
             self.stopSpinner()
             
+        }
+    }
+    
+    func processStops(index: Int, completion: @escaping (String, String) -> ()){
+        
+        let group = DispatchGroup()
+        var finalTime = ""
+        var finalDistance = ""
+        
+        if (index > 0) {
+            group.enter()
+            processStops(index: index - 1) { time, distance in
+                self.createLine(startLocation: self.userTripDetails.cityLocations[index-1], endLocation: self.userTripDetails.cityLocations[index], time: self.userTripDetails.startTimes[index]){ time, distance in
+                    finalTime = time
+                    finalDistance = distance
+                    group.leave()
+                }
+                
+            }
+        }
+        group.notify(queue: DispatchQueue.main){
+            completion(finalTime, finalDistance)
         }
     }
 
