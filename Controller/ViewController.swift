@@ -311,6 +311,7 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
         - sender: the UIButton being interacted with
     */
     func showTimePopupInitially(){
+        userTripDetails = tripDetailsModal()
         let tripDetailVC = storyboard?.instantiateViewController(withIdentifier: "customizeTripDetails") as! CustomizeTripDetails
         tripDetailVC.modalPresentationStyle = .overCurrentContext
         tripDetailVC.delegate = self
@@ -354,12 +355,9 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
             self.startButton.isEnabled = true
             self.destinationButton.isEnabled = true
             
-            //show destination marker on map
-            self.MarkerEnd = self.createMarker(titleMarker: self.tripData.cities[0], latitude: self.locationEnd.coordinate.latitude, longitude: self.locationEnd.coordinate.longitude)
-            
-            //show start location maker only if not using current location
-            if self.startLocation.text != "Current Location" {
-                self.markerStart = self.createMarker(titleMarker: self.tripData.cities[self.tripData.cities.count - 1], latitude: self.locationStart.coordinate.latitude, longitude: self.locationStart.coordinate.longitude)
+            for (index, location) in self.userTripDetails.cityLocations.enumerated() {
+                
+                self.createMarker(titleMarker: self.userTripDetails.cityStops[index], latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
             }
             
             self.stopSpinner()
