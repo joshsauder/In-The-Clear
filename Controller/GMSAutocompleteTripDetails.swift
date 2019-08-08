@@ -15,9 +15,11 @@ extension CustomizeTripDetails: GMSAutocompleteViewControllerDelegate {
     func viewController(_ viewController: GMSAutocompleteViewController, didAutocompleteWith place: GMSPlace) {
         //add city to cities array
         let location = CLLocation(latitude: place.coordinate.latitude, longitude: place.coordinate.longitude)
-        addCity(city: place.name!, loc: location, index: selectedIndex.row)
+        let index = self.tripDetails.cityLocations.count - 1
+        let indexPath = IndexPath(row: index, section: 0)
+        addCity(city: place.name!, loc: location, index: index)
         self.dismiss(animated: true, completion: nil)
-        insertCityToTable()
+        insertCityToTable(index: indexPath)
     }
     
     func viewController(_ viewController: GMSAutocompleteViewController, didFailAutocompleteWithError error: Error) {

@@ -20,6 +20,9 @@ class CustomizeTripDetails: UIViewController, CellDataDelegate{
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var dateView: UIView!
+    @IBOutlet weak var editButton: UIButton!
+    @IBOutlet weak var addButton: UIButton!
+    
     var tripDetails = tripDetailsModal()
     var selectedIndex = IndexPath(row: 0, section: 0)
     weak var delegate: TripDetailsDetegate?
@@ -27,6 +30,7 @@ class CustomizeTripDetails: UIViewController, CellDataDelegate{
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
+        setupButton()
         configureTableView()
     }
     
@@ -48,27 +52,40 @@ class CustomizeTripDetails: UIViewController, CellDataDelegate{
         tripDetails = (delegate?.intializeLocationData())!
         tableView.dataSource = self
         tableView.delegate = self
-        self.tableView.isEditing = true
+        self.tableView.isEditing = false
         self.tableView.allowsSelection = true
         self.tableView.isUserInteractionEnabled = true
     }
     
-
     
-    
-    func addButtonTapped(){
+    @IBAction func addButtonTapped(_ sender: Any){
         //open GMSAutocomplete controllerand present
         let autoCompleteController = GMSAutocompleteViewController()
         autoCompleteController.delegate = self
         self.present(autoCompleteController, animated: true, completion: nil)
     }
     
-    func insertCityToTable(){
+    @IBAction func editButtonTapped(_ sender: Any) {
+        
+        self.tableView.isEditing = !self.tableView.isEditing
+        
+        if self.tableView.isEditing {
+            addButton.isHidden = true
+            editButton.setTitle("Done", for: .normal)
+        } else {
+            addButton.isHidden = false
+            editButton.setTitle("Edit", for: .normal)
+        }
+        
+    }
+    
+    
+    func insertCityToTable(index: IndexPath){
         
         //TODO: need to check new value was inputed
         
         tableView.beginUpdates()
-        tableView.insertRows(at: [selectedIndex], with: .automatic)
+        tableView.insertRows(at: [index], with: .automatic)
         tableView.endUpdates()
     }
     
@@ -137,15 +154,13 @@ extension CustomizeTripDetails: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.tableView.beginUpdates()
         let cell = self.tableView.cellForRow(at: indexPath) as! TripDetailsTableViewCell
+        //if index is already selected close else show uidatepicker
         if selectedIndex == indexPath {
             cell.DatePicker.isHidden = true
             selectedIndex = IndexPath()
         } else{
             cell.DatePicker.isHidden = false
             selectedIndex = indexPath
-            if cell.CityName.text! == "Add City" {
-                addButtonTapped()
-            }
         }
         tableView.deselectRow(at: indexPath, animated: false)
         self.tableView.endUpdates()

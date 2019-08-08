@@ -207,7 +207,7 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
         
         if userTripDetails.cityStops.count == 0 {
             //append first and last city
-            tripDetails.cityStops.append(contentsOf: [startLocation.text!, "Add City", destinationLocation.text!])
+            tripDetails.cityStops.append(contentsOf: [startLocation.text!, destinationLocation.text!])
             //need two dates in the case first or last city are reordered
             tripDetails.startTimes.append(contentsOf: [Date(), Date()])
             //add start and end locations

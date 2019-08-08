@@ -13,6 +13,7 @@ class TripDetailsTableViewCell: UITableViewCell  {
     
     @IBOutlet weak var CityName: UILabel!
     @IBOutlet weak var DatePicker: UIDatePicker!
+    @IBOutlet weak var dateFormatSwitch: UISegmentedControl!
     
     weak var cellData: CellDataDelegate?
     
@@ -40,8 +41,22 @@ class TripDetailsTableViewCell: UITableViewCell  {
         
     }
     
+    func setupSegment(){
+        
+        dateFormatSwitch.setTitle("Date", forSegmentAt: 0)
+        dateFormatSwitch.setTitle("Interval", forSegmentAt: 1)
+    }
+    
     @IBAction func datePickerChange(_ sender: Any) {
         cellData?.modifyTime(time: DatePicker.date)
     }
     
+    @IBAction func switchDateFormat(_ sender: Any) {
+        let index = dateFormatSwitch.selectedSegmentIndex
+        if index == 0 {
+            DatePicker.datePickerMode = UIDatePickerMode.dateAndTime
+        }else {
+            DatePicker.datePickerMode = UIDatePickerMode.countDownTimer
+        }
+    }
 }

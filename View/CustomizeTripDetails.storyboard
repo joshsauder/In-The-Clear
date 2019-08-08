@@ -20,7 +20,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gPA-Xj-wrF">
                                 <rect key="frame" x="20" y="154" width="335" height="514"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select a Start Time" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OTl-7R-QE9">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Trip Stops" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OTl-7R-QE9">
                                         <rect key="frame" x="0.0" y="0.0" width="335" height="42"/>
                                         <color key="backgroundColor" red="0.47464728355407715" green="0.15095242857933044" blue="0.50199043750762939" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <constraints>
@@ -38,7 +38,7 @@
                                             <constraint firstAttribute="height" constant="42" id="ofy-NX-WbO"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="21"/>
-                                        <state key="normal" title="Set Start Time">
+                                        <state key="normal" title="Set Trip Stops">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <connections>
@@ -61,12 +61,15 @@
                                                             <date key="date" timeIntervalSinceReferenceDate="586577904.22887599">
                                                                 <!--2019-08-04 02:18:24 +0000-->
                                                             </date>
+                                                            <connections>
+                                                                <action selector="datePickerChange:" destination="O2Z-77-fRu" eventType="valueChanged" id="1oH-Gv-yRh"/>
+                                                            </connections>
                                                         </datePicker>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pWn-KF-vcz">
-                                                            <rect key="frame" x="15" y="3" width="179" height="38"/>
+                                                            <rect key="frame" x="15" y="3" width="182" height="38"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="38" id="7CU-xp-1BN"/>
-                                                                <constraint firstAttribute="width" constant="179" id="zkO-rY-hn8"/>
+                                                                <constraint firstAttribute="width" constant="182" id="zkO-rY-hn8"/>
                                                             </constraints>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <nil key="textColor"/>
@@ -100,6 +103,23 @@
                                             <action selector="onCancel:" destination="oEp-kz-6sl" eventType="touchUpInside" id="bV8-SG-ZrU"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ywt-Pz-YXo">
+                                        <rect key="frame" x="273" y="4" width="54" height="34"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                        <state key="normal" title="Button"/>
+                                        <connections>
+                                            <action selector="editButtonTapped:" destination="oEp-kz-6sl" eventType="touchUpInside" id="3YA-Ac-KJY"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Dc-Di-m5d">
+                                        <rect key="frame" x="8" y="11" width="21" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                        <connections>
+                                            <action selector="addButtonTapped:" destination="oEp-kz-6sl" eventType="touchUpInside" id="cx3-1a-DhS"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
@@ -131,7 +151,9 @@
                         <viewLayoutGuide key="safeArea" id="Brl-bT-qop"/>
                     </view>
                     <connections>
+                        <outlet property="addButton" destination="8Dc-Di-m5d" id="zWm-Vl-YDS"/>
                         <outlet property="dateView" destination="gPA-Xj-wrF" id="He3-rZ-ISG"/>
+                        <outlet property="editButton" destination="Ywt-Pz-YXo" id="Oa6-Di-pZ6"/>
                         <outlet property="tableView" destination="uhN-Vg-s4s" id="WvF-So-lmP"/>
                     </connections>
                 </viewController>

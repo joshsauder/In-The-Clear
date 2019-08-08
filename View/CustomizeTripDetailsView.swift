@@ -11,25 +11,6 @@ import UIKit
 
 extension CustomizeTripDetails {
     
-    func setLabelImage(imageString: String, labelString: String, size: Int) -> NSMutableAttributedString{
-        //Create Attachment
-        let imageAttachment =  NSTextAttachment()
-        imageAttachment.image = UIImage(named: imageString)
-        imageAttachment.bounds = CGRect(x: 0, y: -3, width: size, height: size)
-        
-        //Create string with attachment
-        let attachmentString = NSAttributedString(attachment: imageAttachment)
-        //Initialize mutable string
-        let completeText = NSMutableAttributedString(string: "")
-        //Add image to mutable string
-        completeText.append(attachmentString)
-        
-        let textAfterIcon = NSMutableAttributedString(string: " " + labelString)
-        completeText.append(textAfterIcon)
-        
-        return completeText
-    }
-    
     /**
      Sets up the date picker view
      */
@@ -39,4 +20,19 @@ extension CustomizeTripDetails {
         view.backgroundColor = UIColor.init(red: 0.5, green: 0.5, blue: 0.5, alpha: 0.5)
         
     }
+    
+    
+    func setupButton(){
+        editButton.setTitle("Edit", for: .normal)
+        editButton.setTitleColor(.white, for: .normal)
+        
+        var image = UIImage(named: "addIcon")
+        image = image?.resize(targetSize: CGSize(width: 21, height: 21))
+        image = image?.withRenderingMode(.alwaysTemplate)
+    
+        addButton.setImage(image, for: .normal)
+        addButton.tintColor = .white
+    }
 }
+
+
