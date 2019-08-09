@@ -14,6 +14,7 @@ class TripDetailsTableViewCell: UITableViewCell  {
     @IBOutlet weak var CityName: UILabel!
     @IBOutlet weak var DatePicker: UIDatePicker!
     @IBOutlet weak var dateFormatSwitch: UISegmentedControl!
+    @IBOutlet weak var timeLabel: UILabel!
     
     weak var cellData: CellDataDelegate?
     
@@ -48,6 +49,7 @@ class TripDetailsTableViewCell: UITableViewCell  {
     }
     
     @IBAction func datePickerChange(_ sender: Any) {
+        timeLabel.text = DatePicker.date.toString(dateFormat: "EE h:mm a")
         cellData?.modifyTime(time: DatePicker.date)
     }
     
@@ -59,4 +61,16 @@ class TripDetailsTableViewCell: UITableViewCell  {
             DatePicker.datePickerMode = UIDatePickerMode.countDownTimer
         }
     }
+}
+
+
+extension Date
+{
+    func toString( dateFormat format  : String ) -> String
+    {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = format
+        return dateFormatter.string(from: self)
+    }
+    
 }

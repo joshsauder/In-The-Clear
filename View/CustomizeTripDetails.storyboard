@@ -66,11 +66,17 @@
                                                             </connections>
                                                         </datePicker>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pWn-KF-vcz">
-                                                            <rect key="frame" x="15" y="3" width="182" height="38"/>
+                                                            <rect key="frame" x="15" y="3" width="140" height="38"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="38" id="7CU-xp-1BN"/>
-                                                                <constraint firstAttribute="width" constant="182" id="zkO-rY-hn8"/>
+                                                                <constraint firstAttribute="width" constant="140" id="zkO-rY-hn8"/>
                                                             </constraints>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yTr-jp-4iR">
+                                                            <rect key="frame" x="183" y="3" width="126" height="38"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
@@ -80,14 +86,19 @@
                                                         <constraint firstItem="KAa-yq-1Sf" firstAttribute="top" secondItem="pWn-KF-vcz" secondAttribute="bottom" constant="3" id="78M-js-bSo"/>
                                                         <constraint firstItem="KAa-yq-1Sf" firstAttribute="leading" secondItem="qT2-Oh-bgO" secondAttribute="leading" id="ECs-um-g8V"/>
                                                         <constraint firstAttribute="trailing" secondItem="KAa-yq-1Sf" secondAttribute="trailing" id="F0V-Xn-bzH"/>
+                                                        <constraint firstItem="yTr-jp-4iR" firstAttribute="firstBaseline" secondItem="pWn-KF-vcz" secondAttribute="firstBaseline" id="FWR-JI-6l6"/>
                                                         <constraint firstItem="pWn-KF-vcz" firstAttribute="top" secondItem="qT2-Oh-bgO" secondAttribute="top" constant="3" id="J8F-PP-w0d"/>
                                                         <constraint firstItem="pWn-KF-vcz" firstAttribute="leading" secondItem="qT2-Oh-bgO" secondAttribute="leadingMargin" id="axi-EG-vJ5"/>
+                                                        <constraint firstItem="yTr-jp-4iR" firstAttribute="leading" secondItem="pWn-KF-vcz" secondAttribute="trailing" constant="28" id="cUs-X0-9m5"/>
+                                                        <constraint firstAttribute="trailingMargin" secondItem="yTr-jp-4iR" secondAttribute="trailing" constant="11" id="dks-Sj-Usf"/>
                                                         <constraint firstAttribute="bottomMargin" secondItem="KAa-yq-1Sf" secondAttribute="bottom" constant="-11" id="dys-HC-xPZ"/>
+                                                        <constraint firstItem="yTr-jp-4iR" firstAttribute="baseline" secondItem="pWn-KF-vcz" secondAttribute="baseline" id="hXs-e8-Btc"/>
                                                     </constraints>
                                                 </tableViewCellContentView>
                                                 <connections>
                                                     <outlet property="CityName" destination="pWn-KF-vcz" id="1Vd-cb-2eO"/>
                                                     <outlet property="DatePicker" destination="KAa-yq-1Sf" id="re2-nM-493"/>
+                                                    <outlet property="timeLabel" destination="yTr-jp-4iR" id="9mC-Dw-zzY"/>
                                                 </connections>
                                             </tableViewCell>
                                         </prototypes>

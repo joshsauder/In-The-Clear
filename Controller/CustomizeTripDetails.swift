@@ -26,6 +26,7 @@ class CustomizeTripDetails: UIViewController, CellDataDelegate{
     var tripDetails = tripDetailsModal()
     var selectedIndex = IndexPath(row: 0, section: 0)
     weak var delegate: TripDetailsDetegate?
+    var earliestTimes: [Date] = [Date()]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -79,6 +80,26 @@ class CustomizeTripDetails: UIViewController, CellDataDelegate{
         
     }
     
+    func updateTimes(){
+        getTravelTime(locations: tripDetails.cityLocations){ times in
+            self.earliestTimes = self.addTimes(times: times)
+            self.tableView.reloadData()
+        }
+    }
+    
+    func addTimes(times: [Int]) -> [Date]{
+        var retArray:[Date] = []
+        if times.count > 0{
+            var tempArray = times
+            tempArray.removeLast()
+            retArray = addTimes(times: tempArray)
+            let time = times[times.count - 1]
+            let date = Calendar.current.date(byAdding: .second, value: time, to: Date())
+            retArray.append(date!)
+        }
+        return retArray
+    }
+    
     
     func insertCityToTable(index: IndexPath){
         
@@ -87,6 +108,7 @@ class CustomizeTripDetails: UIViewController, CellDataDelegate{
         tableView.beginUpdates()
         tableView.insertRows(at: [index], with: .automatic)
         tableView.endUpdates()
+        updateTimes()
     }
     
     /**
@@ -124,6 +146,12 @@ extension CustomizeTripDetails: UITableViewDelegate, UITableViewDataSource {
         
         let tripCell = tableView.dequeueReusableCell(withIdentifier: "TripDetailsTableViewCell", for: indexPath) as! TripDetailsTableViewCell
         tripCell.CityName.text = tripDetails.cityStops[indexPath.row]
+        if indexPath.row < earliestTimes.count {
+            tripCell.DatePicker.minimumDate = earliestTimes[indexPath.row]
+            tripCell.timeLabel.text = tripCell.DatePicker.date.toString(dateFormat: "EE h:mm a")
+        } else {
+            tripCell.timeLabel.text = ""
+        }
         tripCell.cellData = self
 
         return tripCell
@@ -140,6 +168,7 @@ extension CustomizeTripDetails: UITableViewDelegate, UITableViewDataSource {
             tableView.deleteRows(at: [indexPath], with: .automatic)
             //will need to prevent target city from being removed
             tableView.endUpdates()
+            updateTimes()
         }
     }
     
@@ -149,6 +178,7 @@ extension CustomizeTripDetails: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
         tripDetails.reorderItems(startIndex: sourceIndexPath.row, destIndex: destinationIndexPath.row)
+        updateTimes()
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

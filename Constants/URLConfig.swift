@@ -10,9 +10,8 @@ import Foundation
 
 struct url {
     static let PATH_URL = "https://maps.googleapis.com/maps/api/directions/json?origin="
-    static let WEATHER_URL = "http://api.openweathermap.org/data/2.5/forecast?"
     static let GOOGLEMAPS_URL = "https://www.google.co.in/maps/dir/?saddr="
-    static let ARCGIS_GEOCODER_URL = "http://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer/reverseGeocode?f=pjson&location="
     static let AWS_WEATHER_URL = "https://\(Constants.AWS_KEY).execute-api.us-east-1.amazonaws.com/Prod/weather"
     static let AWS_REVERSE_GEOLOCATION_URL = "https://\(Constants.AWS_KEY).execute-api.us-east-1.amazonaws.com/Prod/reveresegeocode"
+    static let HERE_MAPS_TRIP_TIMES_URL = "https://route.api.here.com/routing/7.2/calculateroute.json?app_id=\(Constants.HERE_APPID)&app_code=\(Constants.HERE_APPCODE)"
 }
