@@ -85,6 +85,8 @@ class CustomizeTripDetails: UIViewController, CellDataDelegate{
     func getNewTimes(){
         getTravelTime(locations: tripDetails.cityLocations){ times in
             self.timeOffset = times
+            //remove last since destination city
+            self.timeOffset.removeLast()
             self.updateTimes()
         }
     }
@@ -159,11 +161,14 @@ extension CustomizeTripDetails: UITableViewDelegate, UITableViewDataSource {
         
         let tripCell = tableView.dequeueReusableCell(withIdentifier: "TripDetailsTableViewCell", for: indexPath) as! TripDetailsTableViewCell
         tripCell.CityName.text = tripDetails.cityStops[indexPath.row]
-        if indexPath.row < timeOffset.count - 1 {
+        if indexPath.row < earliestTimes.count {
             tripCell.DatePicker.minimumDate = earliestTimes[indexPath.row]
             tripCell.timeLabel.text = tripCell.DatePicker.date.toString(dateFormat: "EE h:mm a")
+            tripCell.departureTime.text = "Departure Time"
         } else {
             tripCell.timeLabel.text = ""
+            tripCell.departureTime.text = ""
+            
         }
         tripCell.cellData = self
 

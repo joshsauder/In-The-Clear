@@ -15,6 +15,7 @@ class TripDetailsTableViewCell: UITableViewCell  {
     @IBOutlet weak var DatePicker: UIDatePicker!
     @IBOutlet weak var dateFormatSwitch: UISegmentedControl!
     @IBOutlet weak var timeLabel: UILabel!
+    @IBOutlet weak var departureTime: UILabel!
     
     weak var cellData: CellDataDelegate?
     
