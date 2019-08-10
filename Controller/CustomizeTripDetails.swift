@@ -27,6 +27,7 @@ class CustomizeTripDetails: UIViewController, CellDataDelegate{
     var selectedIndex = IndexPath(row: 0, section: 0)
     weak var delegate: TripDetailsDetegate?
     var earliestTimes: [Date] = [Date()]
+    var timeOffset: [Int] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,6 +48,7 @@ class CustomizeTripDetails: UIViewController, CellDataDelegate{
     
     func modifyTime(time: Date) {
         tripDetails.startTimes[selectedIndex.row] = time
+        updateTimes()
     }
     
     func configureTableView(){
@@ -80,22 +82,33 @@ class CustomizeTripDetails: UIViewController, CellDataDelegate{
         
     }
     
-    func updateTimes(){
+    func getNewTimes(){
         getTravelTime(locations: tripDetails.cityLocations){ times in
-            self.earliestTimes = self.addTimes(times: times)
-            self.tableView.reloadData()
+            self.timeOffset = times
+            self.updateTimes()
         }
     }
     
+    func updateTimes(){
+            self.earliestTimes = self.addTimes(times: timeOffset)
+            self.tableView.reloadData()
+    }
+    
     func addTimes(times: [Int]) -> [Date]{
-        var retArray:[Date] = []
-        if times.count > 0{
+        var retArray:[Date] = [Date()]
+        if times.count > 0 {
             var tempArray = times
             tempArray.removeLast()
             retArray = addTimes(times: tempArray)
-            let time = times[times.count - 1]
-            let date = Calendar.current.date(byAdding: .second, value: time, to: Date())
-            retArray.append(date!)
+            let time = times[0]
+            var date = Date()
+            if  Calendar.current.date(byAdding: .second, value: time, to: retArray[retArray.count - 1])! > Calendar.current.date(byAdding: .second, value: time, to: tripDetails.startTimes[retArray.count - 1])! {
+                    
+                date = Calendar.current.date(byAdding: .second, value: time, to: retArray[retArray.count - 1])!
+            } else {
+                date = Calendar.current.date(byAdding: .second, value: time, to: tripDetails.startTimes[retArray.count - 1])!
+            }
+            retArray.append(date)
         }
         return retArray
     }
@@ -108,7 +121,7 @@ class CustomizeTripDetails: UIViewController, CellDataDelegate{
         tableView.beginUpdates()
         tableView.insertRows(at: [index], with: .automatic)
         tableView.endUpdates()
-        updateTimes()
+        getNewTimes()
     }
     
     /**
@@ -146,7 +159,7 @@ extension CustomizeTripDetails: UITableViewDelegate, UITableViewDataSource {
         
         let tripCell = tableView.dequeueReusableCell(withIdentifier: "TripDetailsTableViewCell", for: indexPath) as! TripDetailsTableViewCell
         tripCell.CityName.text = tripDetails.cityStops[indexPath.row]
-        if indexPath.row < earliestTimes.count {
+        if indexPath.row < timeOffset.count - 1 {
             tripCell.DatePicker.minimumDate = earliestTimes[indexPath.row]
             tripCell.timeLabel.text = tripCell.DatePicker.date.toString(dateFormat: "EE h:mm a")
         } else {
@@ -168,7 +181,7 @@ extension CustomizeTripDetails: UITableViewDelegate, UITableViewDataSource {
             tableView.deleteRows(at: [indexPath], with: .automatic)
             //will need to prevent target city from being removed
             tableView.endUpdates()
-            updateTimes()
+            getNewTimes()
         }
     }
     
@@ -178,7 +191,7 @@ extension CustomizeTripDetails: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
         tripDetails.reorderItems(startIndex: sourceIndexPath.row, destIndex: destinationIndexPath.row)
-        updateTimes()
+        getNewTimes()
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
