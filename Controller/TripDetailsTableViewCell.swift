@@ -14,8 +14,8 @@ class TripDetailsTableViewCell: UITableViewCell  {
     @IBOutlet weak var CityName: UILabel!
     @IBOutlet weak var DatePicker: UIDatePicker!
     @IBOutlet weak var dateFormatSwitch: UISegmentedControl!
-    @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var departureTime: UILabel!
+    @IBOutlet weak var arrivalTime: UILabel!
     
     weak var cellData: CellDataDelegate?
     
@@ -50,7 +50,7 @@ class TripDetailsTableViewCell: UITableViewCell  {
     }
     
     @IBAction func datePickerChange(_ sender: Any) {
-        timeLabel.text = DatePicker.date.toString(dateFormat: "EE h:mm a")
+        departureTime.text = "Departure Time: " + DatePicker.date.toString(dateFormat: "EE h:mm a")
         cellData?.modifyTime(time: DatePicker.date)
     }
     

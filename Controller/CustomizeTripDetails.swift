@@ -34,6 +34,7 @@ class CustomizeTripDetails: UIViewController, CellDataDelegate{
         setupView()
         setupButton()
         configureTableView()
+        getNewTimes()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -85,8 +86,6 @@ class CustomizeTripDetails: UIViewController, CellDataDelegate{
     func getNewTimes(){
         getTravelTime(locations: tripDetails.cityLocations){ times in
             self.timeOffset = times
-            //remove last since destination city
-            self.timeOffset.removeLast()
             self.updateTimes()
         }
     }
@@ -161,14 +160,25 @@ extension CustomizeTripDetails: UITableViewDelegate, UITableViewDataSource {
         
         let tripCell = tableView.dequeueReusableCell(withIdentifier: "TripDetailsTableViewCell", for: indexPath) as! TripDetailsTableViewCell
         tripCell.CityName.text = tripDetails.cityStops[indexPath.row]
-        if indexPath.row < earliestTimes.count {
+        if indexPath.row < earliestTimes.count - 1 && indexPath.row != 0 {
             tripCell.DatePicker.minimumDate = earliestTimes[indexPath.row]
-            tripCell.timeLabel.text = tripCell.DatePicker.date.toString(dateFormat: "EE h:mm a")
-            tripCell.departureTime.text = "Departure Time"
-        } else {
-            tripCell.timeLabel.text = ""
-            tripCell.departureTime.text = ""
+            let departureTime = tripCell.DatePicker.date.toString(dateFormat: "EE h:mm a")
+            tripCell.departureTime.text = "Departure: \(departureTime)"
+            let arrivalTime = earliestTimes[indexPath.row].toString(dateFormat: "EE h:mm a")
+            tripCell.arrivalTime.text = "Arrival: \(arrivalTime)"
             
+        } else if indexPath.row == 0 {
+            tripCell.arrivalTime.text = ""
+            tripCell.DatePicker.minimumDate = earliestTimes[indexPath.row]
+            let timeText = tripCell.DatePicker.date.toString(dateFormat: "EE h:mm a")
+            tripCell.departureTime.text = "Departure: \(timeText)"
+        }
+        else {
+            tripCell.departureTime.text = ""
+            if earliestTimes.count - 1 == indexPath.row {
+                let timeText = earliestTimes[indexPath.row].toString(dateFormat: "EE h:mm a")
+                tripCell.arrivalTime.text = "Arrival: \(timeText)"
+            }
         }
         tripCell.cellData = self
 

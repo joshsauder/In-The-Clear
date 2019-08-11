@@ -75,41 +75,41 @@
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yTr-jp-4iR">
-                                                            <rect key="frame" x="189" y="17" width="120" height="24"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Arrval Time" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8y3-jm-509">
+                                                            <rect key="frame" x="172" y="3" width="148" height="18"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Departure Time" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8JF-y0-vSa">
-                                                            <rect key="frame" x="189" y="4" width="120" height="10"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                                            <rect key="frame" x="172" y="23" width="148" height="18"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                     </subviews>
                                                     <constraints>
-                                                        <constraint firstItem="8JF-y0-vSa" firstAttribute="trailing" secondItem="yTr-jp-4iR" secondAttribute="trailing" id="1qt-K1-XOg"/>
                                                         <constraint firstItem="KAa-yq-1Sf" firstAttribute="top" secondItem="pWn-KF-vcz" secondAttribute="bottom" constant="3" id="78M-js-bSo"/>
-                                                        <constraint firstItem="yTr-jp-4iR" firstAttribute="top" secondItem="8JF-y0-vSa" secondAttribute="bottom" constant="3" id="E4p-g6-bGo"/>
+                                                        <constraint firstAttribute="trailingMargin" secondItem="8y3-jm-509" secondAttribute="trailing" id="83O-X8-nb9"/>
+                                                        <constraint firstItem="8JF-y0-vSa" firstAttribute="top" secondItem="8y3-jm-509" secondAttribute="bottom" constant="2" id="AoP-CQ-yWq"/>
+                                                        <constraint firstItem="8y3-jm-509" firstAttribute="leading" secondItem="8JF-y0-vSa" secondAttribute="leading" id="E0I-EH-1bc"/>
                                                         <constraint firstItem="KAa-yq-1Sf" firstAttribute="leading" secondItem="qT2-Oh-bgO" secondAttribute="leading" id="ECs-um-g8V"/>
-                                                        <constraint firstItem="8JF-y0-vSa" firstAttribute="top" secondItem="qT2-Oh-bgO" secondAttribute="topMargin" constant="-7" id="Eh4-iF-Kaf"/>
+                                                        <constraint firstItem="8JF-y0-vSa" firstAttribute="top" secondItem="qT2-Oh-bgO" secondAttribute="topMargin" constant="12" id="Eh4-iF-Kaf"/>
                                                         <constraint firstAttribute="trailing" secondItem="KAa-yq-1Sf" secondAttribute="trailing" id="F0V-Xn-bzH"/>
-                                                        <constraint firstItem="yTr-jp-4iR" firstAttribute="firstBaseline" secondItem="pWn-KF-vcz" secondAttribute="firstBaseline" constant="12" id="FWR-JI-6l6"/>
+                                                        <constraint firstItem="8y3-jm-509" firstAttribute="trailing" secondItem="8JF-y0-vSa" secondAttribute="trailing" id="FTb-Uh-f7j"/>
                                                         <constraint firstItem="pWn-KF-vcz" firstAttribute="top" secondItem="qT2-Oh-bgO" secondAttribute="top" constant="3" id="J8F-PP-w0d"/>
+                                                        <constraint firstItem="8y3-jm-509" firstAttribute="top" secondItem="pWn-KF-vcz" secondAttribute="top" id="JqP-ne-5Wz"/>
+                                                        <constraint firstItem="8JF-y0-vSa" firstAttribute="bottom" secondItem="pWn-KF-vcz" secondAttribute="bottom" id="Lqm-50-5JH"/>
                                                         <constraint firstItem="pWn-KF-vcz" firstAttribute="leading" secondItem="qT2-Oh-bgO" secondAttribute="leadingMargin" id="axi-EG-vJ5"/>
-                                                        <constraint firstItem="yTr-jp-4iR" firstAttribute="leading" secondItem="pWn-KF-vcz" secondAttribute="trailing" constant="25" id="cUs-X0-9m5"/>
-                                                        <constraint firstAttribute="trailingMargin" secondItem="yTr-jp-4iR" secondAttribute="trailing" constant="11" id="dks-Sj-Usf"/>
                                                         <constraint firstAttribute="bottomMargin" secondItem="KAa-yq-1Sf" secondAttribute="bottom" constant="-11" id="dys-HC-xPZ"/>
-                                                        <constraint firstItem="yTr-jp-4iR" firstAttribute="baseline" secondItem="pWn-KF-vcz" secondAttribute="baseline" id="hXs-e8-Btc"/>
-                                                        <constraint firstItem="8JF-y0-vSa" firstAttribute="leading" secondItem="yTr-jp-4iR" secondAttribute="leading" id="nOO-vY-zgA"/>
+                                                        <constraint firstItem="8y3-jm-509" firstAttribute="leading" secondItem="pWn-KF-vcz" secondAttribute="trailing" constant="8" id="fLG-yV-N8J"/>
                                                     </constraints>
                                                 </tableViewCellContentView>
                                                 <connections>
                                                     <outlet property="CityName" destination="pWn-KF-vcz" id="1Vd-cb-2eO"/>
                                                     <outlet property="DatePicker" destination="KAa-yq-1Sf" id="re2-nM-493"/>
+                                                    <outlet property="arrivalTime" destination="8y3-jm-509" id="43a-Ps-fi9"/>
                                                     <outlet property="departureTime" destination="8JF-y0-vSa" id="HwO-Jm-XLB"/>
-                                                    <outlet property="timeLabel" destination="yTr-jp-4iR" id="9mC-Dw-zzY"/>
                                                 </connections>
                                             </tableViewCell>
                                         </prototypes>
