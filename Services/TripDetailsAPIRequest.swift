@@ -13,6 +13,13 @@ import SwiftyJSON
 
 extension CustomizeTripDetails {
     
+    /**
+     Gets the travel times from city to city
+     
+     - parameters:
+        - locations: The array of city geocoordinates
+        - completion: the completion handler for async call; returns an array of time offsets
+    */
     func getTravelTime(locations: [CLLocation], completion: @escaping ([Int]) -> ()){
         
         var hereURL = url.HERE_MAPS_TRIP_TIMES_URL

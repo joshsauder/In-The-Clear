@@ -41,17 +41,34 @@ class CustomizeTripDetails: UIViewController, CellDataDelegate{
         super.viewWillAppear(animated)
     }
     
+    /**
+     Adds city to trip details modal
+     
+     - parameters:
+        - city: The city
+        - loc: cities geocoordinates
+        - index: index of city in table
+    */
     func addCity(city: String, loc: CLLocation, index: Int) {
         tripDetails.cityStops.insert(city, at: index)
         tripDetails.startTimes.insert(Date(), at: index)
         tripDetails.cityLocations.insert(loc, at: index)
     }
     
+    /**
+     Gets the time from date picker and inserts it into the trip modal
+     
+     - parameters:
+        - time: the date
+    */
     func modifyTime(time: Date) {
         tripDetails.startTimes[selectedIndex.row] = time
         updateTimes()
     }
     
+    /**
+     Configures the table view on init
+    */
     func configureTableView(){
         tripDetails = (delegate?.intializeLocationData())!
         tableView.dataSource = self
@@ -62,13 +79,25 @@ class CustomizeTripDetails: UIViewController, CellDataDelegate{
     }
     
     
+    /**
+     Opens Google Places view and adds selected city
+     
+     - parameters:
+        - sender: The UI object interacted with
+    */
     @IBAction func addButtonTapped(_ sender: Any){
-        //open GMSAutocomplete controllerand present
+        //open GMSAutocomplete controller and present
         let autoCompleteController = GMSAutocompleteViewController()
         autoCompleteController.delegate = self
         self.present(autoCompleteController, animated: true, completion: nil)
     }
     
+    /**
+     When edit button tapped, configures table to allow/disallow editting
+     
+     - parameters:
+        - sender: The UI object interacted with
+     */
     @IBAction func editButtonTapped(_ sender: Any) {
         
         self.tableView.isEditing = !self.tableView.isEditing
@@ -83,6 +112,9 @@ class CustomizeTripDetails: UIViewController, CellDataDelegate{
         
     }
     
+    /**
+     Calls Here maps API service and gets the travel times
+    */
     func getNewTimes(){
         getTravelTime(locations: tripDetails.cityLocations){ times in
             self.timeOffset = times
@@ -90,20 +122,34 @@ class CustomizeTripDetails: UIViewController, CellDataDelegate{
         }
     }
     
+    /**
+     Updates the earilest times array and reloads table data
+    */
     func updateTimes(){
             self.earliestTimes = self.addTimes(times: timeOffset)
             self.tableView.reloadData()
     }
     
+    /**
+     Adds the time offsets to the start times to determine arrival time
+     
+     - parameters:
+        - times: the time offsets
+    */
     func addTimes(times: [Int]) -> [Date]{
         var retArray:[Date] = [Date()]
         if times.count > 0 {
             var tempArray = times
+            //remove last from time array
             tempArray.removeLast()
+            //recursive call
             retArray = addTimes(times: tempArray)
             let time = times[0]
             var date = Date()
-            if  Calendar.current.date(byAdding: .second, value: time, to: retArray[retArray.count - 1])! > Calendar.current.date(byAdding: .second, value: time, to: tripDetails.startTimes[retArray.count - 1])! {
+            //if start time is less than earliest time, add time offset to earilest time
+            //else add to start time
+            //needed in the case where start time is greater than earliest time
+            if Calendar.current.date(byAdding: .second, value: time, to: retArray[retArray.count - 1])! > Calendar.current.date(byAdding: .second, value: time, to: tripDetails.startTimes[retArray.count - 1])! {
                     
                 date = Calendar.current.date(byAdding: .second, value: time, to: retArray[retArray.count - 1])!
             } else {
@@ -114,7 +160,12 @@ class CustomizeTripDetails: UIViewController, CellDataDelegate{
         return retArray
     }
     
-    
+    /**
+     Inserts city into table
+     
+     - parameters:
+        - index: the index to add row
+    */
     func insertCityToTable(index: IndexPath){
         
         //TODO: need to check new value was inputed
@@ -160,6 +211,7 @@ extension CustomizeTripDetails: UITableViewDelegate, UITableViewDataSource {
         
         let tripCell = tableView.dequeueReusableCell(withIdentifier: "TripDetailsTableViewCell", for: indexPath) as! TripDetailsTableViewCell
         tripCell.CityName.text = tripDetails.cityStops[indexPath.row]
+        //if index is in middle add arrival and departure, if first, add only departure time, else add only arrival time
         if indexPath.row < earliestTimes.count - 1 && indexPath.row != 0 {
             tripCell.DatePicker.minimumDate = earliestTimes[indexPath.row]
             let departureTime = tripCell.DatePicker.date.toString(dateFormat: "EE h:mm a")

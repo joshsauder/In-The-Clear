@@ -43,30 +43,27 @@ class TripDetailsTableViewCell: UITableViewCell  {
         
     }
     
-    func setupSegment(){
-        
-        dateFormatSwitch.setTitle("Date", forSegmentAt: 0)
-        dateFormatSwitch.setTitle("Interval", forSegmentAt: 1)
-    }
-    
+    /**
+     When the date picker is changed, updated the trip modal
+     
+     - parameters:
+        - sender: the ui object interacted with
+    */
     @IBAction func datePickerChange(_ sender: Any) {
         departureTime.text = "Departure Time: " + DatePicker.date.toString(dateFormat: "EE h:mm a")
         cellData?.modifyTime(time: DatePicker.date)
     }
     
-    @IBAction func switchDateFormat(_ sender: Any) {
-        let index = dateFormatSwitch.selectedSegmentIndex
-        if index == 0 {
-            DatePicker.datePickerMode = UIDatePickerMode.dateAndTime
-        }else {
-            DatePicker.datePickerMode = UIDatePickerMode.countDownTimer
-        }
-    }
 }
-
 
 extension Date
 {
+    /**
+     Formats a Date into a string
+     
+     - parameters:
+        - format: The format the date needs to be in
+    */
     func toString( dateFormat format  : String ) -> String
     {
         let dateFormatter = DateFormatter()
