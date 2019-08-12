@@ -90,11 +90,11 @@ extension ViewController {
      Creates GMSPath on the Map
      
      - parameters:
-        - startLocation: The starting location
+        - startLocation: The starting location 
         - endLocation: The destination location
         - completion: Upon calling the service, return the total time and distance strings
     */
-    func createLine(startLocation: CLLocation, endLocation: CLLocation, time: Date, completion: @escaping (String, String) -> ()) {
+    func createLine(startLocation: CLLocation, endLocation: CLLocation, time: Date, completion: @escaping (Int, Double) -> ()) {
         
         
         let origin = "\(startLocation.coordinate.latitude),\(startLocation.coordinate.longitude)"
@@ -110,8 +110,8 @@ extension ViewController {
                 //get the direction steps from the directions array
                 let routesVal = routes[0]["legs"].arrayValue
                 let stepsEval = routesVal[0]
-                let totalTime = stepsEval["duration"]["text"].stringValue
-                let totalDistance = stepsEval["distance"]["text"].stringValue
+                let totalTime = stepsEval["duration"]["value"].intValue
+                let totalDistance = stepsEval["distance"]["value"].doubleValue
                 let steps = stepsEval["steps"].arrayValue
                 
                 //prevent routes that are too long too handle

@@ -365,25 +365,34 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
         }
     }
     
-    func processStops(index: Int, completion: @escaping (String, String) -> ()){
+    func processStops(index: Int, completion: @escaping (String, Double) -> ()){
         
         let group = DispatchGroup()
-        var finalTime = ""
-        var finalDistance = ""
+        var finalTime = 0
+        var finalDistance = Double(0)
         
         if (index > 0) {
             group.enter()
             processStops(index: index - 1) { time, distance in
                 self.createLine(startLocation: self.userTripDetails.cityLocations[index-1], endLocation: self.userTripDetails.cityLocations[index], time: self.userTripDetails.startTimes[index]){ time, distance in
-                    finalTime = time
-                    finalDistance = distance
+                    finalTime += time
+                    finalDistance += distance
                     group.leave()
                 }
                 
             }
         }
         group.notify(queue: DispatchQueue.main){
-            completion(finalTime, finalDistance)
+            
+            var timeString = ""
+            if finalTime < 3600 {
+                timeString = "\(finalTime % 3600 / 60) Minutes"
+            } else {
+                timeString = "\(finalTime / 3600) Hours \(finalTime % 3600 / 60) Minutes"
+            }
+            
+            finalDistance = round(finalDistance * 0.00062137)
+            completion(timeString, finalDistance)
         }
     }
 

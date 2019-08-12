@@ -138,10 +138,10 @@ extension ViewController {
         - time: The total time it takes to travel the route
         - distance: The distance it takes to travel the route
     */
-    func showButtonsAndLabels(time: String, distance: String){
+    func showButtonsAndLabels(time: String, distance: Double){
         
         //enable time label
-        self.timeLabel.text = "Time: \(time)  Distance: \(distance)"
+        self.timeLabel.text = "Time: \(time)  Distance: \(String(format: "%.0f", distance)) Miles"
         self.timeLabel.isHidden = false
         
         //need to scale google maps icons/buttons for diffenent screen sizes
