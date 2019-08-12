@@ -22,7 +22,7 @@
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Trip Stops" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OTl-7R-QE9">
                                         <rect key="frame" x="0.0" y="0.0" width="335" height="42"/>
-                                        <color key="backgroundColor" red="0.47464728355407715" green="0.15095242857933044" blue="0.50199043750762939" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <color key="backgroundColor" red="0.47450980392156861" green="0.14901960784313725" blue="0.50196078431372548" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="42" id="jBt-e2-Pxa"/>
                                         </constraints>
@@ -76,7 +76,7 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Arrval Time" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8y3-jm-509">
-                                                            <rect key="frame" x="172" y="3" width="148" height="18"/>
+                                                            <rect key="frame" x="172" y="4" width="148" height="19"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
@@ -91,14 +91,14 @@
                                                     <constraints>
                                                         <constraint firstItem="KAa-yq-1Sf" firstAttribute="top" secondItem="pWn-KF-vcz" secondAttribute="bottom" constant="3" id="78M-js-bSo"/>
                                                         <constraint firstAttribute="trailingMargin" secondItem="8y3-jm-509" secondAttribute="trailing" id="83O-X8-nb9"/>
-                                                        <constraint firstItem="8JF-y0-vSa" firstAttribute="top" secondItem="8y3-jm-509" secondAttribute="bottom" constant="2" id="AoP-CQ-yWq"/>
+                                                        <constraint firstItem="8JF-y0-vSa" firstAttribute="top" secondItem="8y3-jm-509" secondAttribute="bottom" id="AoP-CQ-yWq"/>
                                                         <constraint firstItem="8y3-jm-509" firstAttribute="leading" secondItem="8JF-y0-vSa" secondAttribute="leading" id="E0I-EH-1bc"/>
                                                         <constraint firstItem="KAa-yq-1Sf" firstAttribute="leading" secondItem="qT2-Oh-bgO" secondAttribute="leading" id="ECs-um-g8V"/>
                                                         <constraint firstItem="8JF-y0-vSa" firstAttribute="top" secondItem="qT2-Oh-bgO" secondAttribute="topMargin" constant="12" id="Eh4-iF-Kaf"/>
                                                         <constraint firstAttribute="trailing" secondItem="KAa-yq-1Sf" secondAttribute="trailing" id="F0V-Xn-bzH"/>
                                                         <constraint firstItem="8y3-jm-509" firstAttribute="trailing" secondItem="8JF-y0-vSa" secondAttribute="trailing" id="FTb-Uh-f7j"/>
                                                         <constraint firstItem="pWn-KF-vcz" firstAttribute="top" secondItem="qT2-Oh-bgO" secondAttribute="top" constant="3" id="J8F-PP-w0d"/>
-                                                        <constraint firstItem="8y3-jm-509" firstAttribute="top" secondItem="pWn-KF-vcz" secondAttribute="top" id="JqP-ne-5Wz"/>
+                                                        <constraint firstItem="8y3-jm-509" firstAttribute="top" secondItem="pWn-KF-vcz" secondAttribute="top" constant="1" id="JqP-ne-5Wz"/>
                                                         <constraint firstItem="8JF-y0-vSa" firstAttribute="bottom" secondItem="pWn-KF-vcz" secondAttribute="bottom" id="Lqm-50-5JH"/>
                                                         <constraint firstItem="pWn-KF-vcz" firstAttribute="leading" secondItem="qT2-Oh-bgO" secondAttribute="leadingMargin" id="axi-EG-vJ5"/>
                                                         <constraint firstAttribute="bottomMargin" secondItem="KAa-yq-1Sf" secondAttribute="bottom" constant="-11" id="dys-HC-xPZ"/>
@@ -110,6 +110,8 @@
                                                     <outlet property="DatePicker" destination="KAa-yq-1Sf" id="re2-nM-493"/>
                                                     <outlet property="arrivalTime" destination="8y3-jm-509" id="43a-Ps-fi9"/>
                                                     <outlet property="departureTime" destination="8JF-y0-vSa" id="HwO-Jm-XLB"/>
+                                                    <outlet property="departureToArrival" destination="AoP-CQ-yWq" id="dRL-HU-dUg"/>
+                                                    <outlet property="departureToSuper" destination="Eh4-iF-Kaf" id="3hU-it-ZIy"/>
                                                 </connections>
                                             </tableViewCell>
                                         </prototypes>

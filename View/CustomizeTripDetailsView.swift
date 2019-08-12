@@ -21,7 +21,9 @@ extension CustomizeTripDetails {
         
     }
     
-    
+    /**
+     Sets up add and edit buttons
+    */
     func setupButton(){
         editButton.setTitle("Edit", for: .normal)
         editButton.setTitleColor(.white, for: .normal)
@@ -32,6 +34,30 @@ extension CustomizeTripDetails {
     
         addButton.setImage(image, for: .normal)
         addButton.tintColor = .white
+    }
+    
+}
+
+extension TripDetailsTableViewCell {
+    
+    /**
+     Sets each cell color and border
+    */
+    func setCellColor(){
+        
+        self.backgroundColor = UIColor(red:0.47, green:0.15, blue:0.50, alpha:1.0)
+        self.layer.cornerRadius = 12
+        self.layer.borderWidth = 3
+        self.layer.borderColor = UIColor.white.cgColor
+    }
+    
+    /**
+     Sets each cells label color to white
+    */
+    func setLabelColor(){
+        self.arrivalTime.textColor = .white
+        self.departureTime.textColor = .white
+        self.CityName.textColor = .white
     }
 }
 

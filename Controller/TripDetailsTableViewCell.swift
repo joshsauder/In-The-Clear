@@ -16,12 +16,15 @@ class TripDetailsTableViewCell: UITableViewCell  {
     @IBOutlet weak var dateFormatSwitch: UISegmentedControl!
     @IBOutlet weak var departureTime: UILabel!
     @IBOutlet weak var arrivalTime: UILabel!
+    @IBOutlet weak var departureToArrival: NSLayoutConstraint!
+    @IBOutlet weak var departureToSuper: NSLayoutConstraint!
     
     weak var cellData: CellDataDelegate?
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        //createDatePicker()
+        setCellColor()
+        setLabelColor()
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -31,15 +34,17 @@ class TripDetailsTableViewCell: UITableViewCell  {
     /**
      Configure the date picker
      */
-    func createDatePicker(){
+    func createDatePicker(minDate: Date?){
         
         DatePicker.datePickerMode = UIDatePickerMode.dateAndTime
         
-        //set min and max date values for date picker
-        let minDate = Calendar.current.date(byAdding: .day, value: .zero, to: Date())
-        let maxDate = Calendar.current.date(byAdding: .day, value: 3, to: Date())
-        DatePicker.minimumDate = minDate
+        //set maxDate
+        let maxDate = Calendar.current.date(byAdding: .day, value: 10, to: Date())
         DatePicker.maximumDate = maxDate
+        DatePicker.minimumDate = minDate
+        
+        //set the datepickers text color to white
+        DatePicker.setValue(UIColor.white, forKey: "textColor")
         
     }
     

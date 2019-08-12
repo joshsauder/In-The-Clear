@@ -76,6 +76,7 @@ class CustomizeTripDetails: UIViewController, CellDataDelegate{
         self.tableView.isEditing = false
         self.tableView.allowsSelection = true
         self.tableView.isUserInteractionEnabled = true
+        self.tableView.separatorColor = UIColor.clear
     }
     
     
@@ -213,23 +214,30 @@ extension CustomizeTripDetails: UITableViewDelegate, UITableViewDataSource {
         tripCell.CityName.text = tripDetails.cityStops[indexPath.row]
         //if index is in middle add arrival and departure, if first, add only departure time, else add only arrival time
         if indexPath.row < earliestTimes.count - 1 && indexPath.row != 0 {
-            tripCell.DatePicker.minimumDate = earliestTimes[indexPath.row]
+            tripCell.createDatePicker(minDate: earliestTimes[indexPath.row])
             let departureTime = tripCell.DatePicker.date.toString(dateFormat: "EE h:mm a")
             tripCell.departureTime.text = "Departure: \(departureTime)"
             let arrivalTime = earliestTimes[indexPath.row].toString(dateFormat: "EE h:mm a")
             tripCell.arrivalTime.text = "Arrival: \(arrivalTime)"
+            //reset constants
+            tripCell.departureToSuper.constant = 12
+            tripCell.departureToArrival.constant = 0
             
         } else if indexPath.row == 0 {
-            tripCell.arrivalTime.text = ""
-            tripCell.DatePicker.minimumDate = earliestTimes[indexPath.row]
+            tripCell.createDatePicker(minDate: earliestTimes[indexPath.row])
             let timeText = tripCell.DatePicker.date.toString(dateFormat: "EE h:mm a")
             tripCell.departureTime.text = "Departure: \(timeText)"
+            //move departure to middle
+            tripCell.departureToSuper.constant = -5
+            tripCell.arrivalTime.text = ""
         }
         else {
-            tripCell.departureTime.text = ""
             if earliestTimes.count - 1 == indexPath.row {
                 let timeText = earliestTimes[indexPath.row].toString(dateFormat: "EE h:mm a")
                 tripCell.arrivalTime.text = "Arrival: \(timeText)"
+                //move arrival to middle
+                tripCell.departureToArrival.constant = -20
+                tripCell.departureTime.text = ""
             }
         }
         tripCell.cellData = self
