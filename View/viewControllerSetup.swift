@@ -70,15 +70,27 @@ extension ViewController {
     func timeLabelSetup(){
         
         //set up time and weather label
-        timeLabel.isHidden = true
-        timeLabel.backgroundColor = UIColor(white: 1, alpha: 1)
-        timeLabel.layer.cornerRadius = 12
+        timeAndDistanceView.isHidden = true
+        timeAndDistanceView.backgroundColor = UIColor(white: 1, alpha: 1)
+        timeAndDistanceView.layer.cornerRadius = 12
         //timeLabel.clipsToBounds = true
-        timeLabel.layer.masksToBounds = true
-        timeLabel.textAlignment = .center
-        //timeLabel.font = UIFont.boldSystemFont(ofSize: 20.0)
-        timeLabel.font = UIFont.systemFont(ofSize: 19.0)
-        timeLabel.adjustsFontForContentSizeCategory = true
+        timeAndDistanceView.layer.masksToBounds = true
+        timeAndDistanceView.backgroundColor = UIColor(red:0.47, green:0.15, blue:0.50, alpha:1.0)
+        
+        //set up text allignment
+        totalTimeLabel.textAlignment = .left
+        drivingTimeLabel.textAlignment = .left
+        totalDistanceLabel.textAlignment = .right
+        
+        //set up font size
+        totalTimeLabel.font = UIFont.systemFont(ofSize: 13.0)
+        drivingTimeLabel.font = UIFont.systemFont(ofSize: 13.0)
+        totalDistanceLabel.font = UIFont.systemFont(ofSize: 13.0)
+        
+        //set font color
+        totalTimeLabel.textColor = .white
+        drivingTimeLabel.textColor = .white
+        totalDistanceLabel.textColor = .white
         
 
     }
@@ -138,11 +150,14 @@ extension ViewController {
         - time: The total time it takes to travel the route
         - distance: The distance it takes to travel the route
     */
-    func showButtonsAndLabels(time: String, distance: Double){
+    func showButtonsAndLabels(drivingTime: String, totalTime: String, distance: Double){
         
         //enable time label
-        self.timeLabel.text = "Time: \(time)  Distance: \(String(format: "%.0f", distance)) Miles"
-        self.timeLabel.isHidden = false
+        self.drivingTimeLabel.text = "Driving Time: \(drivingTime)"
+        self.totalTimeLabel.text = "Total Trip Time: \(totalTime)"
+        self.totalDistanceLabel.text = "Driving Distance: \(String(format: "%.0f", distance)) Miles"
+        
+        self.timeAndDistanceView.isHidden = false
         
         //need to scale google maps icons/buttons for diffenent screen sizes
         if view.bounds.height > 800 && view.bounds.height < 900 {

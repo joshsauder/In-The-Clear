@@ -36,9 +36,13 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
     @IBOutlet weak var destinationLocation: UITextField!
     @IBOutlet weak var startButton: UIButton!
     @IBOutlet weak var destinationButton: UIButton!
-    
     @IBOutlet weak var weatherList: UIButton!
-    @IBOutlet weak var timeLabel: UILabel!
+    
+    @IBOutlet weak var timeAndDistanceView: UIView!
+    @IBOutlet weak var totalTimeLabel: UILabel!
+    @IBOutlet weak var drivingTimeLabel: UILabel!
+    @IBOutlet weak var totalDistanceLabel: UILabel!
+    
     @IBOutlet weak var myLocationButton: UIButton!
     @IBOutlet weak var openGoogleMaps: UIButton!
     @IBOutlet weak var setTime: UIButton!
@@ -349,8 +353,18 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
             
             self.tripData.reverse()
             
+            var totalTimeString = ""
+            if self.userTripDetails.cityStops.count != 2 {
+                let formatter = DateComponentsFormatter()
+                formatter.unitsStyle = .full
+                formatter.allowedUnits = [.hour, .minute]
+                //need to use last start time plus offset
+                totalTimeString = formatter.string(from: self.userTripDetails.startTimes[0], to: self.userTripDetails.endTime)!
+            } else {
+                totalTimeString = time
+            }
             //enable and show time/distance label, Google Maps button, and Weather List Button
-            self.showButtonsAndLabels(time: time, distance: distance)
+            self.showButtonsAndLabels(drivingTime: time, totalTime: totalTimeString, distance: distance)
             //re-enable location buttons
             self.startButton.isEnabled = true
             self.destinationButton.isEnabled = true

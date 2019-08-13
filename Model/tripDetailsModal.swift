@@ -14,12 +14,14 @@ class tripDetailsModal {
     var cityStops: [String] = []
     var cityLocations: [CLLocation] = []
     var startTimes: [Date] = []
+    var endTime: Date = Date()
     
     
     init() {
         self.cityStops = []
         self.startTimes = []
         self.cityLocations = []
+        self.endTime = Date()
     }
     
     func reorderItems(startIndex: Int, destIndex: Int){

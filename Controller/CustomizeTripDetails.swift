@@ -235,6 +235,7 @@ extension CustomizeTripDetails: UITableViewDelegate, UITableViewDataSource {
             if earliestTimes.count - 1 == indexPath.row {
                 let timeText = earliestTimes[indexPath.row].toString(dateFormat: "EE h:mm a")
                 tripCell.arrivalTime.text = "Arrival: \(timeText)"
+                tripDetails.endTime = earliestTimes[indexPath.row]
                 //move arrival to middle
                 tripCell.departureToArrival.constant = -20
                 tripCell.departureTime.text = ""
