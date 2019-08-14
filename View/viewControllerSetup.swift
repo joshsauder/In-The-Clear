@@ -87,6 +87,15 @@ extension ViewController {
         drivingTimeLabel.font = UIFont.systemFont(ofSize: 13.0)
         totalDistanceLabel.font = UIFont.systemFont(ofSize: 13.0)
         
+        //set dynamic font sizes
+        totalTimeLabel.adjustsFontSizeToFitWidth = true
+        totalDistanceLabel.minimumScaleFactor=0.5
+        drivingTimeLabel.adjustsFontSizeToFitWidth = true
+        drivingTimeLabel.minimumScaleFactor=0.5
+        totalDistanceLabel.adjustsFontSizeToFitWidth = true
+        totalDistanceLabel.minimumScaleFactor=0.5
+        
+        
         //set font color
         totalTimeLabel.textColor = .white
         drivingTimeLabel.textColor = .white

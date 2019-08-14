@@ -13,11 +13,8 @@ class TripDetailsTableViewCell: UITableViewCell  {
     
     @IBOutlet weak var CityName: UILabel!
     @IBOutlet weak var DatePicker: UIDatePicker!
-    @IBOutlet weak var dateFormatSwitch: UISegmentedControl!
     @IBOutlet weak var departureTime: UILabel!
     @IBOutlet weak var arrivalTime: UILabel!
-    @IBOutlet weak var departureToArrival: NSLayoutConstraint!
-    @IBOutlet weak var departureToSuper: NSLayoutConstraint!
     
     weak var cellData: CellDataDelegate?
     
@@ -25,6 +22,7 @@ class TripDetailsTableViewCell: UITableViewCell  {
         super.awakeFromNib()
         setCellColor()
         setLabelColor()
+        setLabelFont()
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {

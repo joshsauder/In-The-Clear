@@ -219,17 +219,14 @@ extension CustomizeTripDetails: UITableViewDelegate, UITableViewDataSource {
             tripCell.departureTime.text = "Departure: \(departureTime)"
             let arrivalTime = earliestTimes[indexPath.row].toString(dateFormat: "EE h:mm a")
             tripCell.arrivalTime.text = "Arrival: \(arrivalTime)"
-            //reset constants
-            tripCell.departureToSuper.constant = 12
-            tripCell.departureToArrival.constant = 0
             
         } else if indexPath.row == 0 {
             tripCell.createDatePicker(minDate: earliestTimes[indexPath.row])
             let timeText = tripCell.DatePicker.date.toString(dateFormat: "EE h:mm a")
             tripCell.departureTime.text = "Departure: \(timeText)"
             //move departure to middle
-            tripCell.departureToSuper.constant = -5
             tripCell.arrivalTime.text = ""
+
         }
         else {
             if earliestTimes.count - 1 == indexPath.row {
@@ -237,7 +234,6 @@ extension CustomizeTripDetails: UITableViewDelegate, UITableViewDataSource {
                 tripCell.arrivalTime.text = "Arrival: \(timeText)"
                 tripDetails.endTime = earliestTimes[indexPath.row]
                 //move arrival to middle
-                tripCell.departureToArrival.constant = -20
                 tripCell.departureTime.text = ""
             }
         }

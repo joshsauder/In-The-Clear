@@ -59,6 +59,17 @@ extension TripDetailsTableViewCell {
         self.departureTime.textColor = .white
         self.CityName.textColor = .white
     }
+    
+    func setLabelFont(){
+        //set dynamic font sizes
+        self.arrivalTime.adjustsFontSizeToFitWidth = true
+        self.arrivalTime.minimumScaleFactor=0.5
+        self.departureTime.adjustsFontSizeToFitWidth = true
+        self.departureTime.minimumScaleFactor=0.5
+        self.CityName.adjustsFontSizeToFitWidth = true
+        self.CityName.minimumScaleFactor=0.5
+        
+    }
 }
 
 

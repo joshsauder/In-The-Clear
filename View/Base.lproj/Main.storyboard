@@ -120,24 +120,21 @@
                                 <rect key="frame" x="0.0" y="764" width="375" height="58"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="VPO-Up-Lz2">
-                                        <rect key="frame" x="12" y="0.0" width="176" height="17"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="176" id="RLJ-CE-SnC"/>
-                                        </constraints>
+                                        <rect key="frame" x="12" y="2" width="172.66666666666666" height="15"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                         <size key="shadowOffset" width="0.0" height="0.0"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="FQd-9U-VdS">
-                                        <rect key="frame" x="189" y="0.0" width="176" height="17"/>
+                                        <rect key="frame" x="192.66666666666663" y="2" width="172.33333333333337" height="15"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                         <size key="shadowOffset" width="0.0" height="0.0"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="pud-z4-eUh">
-                                        <rect key="frame" x="12" y="19" width="176" height="17"/>
+                                        <rect key="frame" x="12" y="21" width="172.66666666666666" height="15"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -146,17 +143,20 @@
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="58" id="8Fz-NK-wkV"/>
-                                    <constraint firstItem="pud-z4-eUh" firstAttribute="top" secondItem="VPO-Up-Lz2" secondAttribute="bottom" constant="2" id="CGY-Wr-i64"/>
+                                    <constraint firstItem="FQd-9U-VdS" firstAttribute="height" secondItem="VPO-Up-Lz2" secondAttribute="height" id="9Av-xW-Mid"/>
+                                    <constraint firstItem="pud-z4-eUh" firstAttribute="height" secondItem="VPO-Up-Lz2" secondAttribute="height" id="BTh-3f-by2"/>
+                                    <constraint firstItem="pud-z4-eUh" firstAttribute="top" secondItem="VPO-Up-Lz2" secondAttribute="bottom" constant="4" id="CGY-Wr-i64"/>
                                     <constraint firstAttribute="bottom" secondItem="pud-z4-eUh" secondAttribute="bottom" constant="22" id="Gra-Fb-jiT"/>
                                     <constraint firstItem="VPO-Up-Lz2" firstAttribute="trailing" secondItem="pud-z4-eUh" secondAttribute="trailing" id="Nt0-wm-DZ4"/>
-                                    <constraint firstItem="FQd-9U-VdS" firstAttribute="leading" secondItem="VPO-Up-Lz2" secondAttribute="trailing" constant="1" id="Snd-S3-JLn"/>
+                                    <constraint firstItem="FQd-9U-VdS" firstAttribute="width" secondItem="VPO-Up-Lz2" secondAttribute="width" id="OAm-fZ-7gT"/>
+                                    <constraint firstItem="FQd-9U-VdS" firstAttribute="leading" secondItem="VPO-Up-Lz2" secondAttribute="trailing" constant="8" id="Snd-S3-JLn"/>
                                     <constraint firstItem="VPO-Up-Lz2" firstAttribute="baseline" secondItem="FQd-9U-VdS" secondAttribute="baseline" id="T1A-ME-gf3"/>
                                     <constraint firstItem="VPO-Up-Lz2" firstAttribute="firstBaseline" secondItem="FQd-9U-VdS" secondAttribute="firstBaseline" id="d2x-zw-2y3"/>
-                                    <constraint firstItem="VPO-Up-Lz2" firstAttribute="top" secondItem="cNi-GN-vs2" secondAttribute="top" id="de6-lw-N5k"/>
+                                    <constraint firstItem="VPO-Up-Lz2" firstAttribute="top" secondItem="cNi-GN-vs2" secondAttribute="top" constant="2" id="de6-lw-N5k"/>
                                     <constraint firstItem="VPO-Up-Lz2" firstAttribute="leading" secondItem="cNi-GN-vs2" secondAttribute="leadingMargin" constant="4" id="hp8-vw-OB1"/>
                                     <constraint firstAttribute="bottom" secondItem="FQd-9U-VdS" secondAttribute="bottom" constant="41" id="pYU-bR-61A"/>
                                     <constraint firstItem="VPO-Up-Lz2" firstAttribute="leading" secondItem="pud-z4-eUh" secondAttribute="leading" id="tCh-mR-Efc"/>
+                                    <constraint firstItem="pud-z4-eUh" firstAttribute="width" secondItem="VPO-Up-Lz2" secondAttribute="width" id="vO8-eg-arV"/>
                                     <constraint firstItem="FQd-9U-VdS" firstAttribute="trailing" secondItem="cNi-GN-vs2" secondAttribute="trailingMargin" constant="-2" id="xJk-g1-05y"/>
                                 </constraints>
                             </view>
@@ -169,10 +169,10 @@
                             <constraint firstItem="cBk-DE-G9b" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="110" id="CSI-2o-Z9k"/>
                             <constraint firstItem="iRQ-nk-2T0" firstAttribute="leading" secondItem="fEc-Uw-77w" secondAttribute="leading" id="Dtq-Qc-mBG"/>
                             <constraint firstItem="MeT-bN-U9A" firstAttribute="top" secondItem="5FJ-qe-Fmz" secondAttribute="bottom" id="ECP-Nn-CFw"/>
-                            <constraint firstAttribute="bottomMargin" secondItem="cNi-GN-vs2" secondAttribute="bottom" constant="-44" id="EM5-qd-Bn0"/>
                             <constraint firstItem="cNi-GN-vs2" firstAttribute="top" secondItem="cBk-DE-G9b" secondAttribute="bottom" constant="11" id="Gmh-Ua-ShG"/>
                             <constraint firstItem="cNi-GN-vs2" firstAttribute="leading" secondItem="MeT-bN-U9A" secondAttribute="leading" id="JfR-l9-L2I"/>
                             <constraint firstItem="MeT-bN-U9A" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="OqD-uu-U0E"/>
+                            <constraint firstItem="cNi-GN-vs2" firstAttribute="bottom" secondItem="MeT-bN-U9A" secondAttribute="bottom" constant="10" id="Qf6-0v-5kT"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="cBk-DE-G9b" secondAttribute="trailing" constant="110" id="QvO-2b-Tpb"/>
                             <constraint firstItem="BuA-yv-0eC" firstAttribute="leading" secondItem="fEc-Uw-77w" secondAttribute="leading" id="Swq-uT-n1b"/>
                             <constraint firstItem="5FJ-qe-Fmz" firstAttribute="leading" secondItem="MeT-bN-U9A" secondAttribute="leading" id="V6C-4n-XFL"/>
@@ -209,7 +209,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-337.68115942028987" y="116.51785714285714"/>
+            <point key="canvasLocation" x="-338.39999999999998" y="116.00985221674877"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="lqs-ly-pt7">
