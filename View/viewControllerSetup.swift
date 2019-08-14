@@ -80,7 +80,7 @@ extension ViewController {
         //set up text allignment
         totalTimeLabel.textAlignment = .left
         drivingTimeLabel.textAlignment = .left
-        totalDistanceLabel.textAlignment = .right
+        totalDistanceLabel.textAlignment = .left
         
         //set up font size
         totalTimeLabel.font = UIFont.systemFont(ofSize: 13.0)
@@ -95,12 +95,10 @@ extension ViewController {
         totalDistanceLabel.adjustsFontSizeToFitWidth = true
         totalDistanceLabel.minimumScaleFactor=0.5
         
-        
         //set font color
         totalTimeLabel.textColor = .white
         drivingTimeLabel.textColor = .white
         totalDistanceLabel.textColor = .white
-        
 
     }
     

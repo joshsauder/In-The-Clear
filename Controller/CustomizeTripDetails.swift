@@ -42,33 +42,8 @@ class CustomizeTripDetails: UIViewController, CellDataDelegate{
     }
     
     /**
-     Adds city to trip details modal
-     
-     - parameters:
-        - city: The city
-        - loc: cities geocoordinates
-        - index: index of city in table
-    */
-    func addCity(city: String, loc: CLLocation, index: Int) {
-        tripDetails.cityStops.insert(city, at: index)
-        tripDetails.startTimes.insert(Date(), at: index)
-        tripDetails.cityLocations.insert(loc, at: index)
-    }
-    
-    /**
-     Gets the time from date picker and inserts it into the trip modal
-     
-     - parameters:
-        - time: the date
-    */
-    func modifyTime(time: Date) {
-        tripDetails.startTimes[selectedIndex.row] = time
-        updateTimes()
-    }
-    
-    /**
      Configures the table view on init
-    */
+     */
     func configureTableView(){
         tripDetails = (delegate?.intializeLocationData())!
         tableView.dataSource = self
@@ -79,13 +54,12 @@ class CustomizeTripDetails: UIViewController, CellDataDelegate{
         self.tableView.separatorColor = UIColor.clear
     }
     
-    
     /**
      Opens Google Places view and adds selected city
      
      - parameters:
-        - sender: The UI object interacted with
-    */
+     - sender: The UI object interacted with
+     */
     @IBAction func addButtonTapped(_ sender: Any){
         //open GMSAutocomplete controller and present
         let autoCompleteController = GMSAutocompleteViewController()
@@ -97,7 +71,7 @@ class CustomizeTripDetails: UIViewController, CellDataDelegate{
      When edit button tapped, configures table to allow/disallow editting
      
      - parameters:
-        - sender: The UI object interacted with
+     - sender: The UI object interacted with
      */
     @IBAction func editButtonTapped(_ sender: Any) {
         
@@ -113,6 +87,18 @@ class CustomizeTripDetails: UIViewController, CellDataDelegate{
         
     }
     
+    /**
+     Gets the time from date picker and inserts it into the trip modal
+     
+     - parameters:
+        - time: the date
+    */
+    func modifyTime(time: Date) {
+        tripDetails.startTimes[selectedIndex.row] = time
+        updateTimes()
+    }
+    
+
     /**
      Calls Here maps API service and gets the travel times
     */
@@ -162,14 +148,37 @@ class CustomizeTripDetails: UIViewController, CellDataDelegate{
     }
     
     /**
+     Set time for departure and arrival labels
+     
+     - parameters:
+        - date: the date
+    */
+    func setTimeText(date: Date) -> String{
+        let time = date.toString(dateFormat: "EE h:mm a")
+        return time
+    }
+    
+    /**
+     Adds city to trip details modal
+     
+     - parameters:
+     - city: The city
+     - loc: cities geocoordinates
+     - index: index of city in table
+     */
+    func addCity(city: String, loc: CLLocation, index: Int) {
+        tripDetails.cityStops.insert(city, at: index)
+        tripDetails.startTimes.insert(Date(), at: index)
+        tripDetails.cityLocations.insert(loc, at: index)
+    }
+    
+    /**
      Inserts city into table
      
      - parameters:
         - index: the index to add row
     */
     func insertCityToTable(index: IndexPath){
-        
-        //TODO: need to check new value was inputed
         
         tableView.beginUpdates()
         tableView.insertRows(at: [index], with: .automatic)
@@ -215,23 +224,19 @@ extension CustomizeTripDetails: UITableViewDelegate, UITableViewDataSource {
         //if index is in middle add arrival and departure, if first, add only departure time, else add only arrival time
         if indexPath.row < earliestTimes.count - 1 && indexPath.row != 0 {
             tripCell.createDatePicker(minDate: earliestTimes[indexPath.row])
-            let departureTime = tripCell.DatePicker.date.toString(dateFormat: "EE h:mm a")
-            tripCell.departureTime.text = "Departure: \(departureTime)"
-            let arrivalTime = earliestTimes[indexPath.row].toString(dateFormat: "EE h:mm a")
-            tripCell.arrivalTime.text = "Arrival: \(arrivalTime)"
+            tripCell.departureTime.text = "Departure: \(setTimeText(date: tripCell.DatePicker.date))"
+            tripCell.arrivalTime.text = "Arrival: \(setTimeText(date: earliestTimes[indexPath.row]))"
             
         } else if indexPath.row == 0 {
             tripCell.createDatePicker(minDate: earliestTimes[indexPath.row])
-            let timeText = tripCell.DatePicker.date.toString(dateFormat: "EE h:mm a")
-            tripCell.departureTime.text = "Departure: \(timeText)"
+            tripCell.departureTime.text = "Departure: \(setTimeText(date: tripCell.DatePicker.date))"
             //move departure to middle
             tripCell.arrivalTime.text = ""
 
         }
         else {
             if earliestTimes.count - 1 == indexPath.row {
-                let timeText = earliestTimes[indexPath.row].toString(dateFormat: "EE h:mm a")
-                tripCell.arrivalTime.text = "Arrival: \(timeText)"
+                tripCell.arrivalTime.text = "Arrival: \(setTimeText(date: earliestTimes[indexPath.row]))"
                 tripDetails.endTime = earliestTimes[indexPath.row]
                 //move arrival to middle
                 tripCell.departureTime.text = ""

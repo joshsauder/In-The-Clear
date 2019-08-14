@@ -60,6 +60,9 @@ extension TripDetailsTableViewCell {
         self.CityName.textColor = .white
     }
     
+    /**
+     Sets the cells fonts to be adjustable
+    */
     func setLabelFont(){
         //set dynamic font sizes
         self.arrivalTime.adjustsFontSizeToFitWidth = true
