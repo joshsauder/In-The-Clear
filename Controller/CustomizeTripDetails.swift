@@ -34,6 +34,7 @@ class CustomizeTripDetails: UIViewController, CellDataDelegate{
         setupView()
         setupButton()
         configureTableView()
+        //need to set earliest times
         getNewTimes()
     }
     
@@ -159,20 +160,6 @@ class CustomizeTripDetails: UIViewController, CellDataDelegate{
     }
     
     /**
-     Adds city to trip details modal
-     
-     - parameters:
-     - city: The city
-     - loc: cities geocoordinates
-     - index: index of city in table
-     */
-    func addCity(city: String, loc: CLLocation, index: Int) {
-        tripDetails.cityStops.insert(city, at: index)
-        tripDetails.startTimes.insert(Date(), at: index)
-        tripDetails.cityLocations.insert(loc, at: index)
-    }
-    
-    /**
      Inserts city into table
      
      - parameters:
@@ -204,6 +191,7 @@ class CustomizeTripDetails: UIViewController, CellDataDelegate{
         - sender: The UIBUtton that is tapped
      */
     @IBAction func onCancel(_ sender: UIButton) {
+        //no need to show results initally since the user may want to change destination
         dismiss(animated: true)
     }
 
@@ -287,6 +275,7 @@ extension CustomizeTripDetails: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        //show datepicker when row is tapped
         if indexPath == selectedIndex && indexPath.row != tripDetails.cityStops.count - 1 {
             return 184
         }

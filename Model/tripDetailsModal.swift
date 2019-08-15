@@ -24,6 +24,13 @@ class tripDetailsModal {
         self.endTime = Date()
     }
     
+    /**
+     Reorders items in arrays
+     
+     - parameters:
+        - startIndex: The intial index
+        - destIndex: The desination index
+    */
     func reorderItems(startIndex: Int, destIndex: Int){
         let city = cityStops.remove(at: startIndex)
         let time = startTimes.remove(at: startIndex)
@@ -34,9 +41,16 @@ class tripDetailsModal {
         cityLocations.insert(loc, at: destIndex)
     }
     
+    /**
+     Removes items in arrays
+    
+     - parameters:
+        - index: Index of item to remove
+    */
     func removeItems(index: Int){
         cityStops.remove(at: index)
         startTimes.remove(at: index)
         cityLocations.remove(at: index)
     }
+    
 }
