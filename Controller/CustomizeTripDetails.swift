@@ -24,6 +24,7 @@ class CustomizeTripDetails: UIViewController, CellDataDelegate{
     @IBOutlet weak var addButton: UIButton!
     
     var tripDetails = tripDetailsModal()
+    //show datepicker for first location
     var selectedIndex = IndexPath(row: 0, section: 0)
     weak var delegate: TripDetailsDetegate?
     var earliestTimes: [Date] = [Date()]
@@ -214,12 +215,16 @@ extension CustomizeTripDetails: UITableViewDelegate, UITableViewDataSource {
             tripCell.createDatePicker(minDate: earliestTimes[indexPath.row])
             tripCell.departureTime.text = "Departure: \(setTimeText(date: tripCell.DatePicker.date))"
             tripCell.arrivalTime.text = "Arrival: \(setTimeText(date: earliestTimes[indexPath.row]))"
+            tripCell.arrivalToTopConstraint.constant = 0
+            tripCell.departureToBottomConstraint.constant = -2
             
         } else if indexPath.row == 0 {
             tripCell.createDatePicker(minDate: earliestTimes[indexPath.row])
             tripCell.departureTime.text = "Departure: \(setTimeText(date: tripCell.DatePicker.date))"
             //move departure to middle
             tripCell.arrivalTime.text = ""
+            tripCell.arrivalToTopConstraint.constant = -8
+            tripCell.departureToBottomConstraint.constant = -10
 
         }
         else {
@@ -228,6 +233,8 @@ extension CustomizeTripDetails: UITableViewDelegate, UITableViewDataSource {
                 tripDetails.endTime = earliestTimes[indexPath.row]
                 //move arrival to middle
                 tripCell.departureTime.text = ""
+                tripCell.arrivalToTopConstraint.constant = 10
+                tripCell.departureToBottomConstraint.constant = 8
             }
         }
         tripCell.cellData = self

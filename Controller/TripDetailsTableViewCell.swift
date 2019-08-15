@@ -16,6 +16,9 @@ class TripDetailsTableViewCell: UITableViewCell  {
     @IBOutlet weak var departureTime: UILabel!
     @IBOutlet weak var arrivalTime: UILabel!
     
+    @IBOutlet weak var arrivalToTopConstraint: NSLayoutConstraint!
+    @IBOutlet weak var departureToBottomConstraint: NSLayoutConstraint!
+    
     weak var cellData: CellDataDelegate?
     
     override func awakeFromNib() {
