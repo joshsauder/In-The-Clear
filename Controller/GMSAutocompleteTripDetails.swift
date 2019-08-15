@@ -17,7 +17,7 @@ extension CustomizeTripDetails: GMSAutocompleteViewControllerDelegate {
         let location = CLLocation(latitude: place.coordinate.latitude, longitude: place.coordinate.longitude)
         let index = self.tripDetails.cityLocations.count - 1
         let indexPath = IndexPath(row: index, section: 0)
-        addCity(city: place.name!, loc: location, index: index)
+        tripDetails.addCity(city: place.name!, loc: location, index: index)
         self.dismiss(animated: true, completion: nil)
         insertCityToTable(index: indexPath)
     }

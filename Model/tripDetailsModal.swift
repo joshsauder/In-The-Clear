@@ -53,4 +53,17 @@ class tripDetailsModal {
         cityLocations.remove(at: index)
     }
     
+    /**
+     Adds city to trip details modal
+     
+     - parameters:
+     - city: The city
+     - loc: cities geocoordinates
+     - index: index of city in table
+     */
+    func addCity(city: String, loc: CLLocation, index: Int) {
+        cityStops.insert(city, at: index)
+        startTimes.insert(Date(), at: index)
+        cityLocations.insert(loc, at: index)
+    }
 }
