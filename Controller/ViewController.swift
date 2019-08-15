@@ -356,7 +356,7 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
             var totalTimeString = ""
             if self.userTripDetails.cityStops.count != 2 {
                 let formatter = DateComponentsFormatter()
-                formatter.unitsStyle = .full
+                formatter.unitsStyle = .brief
                 formatter.allowedUnits = [.hour, .minute]
                 //need to use last start time plus offset
                 totalTimeString = formatter.string(from: self.userTripDetails.startTimes[0], to: self.userTripDetails.endTime)!
@@ -400,9 +400,9 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
             
             var timeString = ""
             if finalTime < 3600 {
-                timeString = "\(finalTime % 3600 / 60) Minutes"
+                timeString = "\(finalTime % 3600 / 60)min"
             } else {
-                timeString = "\(finalTime / 3600) Hours \(finalTime % 3600 / 60) Minutes"
+                timeString = "\(finalTime / 3600)hr \(finalTime % 3600 / 60)min"
             }
             
             finalDistance = round(finalDistance * 0.00062137)

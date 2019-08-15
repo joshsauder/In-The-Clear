@@ -78,9 +78,9 @@ extension ViewController {
         timeAndDistanceView.backgroundColor = UIColor(red:0.47, green:0.15, blue:0.50, alpha:1.0)
         
         //set up text allignment
-        totalTimeLabel.textAlignment = .left
-        drivingTimeLabel.textAlignment = .left
-        totalDistanceLabel.textAlignment = .left
+        totalTimeLabel.textAlignment = .center
+        drivingTimeLabel.textAlignment = .center
+        totalDistanceLabel.textAlignment = .center
         
         //set up font size
         totalTimeLabel.font = UIFont.systemFont(ofSize: 13.0)
@@ -99,6 +99,17 @@ extension ViewController {
         totalTimeLabel.textColor = .white
         drivingTimeLabel.textColor = .white
         totalDistanceLabel.textColor = .white
+        
+        //set label color
+        totalTimeLabel.backgroundColor = UIColor(red:0.88, green:0.19, blue:0.88, alpha:1.0)
+        drivingTimeLabel.backgroundColor = UIColor(red:0.88, green:0.19, blue:0.88, alpha:1.0)
+        totalDistanceLabel.backgroundColor = UIColor(red:0.88, green:0.19, blue:0.88, alpha:1.0)
+        totalTimeLabel.layer.cornerRadius = 10
+        drivingTimeLabel.layer.cornerRadius = 10
+        totalDistanceLabel.layer.cornerRadius = 10
+        totalTimeLabel.layer.masksToBounds = true
+        drivingTimeLabel.layer.masksToBounds = true
+        totalDistanceLabel.layer.masksToBounds = true
 
     }
     
@@ -160,9 +171,9 @@ extension ViewController {
     func showButtonsAndLabels(drivingTime: String, totalTime: String, distance: Double){
         
         //enable time label
-        self.drivingTimeLabel.text = "Driving Time: \(drivingTime)"
-        self.totalTimeLabel.text = "Total Trip Time: \(totalTime)"
-        self.totalDistanceLabel.text = "Driving Distance: \(String(format: "%.0f", distance)) Miles"
+        self.drivingTimeLabel.attributedText = setupAttributedString(smallString: "Driving Time", largeString: drivingTime)
+        self.totalTimeLabel.attributedText = setupAttributedString(smallString: "Total Time", largeString: totalTime)
+        self.totalDistanceLabel.attributedText = setupAttributedString(smallString: "Distance", largeString: "\(String(format: "%.0f", distance)) Miles")
         
         self.timeAndDistanceView.isHidden = false
         
@@ -183,6 +194,19 @@ extension ViewController {
         self.openGoogleMaps.isHidden = false
         self.setTime.isHidden = false
         self.mapKey.isHidden = false
+        
+    }
+    
+    func setupAttributedString(smallString: String, largeString: String) -> NSMutableAttributedString{
+        let retString = NSMutableAttributedString()
+        
+        let keyString = NSAttributedString(string: smallString + "\n", attributes: [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 11)])
+        retString.append(keyString)
+        
+        let valueString = NSAttributedString(string: largeString, attributes: [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 16)])
+        retString.append(valueString)
+        
+        return retString
         
     }
     
