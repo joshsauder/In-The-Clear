@@ -56,8 +56,6 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
     var userTripDetails = tripDetailsModal()
     
     var polylineArray = [GMSPolyline]()
-    var markerStart: GMSMarker?
-    var MarkerEnd: GMSMarker?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -346,7 +344,7 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
         //dark sky only supports dates up to 7 days out
         if different.day! > 6 {
             
-            var alertController = UIAlertController(title: "Trip Too Long", message: "Looks like your trip is too long. Try shortening your tip up a bit.", preferredStyle: UIAlertControllerStyle.alert)
+            let alertController = UIAlertController(title: "Trip Too Long", message: "Looks like your trip is too long. Try shortening your tip up a bit.", preferredStyle: UIAlertControllerStyle.alert)
             alertController.addAction(UIAlertAction(title: "Ok", style: .default, handler: { action in
                 //run your function here
                 self.showTimePopup(UIButton())
@@ -435,15 +433,13 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
         - titleMarker: The markers title that pops up when the marker is tapped
         - latitude: The markers latitude coordinate
         - longitude: The markers longitude
-     - Returns: The Marker to be placed on the map
      */
-    func createMarker(titleMarker: String, latitude: CLLocationDegrees, longitude: CLLocationDegrees) -> GMSMarker {
+    func createMarker(titleMarker: String, latitude: CLLocationDegrees, longitude: CLLocationDegrees) {
             //set up marker using given title and place the marker on the map
             let marker = GMSMarker(position: CLLocationCoordinate2D(latitude: latitude, longitude: longitude))
             marker.title = titleMarker
             marker.appearAnimation = .pop
             marker.map = mapView
-            return marker
     }
 
     /*
