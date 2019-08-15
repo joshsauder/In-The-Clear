@@ -197,6 +197,13 @@ extension ViewController {
         
     }
     
+    /**
+     Sets up the trip label strings
+     
+     - parameters:
+        - smallString: The key string. Will have smaller font.
+        - largerString: The value string. Will have larger font.
+    */
     func setupAttributedString(smallString: String, largeString: String) -> NSMutableAttributedString{
         let retString = NSMutableAttributedString()
         

@@ -11,6 +11,7 @@ import CoreLocation
 import GoogleMaps
 import GooglePlaces
 import Alamofire
+import Foundation
 
 enum Location {
     case startLocation
@@ -291,22 +292,22 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
         - sender: the UIButton being interacted with
     */
     @IBAction func openGoogleMaps(_ sender: UIButton){
-        //if user has Google Maps App downloaded, open in Google Maps app
-        if (UIApplication.shared.canOpenURL(NSURL(string:"comgooglemaps://")! as URL)){
-            
-            let url = URL(string:
-        "comgooglemaps://?saddr=\(String(locationStart.coordinate.latitude)),\(String(locationStart.coordinate.longitude))&daddr=\(String(locationEnd.coordinate.latitude)),\(String(locationEnd.coordinate.longitude))&directionsmode=driving")
-            
-            UIApplication.shared.open(url!, options: [:])
-
-        } else
-        {
-            //else open in web browser
-            let base = url.GOOGLEMAPS_URL
-            let url = URL(string: "\(base)\(Float(locationStart.coordinate.latitude)),\(locationStart.coordinate.longitude))&daddr=\(String(describing: locationEnd.coordinate.latitude)),\(String(describing: locationEnd.coordinate.longitude))")
-            
-            UIApplication.shared.open(url!, options: [:], completionHandler: nil)
+        //set up waypoints
+        var waypoints = "&waypoints="
+        
+        var i = 1
+        while i < userTripDetails.cityStops.count - 1 {
+            waypoints.append(contentsOf: userTripDetails.cityStops[i])
+            if i != 1 {
+                waypoints.append(contentsOf: "%7C")
+            }
+            i += 1
         }
+        //call google maps to open up directions
+        let base = url.GOOGLEMAPS_URL
+        let url = URL(string: "\(base)\(Float(locationStart.coordinate.latitude)),\(locationStart.coordinate.longitude))&daddr=\(String(describing: locationEnd.coordinate.latitude)),\(String(describing: locationEnd.coordinate.longitude))&travelMode=driving\(waypoints)".addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlFragmentAllowed)!)
+            
+        UIApplication.shared.open(url!, options: [:], completionHandler: nil)
     }
     
     /**
