@@ -36,6 +36,7 @@ extension CustomizeTripDetails {
         addButton.tintColor = .white
     }
     
+    
 }
 
 extension TripDetailsTableViewCell {
@@ -73,6 +74,7 @@ extension TripDetailsTableViewCell {
         self.CityName.minimumScaleFactor=0.5
         
     }
+    
 }
 
 

@@ -303,6 +303,7 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
             }
             i += 1
         }
+        
         //call google maps to open up directions
         let base = url.GOOGLEMAPS_URL
         let url = URL(string: "\(base)\(Float(locationStart.coordinate.latitude)),\(locationStart.coordinate.longitude))&daddr=\(String(describing: locationEnd.coordinate.latitude)),\(String(describing: locationEnd.coordinate.longitude))&travelMode=driving\(waypoints)".addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlFragmentAllowed)!)
@@ -340,43 +341,60 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
      */
     func showDirection(){
         
-        disableInputButtons()
+        let different = Calendar.current.dateComponents([Calendar.Component.day], from: Date(), to: userTripDetails.endTime)
         
-        //clear weather arrays
-        tripData.removeAll()
-        mapView.clear()
-        //remove any existing polylines
-        self.polylineArray.forEach { $0.map = nil }
-        showSpinner(view: view)
-        
-        //show line
-        self.processStops(index: self.userTripDetails.cityLocations.count - 1) { time, distance in
+        //dark sky only supports dates up to 7 days out
+        if different.day! > 6 {
             
-            self.tripData.reverse()
-            
-            var totalTimeString = ""
-            if self.userTripDetails.cityStops.count != 2 {
-                let formatter = DateComponentsFormatter()
-                formatter.unitsStyle = .brief
-                formatter.allowedUnits = [.hour, .minute]
-                //need to use last start time plus offset
-                totalTimeString = formatter.string(from: self.userTripDetails.startTimes[0], to: self.userTripDetails.endTime)!
-            } else {
-                totalTimeString = time
-            }
-            //enable and show time/distance label, Google Maps button, and Weather List Button
-            self.showButtonsAndLabels(drivingTime: time, totalTime: totalTimeString, distance: distance)
-            //re-enable location buttons
-            self.startButton.isEnabled = true
-            self.destinationButton.isEnabled = true
-            
-            for (index, location) in self.userTripDetails.cityLocations.enumerated() {
+            var alertController = UIAlertController(title: "Trip Too Long", message: "Looks like your trip is too long. Try shortening your tip up a bit.", preferredStyle: UIAlertControllerStyle.alert)
+            alertController.addAction(UIAlertAction(title: "Ok", style: .default, handler: { action in
+                //run your function here
+                self.showTimePopup(UIButton())
                 
-                self.createMarker(titleMarker: self.userTripDetails.cityStops[index], latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
+            }))
+            
+            self.present(alertController, animated: true, completion: nil)
+            
+        } else {
+        
+            disableInputButtons()
+            
+            //clear weather arrays
+            tripData.removeAll()
+            mapView.clear()
+            //remove any existing polylines
+            self.polylineArray.forEach { $0.map = nil }
+            showSpinner(view: view)
+            
+            //show line
+            self.processStops(index: self.userTripDetails.cityLocations.count - 1) { time, distance in
+                
+                self.tripData.reverse()
+                
+                var totalTimeString = ""
+                if self.userTripDetails.cityStops.count != 2 {
+                    let formatter = DateComponentsFormatter()
+                    formatter.unitsStyle = .brief
+                    formatter.allowedUnits = [.hour, .minute]
+                    //need to use last start time plus offset
+                    totalTimeString = formatter.string(from: self.userTripDetails.startTimes[0], to: self.userTripDetails.endTime)!
+                } else {
+                    totalTimeString = time
+                }
+                //enable and show time/distance label, Google Maps button, and Weather List Button
+                self.showButtonsAndLabels(drivingTime: time, totalTime: totalTimeString, distance: distance)
+                //re-enable location buttons
+                self.startButton.isEnabled = true
+                self.destinationButton.isEnabled = true
+                
+                for (index, location) in self.userTripDetails.cityLocations.enumerated() {
+                    
+                    self.createMarker(titleMarker: self.userTripDetails.cityStops[index], latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
+                }
+                
+                self.stopSpinner()
+                
             }
-            
-            self.stopSpinner()
-            
         }
     }
     

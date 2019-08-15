@@ -37,7 +37,7 @@ class TripDetailsTableViewCell: UITableViewCell  {
         DatePicker.datePickerMode = UIDatePickerMode.dateAndTime
         
         //set maxDate
-        let maxDate = Calendar.current.date(byAdding: .day, value: 10, to: Date())
+        let maxDate = Calendar.current.date(byAdding: .day, value: 6, to: Date())
         DatePicker.maximumDate = maxDate
         DatePicker.minimumDate = minDate
         

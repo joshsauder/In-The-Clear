@@ -113,8 +113,8 @@ class CustomizeTripDetails: UIViewController, CellDataDelegate{
      Updates the earilest times array and reloads table data
     */
     func updateTimes(){
-            self.earliestTimes = self.addTimes(times: timeOffset)
-            self.tableView.reloadData()
+        self.earliestTimes = self.addTimes(times: timeOffset)
+        self.tableView.reloadData()
     }
     
     /**
@@ -193,8 +193,8 @@ class CustomizeTripDetails: UIViewController, CellDataDelegate{
         - sender: The UIBUtton that is tapped
     */
     @IBAction func onSubmit(_ sender: UIButton) {
-        delegate?.recieveLocationData(tripDetials: tripDetails)
         dismiss(animated: true)
+        delegate?.recieveLocationData(tripDetials: tripDetails)
     }
     
     /**
