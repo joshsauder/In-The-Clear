@@ -19,7 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate{
     var googlePlacesKey = Constants.GOOGLE_PLACES_KEY
 
     
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         GMSServices.provideAPIKey(googleAPIKey)
         GMSPlacesClient.provideAPIKey(googlePlacesKey)

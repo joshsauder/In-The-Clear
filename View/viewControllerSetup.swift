@@ -179,13 +179,13 @@ extension ViewController {
         
         //need to scale google maps icons/buttons for diffenent screen sizes
         if view.bounds.height > 800 && view.bounds.height < 900 {
-            self.mapView.padding = UIEdgeInsetsMake(0, 0, 25, 0)
+            self.mapView.padding = UIEdgeInsets.init(top: 0, left: 0, bottom: 25, right: 0)
         }
         else if view.bounds.height >= 900{
-            self.mapView.padding = UIEdgeInsetsMake(0, 0, 36, 0)
+            self.mapView.padding = UIEdgeInsets.init(top: 0, left: 0, bottom: 36, right: 0)
         }
         else{
-            self.mapView.padding = UIEdgeInsetsMake(0, 0, 60, 0)
+            self.mapView.padding = UIEdgeInsets.init(top: 0, left: 0, bottom: 60, right: 0)
         }
         //enable weather list button
         self.weatherList.isEnabled = true
@@ -207,10 +207,10 @@ extension ViewController {
     func setupAttributedString(smallString: String, largeString: String) -> NSMutableAttributedString{
         let retString = NSMutableAttributedString()
         
-        let keyString = NSAttributedString(string: smallString + "\n", attributes: [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 11)])
+        let keyString = NSAttributedString(string: smallString + "\n", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 11)])
         retString.append(keyString)
         
-        let valueString = NSAttributedString(string: largeString, attributes: [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 16)])
+        let valueString = NSAttributedString(string: largeString, attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 16)])
         retString.append(valueString)
         
         return retString

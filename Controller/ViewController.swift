@@ -195,8 +195,8 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
         alertController.addAction(cancelAction)
         
         let openAction = UIAlertAction(title: "Open Settings", style: .default) { (action) in
-            if let url = URL(string: UIApplicationOpenSettingsURLString) {
-                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+            if let url = URL(string: UIApplication.openSettingsURLString) {
+                UIApplication.shared.open(url, options: convertToUIApplicationOpenExternalURLOptionsKeyDictionary([:]), completionHandler: nil)
             }
         }
         alertController.addAction(openAction)
@@ -306,7 +306,7 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
         let base = url.GOOGLEMAPS_URL
         let url = URL(string: "\(base)\(Float(locationStart.coordinate.latitude)),\(locationStart.coordinate.longitude))&daddr=\(String(describing: locationEnd.coordinate.latitude)),\(String(describing: locationEnd.coordinate.longitude))&travelMode=driving\(waypoints)".addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlFragmentAllowed)!)
             
-        UIApplication.shared.open(url!, options: [:], completionHandler: nil)
+        UIApplication.shared.open(url!, options: convertToUIApplicationOpenExternalURLOptionsKeyDictionary([:]), completionHandler: nil)
     }
     
     /**
@@ -344,7 +344,7 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
         //dark sky only supports dates up to 7 days out
         if different.day! > 6 {
             
-            let alertController = UIAlertController(title: "Trip Too Long", message: "Looks like your trip is too long. Try shortening your tip up a bit.", preferredStyle: UIAlertControllerStyle.alert)
+            let alertController = UIAlertController(title: "Trip Too Long", message: "Looks like your trip is too long. Try shortening your tip up a bit.", preferredStyle: UIAlertController.Style.alert)
             alertController.addAction(UIAlertAction(title: "Ok", style: .default, handler: { action in
                 //run your function here
                 self.showTimePopup(UIButton())
@@ -483,3 +483,8 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
     }
 }
 
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertToUIApplicationOpenExternalURLOptionsKeyDictionary(_ input: [String: Any]) -> [UIApplication.OpenExternalURLOptionsKey: Any] {
+	return Dictionary(uniqueKeysWithValues: input.map { key, value in (UIApplication.OpenExternalURLOptionsKey(rawValue: key), value)})
+}

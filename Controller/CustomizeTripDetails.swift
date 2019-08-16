@@ -32,6 +32,9 @@ class CustomizeTripDetails: UIViewController, CellDataDelegate{
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        if #available(iOS 13.0, *) {
+            overrideUserInterfaceStyle = .light
+        }
         setupView()
         setupButton()
         configureTableView()
@@ -246,7 +249,7 @@ extension CustomizeTripDetails: UITableViewDelegate, UITableViewDataSource {
         return true
     }
     
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             tripDetails.removeItems(index: indexPath.row)
             tableView.beginUpdates()
