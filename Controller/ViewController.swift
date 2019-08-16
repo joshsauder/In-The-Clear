@@ -367,6 +367,15 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
             //show line
             self.processStops(index: self.userTripDetails.cityLocations.count - 1) { time, distance in
                 
+                var timeString = ""
+                if time < 3600 {
+                    timeString = "\(time % 3600 / 60)min"
+                } else {
+                    timeString = "\(time / 3600)hr \(time % 3600 / 60)min"
+                }
+                
+                let finalDistance = round(distance * 0.00062137)
+                
                 self.tripData.reverse()
                 
                 var totalTimeString = ""
@@ -377,10 +386,10 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
                     //need to use last start time plus offset
                     totalTimeString = formatter.string(from: self.userTripDetails.startTimes[0], to: self.userTripDetails.endTime)!
                 } else {
-                    totalTimeString = time
+                    totalTimeString = timeString
                 }
                 //enable and show time/distance label, Google Maps button, and Weather List Button
-                self.showButtonsAndLabels(drivingTime: time, totalTime: totalTimeString, distance: distance)
+                self.showButtonsAndLabels(drivingTime: timeString, totalTime: totalTimeString, distance: finalDistance)
                 //re-enable location buttons
                 self.startButton.isEnabled = true
                 self.destinationButton.isEnabled = true
@@ -396,7 +405,7 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
         }
     }
     
-    func processStops(index: Int, completion: @escaping (String, Double) -> ()){
+    func processStops(index: Int, completion: @escaping (Int, Double) -> ()){
         
         let group = DispatchGroup()
         var finalTime = 0
@@ -405,6 +414,8 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
         if (index > 0) {
             group.enter()
             processStops(index: index - 1) { time, distance in
+                finalTime = time
+                finalDistance = distance
                 self.createLine(startLocation: self.userTripDetails.cityLocations[index-1], endLocation: self.userTripDetails.cityLocations[index], time: self.userTripDetails.startTimes[index]){ time, distance in
                     finalTime += time
                     finalDistance += distance
@@ -415,15 +426,7 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
         }
         group.notify(queue: DispatchQueue.main){
             
-            var timeString = ""
-            if finalTime < 3600 {
-                timeString = "\(finalTime % 3600 / 60)min"
-            } else {
-                timeString = "\(finalTime / 3600)hr \(finalTime % 3600 / 60)min"
-            }
-            
-            finalDistance = round(finalDistance * 0.00062137)
-            completion(timeString, finalDistance)
+            completion(finalTime, finalDistance)
         }
     }
 
