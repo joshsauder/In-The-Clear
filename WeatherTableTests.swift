@@ -58,7 +58,7 @@ class WeatherTableTests: XCTestCase {
         //Sacramento, CA coordinates
         let destination = CLLocation(latitude: CLLocationDegrees(exactly: 38.5816)!, longitude: CLLocationDegrees(exactly: 121.4944)!)
         
-        vc.createLine(startLocation: start, endLocation: destination, date: Date()){ time, distance in
+        vc.createLine(startLocation: start, endLocation: destination, time: Date()){ time, distance in
             
             //Miami, FL coordinates
             let secondStart = CLLocation(latitude: CLLocationDegrees(exactly: 25.77481)!, longitude: CLLocationDegrees(exactly: -80.19773)!)
@@ -66,7 +66,7 @@ class WeatherTableTests: XCTestCase {
             //Columbus, OH coordinates
             let secondDestination = CLLocation(latitude: CLLocationDegrees(exactly: 32.77815)!, longitude: CLLocationDegrees(exactly: -96.7954)!)
             
-            vc.createLine(startLocation: secondStart, endLocation: secondDestination, date: Date()){ time, distance in
+            vc.createLine(startLocation: secondStart, endLocation: secondDestination, time: Date()){ time, distance in
                 var test = true
                 
                 //check for the first routes first and last cities
