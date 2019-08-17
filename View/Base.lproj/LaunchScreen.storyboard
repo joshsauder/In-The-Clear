@@ -16,13 +16,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="InTheClear" translatesAutoresizingMaskIntoConstraints="NO" id="ezd-lR-0Jd">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="InTheClear.png" translatesAutoresizingMaskIntoConstraints="NO" id="ezd-lR-0Jd">
                                 <rect key="frame" x="16" y="100" width="343" height="197"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="ezd-lR-0Jd" secondAttribute="height" multiplier="156:97" constant="26.175257731958766" id="pjs-us-6qF"/>
                                 </constraints>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BirdhouseWhiteLogo" translatesAutoresizingMaskIntoConstraints="NO" id="vjH-ED-fQi">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BirdhouseWhiteLogo.png" translatesAutoresizingMaskIntoConstraints="NO" id="vjH-ED-fQi">
                                 <rect key="frame" x="50" y="594" width="275" height="164"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="vjH-ED-fQi" secondAttribute="height" multiplier="275:164" id="Dyf-4e-8Mr"/>
@@ -47,7 +47,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="BirdhouseWhiteLogo" width="16" height="16"/>
-        <image name="InTheClear" width="16" height="16"/>
+        <image name="BirdhouseWhiteLogo.png" width="2880" height="1800"/>
+        <image name="InTheClear.png" width="420" height="237"/>
     </resources>
 </document>
