@@ -254,15 +254,21 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
     */
     @IBAction func originStartLocation(_ sender: UIButton) {
         //open GMSAutocomplete controllerand present
-        let autoCompleteControl = GMSAutocompleteViewController()
-        autoCompleteControl.delegate = self
+        let autoCompleteController = GMSAutocompleteViewController()
+        autoCompleteController.delegate = self
+        
+        if #available(iOS 13.0, *) {
+            if traitCollection.userInterfaceStyle == .dark {
+                autoCompleteController.tableCellBackgroundColor = .darkGray
+            }
+        }
         
         //given location
         locationSelected = .startLocation
         
         self.locationManager.stopUpdatingLocation()
         
-        self.present(autoCompleteControl, animated: true, completion: nil)
+        self.present(autoCompleteController, animated: true, completion: nil)
         
     }
     
@@ -275,6 +281,12 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
         //open GMSAutocomplete controllerand present
         let autoCompleteController = GMSAutocompleteViewController()
         autoCompleteController.delegate = self
+        
+        if #available(iOS 13.0, *) {
+            if traitCollection.userInterfaceStyle == .dark {
+                autoCompleteController.tableCellBackgroundColor = .darkGray
+            }
+        }
         
         //given location
         locationSelected = .destinationLocation

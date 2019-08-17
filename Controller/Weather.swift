@@ -113,50 +113,40 @@ extension ViewController {
                 let totalTime = stepsEval["duration"]["value"].intValue
                 let totalDistance = stepsEval["distance"]["value"].doubleValue
                 let steps = stepsEval["steps"].arrayValue
-                
-                //prevent routes that are too long too handle
-                if stepsEval["duration"]["value"].intValue < 216000 {
                     
-                    //take first route and use polyline to draw line
-                    let route = routes[0]
-                    let routeOverviewPolyline = route["overview_polyline"].dictionary
-                    let points = routeOverviewPolyline?["points"]?.stringValue
+                //take first route and use polyline to draw line
+                let route = routes[0]
+                let routeOverviewPolyline = route["overview_polyline"].dictionary
+                let points = routeOverviewPolyline?["points"]?.stringValue
                     
-                    //create path and polyline from encoded path
-                    let path = GMSPath.init(fromEncodedPath: points!)
-                    let polyline = GMSPolyline.init(path: path)
-                    polyline.strokeWidth = 7
+                //create path and polyline from encoded path
+                let path = GMSPath.init(fromEncodedPath: points!)
+                let polyline = GMSPolyline.init(path: path)
+                polyline.strokeWidth = 7
                     
-                    //make sure geolocating is complete when Polyline is colored
-                    let group = DispatchGroup()
-                    group.enter()
-                    group.enter()
+                //make sure geolocating is complete when Polyline is colored
+                let group = DispatchGroup()
+                group.enter()
+                group.enter()
                     
-                    let (weatherParam, geolocationParam) = self.createParamters(steps: steps, date: time)
+                let (weatherParam, geolocationParam) = self.createParamters(steps: steps, date: time)
                     //let geolocating and path coloring run simultaneouly
-                    self.getLocationName(parameters: geolocationParam){
-                        group.leave()
-                    }
-                    //color the polyline and on completion show polyline on map
-                    self.colorPath(line: polyline, steps: steps, path: path!, parameters: weatherParam) {
-                        if(self.tripData.conditions.count > 0){
-                            polyline.map = self.mapView
-                            self.polylineArray.append(polyline)
-                            self.mapView.animate(with: GMSCameraUpdate.fit(GMSCoordinateBounds(path: polyline.path!), withPadding: 95))
-                        }
-                        group.leave()
-                    }
-                    
-                    group.notify(queue: DispatchQueue.main){
-                        //return total time value from json once colorpath and geolocating methods are complete
-                        completion(totalTime, totalDistance)
-                    }
+                self.getLocationName(parameters: geolocationParam){
+                    group.leave()
                 }
-                else{
-                    let title = "Invalid Route"
-                    let message = "Sorry! At this time, In The Clear does not support routes longer than 60 hours."
+                //color the polyline and on completion show polyline on map
+                self.colorPath(line: polyline, steps: steps, path: path!, parameters: weatherParam) {
+                    if(self.tripData.conditions.count > 0){
+                        polyline.map = self.mapView
+                        self.polylineArray.append(polyline)
+                        self.mapView.animate(with: GMSCameraUpdate.fit(GMSCoordinateBounds(path: polyline.path!), withPadding: 95))
+                    }
+                    group.leave()
+                }
                     
-                    self.alertTool(title: title, message: message)
+                group.notify(queue: DispatchQueue.main){
+                    //return total time value from json once colorpath and geolocating methods are complete
+                    completion(totalTime, totalDistance)
                 }
             }
             else {
@@ -164,6 +154,10 @@ extension ViewController {
                 let message = "Woops! Looks like it's not possible to drive between these two locations."
                 
                 self.alertTool(title: title, message: message)
+                
+                self.mapView.clear()
+                self.timeAndDistanceView.isHidden = true
+                
             }
         }
     }

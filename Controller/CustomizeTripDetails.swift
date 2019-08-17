@@ -69,6 +69,13 @@ class CustomizeTripDetails: UIViewController, CellDataDelegate{
         //open GMSAutocomplete controller and present
         let autoCompleteController = GMSAutocompleteViewController()
         autoCompleteController.delegate = self
+        
+        if #available(iOS 13.0, *) {
+            if traitCollection.userInterfaceStyle == .dark {
+                autoCompleteController.tableCellBackgroundColor = .darkGray
+            }
+        }
+        
         self.present(autoCompleteController, animated: true, completion: nil)
     }
     
