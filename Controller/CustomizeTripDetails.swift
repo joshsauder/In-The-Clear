@@ -140,10 +140,10 @@ class CustomizeTripDetails: UIViewController, CellDataDelegate{
         if times.count > 0 {
             var tempArray = times
             //remove last from time array
-            tempArray.removeLast()
+            let time = tempArray.removeLast()
             //recursive call
             retArray = addTimes(times: tempArray)
-            let time = times[0]
+            
             var date = Date()
             //if start time is less than earliest time, add time offset to earilest time
             //else add to start time

@@ -296,7 +296,8 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
         self.present(autoCompleteController, animated: true, completion: nil)
         
     }
-    /*
+    
+    /**
      Controls when open maps button is clicked
      - parameters:
         - sender: the UIButton being interacted with
@@ -457,7 +458,7 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
             marker.map = mapView
     }
 
-    /*
+    /**
      Function called that sends the weather data values to the weather table
     */
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
