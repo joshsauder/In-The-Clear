@@ -204,6 +204,9 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
         self.present(alertController, animated: true, completion: nil)
     }
     
+    /**
+        Initializes the initail trip details modal
+     */
     func intializeLocationData() -> tripDetailsModal {
         
         let tripDetails = userTripDetails
@@ -220,6 +223,11 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
         return tripDetails
     }
     
+    /**
+        Retrieves the location data from the user inputted trip details
+        - parameters:
+            - tripDetails: the user inputted trip details
+     */
     func recieveLocationData(tripDetials: tripDetailsModal) {
         
         userTripDetails = tripDetials
@@ -227,6 +235,9 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
         
     }
     
+    /**
+     Function that processes the trip details (calls show directions).
+     */
     func processTripData(){
         showDirection()
     }
