@@ -46,10 +46,10 @@ extension TripDetailsTableViewCell {
     */
     func setCellColor(){
         
-        self.backgroundColor = UIColor(red:0.47, green:0.15, blue:0.50, alpha:1.0)
-        self.layer.cornerRadius = 12
-        self.layer.borderWidth = 3
-        self.layer.borderColor = UIColor.white.cgColor
+        self.contentView.backgroundColor = UIColor(red:0.47, green:0.15, blue:0.50, alpha:1.0)
+        self.contentView.layer.cornerRadius = 12
+        self.contentView.layer.borderWidth = 3
+        self.contentView.layer.borderColor = UIColor.white.cgColor
     }
     
     /**
