@@ -15,7 +15,7 @@ extension ViewController {
     /**
      Sets up map key
     */
-    func mapkeySetup(){
+    internal func mapkeySetup(){
         
         //hide map key
         mapKey.isHidden = true
@@ -30,7 +30,7 @@ extension ViewController {
     /**
      Sets up weathet list button
     */
-    func weatherListButtonSetup() {
+    internal func weatherListButtonSetup() {
         
         //set up weatherButton
         weatherList.layer.cornerRadius = 5
@@ -56,7 +56,7 @@ extension ViewController {
     /**
      Disables all input buttons when loading a new route
     */
-    func disableInputButtons(){
+    internal func disableInputButtons(){
         //disable location buttons
         startButton.isEnabled = false
         destinationButton.isEnabled = false
@@ -67,7 +67,7 @@ extension ViewController {
     /**
      Sets up time and distance label
     */
-    func timeLabelSetup(){
+    internal func timeLabelSetup(){
         
         //set up time and weather label
         timeAndDistanceView.isHidden = true
@@ -120,7 +120,7 @@ extension ViewController {
         - imageString: The image name
         - size: Size of image
     */
-    func configureMapButtons(button: UIButton, imageString: String, size: Int){
+    internal func configureMapButtons(button: UIButton, imageString: String, size: Int){
         
         button.isHidden = true
         button.backgroundColor = UIColor(white: 1, alpha: 1)
@@ -155,7 +155,7 @@ extension ViewController {
     /**
      Sets up Google Maps, Set Time, and location buttons
     */
-    func mapButtonsSetup(){
+    internal func mapButtonsSetup(){
         
         configureMapButtons(button: openGoogleMaps, imageString: "icons8-google-maps-48", size: 30)
         configureMapButtons(button: setTime, imageString: "time", size: 30)
@@ -168,7 +168,7 @@ extension ViewController {
         - time: The total time it takes to travel the route
         - distance: The distance it takes to travel the route
     */
-    func showButtonsAndLabels(drivingTime: String, totalTime: String, distance: Double){
+    internal func showButtonsAndLabels(drivingTime: String, totalTime: String, distance: Double){
         
         //enable time label
         self.drivingTimeLabel.attributedText = setupAttributedString(smallString: "Driving Time", largeString: drivingTime)
@@ -204,7 +204,7 @@ extension ViewController {
         - smallString: The key string. Will have smaller font.
         - largerString: The value string. Will have larger font.
     */
-    func setupAttributedString(smallString: String, largeString: String) -> NSMutableAttributedString{
+    internal func setupAttributedString(smallString: String, largeString: String) -> NSMutableAttributedString{
         let retString = NSMutableAttributedString()
         
         let keyString = NSAttributedString(string: smallString + "\n", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 11)])
@@ -221,7 +221,7 @@ extension ViewController {
     Shows location button, if enabled.
      Else, moves Google maps button and time button down
     */
-    func showLocationButton(){
+    internal func showLocationButton(){
         //if location services are not enabled google maps and set time buttons down
         //else show location button
         if CLLocationManager.locationServicesEnabled() {
@@ -242,7 +242,7 @@ extension ViewController {
         - title: title of alert
         - message: the message of alert
     */
-    func showAlert(title: String, message: String){
+    internal func showAlert(title: String, message: String){
         //display alert based on tyle
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
@@ -255,7 +255,7 @@ extension ViewController {
      - parameters:
         - view: The view in which the spinner will appear in
      */
-    func showSpinner(view: UIView){
+    internal func showSpinner(view: UIView){
         let spinnerView = UIView.init(frame: view.bounds)
         spinnerView.backgroundColor = UIColor.init(red: 0.5, green: 0.5, blue: 0.5, alpha: 0.5)
         let activityIV = UIActivityIndicatorView.init(style: .whiteLarge)
@@ -273,7 +273,7 @@ extension ViewController {
     /**
      Removes the spinner from the superview
     */
-    func stopSpinner(){
+    internal func stopSpinner(){
         DispatchQueue.main.async {
             self.spinner?.removeFromSuperview()
             self.spinner = nil

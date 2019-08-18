@@ -14,7 +14,7 @@ import MapKit
 
 extension ViewController {
     
-    struct pathColorSegs {
+    private struct pathColorSegs {
         static let SNOW = GMSStrokeStyle.solidColor(UIColor(red:0.12, green:0.53, blue:0.90, alpha:1.0))
         static let RAIN = GMSStrokeStyle.solidColor(UIColor(red:0.26, green:0.63, blue:0.28, alpha:1.0))
         static let STORMS = GMSStrokeStyle.solidColor(UIColor(red:0.90, green:0.22, blue:0.21, alpha:1.0))
@@ -30,7 +30,7 @@ extension ViewController {
         - title: The title of the alert
         - message: The message contained in the alert
  `  */
-    func alertTool(title: String, message: String){
+    internal func alertTool(title: String, message: String){
         self.showAlert(title: title, message: message)
         
         //animate back to start location
@@ -52,7 +52,7 @@ extension ViewController {
         - date: Planned departure date
      - returns: Two sets of parameters for the two AWS Lambda functions
     */
-    func createParamters(steps: [JSON], date: Date) -> (Parameters, Parameters){
+    internal func createParamters(steps: [JSON], date: Date) -> (Parameters, Parameters){
         
         //get the time for the current weather step
         let refDate = date.timeIntervalSince1970
@@ -94,7 +94,7 @@ extension ViewController {
         - endLocation: The destination location
         - completion: Upon calling the service, return the total time and distance strings
     */
-    func createLine(startLocation: CLLocation, endLocation: CLLocation, time: Date, completion: @escaping (Int, Double) -> ()) {
+    internal func createLine(startLocation: CLLocation, endLocation: CLLocation, time: Date, completion: @escaping (Int, Double) -> ()) {
         
         
         let origin = "\(startLocation.coordinate.latitude),\(startLocation.coordinate.longitude)"
@@ -173,7 +173,7 @@ extension ViewController {
         - parameters: The API request body
         - completion: After weather services callback, exit function
     */
-    func colorPath(line: GMSPolyline, steps: [JSON], path: GMSPath, parameters: Parameters, completion: @escaping () -> ()) {
+    private func colorPath(line: GMSPolyline, steps: [JSON], path: GMSPath, parameters: Parameters, completion: @escaping () -> ()) {
         //take each step and get weather at end location
         var colorSegs: [GMSStyleSpan] = []
     
@@ -194,7 +194,7 @@ extension ViewController {
         - parameters: The API request body
         - completion: An array containing the color segments for the polyline.
     */
-    func weatherPerStep(steps: [JSON], path: GMSPath, parameters: Parameters, completion: @escaping ([GMSStyleSpan]) -> ()) {
+    private func weatherPerStep(steps: [JSON], path: GMSPath, parameters: Parameters, completion: @escaping ([GMSStyleSpan]) -> ()) {
         
         var colorSegs: [GMSStyleSpan] = []
 
@@ -230,7 +230,7 @@ extension ViewController {
         - index: the coordinate index on the GMSPath
      - returns: The number of segs and the last segment index on the GMSPath
     */
-    func determineSegCount(step: JSON, path: GMSPath, index: UInt) -> (Int, UInt){
+    private func determineSegCount(step: JSON, path: GMSPath, index: UInt) -> (Int, UInt){
         //array will contain path index and number of segs
         var i = index
         //get path index
@@ -261,7 +261,7 @@ extension ViewController {
      - returns: The GMSStyleSpan for a specific segment(s)
      
     */
-    func determineColorSeg(condition: String, numberSegs: Int) -> GMSStyleSpan {
+    private func determineColorSeg(condition: String, numberSegs: Int) -> GMSStyleSpan {
         let colorSeg: GMSStyleSpan
         //determine condition and set segment color accordingly
         if condition == "rain" {

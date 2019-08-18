@@ -105,7 +105,7 @@ class CustomizeTripDetails: UIViewController, CellDataDelegate{
      - parameters:
         - time: the date
     */
-    func modifyTime(time: Date) {
+    internal func modifyTime(time: Date) {
         tripDetails.startTimes[selectedIndex.row] = time
         updateTimes()
     }
@@ -114,7 +114,7 @@ class CustomizeTripDetails: UIViewController, CellDataDelegate{
     /**
      Calls Here maps API service and gets the travel times
     */
-    func getNewTimes(){
+    internal func getNewTimes(){
         getTravelTime(locations: tripDetails.cityLocations){ times in
             self.timeOffset = times
             self.updateTimes()
@@ -124,7 +124,7 @@ class CustomizeTripDetails: UIViewController, CellDataDelegate{
     /**
      Updates the earilest times array and reloads table data
     */
-    func updateTimes(){
+    internal func updateTimes(){
         self.earliestTimes = self.addTimes(times: timeOffset)
         self.tableView.reloadData()
     }
@@ -135,7 +135,7 @@ class CustomizeTripDetails: UIViewController, CellDataDelegate{
      - parameters:
         - times: the time offsets
     */
-    func addTimes(times: [Int]) -> [Date]{
+    internal func addTimes(times: [Int]) -> [Date]{
         var retArray:[Date] = [Date()]
         if times.count > 0 {
             var tempArray = times
@@ -165,7 +165,7 @@ class CustomizeTripDetails: UIViewController, CellDataDelegate{
      - parameters:
         - date: the date
     */
-    func setTimeText(date: Date) -> String{
+    private func setTimeText(date: Date) -> String{
         let time = date.toString(dateFormat: "EE h:mm a")
         return time
     }
@@ -176,7 +176,7 @@ class CustomizeTripDetails: UIViewController, CellDataDelegate{
      - parameters:
         - index: the index to add row
     */
-    func insertCityToTable(index: IndexPath){
+    internal func insertCityToTable(index: IndexPath){
         
         tableView.beginUpdates()
         tableView.insertRows(at: [index], with: .automatic)
@@ -245,6 +245,7 @@ extension CustomizeTripDetails: UITableViewDelegate, UITableViewDataSource {
                 tripCell.departureTime.text = ""
                 tripCell.arrivalToTopConstraint.constant = 10
                 tripCell.departureToBottomConstraint.constant = 8
+                
             }
         }
         tripCell.cellData = self
@@ -253,6 +254,9 @@ extension CustomizeTripDetails: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        if indexPath.row == 0 || indexPath.row == tableView.numberOfRows(inSection: 0) - 1{
+            return false
+        }
         return true
     }
     
@@ -268,6 +272,9 @@ extension CustomizeTripDetails: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
+        if indexPath.row == 0 || indexPath.row == tableView.numberOfRows(inSection: 0) - 1{
+            return false
+        }
         return true
     }
     

@@ -18,7 +18,7 @@ extension WeatherTableViewCell {
      - firstColor: The lighter UIColor
      - secondColor: The darker UIColor
      */
-    func colorCell(firstColor: UIColor, secondColor:UIColor){
+    internal func colorCell(firstColor: UIColor, secondColor:UIColor){
         
         let gradientLayer = CAGradientLayer()
         gradientLayer.frame = self.bounds

@@ -35,7 +35,7 @@ class TripDetailsTableViewCell: UITableViewCell  {
     /**
      Configure the date picker
      */
-    func createDatePicker(minDate: Date?){
+    internal func createDatePicker(minDate: Date?){
         
         DatePicker.datePickerMode = UIDatePicker.Mode.dateAndTime
         

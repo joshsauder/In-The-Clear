@@ -31,7 +31,7 @@ class tripDetailsModal {
         - startIndex: The intial index
         - destIndex: The desination index
     */
-    func reorderItems(startIndex: Int, destIndex: Int){
+    internal func reorderItems(startIndex: Int, destIndex: Int){
         let city = cityStops.remove(at: startIndex)
         let time = startTimes.remove(at: startIndex)
         let loc = cityLocations.remove(at: startIndex)
@@ -47,7 +47,7 @@ class tripDetailsModal {
      - parameters:
         - index: Index of item to remove
     */
-    func removeItems(index: Int){
+    internal func removeItems(index: Int){
         cityStops.remove(at: index)
         startTimes.remove(at: index)
         cityLocations.remove(at: index)
@@ -61,7 +61,7 @@ class tripDetailsModal {
      - loc: cities geocoordinates
      - index: index of city in table
      */
-    func addCity(city: String, loc: CLLocation, index: Int) {
+    internal func addCity(city: String, loc: CLLocation, index: Int) {
         cityStops.insert(city, at: index)
         startTimes.insert(Date(), at: index)
         cityLocations.insert(loc, at: index)

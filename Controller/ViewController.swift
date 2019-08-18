@@ -73,7 +73,7 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
     /**
       Sets up the Google Maps Map View
     */
-    func setupMap(){
+    private func setupMap(){
         let camera = GMSCameraPosition.camera(withLatitude: -33.86, longitude: 151, zoom: 11.0)
         mapView.camera = camera
         mapView.delegate = self
@@ -89,7 +89,7 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
     /**
      Asks user for location permissions
     */
-    func locationAuthorization(){
+    internal func locationAuthorization(){
         
         locationManager.delegate = self
         locationManager.requestWhenInUseAuthorization()
@@ -185,7 +185,7 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
     /**
      Function to request user enable location services in settings
     */
-    func showLocationDisabledPopUp() {
+    internal func showLocationDisabledPopUp() {
         
         let alertController = UIAlertController(title: "Background Location Access Disabled",
                                                 message: "Your Location is disabled. Enable if you'd like your location to be shown on map",
@@ -238,7 +238,7 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
     /**
      Function that processes the trip details (calls show directions).
      */
-    func processTripData(){
+    private func processTripData(){
         showDirection()
     }
     
@@ -338,7 +338,7 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
      - parameters:
         - sender: the UIButton being interacted with
     */
-    func showTimePopupInitially(){
+    internal func showTimePopupInitially(){
         userTripDetails = tripDetailsModal()
         let tripDetailVC = storyboard?.instantiateViewController(withIdentifier: "customizeTripDetails") as! CustomizeTripDetails
         tripDetailVC.modalPresentationStyle = .overCurrentContext
@@ -361,7 +361,7 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
     /**
     Calls createLine to add polyline to map and also enables the weatherList button and time label at bottom
      */
-    func showDirection(){
+    private func showDirection(){
         
         let different = Calendar.current.dateComponents([Calendar.Component.day], from: Date(), to: userTripDetails.endTime)
         
@@ -429,7 +429,7 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
         }
     }
     
-    func processStops(index: Int, completion: @escaping (Int, Double) -> ()){
+    private func processStops(index: Int, completion: @escaping (Int, Double) -> ()){
         
         let group = DispatchGroup()
         var finalTime = 0
@@ -461,7 +461,7 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
         - latitude: The markers latitude coordinate
         - longitude: The markers longitude
      */
-    func createMarker(titleMarker: String, latitude: CLLocationDegrees, longitude: CLLocationDegrees) {
+    private func createMarker(titleMarker: String, latitude: CLLocationDegrees, longitude: CLLocationDegrees) {
             //set up marker using given title and place the marker on the map
             let marker = GMSMarker(position: CLLocationCoordinate2D(latitude: latitude, longitude: longitude))
             marker.title = titleMarker

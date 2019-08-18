@@ -14,7 +14,7 @@ extension CustomizeTripDetails {
     /**
      Sets up the date picker view
      */
-    func setupView(){
+    internal func setupView(){
         dateView.layer.cornerRadius = 10
         dateView.layer.masksToBounds = true
         view.backgroundColor = UIColor.init(red: 0.5, green: 0.5, blue: 0.5, alpha: 0.5)
@@ -24,7 +24,7 @@ extension CustomizeTripDetails {
     /**
      Sets up add and edit buttons
     */
-    func setupButton(){
+    internal func setupButton(){
         editButton.setTitle("Edit", for: .normal)
         editButton.setTitleColor(.white, for: .normal)
         
@@ -44,7 +44,7 @@ extension TripDetailsTableViewCell {
     /**
      Sets each cell color and border
     */
-    func setCellColor(){
+    internal func setCellColor(){
         
         self.contentView.backgroundColor = UIColor(red:0.47, green:0.15, blue:0.50, alpha:1.0)
         self.contentView.layer.cornerRadius = 12
@@ -55,7 +55,7 @@ extension TripDetailsTableViewCell {
     /**
      Sets each cells label color to white
     */
-    func setLabelColor(){
+    internal func setLabelColor(){
         self.arrivalTime.textColor = .white
         self.departureTime.textColor = .white
         self.CityName.textColor = .white
@@ -64,7 +64,7 @@ extension TripDetailsTableViewCell {
     /**
      Sets the cells fonts to be adjustable
     */
-    func setLabelFont(){
+    internal func setLabelFont(){
         //set dynamic font sizes
         self.arrivalTime.adjustsFontSizeToFitWidth = true
         self.arrivalTime.minimumScaleFactor=0.5
