@@ -80,7 +80,7 @@ class weatherMenu: UITableViewController {
      - parameter weather: The weather condition
      - returns: An array containing two UIColors
     */
-    func cellColor(weather: String) -> [UIColor] {
+    internal func cellColor(weather: String) -> [UIColor] {
         //two colors needed for gradient
         var colorOne = UIColor()
         var colorTwo = UIColor()
@@ -121,7 +121,7 @@ class weatherMenu: UITableViewController {
         - size: the image size
      - returns: A UIImage that relates to the weather condition correctly sized
     */
-    func weatherImage(weather: String, size: CGSize) -> UIImage {
+    private func weatherImage(weather: String, size: CGSize) -> UIImage {
         var image = UIImage()
 
         if weather == "rain" {
