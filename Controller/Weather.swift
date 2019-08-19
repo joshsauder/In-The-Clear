@@ -152,12 +152,7 @@ extension ViewController {
             else {
                 let title = "Invalid Route"
                 let message = "Woops! Looks like it's not possible to drive between these two locations."
-                
-                self.stopSpinner()
                 self.showAlertTimePopup(title: title, message: message)
-                
-                self.mapView.clear()
-                self.timeAndDistanceView.isHidden = true
                 
                 
             }

@@ -358,7 +358,6 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
         
         //dark sky only supports dates up to 7 days out
         if different.day! > 6 {
-            self.stopSpinner()
             showAlertTimePopup(title: "Trip Too Long", message: "Looks like your trip is too long. Try shortening your tip up a bit.")
             
         } else {
