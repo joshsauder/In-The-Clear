@@ -236,6 +236,7 @@ extension ViewController {
             openMapsBottomContraints.constant = 10
         }
     }
+    
     /**
      Displays a UIAlert
      - parameters:
@@ -247,6 +248,25 @@ extension ViewController {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
         self.present(alert, animated: true, completion: nil)
+        
+    }
+    
+    /**
+     Displays a UIAlert with the time popup showing when 'OK' is tapped
+     - parameters:
+        - title: title of alert
+        - message: the message of alert
+    */
+    internal func showAlertTimePopup(title: String, message: String){
+        
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
+        alertController.addAction(UIAlertAction(title: "Ok", style: .default, handler: { action in
+            //run your function here
+            self.showTimePopup(UIButton())
+            
+        }))
+        
+        self.present(alertController, animated: true, completion: nil)
         
     }
     

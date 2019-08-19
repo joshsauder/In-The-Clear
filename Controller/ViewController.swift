@@ -267,13 +267,8 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
         //open GMSAutocomplete controllerand present
         let autoCompleteController = GMSAutocompleteViewController()
         autoCompleteController.delegate = self
-        
-        if #available(iOS 13.0, *) {
-            if traitCollection.userInterfaceStyle == .dark {
-                autoCompleteController.tableCellBackgroundColor = .darkGray
-            }
-        }
-        
+        autoCompleteController.tableCellBackgroundColor = .darkGray
+                
         //given location
         locationSelected = .startLocation
         
@@ -292,12 +287,8 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
         //open GMSAutocomplete controllerand present
         let autoCompleteController = GMSAutocompleteViewController()
         autoCompleteController.delegate = self
-        
-        if #available(iOS 13.0, *) {
-            if traitCollection.userInterfaceStyle == .dark {
-                autoCompleteController.tableCellBackgroundColor = .darkGray
-            }
-        }
+        autoCompleteController.tableCellBackgroundColor = .darkGray
+
         
         //given location
         locationSelected = .destinationLocation
@@ -367,15 +358,8 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
         
         //dark sky only supports dates up to 7 days out
         if different.day! > 6 {
-            
-            let alertController = UIAlertController(title: "Trip Too Long", message: "Looks like your trip is too long. Try shortening your tip up a bit.", preferredStyle: UIAlertController.Style.alert)
-            alertController.addAction(UIAlertAction(title: "Ok", style: .default, handler: { action in
-                //run your function here
-                self.showTimePopup(UIButton())
-                
-            }))
-            
-            self.present(alertController, animated: true, completion: nil)
+            self.stopSpinner()
+            showAlertTimePopup(title: "Trip Too Long", message: "Looks like your trip is too long. Try shortening your tip up a bit.")
             
         } else {
         
