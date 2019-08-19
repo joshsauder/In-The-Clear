@@ -380,7 +380,6 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
                 } else {
                     timeString = "\(time / 3600)hr \(time % 3600 / 60)min"
                 }
-                
                 let finalDistance = round(distance * 0.00062137)
                 
                 self.tripData.reverse()
@@ -412,6 +411,13 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
         }
     }
     
+    /**
+    Process data from each user selected stop
+     
+     - parameters:
+        - index: The index of the stop being processed
+        - completion: The total time and total distance returned on completion
+     */
     private func processStops(index: Int, completion: @escaping (Int, Double) -> ()){
         
         let group = DispatchGroup()
