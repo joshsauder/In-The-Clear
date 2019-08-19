@@ -37,8 +37,6 @@ class CustomizeTripDetailsTest: XCTestCase {
         
         vc.tripDetails.startTimes = [Date(), Date(), Date()]
         let dates = vc.addTimes(times: times)
-        print(expectedDates)
-        print(dates)
         
         //compare each date with accuracy set
         for (index,date) in dates.enumerated() {
