@@ -307,21 +307,29 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
     @IBAction func openGoogleMaps(_ sender: UIButton){
         //set up waypoints
         var waypoints = "&waypoints="
+        var appWaypoints=""
         
         var i = 1
         while i < userTripDetails.cityStops.count - 1 {
             waypoints.append(contentsOf: userTripDetails.cityStops[i])
+            appWaypoints.append(contentsOf: userTripDetails.cityStops[i] + "/")
             if i != 1 {
                 waypoints.append(contentsOf: "%7C")
             }
             i += 1
         }
         
-        //call google maps to open up directions
-        let base = url.GOOGLEMAPS_URL
-        let url = URL(string: "\(base)\(Float(locationStart.coordinate.latitude)),\(locationStart.coordinate.longitude))&daddr=\(String(describing: locationEnd.coordinate.latitude)),\(String(describing: locationEnd.coordinate.longitude))&travelMode=driving\(waypoints)".addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlFragmentAllowed)!)
+        if UIApplication.shared.canOpenURL(NSURL(string:"comgooglemaps://")! as URL){
             
-        UIApplication.shared.open(url!, options: convertToUIApplicationOpenExternalURLOptionsKeyDictionary([:]), completionHandler: nil)
+            UIApplication.shared.open(NSURL(string: "comgooglemapsurl://www.google.com/maps/dir/\(Float(locationStart.coordinate.latitude)),\(Float(locationStart.coordinate.longitude))/\(appWaypoints)\(Float(locationEnd.coordinate.latitude)),\(Float( locationEnd.coordinate.longitude))")! as URL, options: [:], completionHandler: nil)
+            
+        } else {
+            //call google maps to open up directions
+            let base = url.GOOGLEMAPS_URL
+            let url = URL(string: "\(base)\(Float(locationStart.coordinate.latitude)),\(Float(locationStart.coordinate.longitude))&daddr=\(Float(locationEnd.coordinate.latitude)),\(Float( locationEnd.coordinate.longitude))&travelMode=driving\(waypoints)".addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlFragmentAllowed)!)
+                
+            UIApplication.shared.open(url!, options: convertToUIApplicationOpenExternalURLOptionsKeyDictionary([:]), completionHandler: nil)
+        }
     }
     
     /**

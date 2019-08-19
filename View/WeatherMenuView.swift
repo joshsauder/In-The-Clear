@@ -15,8 +15,8 @@ extension WeatherTableViewCell {
      Function allows for cells to have array of color (gradient)
      
      - parameters:
-     - firstColor: The lighter UIColor
-     - secondColor: The darker UIColor
+        - firstColor: The lighter UIColor
+        - secondColor: The darker UIColor
      */
     internal func colorCell(firstColor: UIColor, secondColor:UIColor){
         
