@@ -32,9 +32,9 @@ class CustomizeTripDetails: UIViewController, CellDataDelegate{
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        if #available(iOS 13.0, *) {
-            overrideUserInterfaceStyle = .light
-        }
+//        if #available(iOS 13.0, *) {
+//            overrideUserInterfaceStyle = .light
+//        }
         setupView()
         setupButton()
         configureTableView()
@@ -69,7 +69,8 @@ class CustomizeTripDetails: UIViewController, CellDataDelegate{
         //open GMSAutocomplete controller and present
         let autoCompleteController = GMSAutocompleteViewController()
         autoCompleteController.delegate = self
-        autoCompleteController.tableCellBackgroundColor = .darkGray
+        //set table dark
+        autoCompleteController.setCellDark()
         
         self.present(autoCompleteController, animated: true, completion: nil)
     }

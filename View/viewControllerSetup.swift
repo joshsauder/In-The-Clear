@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import CoreLocation
+import GooglePlaces
 
 extension ViewController {
     
@@ -309,4 +310,16 @@ extension ViewController {
     }
 }
 
+extension GMSAutocompleteViewController {
+    
+    /**
+     Sets the table to be dark gray and lightens the text up
+     */
+    func setCellDark(){
+        self.tableCellBackgroundColor = .darkGray
+        self.primaryTextColor = .lightGray
+        self.primaryTextHighlightColor = .white
+        self.secondaryTextColor = .lightGray
+    }
+}
 

@@ -267,7 +267,8 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
         //open GMSAutocomplete controllerand present
         let autoCompleteController = GMSAutocompleteViewController()
         autoCompleteController.delegate = self
-        autoCompleteController.tableCellBackgroundColor = .darkGray
+        //set table dark
+        autoCompleteController.setCellDark()
                 
         //given location
         locationSelected = .startLocation
@@ -287,7 +288,8 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
         //open GMSAutocomplete controllerand present
         let autoCompleteController = GMSAutocompleteViewController()
         autoCompleteController.delegate = self
-        autoCompleteController.tableCellBackgroundColor = .darkGray
+        //set table dark
+        autoCompleteController.setCellDark()
 
         
         //given location
