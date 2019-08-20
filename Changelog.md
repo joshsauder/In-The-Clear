@@ -19,7 +19,7 @@
 * Removed Location button if location services are not enabled - 7/21/19
 * Increased time limit to 60 hours - 7/21/19
 
-[Version 2.0]
+[Version 2.0] - Released 8/20/19
 * File Structure moved over to MVP structure - 7/26/2019
 * Ability to add city stops - 8/3/19
 * Alowed reorder of city stops - 8/3/19
@@ -28,6 +28,6 @@
 * Redesign trip time/distance label - 8/14/19
 * Allowed waypoints to be added to Google Maps URL - 8/14/19
 * New logo added to splash screen - 8/14/19
-- Swift 5 update - 8/16/19
-- iOS 13 support - 8/17/19
-- Access types added to functions - 8/17/19
+* Swift 5 update - 8/16/19
+* Access types added to functions - 8/17/19
+* Google Places table darkened and iOS 13 support added but commented out - 8/19/19
