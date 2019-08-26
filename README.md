@@ -7,6 +7,21 @@ In The Clear is an iOS directions app that shows the user the weather they can e
 - Swift 4.0
 
 ## Getting Started
+
+### Download Repository from Github
+Clone the repository from Github:
+
+```bash
+git clone https://github.com/joshsauder/In-The-Clear.git
+```
+
+Clone each submodule:
+
+```bash
+cd In-The-Clear
+git submodule update --init --recursive
+```
+
 ### CocoaPods
 Add to your 'Podfile':
 
@@ -27,23 +42,17 @@ end
 Then run 'pod install' you will have all the necessary CocoaPods installed.
 
 ### Setting up Google Maps, Google Places, and OpenWeatherAPI
-To run this project you will need an API key for GoogleMaps, Google Places, and OpenWeatherAPI. Insert the API keys in the following locations:
+To run this project you will need an API key for GoogleMaps, Google Places, Google Directions, HERE Maps, and AWS. The AWS API keys must be provided by me (Josh Sauder), but the other four keys will need to be obtained from Google and HERE Maps. Create a Constants.swift file inside InTheClear/Constants and set it up like below:
 
-Google Maps
-In AppDelegate.swift:
 ```swift
-var googleAPIKey = "Your-API-Key"
-```
-
-Google Places
-In AppDelegate.swift:
-```swift
-var googlePlacesKey = "Your-API-Key"
-```
-
-OpenWeatherAPI
-```swift
-let urlComplete = urlBase + "lat=\(lat)&lon=\(long)&units=imperial&APPID=Your-API-Key"
+struct Constants {
+    static let AWS_KEY = "<AWS KEY>"
+    static let GOOGLE_MAPS_KEY = "<Google Maps Key>"
+    static let GOOGLE_PLACES_KEY = "<Google Places Key>"
+    static let GOOGLE_DIRECTIONS_KEY = "<Google Directions Key>"
+    static let HERE_APPID = "<HERE Maps App ID>"
+    static let HERE_APPCODE = "<HERE Maps App Code>"
+}
 ```
 
 All that's left to do is to open 'InTheClear.xcworkspace' and you should be good to go!
