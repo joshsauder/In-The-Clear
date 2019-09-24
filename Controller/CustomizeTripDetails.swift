@@ -32,9 +32,9 @@ class CustomizeTripDetails: UIViewController, CellDataDelegate{
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        if #available(iOS 13.0, *) {
-//            overrideUserInterfaceStyle = .light
-//        }
+        if #available(iOS 13.0, *) {
+            overrideUserInterfaceStyle = .light
+        }
         setupView()
         setupButton()
         configureTableView()
