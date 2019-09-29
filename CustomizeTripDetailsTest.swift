@@ -40,7 +40,7 @@ class CustomizeTripDetailsTest: XCTestCase {
         
         //compare each date with accuracy set
         for (index,date) in dates.enumerated() {
-            XCTAssertEqual(date.timeIntervalSinceReferenceDate, expectedDates[index].timeIntervalSinceReferenceDate, accuracy: 0.001)
+            XCTAssertEqual(date.timeIntervalSinceReferenceDate, expectedDates[index].timeIntervalSinceReferenceDate, accuracy: 0.05)
         }
         
     }
