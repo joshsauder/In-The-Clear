@@ -31,3 +31,6 @@
 * Swift 5 update - 8/16/19
 * Access types added to functions - 8/17/19
 * Google Places table darkened and iOS 13 support added but commented out - 8/19/19
+
+[Version 2.1] - Released 10/1/19
+* Added supported for iOS 13 dark mode - 9/23/19
