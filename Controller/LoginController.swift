@@ -14,22 +14,55 @@ class LoginController: UIViewController {
     
     @IBOutlet weak var InputView: UIView!
     @IBOutlet weak var AppleButtonView: UIStackView!
+    @IBOutlet weak var SubmitButton: UIButton!
+    @IBOutlet weak var ToggleButton: UIButton!
+    
+    var loginView: LoginView!
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setUpSignInAppleButton()
-        setUpForm()
+        setToLogin()
     }
     
-    func setUpForm(){
-        let nib = Bundle.main.loadNibNamed("Login", owner: nil, options: nil)?[0] as! UIView
-        nib.frame = InputView.bounds
-        nib.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        InputView.addSubview(nib);
+    func setToLogin(){
+        loginView = Bundle.main.loadNibNamed("Login", owner: nil, options: nil)?[0] as! LoginView
+        loginView.frame = InputView.bounds
+        loginView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        InputView.addSubview(loginView);
+        
+        ToggleButton.setTitle("Register", for: .normal)
     }
-
+    
+    func setToRegister(){
+        
+        loginView = Bundle.main.loadNibNamed("Register", owner: nil, options: nil)?[0] as! LoginView
+        loginView.frame = InputView.bounds
+        loginView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        InputView.addSubview(loginView);
+        ToggleButton.setTitle("Login", for: .normal)
+        
+    }
+    
+    @IBAction func SubmitClick(_ sender: Any) {
+        
+        if(ToggleButton.titleLabel!.text == "Register"){
+            print(loginView.emailText!.text)
+            print(loginView.passwordText!.text)
+        }else {
+            print(loginView.registerEmailText!.text)
+            print(loginView.registerLastText!.text)
+        }
+    }
+    
+    @IBAction func RenderClick(_ sender: Any) {
+        ToggleButton.titleLabel?.text == "Register" ? setToRegister() : setToLogin()
+        
+    }
+    
+    
 }
 
 extension LoginController: ASAuthorizationControllerDelegate {
