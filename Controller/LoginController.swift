@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import AuthenticationServices
 
-class LoginController: UIViewController, ASAuthorizationControllerDelegate {
+class LoginController: UIViewController {
     
     @IBOutlet weak var InputView: UIView!
     @IBOutlet weak var AppleButtonView: UIStackView!
@@ -20,7 +20,19 @@ class LoginController: UIViewController, ASAuthorizationControllerDelegate {
         super.viewDidLoad()
         
         setUpSignInAppleButton()
+        setUpForm()
     }
+    
+    func setUpForm(){
+        let nib = Bundle.main.loadNibNamed("Login", owner: nil, options: nil)?[0] as! UIView
+        nib.frame = InputView.bounds
+        nib.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        InputView.addSubview(nib);
+    }
+
+}
+
+extension LoginController: ASAuthorizationControllerDelegate {
     
     func setUpSignInAppleButton() {
         
@@ -57,7 +69,7 @@ class LoginController: UIViewController, ASAuthorizationControllerDelegate {
         
         print(error)
     }
-
+    
 }
 
 extension LoginController: ASAuthorizationControllerPresentationContextProviding {

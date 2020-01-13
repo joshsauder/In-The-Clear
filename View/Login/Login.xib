@@ -8,29 +8,39 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LoginView" customModule="InTheClear" customModuleProvider="target"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view contentMode="scaleToFill" id="Hw9-MT-thb">
-            <rect key="frame" x="0.0" y="0.0" width="414" height="180"/>
+        <view contentMode="scaleToFill" id="Hw9-MT-thb" customClass="LoginView" customModule="InTheClear" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="378" height="122"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="E-Mail" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="pRj-PX-3sJ">
-                    <rect key="frame" x="66" y="44" width="282" height="34"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="E-Mail" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="pRj-PX-3sJ">
+                    <rect key="frame" x="66" y="16" width="246" height="34"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits"/>
                 </textField>
-                <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="VqA-EI-vVZ">
-                    <rect key="frame" x="66" y="109" width="282" height="34"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="VqA-EI-vVZ">
+                    <rect key="frame" x="66" y="68" width="246" height="34"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits"/>
                 </textField>
             </subviews>
             <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+            <constraints>
+                <constraint firstItem="adX-Dt-1W5" firstAttribute="trailing" secondItem="VqA-EI-vVZ" secondAttribute="trailing" constant="66" id="5OW-ug-ozS"/>
+                <constraint firstItem="adX-Dt-1W5" firstAttribute="trailing" secondItem="pRj-PX-3sJ" secondAttribute="trailing" constant="66" id="6oO-vu-Myu"/>
+                <constraint firstItem="VqA-EI-vVZ" firstAttribute="leading" secondItem="adX-Dt-1W5" secondAttribute="leading" constant="66" id="9xl-Lt-Uuf"/>
+                <constraint firstItem="pRj-PX-3sJ" firstAttribute="leading" secondItem="adX-Dt-1W5" secondAttribute="leading" constant="66" id="ISx-id-5TQ"/>
+                <constraint firstItem="VqA-EI-vVZ" firstAttribute="top" secondItem="pRj-PX-3sJ" secondAttribute="bottom" constant="18" id="fbl-Ae-n4P"/>
+                <constraint firstItem="pRj-PX-3sJ" firstAttribute="top" secondItem="Hw9-MT-thb" secondAttribute="top" constant="16" id="jOD-CS-gWL"/>
+            </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="adX-Dt-1W5"/>
-            <point key="canvasLocation" x="186.95652173913044" y="-5.3571428571428568"/>
+            <connections>
+                <outlet property="emailText" destination="pRj-PX-3sJ" id="dG5-P8-QYT"/>
+                <outlet property="passwordText" destination="VqA-EI-vVZ" id="vUX-vs-vYH"/>
+            </connections>
+            <point key="canvasLocation" x="182.60869565217394" y="-7.3660714285714279"/>
         </view>
     </objects>
 </document>
