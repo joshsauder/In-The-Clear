@@ -49,8 +49,16 @@ class LoginController: UIViewController {
     @IBAction func SubmitClick(_ sender: Any) {
         
         if(ToggleButton.titleLabel!.text == "Register"){
-            print(loginView.emailText!.text)
-            print(loginView.passwordText!.text)
+            var userDetails = [String:String]()
+            userDetails["email"] = loginView.emailText!.text
+            userDetails["password"] = loginView.passwordText!.text
+            signInUser(url: "http://localhost:3400/api/user/auth", parameters: userDetails) {login in
+                if(login == 200){
+                    self.transitionViewController()
+                }else {
+                    self.showAlert(title: "Incorrect Password")
+                }
+            }
         }else {
             print(loginView.registerEmailText!.text)
             print(loginView.registerLastText!.text)
@@ -62,6 +70,19 @@ class LoginController: UIViewController {
         
     }
     
+    func transitionViewController(){
+        let storyBoard = UIStoryboard(name: "Main", bundle: nil)
+        if let mainVc = storyBoard.instantiateViewController(withIdentifier: "ViewController") as? ViewController{
+            self.present(mainVc, animated: true, completion: nil)
+        }
+        
+    }
+    
+    func showAlert(title: String){
+        let alert = UIAlertController(title: title, message: nil, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+    }
     
 }
 

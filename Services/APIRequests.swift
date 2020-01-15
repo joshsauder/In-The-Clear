@@ -99,13 +99,4 @@ extension ViewController {
         }
     }
     
-    func signInUser(url: String, completion: @escaping (Int?) -> ()){
-        
-        Alamofire.request(url, method: .post).validate().responseJSON {
-            response in
-            
-            completion(response.response?.statusCode)
-        }
-    }
-    
 }
