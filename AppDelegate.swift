@@ -10,6 +10,8 @@ import UIKit
 import GoogleMaps
 import GooglePlaces
 import GoogleSignIn
+import Alamofire
+import SwiftyJSON
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate{
@@ -18,6 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate{
 
     var googleAPIKey = Constants.GOOGLE_MAPS_KEY
     var googlePlacesKey = Constants.GOOGLE_PLACES_KEY
+ 
     var googleSignInId = Constants.GOOGLE_SIGNIN_KEY
 
     
@@ -49,7 +52,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate{
         }
         
         let idToken = user.authentication.idToken
-        print(idToken)
+        
+        Alamofire.request("http://localhost:3400/api/User/Auth/Google/?token=\(idToken)&paid=true", method: .post).validate().responseJSON {
+            response in
+            
+            let json = JSON(response.data!)
+        }
+        
     }
     
 

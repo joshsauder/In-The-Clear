@@ -35,13 +35,4 @@ extension LoginController {
             completion(response.response?.statusCode)
         }
     }
-    
-    func signInGoogle(token: String, completion: @escaping (String, String) -> ()){
-        Alamofire.request("http://localhost:3400/api/User/Auth/Google/?token=\(token)&paid=true", method: .post).validate().responseJSON {
-            response in
-            
-            let json = JSON(response.data!)
-            completion(json["Id"].stringValue, json["FirstName"].stringValue)
-        }
-    }
 }

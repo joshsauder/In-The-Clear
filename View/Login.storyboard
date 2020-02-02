@@ -34,13 +34,13 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="UMf-Y3-rNL">
-                                <rect key="frame" x="87" y="658" width="201" height="54"/>
+                                <rect key="frame" x="73" y="658" width="229" height="48"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="54" id="5dl-CL-aBC"/>
+                                    <constraint firstAttribute="height" constant="48" id="5dl-CL-aBC"/>
                                 </constraints>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Axp-3r-9nr">
-                                <rect key="frame" x="22" y="580" width="331" height="30"/>
+                                <rect key="frame" x="22" y="582" width="331" height="30"/>
                                 <state key="normal" title="Button"/>
                                 <connections>
                                     <action selector="SubmitClick:" destination="xV8-Ue-1up" eventType="touchUpInside" id="cdC-lI-TRb"/>
@@ -57,36 +57,34 @@
                                 <rect key="frame" x="16" y="335" width="343" height="223"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="x7v-13-h6X" customClass="GIDSignInButton">
-                                <rect key="frame" x="67" y="729" width="241" height="63"/>
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="x7v-13-h6X" customClass="GIDSignInButton">
+                                <rect key="frame" x="73" y="717" width="230" height="48"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                             </view>
                         </subviews>
                         <color key="backgroundColor" red="0.49803921568627452" green="0.011764705882352941" blue="0.99607843137254903" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
-                            <constraint firstAttribute="bottom" secondItem="x7v-13-h6X" secondAttribute="bottom" constant="20" id="5yg-HY-1VU"/>
-                            <constraint firstItem="UMf-Y3-rNL" firstAttribute="leading" secondItem="4Og-52-b69" secondAttribute="leading" constant="87" id="8rb-W6-bx1"/>
+                            <constraint firstAttribute="bottom" secondItem="x7v-13-h6X" secondAttribute="bottom" constant="47" id="5yg-HY-1VU"/>
+                            <constraint firstItem="UMf-Y3-rNL" firstAttribute="leading" secondItem="4Og-52-b69" secondAttribute="leading" constant="73" id="8rb-W6-bx1"/>
                             <constraint firstItem="8Sp-On-4LT" firstAttribute="leading" secondItem="4Og-52-b69" secondAttribute="leading" constant="22" id="BuN-UD-SoO"/>
-                            <constraint firstItem="Axp-3r-9nr" firstAttribute="top" secondItem="4lB-2A-TuZ" secondAttribute="bottom" constant="22" id="DKc-4h-A1M"/>
-                            <constraint firstItem="8Sp-On-4LT" firstAttribute="top" secondItem="Axp-3r-9nr" secondAttribute="bottom" constant="8" id="EVF-an-xab"/>
+                            <constraint firstItem="Axp-3r-9nr" firstAttribute="top" secondItem="4lB-2A-TuZ" secondAttribute="bottom" constant="24" id="DKc-4h-A1M"/>
+                            <constraint firstItem="8Sp-On-4LT" firstAttribute="top" secondItem="Axp-3r-9nr" secondAttribute="bottom" constant="6" id="EVF-an-xab"/>
                             <constraint firstItem="x7v-13-h6X" firstAttribute="centerX" secondItem="Oe5-0E-lUU" secondAttribute="centerX" id="FEJ-LC-lle"/>
                             <constraint firstItem="qDH-qH-whp" firstAttribute="top" secondItem="CWv-cb-zv6" secondAttribute="bottom" constant="22" id="JPh-ez-iCm"/>
-                            <constraint firstItem="x7v-13-h6X" firstAttribute="top" secondItem="UMf-Y3-rNL" secondAttribute="bottom" constant="17" id="MD5-e6-MRj"/>
+                            <constraint firstItem="4lB-2A-TuZ" firstAttribute="top" secondItem="qDH-qH-whp" secondAttribute="bottom" constant="19" id="Lqu-jF-x6B"/>
+                            <constraint firstItem="x7v-13-h6X" firstAttribute="top" secondItem="UMf-Y3-rNL" secondAttribute="bottom" constant="11" id="MD5-e6-MRj"/>
                             <constraint firstItem="4Og-52-b69" firstAttribute="trailing" secondItem="Axp-3r-9nr" secondAttribute="trailing" constant="22" id="NrX-Jc-4Hy"/>
                             <constraint firstItem="Axp-3r-9nr" firstAttribute="leading" secondItem="4Og-52-b69" secondAttribute="leading" constant="22" id="OuY-Rs-3gi"/>
                             <constraint firstItem="4lB-2A-TuZ" firstAttribute="centerX" secondItem="Oe5-0E-lUU" secondAttribute="centerX" id="Q1z-Md-BuR"/>
                             <constraint firstItem="4lB-2A-TuZ" firstAttribute="leading" secondItem="4Og-52-b69" secondAttribute="leading" constant="16" id="REp-Qk-fkS"/>
-                            <constraint firstItem="x7v-13-h6X" firstAttribute="leading" secondItem="4Og-52-b69" secondAttribute="leading" constant="67" id="TCt-zW-dC8"/>
-                            <constraint firstItem="4Og-52-b69" firstAttribute="trailing" secondItem="UMf-Y3-rNL" secondAttribute="trailing" constant="87" id="TLa-wD-dYn"/>
-                            <constraint firstItem="8Sp-On-4LT" firstAttribute="top" secondItem="Axp-3r-9nr" secondAttribute="bottom" constant="8" id="Usd-uI-lc1"/>
+                            <constraint firstAttribute="bottom" secondItem="4lB-2A-TuZ" secondAttribute="bottom" constant="254" id="RUf-le-txl"/>
+                            <constraint firstItem="x7v-13-h6X" firstAttribute="leading" secondItem="4Og-52-b69" secondAttribute="leading" constant="73" id="TCt-zW-dC8"/>
+                            <constraint firstItem="8Sp-On-4LT" firstAttribute="top" secondItem="Axp-3r-9nr" secondAttribute="bottom" constant="6" id="Usd-uI-lc1"/>
                             <constraint firstItem="qDH-qH-whp" firstAttribute="centerX" secondItem="Oe5-0E-lUU" secondAttribute="centerX" id="Uxq-TE-9Am"/>
                             <constraint firstItem="qDH-qH-whp" firstAttribute="top" secondItem="CWv-cb-zv6" secondAttribute="bottom" constant="22" id="WO3-WQ-SPn"/>
                             <constraint firstItem="CWv-cb-zv6" firstAttribute="centerX" secondItem="Oe5-0E-lUU" secondAttribute="centerX" id="XFe-OS-YXv"/>
-                            <constraint firstItem="4Og-52-b69" firstAttribute="trailing" secondItem="4lB-2A-TuZ" secondAttribute="trailing" constant="16" id="cTP-SP-ATM"/>
-                            <constraint firstItem="4lB-2A-TuZ" firstAttribute="top" secondItem="qDH-qH-whp" secondAttribute="bottom" constant="19" id="l52-b4-UdU"/>
                             <constraint firstItem="UMf-Y3-rNL" firstAttribute="top" secondItem="8Sp-On-4LT" secondAttribute="bottom" constant="10" id="mQc-ax-WAg"/>
                             <constraint firstItem="4Og-52-b69" firstAttribute="trailing" secondItem="8Sp-On-4LT" secondAttribute="trailing" constant="22" id="mf4-hT-BOE"/>
-                            <constraint firstItem="x7v-13-h6X" firstAttribute="top" secondItem="Oe5-0E-lUU" secondAttribute="top" constant="729" id="qIv-3a-fM7"/>
                             <constraint firstItem="UMf-Y3-rNL" firstAttribute="centerX" secondItem="Oe5-0E-lUU" secondAttribute="centerX" id="tPx-SE-Yf7"/>
                             <constraint firstItem="CWv-cb-zv6" firstAttribute="top" secondItem="4Og-52-b69" secondAttribute="top" constant="25" id="tuk-a5-LSc"/>
                         </constraints>
