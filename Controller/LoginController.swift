@@ -9,11 +9,13 @@
 import Foundation
 import UIKit
 import AuthenticationServices
+import GoogleSignIn
 
-class LoginController: UIViewController {
+class LoginController: UIViewController, GIDSignInUIDelegate {
     
     @IBOutlet weak var InputView: UIView!
     @IBOutlet weak var AppleButtonView: UIStackView!
+    @IBOutlet weak var signInButton: GIDSignInButton!
     @IBOutlet weak var SubmitButton: UIButton!
     @IBOutlet weak var ToggleButton: UIButton!
     
@@ -23,6 +25,7 @@ class LoginController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        GIDSignIn.sharedInstance()?.uiDelegate = self
         setUpSignInAppleButton()
         setToLogin()
     }
@@ -52,8 +55,8 @@ class LoginController: UIViewController {
             var userDetails = [String:String]()
             userDetails["Email"] = loginView.emailText!.text
             userDetails["Password"] = loginView.passwordText!.text
-            signInUser(url: "http://localhost:5000/api/User/Auth", parameters: userDetails) {login in
-                if(login == 200){
+            signInUser(parameters: userDetails) {Id, name in
+                if(Id != ""){
                     self.transitionViewController()
                 }else {
                     self.showAlert(title: "Incorrect Password")
@@ -68,11 +71,11 @@ class LoginController: UIViewController {
             userDetails["LastName"] = loginView.registerLastText!.text
             userDetails["Paid"] = "true"
             
-            signInUser(url: "http://localhost:5000/api/User", parameters: userDetails)
+            createUser(parameters: userDetails)
             {login in
                 if(login == 200){
-                    self.signInUser(url: "http://localhost:3400/api/User/Auth", parameters: userDetails){
-                        login in
+                    self.signInUser(parameters: userDetails){
+                        Id, name in
                         self.transitionViewController()
                     }
                 } else {
