@@ -50,9 +50,9 @@ class LoginController: UIViewController {
         
         if(ToggleButton.titleLabel!.text == "Register"){
             var userDetails = [String:String]()
-            userDetails["email"] = loginView.emailText!.text
-            userDetails["password"] = loginView.passwordText!.text
-            signInUser(url: "http://localhost:3400/api/user/auth", parameters: userDetails) {login in
+            userDetails["Email"] = loginView.emailText!.text
+            userDetails["Password"] = loginView.passwordText!.text
+            signInUser(url: "http://localhost:5000/api/User/Auth", parameters: userDetails) {login in
                 if(login == 200){
                     self.transitionViewController()
                 }else {
@@ -60,8 +60,25 @@ class LoginController: UIViewController {
                 }
             }
         }else {
-            print(loginView.registerEmailText!.text)
-            print(loginView.registerLastText!.text)
+            
+            var userDetails = [String: String]()
+            userDetails["Email"] = loginView.registerEmailText!.text
+            userDetails["Password"] = loginView.registerPasswordText!.text
+            userDetails["FirstName"] = loginView.registerFirstText!.text
+            userDetails["LastName"] = loginView.registerLastText!.text
+            userDetails["Paid"] = "true"
+            
+            signInUser(url: "http://localhost:5000/api/User", parameters: userDetails)
+            {login in
+                if(login == 200){
+                    self.signInUser(url: "http://localhost:3400/api/User/Auth", parameters: userDetails){
+                        login in
+                        self.transitionViewController()
+                    }
+                } else {
+                    self.showAlert(title: "Incorrect Password")
+                }
+            }
         }
     }
     

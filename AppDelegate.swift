@@ -9,23 +9,47 @@
 import UIKit
 import GoogleMaps
 import GooglePlaces
+import GoogleSignIn
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate{
-
+class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate{
+    
     var window: UIWindow?
 
     var googleAPIKey = Constants.GOOGLE_MAPS_KEY
     var googlePlacesKey = Constants.GOOGLE_PLACES_KEY
+    var googleSignInId = Constants.GOOGLE_SIGNIN_KEY
 
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         GMSServices.provideAPIKey(googleAPIKey)
         GMSPlacesClient.provideAPIKey(googlePlacesKey)
+        
+        GIDSignIn.sharedInstance().clientID = googleSignInId
+        GIDSignIn.sharedInstance().delegate = self
    
         // Override point for customization after application launch.
         return true
+    }
+    
+    func application(_ application: UIApplication,
+                     open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
+      return GIDSignIn.sharedInstance().handle(url, sourceApplication: sourceApplication, annotation: annotation)
+    }
+    
+    func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
+        if let error = error {
+            if (error as NSError).code == GIDSignInErrorCode.hasNoAuthInKeychain.rawValue {
+              print("The user has not signed in before or they have since signed out.")
+            } else {
+              print("\(error.localizedDescription)")
+            }
+            return
+        }
+        
+        let idToken = user.authentication.idToken
+        print(idToken)
     }
     
 
