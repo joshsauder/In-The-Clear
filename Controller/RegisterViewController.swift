@@ -53,6 +53,21 @@ class RegisterViewController : UIViewController {
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
         self.present(alert, animated: true, completion: nil)
     }
+    
+    @objc func textFieldDidChange(textField: UITextField) {
+        if EmailText.text!.isEmpty || PasswordText.text!.isEmpty || FirstNameText.text!.isEmpty || LastNameText.text!.isEmpty {
+            SubmitButton.isEnabled = false
+        }else {
+            SubmitButton.isEnabled = true
+        }
+    }
+    
+    func addTargets(){
+        EmailText.addTarget(self, action: #selector(textFieldDidChange(textField:)), for: UIControl.Event.editingChanged)
+        PasswordText.addTarget(self, action: #selector(textFieldDidChange(textField:)), for: UIControl.Event.editingChanged)
+        FirstNameText.addTarget(self, action: #selector(textFieldDidChange(textField:)), for: UIControl.Event.editingChanged)
+        LastNameText.addTarget(self, action: #selector(textFieldDidChange(textField:)), for: UIControl.Event.editingChanged)
+    }
 
     
 }

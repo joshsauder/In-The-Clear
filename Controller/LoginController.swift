@@ -16,7 +16,6 @@ class LoginController: UIViewController, GIDSignInUIDelegate {
     @IBOutlet weak var AppleButtonView: UIStackView!
     @IBOutlet weak var signInButton: GIDSignInButton!
     @IBOutlet weak var SubmitButton: UIButton!
-    
     @IBOutlet weak var EmailText: UITextField!
     @IBOutlet weak var PasswordText: UITextField!
     
@@ -24,9 +23,9 @@ class LoginController: UIViewController, GIDSignInUIDelegate {
         super.viewDidLoad()
         
         GIDSignIn.sharedInstance()?.uiDelegate = self
+        addTargets()
         setUpSignInAppleButton()
     }
-    
     
     @IBAction func SubmitClick(_ sender: Any) {
         
@@ -55,6 +54,20 @@ class LoginController: UIViewController, GIDSignInUIDelegate {
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
         self.present(alert, animated: true, completion: nil)
     }
+    
+    @objc func textFieldDidChange(textField: UITextField) {
+        if EmailText.text!.isEmpty || PasswordText.text!.isEmpty {
+            SubmitButton.isEnabled = false
+        }else {
+            SubmitButton.isEnabled = true
+        }
+    }
+    
+    func addTargets(){
+        EmailText.addTarget(self, action: #selector(textFieldDidChange(textField:)), for: UIControl.Event.editingChanged)
+        PasswordText.addTarget(self, action: #selector(textFieldDidChange(textField:)), for: UIControl.Event.editingChanged)
+    }
+    
     
 }
 
