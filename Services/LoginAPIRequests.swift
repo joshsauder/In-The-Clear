@@ -10,7 +10,13 @@ import Foundation
 import Alamofire
 import SwiftyJSON
 
-extension LoginController {
+protocol LoginAPI {
+    func signInUser(parameters: [String: String], completion: @escaping (String, String) -> ())
+    
+     func createUser(parameters: [String: String], completion: @escaping (Int?) -> ())
+}
+
+extension LoginAPI {
     
     func signInUser(parameters: [String: String], completion: @escaping (String, String) -> ()){
         
@@ -36,3 +42,6 @@ extension LoginController {
         }
     }
 }
+
+extension LoginController : LoginAPI {}
+extension RegisterViewController : LoginAPI {}
