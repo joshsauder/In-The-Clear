@@ -24,18 +24,36 @@
                                 </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T5B-Sg-ZU3">
-                                <rect key="frame" x="87" y="648" width="240" height="30"/>
+                                <rect key="frame" x="51" y="635" width="313" height="43"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Login"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
+                                <state key="normal" title="Login">
+                                    <color key="titleColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                </state>
                                 <connections>
                                     <action selector="LoginButton:" destination="83A-ol-xWy" eventType="touchUpInside" id="aib-iK-Nwi"/>
                                     <segue destination="gwu-p5-sbh" kind="show" id="dau-0g-Z8Z"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eCP-Ol-MhT">
-                                <rect key="frame" x="87" y="746" width="240" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jFI-ge-b2s">
+                                <rect key="frame" x="51" y="703" width="313" height="43"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Register"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
+                                <state key="normal" title="Sign up with Apple or Google">
+                                    <color key="titleColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                </state>
+                                <connections>
+                                    <action selector="LoginButton:" destination="83A-ol-xWy" eventType="touchUpInside" id="knF-a8-TnI"/>
+                                    <segue destination="gwu-p5-sbh" kind="show" id="vBS-Tp-TXA"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eCP-Ol-MhT">
+                                <rect key="frame" x="51" y="771" width="313" height="43"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
+                                <state key="normal" title="Register">
+                                    <color key="titleColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                </state>
                                 <connections>
                                     <action selector="RegisterButton:" destination="83A-ol-xWy" eventType="touchUpInside" id="vqw-3x-tGf"/>
                                     <segue destination="qH0-Wf-Szd" kind="show" id="n8n-Qc-LBt"/>
@@ -92,8 +110,11 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Chr-PJ-Z5Q">
-                                <rect key="frame" x="92" y="512" width="230" height="30"/>
-                                <state key="normal" title="Submit"/>
+                                <rect key="frame" x="92" y="508" width="230" height="34"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
+                                <state key="normal" title="Submit">
+                                    <color key="titleColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                </state>
                                 <connections>
                                     <action selector="SubmitClick:" destination="gwu-p5-sbh" eventType="touchUpInside" id="TW8-Wo-EO1"/>
                                 </connections>
@@ -175,8 +196,11 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HDi-fH-DOQ">
-                                <rect key="frame" x="103" y="570" width="224" height="30"/>
-                                <state key="normal" title="Button"/>
+                                <rect key="frame" x="103" y="570" width="224" height="34"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
+                                <state key="normal" title="Register">
+                                    <color key="titleColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                </state>
                                 <connections>
                                     <action selector="RegisterSubmit:" destination="qH0-Wf-Szd" eventType="touchUpInside" id="3Sm-30-B8x"/>
                                 </connections>
@@ -244,4 +268,7 @@
     <resources>
         <image name="InTheClear.png" width="420" height="237"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="dau-0g-Z8Z"/>
+    </inferredMetricsTieBreakers>
 </document>
