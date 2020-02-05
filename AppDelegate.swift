@@ -53,7 +53,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate{
         
         let idToken = user.authentication.idToken
         
-        Alamofire.request("http://localhost:3400/api/User/Auth/Google/?token=\(idToken)&paid=true", method: .post).validate().responseJSON {
+        AF.request("http://localhost:3400/api/User/Auth/Google/?token=\(idToken)&paid=true", method: .post).validate().responseJSON {
             response in
             
             let json = JSON(response.data!)

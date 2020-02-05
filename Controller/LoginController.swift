@@ -30,8 +30,8 @@ class LoginController: UIViewController, GIDSignInUIDelegate {
     @IBAction func SubmitClick(_ sender: Any) {
         
         var userDetails = [String:String]()
-        userDetails["Email"] = EmailText!.text
-        userDetails["Password"] = PasswordText!.text
+        userDetails["email"] = EmailText!.text
+        userDetails["password"] = PasswordText!.text
         signInUser(parameters: userDetails) {Id, name in
             if(Id != ""){
                 self.transitionViewController()

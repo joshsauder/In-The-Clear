@@ -13,14 +13,25 @@ import SwiftyJSON
 protocol LoginAPI {
     func signInUser(parameters: [String: String], completion: @escaping (String, String) -> ())
     
-     func createUser(parameters: [String: String], completion: @escaping (Int?) -> ())
+    func createUser(parameters: [String: String], completion: @escaping (Int?) -> ())
+}
+
+struct Login: Encodable {
+    let email: String
+    let password: String
 }
 
 extension LoginAPI {
     
     func signInUser(parameters: [String: String], completion: @escaping (String, String) -> ()){
         
-        Alamofire.request("http://localhost:5000/api/User/Auth", method: .post, parameters: parameters).validate().responseJSON {
+        let headers: HTTPHeaders = [
+          "Content-Type": "application/json; charset=utf-8"
+        ]
+        
+        let login = Login(email: parameters["email"]!, password: parameters["password"]!)
+        
+        AF.request("http://localhost:5000/api/User/Auth", method: .post, parameters: login, encoder: JSONParameterEncoder.default).validate().responseJSON {
             response in
             
             if(response.response?.statusCode != 200){
@@ -28,14 +39,14 @@ extension LoginAPI {
             }
             
             let json = JSON(response.data!)
-            completion(json["Id"].stringValue, json["FirstName"].stringValue)
+            completion(json["id"].stringValue, json["firstName"].stringValue)
         }
     }
     
     
     func createUser(parameters: [String: String], completion: @escaping (Int?) -> ()){
         
-        Alamofire.request("http://localhost:5000/api/User", method: .post, parameters: parameters).validate().responseJSON {
+        AF.request("http://localhost:5000/api/User", method: .post, parameters: parameters).validate().responseJSON {
             response in
             
             completion(response.response?.statusCode)

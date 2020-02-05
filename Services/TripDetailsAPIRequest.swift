@@ -30,7 +30,7 @@ extension CustomizeTripDetails {
         }
         hereURL.append(contentsOf: "&mode=fastest;car;")
         
-        Alamofire.request(hereURL, method: .get).validate(statusCode: 200..<300).responseJSON { response in
+        AF.request(hereURL, method: .get).validate(statusCode: 200..<300).responseJSON { response in
             
             //begin parsing the response
             let json = JSON(response.data!)

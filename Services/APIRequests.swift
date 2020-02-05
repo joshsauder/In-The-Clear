@@ -23,7 +23,7 @@ extension ViewController {
         
         let AWSURL = url.AWS_WEATHER_URL
         //make url request to AWS Weather Fuction
-        Alamofire.request(AWSURL, method: .post, parameters: parameters, encoding: JSONEncoding.default).validate(statusCode: 200..<300).responseJSON(completionHandler: {
+        AF.request(AWSURL, method: .post, parameters: parameters, encoding: JSONEncoding.default).validate(statusCode: 200..<300).responseJSON(completionHandler: {
             (response) in
             
             switch response.result {
@@ -55,7 +55,7 @@ extension ViewController {
         let urlComplete = url.AWS_REVERSE_GEOLOCATION_URL
         
         //make API call to AWS Lambda Reverse Geolocating function
-        Alamofire.request(urlComplete, method: .post, parameters: parameters, encoding: JSONEncoding.default).validate(statusCode: 200..<300).responseJSON(completionHandler: {
+        AF.request(urlComplete, method: .post, parameters: parameters, encoding: JSONEncoding.default).validate(statusCode: 200..<300).responseJSON(completionHandler: {
             (response) in
             
             switch response.result {
@@ -90,7 +90,7 @@ extension ViewController {
     */
     func getDirections(url: String, completion: @escaping ([JSON]) -> ()){
         
-        Alamofire.request(url, method: .get).validate(statusCode: 200..<300).responseJSON { response in
+        AF.request(url, method: .get).validate(statusCode: 200..<300).responseJSON { response in
             
             //begin parsing the response
             let json = JSON(response.data!)
