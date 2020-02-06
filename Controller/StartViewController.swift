@@ -12,14 +12,19 @@ import UIKit
 class StartViewController: UIViewController {
     
     @IBOutlet weak var LoginButton: UIButton!
-    @IBOutlet weak var ThirdPartyButton: UIButton!
     @IBOutlet weak var RegisterButton: UIButton!
+    
+    @IBOutlet weak var TextView: UIView!
+    @IBOutlet weak var ThirdPartyLabel: UILabel!
+    @IBOutlet weak var LoginLabel: UILabel!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         createButton(button: LoginButton)
-        createButton(button: ThirdPartyButton)
         createButton(button: RegisterButton)
+        
+        setupLabels()
     }
 }
