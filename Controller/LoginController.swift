@@ -29,9 +29,7 @@ class LoginController: UIViewController, GIDSignInUIDelegate {
     
     @IBAction func SubmitClick(_ sender: Any) {
         
-        var userDetails = [String:String]()
-        userDetails["email"] = EmailText!.text
-        userDetails["password"] = PasswordText!.text
+        let userDetails = User(email: EmailText!.text!, password: PasswordText!.text!, firstName: "", lastName: "")
         signInUser(parameters: userDetails) {Id, name in
             if(Id != ""){
                 self.transitionViewController()
@@ -55,7 +53,7 @@ class LoginController: UIViewController, GIDSignInUIDelegate {
         self.present(alert, animated: true, completion: nil)
     }
     
-    @objc func textFieldDidChange(textField: UITextField) {
+    @objc func textFieldDidChange(_ textField: UITextField) {
         if EmailText.text!.isEmpty || PasswordText.text!.isEmpty {
             SubmitButton.isEnabled = false
         }else {
@@ -64,8 +62,8 @@ class LoginController: UIViewController, GIDSignInUIDelegate {
     }
     
     func addTargets(){
-        EmailText.addTarget(self, action: #selector(textFieldDidChange(textField:)), for: UIControl.Event.editingChanged)
-        PasswordText.addTarget(self, action: #selector(textFieldDidChange(textField:)), for: UIControl.Event.editingChanged)
+        EmailText.addTarget(self, action: #selector(textFieldDidChange(_:)), for: UIControl.Event.editingChanged)
+        PasswordText.addTarget(self, action: #selector(textFieldDidChange(_:)), for: UIControl.Event.editingChanged)
     }
     
     

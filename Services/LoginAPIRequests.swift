@@ -10,28 +10,24 @@ import Foundation
 import Alamofire
 import SwiftyJSON
 
-protocol LoginAPI {
-    func signInUser(parameters: [String: String], completion: @escaping (String, String) -> ())
-    
-    func createUser(parameters: [String: String], completion: @escaping (Int?) -> ())
-}
-
-struct Login: Encodable {
+struct User: Encodable {
     let email: String
     let password: String
+    let firstName: String
+    let lastName: String
+}
+
+protocol LoginAPI {
+    func signInUser(parameters: User, completion: @escaping (String, String) -> ())
+    func createUser(parameters: User, completion: @escaping (Int) -> ())
 }
 
 extension LoginAPI {
     
-    func signInUser(parameters: [String: String], completion: @escaping (String, String) -> ()){
+    func signInUser(parameters: User, completion: @escaping (String, String) -> ()){
         
-        let headers: HTTPHeaders = [
-          "Content-Type": "application/json; charset=utf-8"
-        ]
         
-        let login = Login(email: parameters["email"]!, password: parameters["password"]!)
-        
-        AF.request("http://localhost:5000/api/User/Auth", method: .post, parameters: login, encoder: JSONParameterEncoder.default).validate().responseJSON {
+        AF.request("http://localhost:5000/api/User/Auth", method: .post, parameters: parameters, encoder: JSONParameterEncoder.default).validate().responseJSON {
             response in
             
             if(response.response?.statusCode != 200){
@@ -44,12 +40,14 @@ extension LoginAPI {
     }
     
     
-    func createUser(parameters: [String: String], completion: @escaping (Int?) -> ()){
+    func createUser(parameters: User, completion: @escaping (Int) -> ()){
         
-        AF.request("http://localhost:5000/api/User", method: .post, parameters: parameters).validate().responseJSON {
+        AF.request("http://localhost:5000/api/User", method: .post, parameters: parameters, encoder: JSONParameterEncoder.default).validate().responseJSON {
             response in
             
-            completion(response.response?.statusCode)
+            print((response.response?.statusCode)!)
+            
+            completion((response.response?.statusCode)!)
         }
     }
 }

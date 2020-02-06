@@ -23,11 +23,7 @@ class RegisterViewController : UIViewController {
     
     @IBAction func RegisterSubmit(_ sender: Any) {
         
-        var userDetails = [String:String]()
-        userDetails["Email"] = EmailText!.text
-        userDetails["Password"] = PasswordText!.text
-        userDetails["FirstName"] = FirstNameText!.text
-        userDetails["LastName"] = LastNameText!.text
+        let userDetails = User(email: EmailText!.text!, password: EmailText!.text!, firstName: PasswordText!.text!, lastName: LastNameText!.text!)
         
         createUser(parameters: userDetails){
             code in
@@ -41,11 +37,12 @@ class RegisterViewController : UIViewController {
     }
     
     func transitionViewController(){
-         let storyBoard = UIStoryboard(name: "Main", bundle: nil)
-         if let mainVc = storyBoard.instantiateViewController(withIdentifier: "LoginController") as? ViewController{
-             self.present(mainVc, animated: true, completion: nil)
-         }
-         
+        weak var pvc = self.presentingViewController
+        self.dismiss(animated: true, completion: {
+            let storyboard = UIStoryboard(name: "StartView", bundle: nil)
+            let vc = storyboard.instantiateViewController(withIdentifier: "LoginController")
+            pvc?.present(vc, animated: true, completion: nil)
+        })
      }
     
     func showAlert(title: String){
