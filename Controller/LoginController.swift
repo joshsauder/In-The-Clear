@@ -23,6 +23,7 @@ class LoginController: UIViewController, GIDSignInUIDelegate {
         super.viewDidLoad()
         
         GIDSignIn.sharedInstance()?.uiDelegate = self
+        createButton(button: SubmitButton)
         addTargets()
         setUpSignInAppleButton()
     }

@@ -67,6 +67,11 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="zLz-H5-64i"/>
                     </view>
+                    <connections>
+                        <outlet property="LoginButton" destination="T5B-Sg-ZU3" id="szD-kI-uqb"/>
+                        <outlet property="RegisterButton" destination="eCP-Ol-MhT" id="bbZ-cQ-kfD"/>
+                        <outlet property="ThirdPartyButton" destination="jFI-ge-b2s" id="Ei8-i2-dzs"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jfE-Wm-MZT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <exit id="83A-ol-xWy" userLabel="Exit" sceneMemberID="exit"/>
@@ -352,6 +357,6 @@
         <image name="InTheClear.png" width="420" height="237"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="vBS-Tp-TXA"/>
+        <segue reference="dau-0g-Z8Z"/>
     </inferredMetricsTieBreakers>
 </document>

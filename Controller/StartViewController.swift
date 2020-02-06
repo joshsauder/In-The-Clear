@@ -11,8 +11,15 @@ import UIKit
 
 class StartViewController: UIViewController {
     
+    @IBOutlet weak var LoginButton: UIButton!
+    @IBOutlet weak var ThirdPartyButton: UIButton!
+    @IBOutlet weak var RegisterButton: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        createButton(button: LoginButton)
+        createButton(button: ThirdPartyButton)
+        createButton(button: RegisterButton)
     }
 }
