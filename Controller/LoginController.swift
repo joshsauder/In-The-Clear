@@ -21,6 +21,8 @@ class LoginController: UIViewController {
     @IBOutlet weak var EmailText: UITextField!
     @IBOutlet weak var PasswordText: UITextField!
     
+    let defaults = UserDefaults()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -35,6 +37,8 @@ class LoginController: UIViewController {
         let userDetails = User(email: EmailText!.text!, password: PasswordText!.text!, firstName: "", lastName: "")
         signInUser(parameters: userDetails) {Id, name in
             if(Id != ""){
+                self.defaults.set(Id, forKey: Defaults.id)
+                self.defaults.set(name, forKey: Defaults.user)
                 self.transitionViewController()
             }else {
                 self.showAlert(title: "Incorrect Password")
@@ -141,6 +145,8 @@ extension LoginController : GIDSignInDelegate {
         
         let idToken = user.authentication.idToken!
         signInGoogleUser(token: idToken, completion: {id,name in
+            self.defaults.set(id, forKey: Defaults.id)
+            self.defaults.set(name, forKey: Defaults.user)
             self.transitionViewController()
         })
     }
