@@ -10,8 +10,10 @@ import Foundation
 import UIKit
 import AuthenticationServices
 import GoogleSignIn
+import Alamofire
+import SwiftyJSON
 
-class LoginController: UIViewController, GIDSignInUIDelegate {
+class LoginController: UIViewController {
     
     @IBOutlet weak var AppleButtonView: UIStackView!
     @IBOutlet weak var signInButton: GIDSignInButton!
@@ -22,7 +24,7 @@ class LoginController: UIViewController, GIDSignInUIDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        GIDSignIn.sharedInstance()?.uiDelegate = self
+        initGoogle()
         createButton(button: SubmitButton)
         addTargets()
         setUpSignInAppleButton()
@@ -41,11 +43,14 @@ class LoginController: UIViewController, GIDSignInUIDelegate {
     }
     
     func transitionViewController(){
-         let storyBoard = UIStoryboard(name: "Main", bundle: nil)
-         if let mainVc = storyBoard.instantiateViewController(withIdentifier: "ViewController") as? ViewController{
-             self.present(mainVc, animated: true, completion: nil)
-         }
          
+        weak var pvc = self.presentingViewController
+        self.dismiss(animated: true, completion: {
+            let storyBoard = UIStoryboard(name: "Main", bundle: nil)
+            let vc = storyBoard.instantiateViewController(withIdentifier: "ViewController")
+            vc.modalPresentationStyle = .fullScreen
+            pvc?.present(vc, animated: true, completion: nil)
+        })
      }
     
     func showAlert(title: String){
@@ -66,8 +71,7 @@ class LoginController: UIViewController, GIDSignInUIDelegate {
         EmailText.addTarget(self, action: #selector(textFieldDidChange(_:)), for: UIControl.Event.editingChanged)
         PasswordText.addTarget(self, action: #selector(textFieldDidChange(_:)), for: UIControl.Event.editingChanged)
     }
-    
-    
+        
 }
 
 extension LoginController: ASAuthorizationControllerDelegate {
@@ -113,5 +117,31 @@ extension LoginController: ASAuthorizationControllerDelegate {
 extension LoginController: ASAuthorizationControllerPresentationContextProviding {
     func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
         return self.view.window!
+    }
+}
+
+
+extension LoginController : GIDSignInDelegate {
+    
+    func initGoogle(){
+        GIDSignIn.sharedInstance()?.clientID = Constants.GOOGLE_SIGNIN_KEY
+        GIDSignIn.sharedInstance().delegate = self
+        GIDSignIn.sharedInstance()?.presentingViewController = self
+    }
+
+    func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
+        if let error = error {
+          if (error as NSError).code == GIDSignInErrorCode.hasNoAuthInKeychain.rawValue {
+            print("The user has not signed in before or they have since signed out.")
+          } else {
+            print("\(error.localizedDescription)")
+          }
+          return
+        }
+        
+        let idToken = user.authentication.idToken!
+        signInGoogleUser(token: idToken, completion: {id,name in
+            self.transitionViewController()
+        })
     }
 }

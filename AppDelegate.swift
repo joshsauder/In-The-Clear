@@ -14,52 +14,27 @@ import Alamofire
 import SwiftyJSON
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate{
+class AppDelegate: UIResponder, UIApplicationDelegate{
     
     var window: UIWindow?
 
     var googleAPIKey = Constants.GOOGLE_MAPS_KEY
     var googlePlacesKey = Constants.GOOGLE_PLACES_KEY
- 
-    var googleSignInId = Constants.GOOGLE_SIGNIN_KEY
 
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         GMSServices.provideAPIKey(googleAPIKey)
         GMSPlacesClient.provideAPIKey(googlePlacesKey)
-        
-        GIDSignIn.sharedInstance().clientID = googleSignInId
-        GIDSignIn.sharedInstance().delegate = self
    
         // Override point for customization after application launch.
         return true
     }
     
-    func application(_ application: UIApplication,
-                     open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
-      return GIDSignIn.sharedInstance().handle(url, sourceApplication: sourceApplication, annotation: annotation)
+    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any]) -> Bool {
+      return GIDSignIn.sharedInstance().handle(url)
     }
     
-    func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
-        if let error = error {
-            if (error as NSError).code == GIDSignInErrorCode.hasNoAuthInKeychain.rawValue {
-              print("The user has not signed in before or they have since signed out.")
-            } else {
-              print("\(error.localizedDescription)")
-            }
-            return
-        }
-        
-        let idToken = user.authentication.idToken
-        
-        AF.request("http://localhost:3400/api/User/Auth/Google/?token=\(idToken)&paid=true", method: .post).validate().responseJSON {
-            response in
-            
-            let json = JSON(response.data!)
-        }
-        
-    }
     
 
     func applicationWillResignActive(_ application: UIApplication) {
