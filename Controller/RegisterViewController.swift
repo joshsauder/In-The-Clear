@@ -20,6 +20,7 @@ class RegisterViewController : UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         createButton(button: SubmitButton)
+        disableButton(button: SubmitButton)
     }
     
     @IBAction func RegisterSubmit(_ sender: Any) {

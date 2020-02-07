@@ -31,7 +31,9 @@ extension Login where Self: UIViewController {
         button.layer.shadowOffset = CGSize(width: 2, height: 2)
         button.layer.shadowRadius = 2
         button.layer.shadowOpacity = 1.0
-        
+    }
+
+    func disableButton(button: UIButton){
         //submit button should be disabled on init
         button.isEnabled = false
     }

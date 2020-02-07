@@ -27,7 +27,6 @@ extension LoginAPI {
     
     func signInUser(parameters: User, completion: @escaping (String, String) -> ()){
         
-        
         AF.request("http://localhost:5000/api/User/Auth", method: .post, parameters: parameters, encoder: JSONParameterEncoder.default).validate().responseJSON {
             response in
             
@@ -41,6 +40,7 @@ extension LoginAPI {
     }
     
     func signInGoogleUser(token: String, completion: @escaping (String, String) -> ()){
+        
         AF.request("http://localhost:5000/api/User/Auth/Google?token=\(token)&paid=true", method: .post).validate().responseJSON {
             response in
             

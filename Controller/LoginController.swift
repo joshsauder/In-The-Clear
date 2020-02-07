@@ -28,6 +28,7 @@ class LoginController: UIViewController {
         
         initGoogle()
         createButton(button: SubmitButton)
+        disableButton(button: SubmitButton)
         addTargets()
         setUpSignInAppleButton()
     }
@@ -125,6 +126,7 @@ extension LoginController : GIDSignInDelegate {
         GIDSignIn.sharedInstance()?.clientID = Constants.GOOGLE_SIGNIN_KEY
         GIDSignIn.sharedInstance().delegate = self
         GIDSignIn.sharedInstance()?.presentingViewController = self
+        self.signInButton.style = GIDSignInButtonStyle.wide
     }
 
     func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
