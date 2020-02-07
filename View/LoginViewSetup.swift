@@ -11,9 +11,12 @@ import UIKit
 
 protocol Login {
     func createButton(button: UIButton)
+    func showAlert(title: String)
 }
 
-extension Login {
+extension Login where Self: UIViewController {
+    
+    //create submit button
     func createButton(button: UIButton){
         button.layer.cornerRadius = 5
         button.clipsToBounds = true
@@ -29,6 +32,14 @@ extension Login {
         button.layer.shadowRadius = 2
         button.layer.shadowOpacity = 1.0
         
+        //submit button should be disabled on init
+        button.isEnabled = false
+    }
+    
+    func showAlert(title: String){
+        let alert = UIAlertController(title: title, message: nil, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        self.present(alert, animated: true)
     }
 }
 

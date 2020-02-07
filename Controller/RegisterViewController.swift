@@ -46,12 +46,6 @@ class RegisterViewController : UIViewController {
         })
      }
     
-    func showAlert(title: String){
-        let alert = UIAlertController(title: title, message: nil, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-        self.present(alert, animated: true, completion: nil)
-    }
-    
     @objc func textFieldDidChange(textField: UITextField) {
         if EmailText.text!.isEmpty || PasswordText.text!.isEmpty || FirstNameText.text!.isEmpty || LastNameText.text!.isEmpty {
             SubmitButton.isEnabled = false

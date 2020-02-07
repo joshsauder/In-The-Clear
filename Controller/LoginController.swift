@@ -57,12 +57,6 @@ class LoginController: UIViewController {
         })
      }
     
-    func showAlert(title: String){
-        let alert = UIAlertController(title: title, message: nil, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-        self.present(alert, animated: true, completion: nil)
-    }
-    
     @objc func textFieldDidChange(_ textField: UITextField) {
         if EmailText.text!.isEmpty || PasswordText.text!.isEmpty {
             SubmitButton.isEnabled = false
