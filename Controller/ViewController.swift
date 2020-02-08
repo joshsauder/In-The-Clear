@@ -57,6 +57,8 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
     
     var polylineArray = [GMSPolyline]()
     
+    let defaults = UserDefaults()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -417,6 +419,11 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
                 
                 self.stopSpinner()
                 
+                //set trip data stops
+                self.tripData.stops = self.userTripDetails.cityStops
+                self.tripData.stops[0] = self.tripData.cities[self.tripData.cities.count-1]
+                
+                self.postTrip(tripData: self.tripData, distance: Int(distance), duration: time)
             }
         }
     }

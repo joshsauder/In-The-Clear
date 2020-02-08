@@ -11,4 +11,5 @@ import Foundation
 struct Defaults {
     static let id = "ID"
     static let user = "USER"
+    static let token = "TOKEN"
 }

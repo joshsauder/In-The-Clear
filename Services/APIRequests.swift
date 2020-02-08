@@ -9,9 +9,23 @@
 import Foundation
 import Alamofire
 import SwiftyJSON
+import CoreLocation
 
 extension ViewController {
     
+    struct TripPostData: Encodable {
+        let userId: Int
+        let duration: Int
+        let distance: Int
+        let locations: [LocationData]
+        
+    }
+    
+    struct LocationData: Encodable {
+        let city: String
+        let condition: String
+        let temperature: Int
+    }
     /**
      Calls the AWS Lambda Weather API service and populates the weather array
      
@@ -99,4 +113,19 @@ extension ViewController {
         }
     }
     
+    func postTrip(tripData: tripDataModal, distance: Int, duration: Int){
+        var locationData : [LocationData] = []
+        for (index, stop) in tripData.stops.enumerated(){
+            let location = LocationData(city: stop, condition: tripData.conditions[index], temperature: Int(tripData.highTemps[index]))
+            locationData.append(location)
+        }
+        
+        let postData = TripPostData(userId: UserDefaults.standard.integer(forKey: Defaults.id), duration: duration, distance: distance, locations: locationData)
+        
+        let headers: HTTPHeaders = ["Authorization": "Bearer " + UserDefaults.standard.string(forKey: Defaults.token)!]
+        AF.request("http://localhost:5000/api/Trip", method: .post, parameters: postData, encoder: JSONParameterEncoder.default, headers: headers).validate().responseJSON { response in
+            
+            print(response.response?.statusCode)
+        }
+    }
 }

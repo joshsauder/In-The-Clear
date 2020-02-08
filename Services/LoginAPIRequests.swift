@@ -18,34 +18,34 @@ struct User: Encodable {
 }
 
 protocol LoginAPI {
-    func signInUser(parameters: User, completion: @escaping (String, String) -> ())
+    func signInUser(parameters: User, completion: @escaping (String, String, String) -> ())
     func createUser(parameters: User, completion: @escaping (Int) -> ())
-    func signInGoogleUser(token: String, completion: @escaping (String, String) -> ())
+    func signInGoogleUser(token: String, completion: @escaping (String, String, String) -> ())
 }
 
 extension LoginAPI {
     
-    func signInUser(parameters: User, completion: @escaping (String, String) -> ()){
+    func signInUser(parameters: User, completion: @escaping (String, String, String) -> ()){
         
         AF.request("http://localhost:5000/api/User/Auth", method: .post, parameters: parameters, encoder: JSONParameterEncoder.default).validate().responseJSON {
             response in
             
             if(response.response?.statusCode != 200){
-                completion("", "")
+                completion("", "", "")
             }
             
             let json = JSON(response.data!)
-            completion(json["id"].stringValue, json["firstName"].stringValue)
+            completion(json["id"].stringValue, json["firstName"].stringValue, json["token"].stringValue)
         }
     }
     
-    func signInGoogleUser(token: String, completion: @escaping (String, String) -> ()){
+    func signInGoogleUser(token: String, completion: @escaping (String, String, String) -> ()){
         
         AF.request("http://localhost:5000/api/User/Auth/Google?token=\(token)&paid=true", method: .post).validate().responseJSON {
             response in
             
             let json = JSON(response.data!)
-            completion(json["id"].stringValue, json["firstName"].stringValue)
+            completion(json["id"].stringValue, json["firstName"].stringValue, json["token"].stringValue)
         }
     }
     
