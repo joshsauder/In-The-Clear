@@ -12,6 +12,8 @@ import AuthenticationServices
 import GoogleSignIn
 import Alamofire
 import SwiftyJSON
+import Firebase
+import CryptoKit
 
 class LoginController: UIViewController {
     
@@ -21,30 +23,17 @@ class LoginController: UIViewController {
     @IBOutlet weak var EmailText: UITextField!
     @IBOutlet weak var PasswordText: UITextField!
     
+    fileprivate var currentNonce: String = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         initGoogle()
         createButton(button: SubmitButton)
         disableButton(button: SubmitButton)
-        addTargets()
         setUpSignInAppleButton()
     }
     
-    @IBAction func SubmitClick(_ sender: Any) {
-        
-        let userDetails = User(email: EmailText!.text!, password: PasswordText!.text!, firstName: "", lastName: "")
-        signInUser(parameters: userDetails) {Id, name, token in
-            if(Id != ""){
-                UserDefaults.standard.set(Id, forKey: Defaults.id)
-                UserDefaults.standard.set(name, forKey: Defaults.user)
-                UserDefaults.standard.set(token, forKey: Defaults.token)
-                self.transitionViewController()
-            }else {
-                self.showAlert(title: "Incorrect Password")
-            }
-        }
-    }
     
     func transitionViewController(){
          
@@ -56,19 +45,6 @@ class LoginController: UIViewController {
             pvc?.present(vc, animated: true, completion: nil)
         })
      }
-    
-    @objc func textFieldDidChange(_ textField: UITextField) {
-        if EmailText.text!.isEmpty || PasswordText.text!.isEmpty {
-            SubmitButton.isEnabled = false
-        }else {
-            SubmitButton.isEnabled = true
-        }
-    }
-    
-    func addTargets(){
-        EmailText.addTarget(self, action: #selector(textFieldDidChange(_:)), for: UIControl.Event.editingChanged)
-        PasswordText.addTarget(self, action: #selector(textFieldDidChange(_:)), for: UIControl.Event.editingChanged)
-    }
         
 }
 
@@ -85,9 +61,13 @@ extension LoginController: ASAuthorizationControllerDelegate {
     
     @objc func handleAppleAuth(){
         
+        currentNonce = randomNonceString()
+        
         let appleIDProvider = ASAuthorizationAppleIDProvider()
         let request = appleIDProvider.createRequest()
         request.requestedScopes = [.fullName, .email]
+        request.nonce = sha256(currentNonce)
+        
         let authorizationController = ASAuthorizationController(authorizationRequests: [request])
         authorizationController.delegate = self
         authorizationController.presentationContextProvider = self
@@ -97,10 +77,32 @@ extension LoginController: ASAuthorizationControllerDelegate {
     func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
         if let appleIDCredential = authorization.credential as?  ASAuthorizationAppleIDCredential {
             
-            let userIdentifier = appleIDCredential.user
-            let fullName = appleIDCredential.fullName
-            let email = appleIDCredential.email
-            print("\(userIdentifier) \(String(describing: fullName)) \(String(describing: email))")
+            guard let appleIDToken = appleIDCredential.identityToken else {
+              print("Unable to fetch identity token")
+              return
+            }
+            guard let idTokenString = String(data: appleIDToken, encoding: .utf8) else {
+              print("Unable to serialize token string from data: \(appleIDToken.debugDescription)")
+              return
+            }
+            
+            let credential = OAuthProvider.credential(withProviderID: "apple.com", idToken: idTokenString, rawNonce: currentNonce)
+            
+            Auth.auth().signIn(with: credential) { (authResult, error) in
+                if let error = error {
+                    print(error.localizedDescription)
+                    return
+                }
+                let parameters = User(email: appleIDCredential.email!, firstName: (appleIDCredential.fullName?.givenName)!, lastName: (appleIDCredential.fullName?.familyName)!)
+                
+                self.signInUser(parameters: parameters){ (id, name, token) in
+                    UserDefaults.standard.set(id, forKey: Defaults.id)
+                    UserDefaults.standard.set(name, forKey: Defaults.user)
+                    UserDefaults.standard.set(token, forKey: Defaults.token)
+                    
+                }
+                
+            }
         
         }
     }
@@ -108,6 +110,48 @@ extension LoginController: ASAuthorizationControllerDelegate {
     func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
         
         print(error)
+    }
+    
+    private func randomNonceString(length: Int = 32) -> String {
+      precondition(length > 0)
+      let charset: Array<Character> =
+          Array("0123456789ABCDEFGHIJKLMNOPQRSTUVXYZabcdefghijklmnopqrstuvwxyz-._")
+      var result = ""
+      var remainingLength = length
+
+      while remainingLength > 0 {
+        let randoms: [UInt8] = (0 ..< 16).map { _ in
+          var random: UInt8 = 0
+          let errorCode = SecRandomCopyBytes(kSecRandomDefault, 1, &random)
+          if errorCode != errSecSuccess {
+            fatalError("Unable to generate nonce. SecRandomCopyBytes failed with OSStatus \(errorCode)")
+          }
+          return random
+        }
+
+        randoms.forEach { random in
+          if remainingLength == 0 {
+            return
+          }
+
+          if random < charset.count {
+            result.append(charset[Int(random)])
+            remainingLength -= 1
+          }
+        }
+      }
+
+      return result
+    }
+
+    private func sha256(_ input: String) -> String {
+      let inputData = Data(input.utf8)
+      let hashedData = SHA256.hash(data: inputData)
+      let hashString = hashedData.compactMap {
+        return String(format: "%02x", $0)
+      }.joined()
+
+      return hashString
     }
     
 }
@@ -122,7 +166,7 @@ extension LoginController: ASAuthorizationControllerPresentationContextProviding
 extension LoginController : GIDSignInDelegate {
     
     func initGoogle(){
-        GIDSignIn.sharedInstance()?.clientID = Constants.GOOGLE_SIGNIN_KEY
+        GIDSignIn.sharedInstance()?.clientID = FirebaseApp.app()?.options.clientID
         GIDSignIn.sharedInstance().delegate = self
         GIDSignIn.sharedInstance()?.presentingViewController = self
         self.signInButton.style = GIDSignInButtonStyle.wide
@@ -138,12 +182,22 @@ extension LoginController : GIDSignInDelegate {
           return
         }
         
-        let idToken = user.authentication.idToken!
-        signInGoogleUser(token: idToken, completion: {id,name, token in
-            UserDefaults.standard.set(id, forKey: Defaults.id)
-            UserDefaults.standard.set(name, forKey: Defaults.user)
-            UserDefaults.standard.set(token, forKey: Defaults.token)
-            self.transitionViewController()
-        })
+        let creds = GoogleAuthProvider.credential(withIDToken: user.authentication.idToken, accessToken: user.authentication.accessToken)
+        
+        Auth.auth().signIn(with: creds) { (authResult, error) in
+            if let error = error {
+              return
+            }else {
+                
+                let currentUser = GIDSignIn.sharedInstance()?.currentUser
+                let parameters = User(email: (currentUser?.profile.email)!, firstName: (currentUser?.profile.givenName)!, lastName: (currentUser?.profile.familyName)!)
+                self.signInUser(parameters: parameters){ (id, name, token) in
+                    UserDefaults.standard.set(id, forKey: Defaults.id)
+                    UserDefaults.standard.set(name, forKey: Defaults.user)
+                    UserDefaults.standard.set(token, forKey: Defaults.token)
+                    
+                }
+            }
+        }
     }
 }

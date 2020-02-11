@@ -12,6 +12,7 @@ import GooglePlaces
 import GoogleSignIn
 import Alamofire
 import SwiftyJSON
+import Firebase
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate{
@@ -26,6 +27,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate{
         
         GMSServices.provideAPIKey(googleAPIKey)
         GMSPlacesClient.provideAPIKey(googlePlacesKey)
+        FirebaseApp.configure()
    
         // Override point for customization after application launch.
         return true

@@ -12,7 +12,6 @@ import SwiftyJSON
 
 struct User: Encodable {
     let email: String
-    let password: String
     let firstName: String
     let lastName: String
 }
