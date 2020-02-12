@@ -19,9 +19,6 @@ class LoginController: UIViewController {
     
     @IBOutlet weak var AppleButtonView: UIStackView!
     @IBOutlet weak var signInButton: GIDSignInButton!
-    @IBOutlet weak var SubmitButton: UIButton!
-    @IBOutlet weak var EmailText: UITextField!
-    @IBOutlet weak var PasswordText: UITextField!
     
     var handle: AuthStateDidChangeListenerHandle?
     fileprivate var currentNonce: String = ""
@@ -30,8 +27,6 @@ class LoginController: UIViewController {
         super.viewDidLoad()
         
         initGoogle()
-        createButton(button: SubmitButton)
-        disableButton(button: SubmitButton)
         setUpSignInAppleButton()
         addStateListener()
     }

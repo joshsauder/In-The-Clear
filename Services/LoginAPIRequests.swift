@@ -39,4 +39,3 @@ extension LoginAPI {
 }
 
 extension LoginController : LoginAPI {}
-extension RegisterViewController : LoginAPI {}
