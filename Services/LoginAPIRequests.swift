@@ -11,54 +11,31 @@ import Alamofire
 import SwiftyJSON
 
 struct User: Encodable {
+    let userId: String
     let email: String
-    let firstName: String
-    let lastName: String
+    let name: String
 }
 
 protocol LoginAPI {
-    func signInUser(parameters: User, completion: @escaping (String, String, String) -> ())
-    func createUser(parameters: User, completion: @escaping (Int) -> ())
-    func signInGoogleUser(token: String, completion: @escaping (String, String, String) -> ())
+    func signInUser(parameters: User, completion: @escaping (String, String) -> ())
 }
 
 extension LoginAPI {
     
-    func signInUser(parameters: User, completion: @escaping (String, String, String) -> ()){
-        
-        AF.request("http://localhost:5000/api/User/Auth", method: .post, parameters: parameters, encoder: JSONParameterEncoder.default).validate().responseJSON {
+    func signInUser(parameters: User, completion: @escaping (String, String) -> ()){
+        let headers: HTTPHeaders = ["Authorization": "Bearer " + UserDefaults.standard.string(forKey: Defaults.token)!]
+        AF.request("http://localhost:5000/api/User/Auth", method: .post, parameters: parameters, encoder: JSONParameterEncoder.default, headers: headers).validate().responseJSON {
             response in
             
             if(response.response?.statusCode != 200){
-                completion("", "", "")
+                completion("", "")
             }
             
             let json = JSON(response.data!)
-            completion(json["id"].stringValue, json["firstName"].stringValue, json["token"].stringValue)
+            completion(json["id"].stringValue, json["token"].stringValue)
         }
     }
     
-    func signInGoogleUser(token: String, completion: @escaping (String, String, String) -> ()){
-        
-        AF.request("http://localhost:5000/api/User/Auth/Google?token=\(token)&paid=true", method: .post).validate().responseJSON {
-            response in
-            
-            let json = JSON(response.data!)
-            completion(json["id"].stringValue, json["firstName"].stringValue, json["token"].stringValue)
-        }
-    }
-    
-    
-    func createUser(parameters: User, completion: @escaping (Int) -> ()){
-        
-        AF.request("http://localhost:5000/api/User", method: .post, parameters: parameters, encoder: JSONParameterEncoder.default).validate().responseJSON {
-            response in
-            
-            print((response.response?.statusCode)!)
-            
-            completion((response.response?.statusCode)!)
-        }
-    }
 }
 
 extension LoginController : LoginAPI {}

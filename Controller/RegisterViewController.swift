@@ -23,20 +23,6 @@ class RegisterViewController : UIViewController {
         disableButton(button: SubmitButton)
     }
     
-    @IBAction func RegisterSubmit(_ sender: Any) {
-        
-        let userDetails = User(email: EmailText!.text!, password: EmailText!.text!, firstName: PasswordText!.text!, lastName: LastNameText!.text!)
-        
-        createUser(parameters: userDetails){
-            code in
-                if(code == 200){
-                    self.transitionViewController()
-                }
-                else {
-                    self.showAlert(title: "Issue Signing You Up!")
-            }
-        }
-    }
     
     func transitionViewController(){
         weak var pvc = self.presentingViewController

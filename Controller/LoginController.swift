@@ -23,6 +23,7 @@ class LoginController: UIViewController {
     @IBOutlet weak var EmailText: UITextField!
     @IBOutlet weak var PasswordText: UITextField!
     
+    var handle: AuthStateDidChangeListenerHandle?
     fileprivate var currentNonce: String = ""
     
     override func viewDidLoad() {
@@ -32,6 +33,12 @@ class LoginController: UIViewController {
         createButton(button: SubmitButton)
         disableButton(button: SubmitButton)
         setUpSignInAppleButton()
+        addStateListener()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        Auth.auth().removeStateDidChangeListener(handle!)
     }
     
     
@@ -45,6 +52,26 @@ class LoginController: UIViewController {
             pvc?.present(vc, animated: true, completion: nil)
         })
      }
+    
+    func addStateListener(){
+        handle = Auth.auth().addStateDidChangeListener { (auth, user) in
+            if let user = user {
+                let parameters = User(userId: user.uid, email: user.email!, name: user.displayName!)
+                user.getIDTokenForcingRefresh(true){ idToken, error in
+                    if let error = error { return; }
+                    else{
+                        UserDefaults.standard.set(idToken, forKey: Defaults.token)
+                        self.signInUser(parameters: parameters){ (id, name) in
+                            UserDefaults.standard.set(id, forKey: Defaults.id)
+                            UserDefaults.standard.set(name, forKey: Defaults.user)
+                            self.transitionViewController()
+                        }
+                    }
+                }
+            }
+            
+        }
+    }
         
 }
 
@@ -92,14 +119,6 @@ extension LoginController: ASAuthorizationControllerDelegate {
                 if let error = error {
                     print(error.localizedDescription)
                     return
-                }
-                let parameters = User(email: appleIDCredential.email!, firstName: (appleIDCredential.fullName?.givenName)!, lastName: (appleIDCredential.fullName?.familyName)!)
-                
-                self.signInUser(parameters: parameters){ (id, name, token) in
-                    UserDefaults.standard.set(id, forKey: Defaults.id)
-                    UserDefaults.standard.set(name, forKey: Defaults.user)
-                    UserDefaults.standard.set(token, forKey: Defaults.token)
-                    
                 }
                 
             }
@@ -187,17 +206,8 @@ extension LoginController : GIDSignInDelegate {
         Auth.auth().signIn(with: creds) { (authResult, error) in
             if let error = error {
               return
-            }else {
-                
-                let currentUser = GIDSignIn.sharedInstance()?.currentUser
-                let parameters = User(email: (currentUser?.profile.email)!, firstName: (currentUser?.profile.givenName)!, lastName: (currentUser?.profile.familyName)!)
-                self.signInUser(parameters: parameters){ (id, name, token) in
-                    UserDefaults.standard.set(id, forKey: Defaults.id)
-                    UserDefaults.standard.set(name, forKey: Defaults.user)
-                    UserDefaults.standard.set(token, forKey: Defaults.token)
-                    
-                }
             }
         }
     }
 }
+
