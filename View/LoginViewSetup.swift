@@ -46,21 +46,4 @@ extension Login where Self: UIViewController {
 }
 
 extension LoginController : Login {}
-extension RegisterViewController : Login {}
-extension StartViewController : Login {}
 
-extension StartViewController {
-    
-    func setupLabels(){
-        //set text view background color
-        self.TextView.layer.backgroundColor = UIColor.white.cgColor
-        
-        //set text color
-        self.LoginLabel.textColor = UIColor(red:0.47, green:0.15, blue:0.50, alpha:1.0)
-        self.ThirdPartyLabel.textColor = UIColor(red:0.47, green:0.15, blue:0.50, alpha:1.0)
-        
-        //set font
-        self.LoginLabel.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
-        self.ThirdPartyLabel.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
-    }
-}

@@ -80,9 +80,7 @@ extension LoginController: ASAuthorizationControllerDelegate {
     func setUpSignInAppleButton() {
         
         let authButton = ASAuthorizationAppleIDButton()
-        
         authButton.addTarget(self, action: #selector(handleAppleAuth), for: .touchUpInside)
-        
         self.AppleButtonView.addArrangedSubview(authButton)
     }
     
@@ -204,9 +202,7 @@ extension LoginController : GIDSignInDelegate {
         let creds = GoogleAuthProvider.credential(withIDToken: user.authentication.idToken, accessToken: user.authentication.accessToken)
         
         Auth.auth().signIn(with: creds) { (authResult, error) in
-            if let error = error {
-              return
-            }
+            if let error = error { return }
         }
     }
 }
