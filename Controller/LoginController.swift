@@ -51,7 +51,8 @@ class LoginController: UIViewController {
     func addStateListener(){
         handle = Auth.auth().addStateDidChangeListener { (auth, user) in
             if let user = user {
-                let parameters = User(userId: user.uid, email: user.email!, name: user.displayName!)
+                print("Got user: \(user.uid)")
+                let parameters = User(userId: user.uid, email: user.email!, name: user.displayName != nil ? user.displayName! : "")
                 user.getIDTokenForcingRefresh(true){ idToken, error in
                     if let error = error { return; }
                     else{
