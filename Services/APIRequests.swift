@@ -10,6 +10,7 @@ import Foundation
 import Alamofire
 import SwiftyJSON
 import CoreLocation
+import CoreData
 
 extension ViewController {
     
@@ -122,10 +123,26 @@ extension ViewController {
         
         let postData = TripPostData(userId: UserDefaults.standard.integer(forKey: Defaults.id), duration: duration, distance: distance, locations: locationData)
         
-        let headers: HTTPHeaders = ["Authorization": "Bearer " + UserDefaults.standard.string(forKey: Defaults.token)!]
+        let headers: HTTPHeaders = ["Authorization": "Bearer " + getAccessToken()]
         AF.request("http://localhost:5000/api/Trip", method: .post, parameters: postData, encoder: JSONParameterEncoder.default, headers: headers).validate().responseJSON { response in
             
             print(response.response?.statusCode)
         }
+    }
+    
+    private func getAccessToken() -> String {
+        let mainContext = CoreDataManager.shared.mainContext
+        
+        let fetchRequest: NSFetchRequest<Entity> = Entity.fetchRequest()
+        
+        do {
+            let results = try mainContext.fetch(fetchRequest)
+            return results[0].token!
+        }
+        catch {
+            debugPrint(error)
+        }
+        
+        return ""
     }
 }

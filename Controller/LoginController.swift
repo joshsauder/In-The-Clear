@@ -24,13 +24,9 @@ class LoginController: UIViewController {
     var handle: AuthStateDidChangeListenerHandle?
     fileprivate var currentNonce: String = ""
     
-    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-    var user: NSManagedObject?
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        setupCoreData()
+
         initGoogle()
         setUpSignInAppleButton()
         addStateListener()
@@ -39,19 +35,6 @@ class LoginController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         Auth.auth().removeStateDidChangeListener(handle!)
-    }
-    
-    func setupCoreData(){
-        let entity = NSEntityDescription.entity(forEntityName: "Entity", in: context)
-        user = NSManagedObject(entity: entity!, insertInto: context)
-    }
-    
-    func saveData(){
-        do {
-           try context.save()
-          } catch {
-           print("Failed saving")
-        }
     }
     
     func transitionViewController(){
@@ -72,17 +55,36 @@ class LoginController: UIViewController {
                 user.getIDTokenForcingRefresh(true){ idToken, error in
                     if let error = error { return; }
                     else{
-                        user.setValue(idToken, forKey: Defaults.token)
-                        UserDefaults.standard.set(idToken, forKey: Defaults.token)
                         self.signInUser(parameters: parameters, token: idToken!){ (id, name) in
-                            user.setValue(id, forKey: Defaults.id)
-                            user.setValue(name, forKey: Defaults.user)
-                            self.saveData()
+                            self.saveData(token: idToken!, id: id, name: name)
                             self.transitionViewController()
                         }
                     }
                 }
             }
+            
+        }
+    }
+    
+    private func saveData(token: String, id: String, name: String) {
+        let context = CoreDataManager.shared.backgroundContext()
+        
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Entity")
+        let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+        
+        do{ try context.execute(deleteRequest)}
+        catch {  self.showAlert(title: "Issue with Sign In") }
+        
+        context.perform {
+            let entity = Entity.entity()
+            let data = Entity(entity: entity, insertInto: context)
+            
+            data.token = token
+            data.name = name
+            data.userId = id
+            
+            do{ try context.save() }
+            catch { self.showAlert(title: "Issue with Sign In") }
             
         }
     }
