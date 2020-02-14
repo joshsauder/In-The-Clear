@@ -14,6 +14,7 @@ import Alamofire
 import SwiftyJSON
 import Firebase
 import CryptoKit
+import CoreData
 
 class LoginController: UIViewController {
     
