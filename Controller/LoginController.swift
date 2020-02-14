@@ -14,7 +14,6 @@ import Alamofire
 import SwiftyJSON
 import Firebase
 import CryptoKit
-import CoreData
 
 class LoginController: UIViewController {
     
@@ -67,26 +66,7 @@ class LoginController: UIViewController {
     }
     
     private func saveData(token: String, id: String, name: String) {
-        let context = CoreDataManager.shared.backgroundContext()
         
-        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Entity")
-        let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
-        
-        do{ try context.execute(deleteRequest)}
-        catch {  self.showAlert(title: "Issue with Sign In") }
-        
-        context.perform {
-            let entity = Entity.entity()
-            let data = Entity(entity: entity, insertInto: context)
-            
-            data.token = token
-            data.name = name
-            data.userId = id
-            
-            do{ try context.save() }
-            catch { self.showAlert(title: "Issue with Sign In") }
-            
-        }
     }
         
 }

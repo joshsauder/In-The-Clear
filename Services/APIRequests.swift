@@ -10,7 +10,6 @@ import Foundation
 import Alamofire
 import SwiftyJSON
 import CoreLocation
-import CoreData
 
 extension ViewController {
     
@@ -131,18 +130,6 @@ extension ViewController {
     }
     
     private func getAccessToken() -> String {
-        let mainContext = CoreDataManager.shared.mainContext
         
-        let fetchRequest: NSFetchRequest<Entity> = Entity.fetchRequest()
-        
-        do {
-            let results = try mainContext.fetch(fetchRequest)
-            return results[0].token!
-        }
-        catch {
-            debugPrint(error)
-        }
-        
-        return ""
     }
 }
