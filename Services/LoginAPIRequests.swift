@@ -9,6 +9,7 @@
 import Foundation
 import Alamofire
 import SwiftyJSON
+import CoreData
 
 struct User: Encodable {
     let userId: String
@@ -17,13 +18,13 @@ struct User: Encodable {
 }
 
 protocol LoginAPI {
-    func signInUser(parameters: User, completion: @escaping (String, String) -> ())
+    func signInUser(parameters: User, token: String, completion: @escaping (String, String) -> ())
 }
 
 extension LoginAPI {
     
-    func signInUser(parameters: User, completion: @escaping (String, String) -> ()){
-        let headers: HTTPHeaders = ["Authorization": "Bearer " + UserDefaults.standard.string(forKey: Defaults.token)!]
+    func signInUser(parameters: User, token: String, completion: @escaping (String, String) -> ()){
+        let headers: HTTPHeaders = ["Authorization": "Bearer " + token]
         AF.request("http://localhost:5000/api/User/Auth", method: .post, parameters: parameters, encoder: JSONParameterEncoder.default, headers: headers).validate().responseJSON {
             response in
             

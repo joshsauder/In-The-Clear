@@ -24,9 +24,13 @@ class LoginController: UIViewController {
     var handle: AuthStateDidChangeListenerHandle?
     fileprivate var currentNonce: String = ""
     
+    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    var user: NSManagedObject?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setupCoreData()
         initGoogle()
         setUpSignInAppleButton()
         addStateListener()
@@ -37,6 +41,18 @@ class LoginController: UIViewController {
         Auth.auth().removeStateDidChangeListener(handle!)
     }
     
+    func setupCoreData(){
+        let entity = NSEntityDescription.entity(forEntityName: "Entity", in: context)
+        user = NSManagedObject(entity: entity!, insertInto: context)
+    }
+    
+    func saveData(){
+        do {
+           try context.save()
+          } catch {
+           print("Failed saving")
+        }
+    }
     
     func transitionViewController(){
          
@@ -52,15 +68,16 @@ class LoginController: UIViewController {
     func addStateListener(){
         handle = Auth.auth().addStateDidChangeListener { (auth, user) in
             if let user = user {
-                print("Got user: \(user.uid)")
                 let parameters = User(userId: user.uid, email: user.email!, name: user.displayName != nil ? user.displayName! : "")
                 user.getIDTokenForcingRefresh(true){ idToken, error in
                     if let error = error { return; }
                     else{
+                        user.setValue(idToken, forKey: Defaults.token)
                         UserDefaults.standard.set(idToken, forKey: Defaults.token)
-                        self.signInUser(parameters: parameters){ (id, name) in
-                            UserDefaults.standard.set(id, forKey: Defaults.id)
-                            UserDefaults.standard.set(name, forKey: Defaults.user)
+                        self.signInUser(parameters: parameters, token: idToken!){ (id, name) in
+                            user.setValue(id, forKey: Defaults.id)
+                            user.setValue(name, forKey: Defaults.user)
+                            self.saveData()
                             self.transitionViewController()
                         }
                     }
@@ -113,9 +130,9 @@ extension LoginController: ASAuthorizationControllerDelegate {
             Auth.auth().signIn(with: credential) { (authResult, error) in
                 if let error = error {
                     print(error.localizedDescription)
+                    self.showAlert(title: "Invalid Sign In")
                     return
                 }
-                
             }
         
         }
@@ -199,7 +216,7 @@ extension LoginController : GIDSignInDelegate {
         let creds = GoogleAuthProvider.credential(withIDToken: user.authentication.idToken, accessToken: user.authentication.accessToken)
         
         Auth.auth().signIn(with: creds) { (authResult, error) in
-            if let error = error { return }
+            if let error = error { self.showAlert(title: "Invalid Sign In"); return;}
         }
     }
 }
