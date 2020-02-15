@@ -19,6 +19,12 @@ class LoginController: UIViewController {
     
     @IBOutlet weak var AppleButtonView: UIStackView!
     @IBOutlet weak var signInButton: GIDSignInButton!
+    @IBOutlet weak var SunArrowView: UIImageView!
+    @IBOutlet weak var StormArrowView: UIImageView!
+    
+    @IBOutlet weak var StormArrowTrailingContstraint: NSLayoutConstraint!
+    @IBOutlet weak var SunArrowLeadingConstraint: NSLayoutConstraint!
+    
     
     var handle: AuthStateDidChangeListenerHandle?
     fileprivate var currentNonce: String = ""
@@ -29,6 +35,16 @@ class LoginController: UIViewController {
         initGoogle()
         setUpSignInAppleButton()
         addStateListener()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.initArrowPosition()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        self.showArrows()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -48,11 +64,19 @@ class LoginController: UIViewController {
             if let user = user {
                 let parameters = User(Id: user.uid, email: user.email!, name: user.displayName != nil ? user.displayName! : "")
                 user.getIDTokenForcingRefresh(true){ idToken, error in
-                    if let error = error { return; }
+                    if error != nil {
+                        self.showAlert(title: "Issue Signing You In! Please Try Again.")
+                        return;
+                        
+                    }
                     else{
                         self.signInUser(parameters: parameters, token: idToken!){ (id, name) in
-                            self.saveData(token: idToken!, id: id, name: name)
-                            self.transitionViewController()
+                            if(id == ""){
+                                self.showAlert(title: "Issue Signing You In! Please Try Again.")
+                            }else {
+                                self.saveData(token: idToken!, id: id, name: name)
+                                self.transitionViewController()
+                            }
                         }
                     }
                 }
@@ -120,8 +144,7 @@ extension LoginController: ASAuthorizationControllerDelegate {
     }
     
     func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
-        
-        print(error)
+        self.showAlert(title: "Issue Signing You In! Please Try Again.")
     }
     
     private func randomNonceString(length: Int = 32) -> String {
@@ -197,7 +220,7 @@ extension LoginController : GIDSignInDelegate {
         let creds = GoogleAuthProvider.credential(withIDToken: user.authentication.idToken, accessToken: user.authentication.accessToken)
         
         Auth.auth().signIn(with: creds) { (authResult, error) in
-            if let error = error { self.showAlert(title: "Invalid Sign In"); return;}
+            if error != nil { self.showAlert(title: "Invalid Sign In"); return;}
         }
     }
 }

@@ -9,12 +9,7 @@
 import Foundation
 import UIKit
 
-protocol Login {
-    func createButton(button: UIButton)
-    func showAlert(title: String)
-}
-
-extension Login where Self: UIViewController {
+extension LoginController {
     
     //create submit button
     func createButton(button: UIButton){
@@ -43,7 +38,18 @@ extension Login where Self: UIViewController {
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
         self.present(alert, animated: true)
     }
+    
+    func initArrowPosition(){
+        self.SunArrowLeadingConstraint.constant -= view.bounds.width
+        self.StormArrowTrailingContstraint.constant += view.bounds.width
+    }
+    
+    func showArrows(){
+        UIView.animate(withDuration: 1, delay: 0, options: UIView.AnimationOptions.curveEaseOut, animations: {
+            self.SunArrowLeadingConstraint.constant += self.view.bounds.width
+            self.StormArrowTrailingContstraint.constant -= self.view.bounds.width
+            self.view.layoutIfNeeded()
+        }, completion: nil)
+    }
 }
-
-extension LoginController : Login {}
 

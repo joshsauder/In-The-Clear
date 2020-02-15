@@ -22,16 +22,6 @@
                                     <constraint firstAttribute="width" constant="240" id="ny1-jF-st1"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="751" text="Login" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bwb-Pb-3bD">
-                                <rect key="frame" x="165" y="286" width="84" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="84" id="87Z-lg-r21"/>
-                                    <constraint firstAttribute="height" constant="30" id="rx2-ct-EQu"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
-                                <color key="textColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Luz-UD-lr4">
                                 <rect key="frame" x="51" y="786" width="312" height="48"/>
                                 <constraints>
@@ -40,23 +30,39 @@
                                 </constraints>
                             </stackView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ArM-pv-T3E" customClass="GIDSignInButton">
-                                <rect key="frame" x="51" y="723" width="312" height="48"/>
+                                <rect key="frame" x="51" y="714" width="312" height="48"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="48" id="9Gk-h6-oG3"/>
                                 </constraints>
                             </view>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="SunArrow.png" translatesAutoresizingMaskIntoConstraints="NO" id="DHy-US-QU1">
+                                <rect key="frame" x="0.0" y="334" width="240" height="141"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="240" id="2Eh-3h-ApS"/>
+                                </constraints>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="StormArrow.png" translatesAutoresizingMaskIntoConstraints="NO" id="2Ux-7x-OG1">
+                                <rect key="frame" x="174" y="485" width="240" height="141"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="240" id="B7q-t6-lE1"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.49803921569999998" green="0.01176470588" blue="0.99607843139999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
-                            <constraint firstItem="bwb-Pb-3bD" firstAttribute="centerX" secondItem="aXU-Yg-MV7" secondAttribute="centerX" id="6dn-Fj-rXk"/>
-                            <constraint firstItem="Luz-UD-lr4" firstAttribute="top" secondItem="ArM-pv-T3E" secondAttribute="bottom" constant="15" id="NUG-Td-jei"/>
+                            <constraint firstItem="2Ux-7x-OG1" firstAttribute="trailing" secondItem="j0S-hT-Q7e" secondAttribute="trailing" id="AYl-Ny-hCU"/>
+                            <constraint firstItem="2Ux-7x-OG1" firstAttribute="height" secondItem="DHy-US-QU1" secondAttribute="height" id="CCR-24-feR"/>
+                            <constraint firstItem="2Ux-7x-OG1" firstAttribute="width" secondItem="DHy-US-QU1" secondAttribute="width" id="D3B-nz-B86"/>
+                            <constraint firstItem="Luz-UD-lr4" firstAttribute="top" secondItem="ArM-pv-T3E" secondAttribute="bottom" constant="24" id="NUG-Td-jei"/>
+                            <constraint firstItem="2Ux-7x-OG1" firstAttribute="top" secondItem="DHy-US-QU1" secondAttribute="bottom" constant="10" id="Shu-Pt-caM"/>
                             <constraint firstItem="Luz-UD-lr4" firstAttribute="centerX" secondItem="aXU-Yg-MV7" secondAttribute="centerX" id="cXR-zk-wav"/>
-                            <constraint firstItem="Luz-UD-lr4" firstAttribute="top" secondItem="ArM-pv-T3E" secondAttribute="bottom" constant="15" id="jck-u6-SM7"/>
+                            <constraint firstItem="DHy-US-QU1" firstAttribute="top" secondItem="Xfy-YU-hUp" secondAttribute="bottom" constant="70" id="d1A-fk-Wm2"/>
+                            <constraint firstItem="Luz-UD-lr4" firstAttribute="top" secondItem="ArM-pv-T3E" secondAttribute="bottom" constant="24" id="jck-u6-SM7"/>
+                            <constraint firstItem="DHy-US-QU1" firstAttribute="leading" secondItem="j0S-hT-Q7e" secondAttribute="leading" id="k0e-Yk-h6j"/>
                             <constraint firstItem="j0S-hT-Q7e" firstAttribute="bottom" secondItem="Luz-UD-lr4" secondAttribute="bottom" constant="28" id="r6t-77-ymW"/>
                             <constraint firstItem="ArM-pv-T3E" firstAttribute="centerX" secondItem="aXU-Yg-MV7" secondAttribute="centerX" id="sFJ-kY-dYY"/>
                             <constraint firstItem="Xfy-YU-hUp" firstAttribute="centerX" secondItem="aXU-Yg-MV7" secondAttribute="centerX" id="sjv-0n-oIz"/>
-                            <constraint firstItem="bwb-Pb-3bD" firstAttribute="top" secondItem="Xfy-YU-hUp" secondAttribute="bottom" constant="22" id="vMW-xR-Hmm"/>
                             <constraint firstItem="ArM-pv-T3E" firstAttribute="leading" secondItem="j0S-hT-Q7e" secondAttribute="leading" constant="51" id="vnH-7S-DdE"/>
                             <constraint firstItem="Luz-UD-lr4" firstAttribute="leading" secondItem="j0S-hT-Q7e" secondAttribute="leading" constant="51" id="wkM-MS-N2p"/>
                             <constraint firstItem="Xfy-YU-hUp" firstAttribute="top" secondItem="j0S-hT-Q7e" secondAttribute="top" constant="25" id="xP1-ze-pLL"/>
@@ -66,6 +72,10 @@
                     <navigationItem key="navigationItem" id="OsP-Ec-kII"/>
                     <connections>
                         <outlet property="AppleButtonView" destination="Luz-UD-lr4" id="clg-ji-mFz"/>
+                        <outlet property="StormArrowTrailingContstraint" destination="AYl-Ny-hCU" id="mvm-Y8-vQU"/>
+                        <outlet property="StormArrowView" destination="2Ux-7x-OG1" id="J1N-U2-Xvy"/>
+                        <outlet property="SunArrowLeadingConstraint" destination="k0e-Yk-h6j" id="7Og-S4-2Bg"/>
+                        <outlet property="SunArrowView" destination="DHy-US-QU1" id="IEg-jc-lJU"/>
                         <outlet property="signInButton" destination="ArM-pv-T3E" id="zdx-Ax-xxS"/>
                     </connections>
                 </viewController>
@@ -76,5 +86,7 @@
     </scenes>
     <resources>
         <image name="InTheClear.png" width="420" height="237"/>
+        <image name="StormArrow.png" width="678" height="141"/>
+        <image name="SunArrow.png" width="679" height="140"/>
     </resources>
 </document>
