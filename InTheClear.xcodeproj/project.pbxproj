@@ -62,8 +62,6 @@
 		19E25A4E2308B94600679D49 /* CustomizeTripDetailsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19E25A4D2308B94600679D49 /* CustomizeTripDetailsTest.swift */; };
 		19E7B6402235EA8B006CB3AF /* InTheClearTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19E7B63F2235EA8B006CB3AF /* InTheClearTests.swift */; };
 		19E7B6482235ED27006CB3AF /* WeatherTableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19E7B6472235ED27006CB3AF /* WeatherTableTests.swift */; };
-		19F1FCF423F0F458007E3F2E /* amplifyconfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = 19F1FCF223F0F458007E3F2E /* amplifyconfiguration.json */; };
-		19F1FCF523F0F458007E3F2E /* awsconfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = 19F1FCF323F0F458007E3F2E /* awsconfiguration.json */; };
 		19F1FCF723F2662C007E3F2E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 19F1FCF623F2662B007E3F2E /* GoogleService-Info.plist */; };
 		5DDD3A275A386DC11241658F /* Pods_InTheClear.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7890AF9DCCDBA9CE387CCDCA /* Pods_InTheClear.framework */; };
 		ECF6DDC9F78D2FD107E97655 /* Pods_InTheClearTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4F974D28D40C2671A1B6AA1 /* Pods_InTheClearTests.framework */; };
@@ -140,8 +138,6 @@
 		19E7B63F2235EA8B006CB3AF /* InTheClearTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InTheClearTests.swift; sourceTree = "<group>"; };
 		19E7B6412235EA8B006CB3AF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		19E7B6472235ED27006CB3AF /* WeatherTableTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherTableTests.swift; sourceTree = "<group>"; };
-		19F1FCF223F0F458007E3F2E /* amplifyconfiguration.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = amplifyconfiguration.json; path = InTheClear/amplifyconfiguration.json; sourceTree = "<group>"; };
-		19F1FCF323F0F458007E3F2E /* awsconfiguration.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = awsconfiguration.json; path = InTheClear/awsconfiguration.json; sourceTree = "<group>"; };
 		19F1FCF623F2662B007E3F2E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		55B2108269BD305D3AC81FEE /* Pods-InTheClear.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-InTheClear.release.xcconfig"; path = "Pods/Target Support Files/Pods-InTheClear/Pods-InTheClear.release.xcconfig"; sourceTree = "<group>"; };
 		68C7662AA1B22A50F213806B /* Pods-InTheClearTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-InTheClearTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-InTheClearTests/Pods-InTheClearTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -175,8 +171,6 @@
 		190E4402210BF951005160C7 = {
 			isa = PBXGroup;
 			children = (
-				19F1FCF223F0F458007E3F2E /* amplifyconfiguration.json */,
-				19F1FCF323F0F458007E3F2E /* awsconfiguration.json */,
 				190E440D210BF951005160C7 /* InTheClear */,
 				19E7B63E2235EA8B006CB3AF /* InTheClearTests */,
 				190E440C210BF951005160C7 /* Products */,
@@ -430,7 +424,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				1939B5F522D41FB700E63F32 /* mapKey.png in Resources */,
-				19F1FCF523F0F458007E3F2E /* awsconfiguration.json in Resources */,
 				19017516223F3E3E00B6793A /* InTheClear.png in Resources */,
 				19D443C723E7AC4C002D52CA /* StartView.storyboard in Resources */,
 				19294C922252FEA600D09673 /* icons8-google-maps-48.png in Resources */,
@@ -454,7 +447,6 @@
 				193AAD3322DFFD0100C6C6DA /* time.png in Resources */,
 				1939B5E922D0247000E63F32 /* partlyCloudy.png in Resources */,
 				19D1242E22EA8FD100636C23 /* WeatherMenu.storyboard in Resources */,
-				19F1FCF423F0F458007E3F2E /* amplifyconfiguration.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
