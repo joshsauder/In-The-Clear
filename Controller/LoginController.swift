@@ -37,20 +37,16 @@ class LoginController: UIViewController {
     }
     
     func transitionViewController(){
-         
-        weak var pvc = self.presentingViewController
-        self.dismiss(animated: true, completion: {
-            let storyBoard = UIStoryboard(name: "Main", bundle: nil)
-            let vc = storyBoard.instantiateViewController(withIdentifier: "ViewController")
-            vc.modalPresentationStyle = .fullScreen
-            pvc?.present(vc, animated: true, completion: nil)
-        })
+        let storyBoard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyBoard.instantiateViewController(withIdentifier: "ViewController")
+        vc.modalPresentationStyle = .fullScreen
+        self.present(vc, animated: true, completion: nil)
      }
     
     func addStateListener(){
         handle = Auth.auth().addStateDidChangeListener { (auth, user) in
             if let user = user {
-                let parameters = User(userId: user.uid, email: user.email!, name: user.displayName != nil ? user.displayName! : "")
+                let parameters = User(Id: user.uid, email: user.email!, name: user.displayName != nil ? user.displayName! : "")
                 user.getIDTokenForcingRefresh(true){ idToken, error in
                     if let error = error { return; }
                     else{

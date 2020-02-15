@@ -12,7 +12,7 @@ import SwiftyJSON
 import CoreData
 
 struct User: Encodable {
-    let userId: String
+    let Id: String
     let email: String
     let name: String
 }

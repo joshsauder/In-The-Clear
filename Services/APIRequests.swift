@@ -14,7 +14,7 @@ import CoreLocation
 extension ViewController {
     
     struct TripPostData: Encodable {
-        let userId: Int
+        let userId: String
         let duration: Int
         let distance: Int
         let locations: [LocationData]
@@ -24,6 +24,8 @@ extension ViewController {
     struct LocationData: Encodable {
         let city: String
         let condition: String
+        let longitude: Double
+        let latitude: Double
         let temperature: Int
     }
     /**
@@ -113,26 +115,28 @@ extension ViewController {
         }
     }
     
-    func postTrip(tripData: tripDataModal, distance: Int, duration: Int){
+    func postTrip(tripData: tripDataModal, distance: Int, duration: Int, locations: [CLLocation]){
         var locationData : [LocationData] = []
         for (index, stop) in tripData.stops.enumerated(){
-            let location = LocationData(city: stop, condition: tripData.conditions[index], temperature: Int(tripData.highTemps[index]))
+            let location = LocationData(city: stop, condition: tripData.conditions[index], longitude: locations[index].coordinate.longitude, latitude: locations[index].coordinate.latitude, temperature: Int(tripData.highTemps[index]))
             locationData.append(location)
         }
         
-        let postData = TripPostData(userId: UserDefaults.standard.integer(forKey: Defaults.id), duration: duration, distance: distance, locations: locationData)
+        let (token, id) = getUserData()
         
-        let headers: HTTPHeaders = ["Authorization": "Bearer " + getAccessToken()]
+        let postData = TripPostData(userId: id, duration: duration, distance: distance, locations: locationData)
+        
+        let headers: HTTPHeaders = ["Authorization": "Bearer " + token]
         AF.request("http://localhost:5000/api/Trip", method: .post, parameters: postData, encoder: JSONParameterEncoder.default, headers: headers).validate().responseJSON { response in
             
             print(response.response?.statusCode)
         }
     }
     
-    private func getAccessToken() -> String {
+    private func getUserData() -> (String, String) {
         let manager = RealmManager()
         
         let user = manager.getUser()
-        return user.token
+        return (user.token, user.id)
     }
 }
