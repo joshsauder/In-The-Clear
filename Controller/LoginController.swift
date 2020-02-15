@@ -66,7 +66,10 @@ class LoginController: UIViewController {
     }
     
     private func saveData(token: String, id: String, name: String) {
+        let manager = RealmManager()
         
+        let data = manager.initUserData(id: id, name: name, token: token)
+        manager.writeUser(user: data)
     }
         
 }

@@ -130,6 +130,9 @@ extension ViewController {
     }
     
     private func getAccessToken() -> String {
+        let manager = RealmManager()
         
+        let user = manager.getUser()
+        return user.token
     }
 }
