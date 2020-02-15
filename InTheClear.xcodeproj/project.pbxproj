@@ -43,6 +43,8 @@
 		1996FA6023F79C80000F906E /* RealmTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1996FA5F23F79C80000F906E /* RealmTests.swift */; };
 		1996FA6423F7A50D000F906E /* TripDataModalTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1996FA6323F7A50D000F906E /* TripDataModalTest.swift */; };
 		1996FA6623F7AA22000F906E /* TripDetailsModalTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1996FA6523F7AA22000F906E /* TripDetailsModalTest.swift */; };
+		1996FA6C23F856C6000F906E /* StormArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 1996FA6B23F856C6000F906E /* StormArrow.png */; };
+		1996FA7023F85759000F906E /* SunArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 1996FA6F23F85759000F906E /* SunArrow.png */; };
 		19BA598C23EBC12B00B6F207 /* LoginViewSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19BA598B23EBC12B00B6F207 /* LoginViewSetup.swift */; };
 		19BA598E23ED101C00B6F207 /* Defaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19BA598D23ED101C00B6F207 /* Defaults.swift */; };
 		19C914BA217575D0002EA1DB /* WeatherMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19C914B9217575D0002EA1DB /* WeatherMenu.swift */; };
@@ -116,6 +118,8 @@
 		1996FA5F23F79C80000F906E /* RealmTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmTests.swift; sourceTree = "<group>"; };
 		1996FA6323F7A50D000F906E /* TripDataModalTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripDataModalTest.swift; sourceTree = "<group>"; };
 		1996FA6523F7AA22000F906E /* TripDetailsModalTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripDetailsModalTest.swift; sourceTree = "<group>"; };
+		1996FA6B23F856C6000F906E /* StormArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = StormArrow.png; sourceTree = "<group>"; };
+		1996FA6F23F85759000F906E /* SunArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SunArrow.png; sourceTree = "<group>"; };
 		19BA598B23EBC12B00B6F207 /* LoginViewSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewSetup.swift; sourceTree = "<group>"; };
 		19BA598D23ED101C00B6F207 /* Defaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Defaults.swift; sourceTree = "<group>"; };
 		19C914B9217575D0002EA1DB /* WeatherMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherMenu.swift; sourceTree = "<group>"; };
@@ -211,6 +215,8 @@
 		19C914C52184B701002EA1DB /* supportingFiles */ = {
 			isa = PBXGroup;
 			children = (
+				1996FA6F23F85759000F906E /* SunArrow.png */,
+				1996FA6B23F856C6000F906E /* StormArrow.png */,
 				191EF2E4230505010049D7D1 /* BirdhouseWhiteLogo.png */,
 				1917538222F78B7D00678745 /* addIcon.png */,
 				191E3F9A22E2A08200F0893D /* CloudyNight.png */,
@@ -437,9 +443,11 @@
 				191E3F9C22E2A08200F0893D /* CloudyNight.png in Resources */,
 				1939B5F322D4180000E63F32 /* danger.png in Resources */,
 				190E4419210BF958005160C7 /* LaunchScreen.storyboard in Resources */,
+				1996FA6C23F856C6000F906E /* StormArrow.png in Resources */,
 				191E3F9F22E3FADE00F0893D /* baseline_my_location_black_36dp.png in Resources */,
 				1939B5EF22D0248900E63F32 /* rain.png in Resources */,
 				190E4416210BF958005160C7 /* Assets.xcassets in Resources */,
+				1996FA7023F85759000F906E /* SunArrow.png in Resources */,
 				19F1FCF723F2662C007E3F2E /* GoogleService-Info.plist in Resources */,
 				190E4414210BF951005160C7 /* Main.storyboard in Resources */,
 				191EF2E5230505010049D7D1 /* BirdhouseWhiteLogo.png in Resources */,
