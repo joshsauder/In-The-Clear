@@ -56,6 +56,9 @@ class RealmTest: XCTestCase {
         XCTAssertTrue(retrievedUser.isSameObject(as: user))
     }
     
+    /**
+     Test insertion of user data multiple times. User data should be removed each time since access token, or signed in user could be different
+     */
     func testInsertofDataMultipleTimes(){
         let id = "123"
         let name = "Josh"
