@@ -118,8 +118,13 @@ extension ViewController {
     func postTrip(tripData: tripDataModal, distance: Int, duration: Int, locations: [CLLocation]){
         var locationData : [LocationData] = []
         for (index, stop) in tripData.stops.enumerated(){
-            let location = LocationData(city: stop, condition: tripData.conditions[index], longitude: locations[index].coordinate.longitude, latitude: locations[index].coordinate.latitude, temperature: Int(tripData.highTemps[index]))
-            locationData.append(location)
+            let cityIndexes = tripData.cities.indices.filter {tripData.cities[$0].localizedCaseInsensitiveContains(stop)}
+            //still need to check if cityIndex is not nil
+            if cityIndexes.count > 0{
+                let cityIndex = cityIndexes[0]
+                let location = LocationData(city: stop, condition: tripData.conditions[cityIndex], longitude: locations[index].coordinate.longitude, latitude: locations[index].coordinate.latitude, temperature: Int(tripData.highTemps[cityIndex]))
+                locationData.append(location)
+            }
         }
         
         let (token, id) = getUserData()
@@ -127,10 +132,7 @@ extension ViewController {
         let postData = TripPostData(userId: id, duration: duration, distance: distance, locations: locationData)
         
         let headers: HTTPHeaders = ["Authorization": "Bearer " + token]
-        AF.request("http://localhost:5000/api/Trip", method: .post, parameters: postData, encoder: JSONParameterEncoder.default, headers: headers).validate().responseJSON { response in
-            
-            print(response.response?.statusCode)
-        }
+        AF.request("http://localhost:5000/api/Trip", method: .post, parameters: postData, encoder: JSONParameterEncoder.default, headers: headers)
     }
     
     private func getUserData() -> (String, String) {
