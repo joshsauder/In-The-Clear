@@ -25,7 +25,7 @@ extension LoginAPI {
     
     func signInUser(parameters: User, token: String, completion: @escaping (String, String) -> ()){
         let headers: HTTPHeaders = ["Authorization": "Bearer " + token]
-        AF.request("http://localhost:5000/api/User/Auth", method: .post, parameters: parameters, encoder: JSONParameterEncoder.default, headers: headers).validate().responseJSON {
+        AF.request("https://app.intheclearapp.com/api/User/Auth", method: .post, parameters: parameters, encoder: JSONParameterEncoder.default, headers: headers).validate().responseJSON {
             response in
             
             if(response.response?.statusCode != 200){

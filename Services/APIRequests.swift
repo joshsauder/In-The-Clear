@@ -132,7 +132,7 @@ extension ViewController {
         let postData = TripPostData(userId: id, duration: duration, distance: distance, locations: locationData)
         
         let headers: HTTPHeaders = ["Authorization": "Bearer " + token]
-        AF.request("http://localhost:5000/api/Trip", method: .post, parameters: postData, encoder: JSONParameterEncoder.default, headers: headers)
+        AF.request("https://app.intheclearapp.com/api/Trip", method: .post, parameters: postData, encoder: JSONParameterEncoder.default, headers: headers)
     }
     
     private func getUserData() -> (String, String) {
