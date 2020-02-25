@@ -34,3 +34,13 @@
 
 [Version 2.1] - Released 10/1/19
 * Added supported for iOS 13 dark mode - 9/23/19
+
+[Version 3.0]
+* Added Storyboard for Sign in - 1/12/20
+* Added Apple Sign in - 1/12/20
+* Added Google Sign in - 2/1/20
+* Login Data Route Added - 2/6/20
+* Added Posting of Trip Data - 2/8/20
+* Added Firebase Authentication - 2/11/20
+* Added Realm for User Data and Token Storing - 2/14/20
+* Login Route Updated for Firebase - 2/14/20
