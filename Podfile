@@ -21,7 +21,7 @@ target 'InTheClearTests' do
   pod 'GooglePlaces'
   pod 'Alamofire', '~> 5.0.0-rc.3' 
   pod 'SwiftyJSON', '~> 4.0' 
-  pod 'Firebase/Analytics'
-  pod 'Firebase/Auth'
+  # pod 'Firebase/Analytics'
+  # pod 'Firebase/Auth'
   pod 'RealmSwift', '~> 4.3.2' 
 end
