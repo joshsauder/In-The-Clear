@@ -62,7 +62,7 @@ class LoginController: UIViewController {
     func addStateListener(){
         handle = Auth.auth().addStateDidChangeListener { (auth, user) in
             if let user = user {
-                let parameters = User(Id: user.uid, email: user.email!, name: user.displayName != nil ? user.displayName! : "")
+                let parameters = User(paid: true, email: user.email!, displayName: user.displayName != nil ? user.displayName! : "")
                 user.getIDTokenForcingRefresh(true){ idToken, error in
                     if error != nil {
                         self.showAlert(title: "Issue Signing You In! Please Try Again.")

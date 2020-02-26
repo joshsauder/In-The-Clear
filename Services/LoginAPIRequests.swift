@@ -12,9 +12,9 @@ import SwiftyJSON
 import CoreData
 
 struct User: Encodable {
-    let Id: String
+    let paid: Bool
     let email: String
-    let name: String
+    let displayName: String
 }
 
 protocol LoginAPI {
@@ -25,6 +25,7 @@ extension LoginAPI {
     
     func signInUser(parameters: User, token: String, completion: @escaping (String, String) -> ()){
         let headers: HTTPHeaders = ["Authorization": "Bearer " + token]
+        print(token)
         AF.request("https://app.intheclearapp.com/api/User/Auth", method: .post, parameters: parameters, encoder: JSONParameterEncoder.default, headers: headers).validate().responseJSON {
             response in
             

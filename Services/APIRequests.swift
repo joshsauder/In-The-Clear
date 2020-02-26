@@ -122,7 +122,7 @@ extension ViewController {
             //still need to check if cityIndex is not nil
             if cityIndexes.count > 0{
                 let cityIndex = cityIndexes[0]
-                let location = LocationData(city: stop, condition: tripData.conditions[cityIndex], longitude: locations[index].coordinate.longitude, latitude: locations[index].coordinate.latitude, temperature: Int(tripData.highTemps[cityIndex]))
+                let location = LocationData(city: tripData.cities[cityIndex], condition: tripData.conditions[cityIndex], longitude: locations[index].coordinate.longitude, latitude: locations[index].coordinate.latitude, temperature: Int(tripData.highTemps[cityIndex]))
                 locationData.append(location)
             }
         }
