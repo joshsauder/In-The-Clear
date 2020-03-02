@@ -54,11 +54,8 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
     var spinner: UIView?
     var tripData = tripDataModal()
     var userTripDetails = tripDetailsModal()
-    
     var polylineArray = [GMSPolyline]()
-    
-    let defaults = UserDefaults()
-    
+        
     override func viewDidLoad() {
         super.viewDidLoad()
         
