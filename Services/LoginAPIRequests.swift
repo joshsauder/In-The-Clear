@@ -17,11 +17,7 @@ struct User: Encodable {
     let displayName: String
 }
 
-protocol LoginAPI {
-    func signInUser(parameters: User, token: String, completion: @escaping (String, String) -> ())
-}
-
-extension LoginAPI {
+extension LoginController {
     
     func signInUser(parameters: User, token: String, completion: @escaping (String, String) -> ()){
         let headers: HTTPHeaders = ["Authorization": "Bearer " + token]
@@ -39,5 +35,3 @@ extension LoginAPI {
     }
     
 }
-
-extension LoginController : LoginAPI {}

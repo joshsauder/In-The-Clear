@@ -11,6 +11,31 @@ import UIKit
 import CoreLocation
 import GooglePlaces
 
+protocol Alert {
+    func showAlert(title: String, message: String) -> UIAlertController
+}
+
+extension Alert{
+    
+    /**
+     Displays a UIAlert
+     - parameters:
+        - title: title of alert
+        - message: the message of alert
+    */
+    internal func showAlert(title: String, message: String) -> UIAlertController {
+        //display alert based on tyle
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        return alert
+    }
+}
+
+//added alert function to each other classes
+extension ViewController: Alert {}
+extension LoginController: Alert {}
+extension CustomizeTripDetails: Alert {}
+
 extension ViewController {
     
     /**
@@ -236,20 +261,6 @@ extension ViewController {
         } else {
             openMapsBottomContraints.constant = 10
         }
-    }
-    
-    /**
-     Displays a UIAlert
-     - parameters:
-        - title: title of alert
-        - message: the message of alert
-    */
-    internal func showAlert(title: String, message: String){
-        //display alert based on tyle
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-        self.present(alert, animated: true, completion: nil)
-        
     }
     
     /**

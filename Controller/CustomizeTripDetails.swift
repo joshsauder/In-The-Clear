@@ -202,7 +202,7 @@ class CustomizeTripDetails: UIViewController, CellDataDelegate{
             dismiss(animated: true)
             delegate?.recieveLocationData(tripDetials: tripDetails)
         }else {
-            self.showAlert(title: "Trip Leg Time Issue", message: "You cannot have a leg in your trip that is longer than 36 hours")
+            self.present(self.showAlert(title: "Trip Leg Too Long", message: "You cannot have a leg in your trip that is longer than 36 hours"), animated: true)
         }
     }
     

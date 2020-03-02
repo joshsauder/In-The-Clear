@@ -35,20 +35,6 @@ extension CustomizeTripDetails {
         addButton.setImage(image, for: .normal)
         addButton.tintColor = .white
     }
-    
-    /**
-        Displays a UIAlert
-        - parameters:
-           - title: title of alert
-           - message: the message of alert
-       */
-       internal func showAlert(title: String, message: String){
-           //display alert based on tyle
-           let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-           alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-           self.present(alert, animated: true, completion: nil)
-           
-       }
 }
 
 extension TripDetailsTableViewCell {

@@ -33,11 +33,6 @@ extension LoginController {
         button.isEnabled = false
     }
     
-    func showAlert(title: String){
-        let alert = UIAlertController(title: title, message: nil, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-        self.present(alert, animated: true)
-    }
     
     func initArrowPosition(){
         self.SunArrowLeadingConstraint.constant -= view.bounds.width

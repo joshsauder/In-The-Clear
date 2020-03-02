@@ -31,7 +31,7 @@ extension ViewController {
         - message: The message contained in the alert
  `  */
     internal func alertTool(title: String, message: String){
-        self.showAlert(title: title, message: message)
+        self.present(self.showAlert(title: title, message: message), animated: true)
         
         //animate back to start location
         let camera = GMSCameraPosition.camera(withLatitude: (self.locationStart.coordinate.latitude), longitude: (self.locationStart.coordinate.longitude), zoom: 11.0)

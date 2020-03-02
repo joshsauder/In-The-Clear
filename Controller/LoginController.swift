@@ -65,14 +65,14 @@ class LoginController: UIViewController {
                 let parameters = User(paid: true, email: user.email!, displayName: user.displayName != nil ? user.displayName! : "")
                 user.getIDTokenForcingRefresh(true){ idToken, error in
                     if error != nil {
-                        self.showAlert(title: "Issue Signing You In! Please Try Again.")
+                        self.present(self.showAlert(title: "Issue Signing You In! Please Try Again.", message: ""), animated: true)
                         return;
                         
                     }
                     else{
                         self.signInUser(parameters: parameters, token: idToken!){ (id, name) in
                             if(id == ""){
-                                self.showAlert(title: "Issue Signing You In! Please Try Again.")
+                                self.present(self.showAlert(title: "Issue Signing You In! Please Try Again.", message: ""), animated: true)
                             }else {
                                 self.saveData(token: idToken!, id: id, name: name)
                                 self.transitionViewController()
@@ -135,7 +135,7 @@ extension LoginController: ASAuthorizationControllerDelegate {
             Auth.auth().signIn(with: credential) { (authResult, error) in
                 if let error = error {
                     print(error.localizedDescription)
-                    self.showAlert(title: "Invalid Sign In")
+                    self.present(self.showAlert(title: "Invalid Sign In", message: ""), animated: true)
                     return
                 }
             }
@@ -144,7 +144,7 @@ extension LoginController: ASAuthorizationControllerDelegate {
     }
     
     func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
-        self.showAlert(title: "Issue Signing You In! Please Try Again.")
+        self.present(self.showAlert(title: "Issue Signing You In! Please Try Again.", message: ""), animated: true)
     }
     
     private func randomNonceString(length: Int = 32) -> String {
@@ -220,7 +220,10 @@ extension LoginController : GIDSignInDelegate {
         let creds = GoogleAuthProvider.credential(withIDToken: user.authentication.idToken, accessToken: user.authentication.accessToken)
         
         Auth.auth().signIn(with: creds) { (authResult, error) in
-            if error != nil { self.showAlert(title: "Invalid Sign In"); return;}
+            if error != nil {
+                self.present(self.showAlert(title: "Invalid Sign In", message: ""), animated: true)
+                return
+            }
         }
     }
 }
