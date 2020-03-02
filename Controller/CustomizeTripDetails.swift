@@ -155,6 +155,16 @@ class CustomizeTripDetails: UIViewController, CellDataDelegate{
         return retArray
     }
     
+    private func checkValues() -> Bool {
+        return timeOffset.allSatisfy { time in
+            if time/3600 > 36 {
+                return false
+            }
+            
+            return true
+        }
+    }
+    
     /**
      Set time for departure and arrival labels
      
@@ -187,8 +197,13 @@ class CustomizeTripDetails: UIViewController, CellDataDelegate{
         - sender: The UIBUtton that is tapped
     */
     @IBAction func onSubmit(_ sender: UIButton) {
-        dismiss(animated: true)
-        delegate?.recieveLocationData(tripDetials: tripDetails)
+        
+        if checkValues() {
+            dismiss(animated: true)
+            delegate?.recieveLocationData(tripDetials: tripDetails)
+        }else {
+            self.showAlert(title: "Trip Leg Time Issue", message: "You cannot have a leg in your trip that is longer than 36 hours")
+        }
     }
     
     /**
