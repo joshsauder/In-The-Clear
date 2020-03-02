@@ -157,7 +157,7 @@ class CustomizeTripDetails: UIViewController, CellDataDelegate{
     
     private func checkValues() -> Bool {
         return timeOffset.allSatisfy { time in
-            if time/3600 > 36 {
+            if time/3600 > 47 {
                 return false
             }
             
@@ -202,7 +202,7 @@ class CustomizeTripDetails: UIViewController, CellDataDelegate{
             dismiss(animated: true)
             delegate?.recieveLocationData(tripDetials: tripDetails)
         }else {
-            self.present(self.showAlert(title: "Trip Leg Too Long", message: "You cannot have a leg in your trip that is longer than 36 hours"), animated: true)
+            self.present(self.showAlert(title: "Trip Leg Too Long", message: "You cannot have a leg in your trip that is longer than 48 hours"), animated: true)
         }
     }
     
