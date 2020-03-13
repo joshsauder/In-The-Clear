@@ -30,7 +30,7 @@ extension LoginController {
     func signInUser(parameters: User, token: String, completion: @escaping (String, String) -> ()){
         let headers: HTTPHeaders = ["Authorization": "Bearer " + token]
         print(token)
-        AF.request("https://app.intheclearapp.com/api/User/Auth", method: .post, parameters: parameters, encoder: JSONParameterEncoder.default, headers: headers).validate().responseJSON {
+        AF.request("\(url.BACKEND_URL)/User/Auth", method: .post, parameters: parameters, encoder: JSONParameterEncoder.default, headers: headers).validate().responseJSON {
             response in
             
             if(response.response?.statusCode != 200){
