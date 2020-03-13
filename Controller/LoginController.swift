@@ -39,11 +39,13 @@ class LoginController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        //initialize animating arrows location
         self.initArrowPosition()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        //show the animating arrows
         self.showArrows()
     }
     
@@ -52,6 +54,9 @@ class LoginController: UIViewController {
         Auth.auth().removeStateDidChangeListener(handle!)
     }
     
+    /**
+     Transitions to Main View Controller
+     */
     func transitionViewController(){
         let storyBoard = UIStoryboard(name: "Main", bundle: nil)
         let vc = storyBoard.instantiateViewController(withIdentifier: "ViewController")
@@ -59,6 +64,9 @@ class LoginController: UIViewController {
         self.present(vc, animated: true, completion: nil)
      }
     
+    /**
+     Listens for a user Sign in and if valid, shows the main view controller
+     */
     func addStateListener(){
         handle = Auth.auth().addStateDidChangeListener { (auth, user) in
             if let user = user {
@@ -74,6 +82,7 @@ class LoginController: UIViewController {
                             if(id == ""){
                                 self.present(self.showAlert(title: "Issue Signing You In! Please Try Again.", message: ""), animated: true)
                             }else {
+                                //add data to Realm
                                 self.saveData(token: idToken!, id: id, name: name)
                                 self.transitionViewController()
                             }
@@ -85,6 +94,9 @@ class LoginController: UIViewController {
         }
     }
     
+    /**
+     Save User Data to Realm
+     */
     private func saveData(token: String, id: String, name: String) {
         let manager = RealmManager()
         
@@ -94,6 +106,9 @@ class LoginController: UIViewController {
         
 }
 
+/**
+ Recommended Procedure to Sign in With Apple using Firebase
+ */
 extension LoginController: ASAuthorizationControllerDelegate {
     
     func setUpSignInAppleButton() {
@@ -200,6 +215,9 @@ extension LoginController: ASAuthorizationControllerPresentationContextProviding
 
 extension LoginController : GIDSignInDelegate {
     
+    /**
+     Initialize Sign in With Google Button
+     */
     func initGoogle(){
         GIDSignIn.sharedInstance()?.clientID = FirebaseApp.app()?.options.clientID
         GIDSignIn.sharedInstance().delegate = self
@@ -207,6 +225,9 @@ extension LoginController : GIDSignInDelegate {
         self.signInButton.style = GIDSignInButtonStyle.wide
     }
 
+    /**
+    Handle Google Sign in
+    */
     func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
         if let error = error {
           if (error as NSError).code == GIDSignInErrorCode.hasNoAuthInKeychain.rawValue {

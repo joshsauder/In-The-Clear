@@ -19,6 +19,14 @@ struct User: Encodable {
 
 extension LoginController {
     
+    /**
+     Sends user credentials to API and validates the token
+     
+     - Parameters:
+        - parameters: User login credentials
+        - token: Access Token
+        - completion: The User ID and DisplayName
+     */
     func signInUser(parameters: User, token: String, completion: @escaping (String, String) -> ()){
         let headers: HTTPHeaders = ["Authorization": "Bearer " + token]
         print(token)
@@ -30,7 +38,7 @@ extension LoginController {
             }
             
             let json = JSON(response.data!)
-            completion(json["id"].stringValue, json["token"].stringValue)
+            completion(json["id"].stringValue, json["DisplayName"].stringValue)
         }
     }
     

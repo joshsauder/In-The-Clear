@@ -11,7 +11,12 @@ import UIKit
 
 extension LoginController {
     
-    //create submit button
+    /**
+     Styles the Submit Button
+     
+     - Parameters:
+        - button: The UIButton to style
+     */
     func createButton(button: UIButton){
         button.layer.cornerRadius = 5
         button.clipsToBounds = true
@@ -28,17 +33,28 @@ extension LoginController {
         button.layer.shadowOpacity = 1.0
     }
 
+    /**
+    Disables a button
+    
+    - Parameters:
+       - button: The UIButton to disable
+    */
     func disableButton(button: UIButton){
         //submit button should be disabled on init
         button.isEnabled = false
     }
     
-    
+    /**
+     Initializes the animating arrows location
+     */
     func initArrowPosition(){
         self.SunArrowLeadingConstraint.constant -= view.bounds.width
         self.StormArrowTrailingContstraint.constant += view.bounds.width
     }
     
+    /**
+    Shows the animating arrows.
+    */
     func showArrows(){
         UIView.animate(withDuration: 1, delay: 0, options: UIView.AnimationOptions.curveEaseOut, animations: {
             self.SunArrowLeadingConstraint.constant += self.view.bounds.width

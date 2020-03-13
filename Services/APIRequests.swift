@@ -115,9 +115,18 @@ extension ViewController {
         }
     }
     
+    /**
+     Post Trip Details to DB
+     - parameters:
+        - tripData: The User's trip data
+        - Distance: Distance of the trip
+        - Duration: Time it will take to complete the trip
+        - Locations: Array of CLLocations for each city
+     */
     func postTrip(tripData: tripDataModal, distance: Int, duration: Int, locations: [CLLocation]){
         var locationData : [LocationData] = []
         for (index, stop) in tripData.stops.enumerated(){
+            //find first instance of stop and save its index
             let cityIndexes = tripData.cities.indices.filter {tripData.cities[$0].localizedCaseInsensitiveContains(stop)}
             //still need to check if cityIndex is not nil
             if cityIndexes.count > 0{
@@ -135,6 +144,9 @@ extension ViewController {
         AF.request("https://app.intheclearapp.com/api/Trip", method: .post, parameters: postData, encoder: JSONParameterEncoder.default, headers: headers)
     }
     
+    /**
+     Fetches User data from Realm
+     */
     private func getUserData() -> (String, String) {
         let manager = RealmManager()
         
