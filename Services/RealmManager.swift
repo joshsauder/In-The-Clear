@@ -24,7 +24,7 @@ class RealmManager {
     /**
      Gets User Data from Realm
      
-     - Returns: The User Data
+     - returns: The User Data
      */
     func getUser() -> UserData {
         
@@ -35,11 +35,12 @@ class RealmManager {
     
     /**
     Gets User Data from Realm
+     
      - Parameters:
         - id: User ID
         - Name : User Display Name
         - Token: Access Token
-     - Returns: The User Data
+     - returns: The User Data
     */
     func initUserData(id: String, name: String, token: String) -> UserData {
         let userData = UserData()

@@ -102,7 +102,7 @@ extension ViewController {
      Calls Google Maps Directions API Service and returns a JSON array containing directions information
      - parameters:
         - url: the full url containing lat and long coordinates
-        - completions: the directions JSON array
+        - completion: the directions JSON array
     */
     func getDirections(url: String, completion: @escaping ([JSON]) -> ()){
         
@@ -117,6 +117,7 @@ extension ViewController {
     
     /**
      Post Trip Details to DB
+     
      - parameters:
         - tripData: The User's trip data
         - Distance: Distance of the trip
@@ -146,6 +147,8 @@ extension ViewController {
     
     /**
      Fetches User data from Realm
+     
+     - returns: The access token and user ID
      */
     private func getUserData() -> (String, String) {
         let manager = RealmManager()
