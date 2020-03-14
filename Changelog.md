@@ -44,3 +44,4 @@
 * Added Firebase Authentication - 2/11/20
 * Added Realm for User Data and Token Storing - 2/14/20
 * Login Route Updated for Firebase - 2/14/20
+* Increased Trip Leg Time Limit to 48 hours - 3/1/20

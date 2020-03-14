@@ -34,10 +34,14 @@ target 'InTheClear' do
   use_frameworks!
 
   pod 'GoogleMaps', '~> 3.0.2'
-  pod 'GooglePlaces', '~> 3.0.2'
-  pod 'Alamofire', '~> 4.7'
-  pod 'SwiftyJSON', '~> 4.0'
-  pod 'FontAwesome.swift', '~> 1.6.0'
+  pod 'GooglePlaces'
+  pod 'Alamofire', '~> 5.0.0-rc.3' 
+  pod 'SwiftyJSON', '~> 4.0' 
+  pod 'GoogleSignIn'
+  pod 'Firebase/Analytics'
+  pod 'Firebase/Auth'
+  pod 'RealmSwift', '~> 4.3.2' 
+  
 end
 ```
 
@@ -56,5 +60,11 @@ struct Constants {
     static let HERE_APPCODE = "<HERE Maps App Code>"
 }
 ```
+
+### Setting up Firebase and Apple Sign in
+To run this project you will also need to set up Firebase and Apple Sign in. You will need to have a developer account with Apple in order to set this project up. I listed two links that will help you set Firebase and Apple Sign-In up:
+
+- [Apple Sign-In](https://developer.apple.com/documentation/authenticationservices/implementing_user_authentication_with_sign_in_with_apple)
+- [Firebase](https://firebase.google.com/docs/ios/setup)
 
 All that's left to do is to open 'InTheClear.xcworkspace' and you should be good to go!
