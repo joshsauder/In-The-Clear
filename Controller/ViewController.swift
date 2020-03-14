@@ -378,7 +378,7 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
             mapView.clear()
             //remove any existing polylines
             self.polylineArray.forEach { $0.map = nil }
-            showSpinner(view: view)
+            spinner = showSpinner(view: view)
             
             //show line
             self.processStops(index: self.userTripDetails.cityLocations.count - 1) { time, distance in
@@ -414,7 +414,8 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
                     self.createMarker(titleMarker: self.userTripDetails.cityStops[index], latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
                 }
                 
-                self.stopSpinner()
+                self.stopSpinner(spinner: spinner)
+                spinner = nil
                 
                 //set trip data stops
                 self.tripData.stops = self.userTripDetails.cityStops

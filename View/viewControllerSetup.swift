@@ -257,7 +257,9 @@ extension ViewController {
         self.present(alertController, animated: true, completion: nil)
         
         //need to stop spinner since completion will not be used
-        self.stopSpinner()
+        self.stopSpinner(spinner: spinner)
+        spinner = nil
+        
         //re-enable location buttons
         self.startButton.isEnabled = true
         self.destinationButton.isEnabled = true

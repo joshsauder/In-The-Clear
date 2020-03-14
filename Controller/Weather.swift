@@ -38,7 +38,9 @@ extension ViewController {
         self.mapView.animate(to: camera)
         
         //need to stop spinner since completion will not be used
-        self.stopSpinner()
+        self.stopSpinner(spinner: spinner)
+        spinner = nil
+        
         //re-enable location buttons
         self.startButton.isEnabled = true
         self.destinationButton.isEnabled = true
