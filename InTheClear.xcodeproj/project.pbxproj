@@ -40,6 +40,7 @@
 		1942A6AD22594F1B00ABFF83 /* viewControllerSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1942A6AC22594F1B00ABFF83 /* viewControllerSetup.swift */; };
 		194AD985212E4B620034572D /* URLConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 194AD984212E4B620034572D /* URLConfig.swift */; };
 		194AD989215331940034572D /* Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 194AD988215331940034572D /* Weather.swift */; };
+		199243D8241D523D00E9A4C2 /* SharedViewComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 199243D7241D523D00E9A4C2 /* SharedViewComponents.swift */; };
 		1996FA6023F79C80000F906E /* RealmTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1996FA5F23F79C80000F906E /* RealmTests.swift */; };
 		1996FA6423F7A50D000F906E /* TripDataModalTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1996FA6323F7A50D000F906E /* TripDataModalTest.swift */; };
 		1996FA6623F7AA22000F906E /* TripDetailsModalTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1996FA6523F7AA22000F906E /* TripDetailsModalTest.swift */; };
@@ -112,6 +113,7 @@
 		1942A6AC22594F1B00ABFF83 /* viewControllerSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = viewControllerSetup.swift; sourceTree = "<group>"; };
 		194AD984212E4B620034572D /* URLConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLConfig.swift; sourceTree = "<group>"; };
 		194AD988215331940034572D /* Weather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weather.swift; sourceTree = "<group>"; };
+		199243D7241D523D00E9A4C2 /* SharedViewComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedViewComponents.swift; sourceTree = "<group>"; };
 		1996FA5F23F79C80000F906E /* RealmTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmTests.swift; sourceTree = "<group>"; };
 		1996FA6323F7A50D000F906E /* TripDataModalTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripDataModalTest.swift; sourceTree = "<group>"; };
 		1996FA6523F7AA22000F906E /* TripDetailsModalTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripDetailsModalTest.swift; sourceTree = "<group>"; };
@@ -240,6 +242,7 @@
 				19173CF222EFD10D001BC2DF /* CustomizeTripDetailsView.swift */,
 				19D443C623E7AC4C002D52CA /* StartView.storyboard */,
 				19BA598B23EBC12B00B6F207 /* LoginViewSetup.swift */,
+				199243D7241D523D00E9A4C2 /* SharedViewComponents.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -585,6 +588,7 @@
 				19C914C021829D5A002EA1DB /* weatherData.swift in Sources */,
 				19D98A3423CBC34200BD8184 /* LoginController.swift in Sources */,
 				19BA598C23EBC12B00B6F207 /* LoginViewSetup.swift in Sources */,
+				199243D8241D523D00E9A4C2 /* SharedViewComponents.swift in Sources */,
 				190E4411210BF951005160C7 /* ViewController.swift in Sources */,
 				19D1243222EBD67400636C23 /* tripDetailsModal.swift in Sources */,
 				194AD989215331940034572D /* Weather.swift in Sources */,
