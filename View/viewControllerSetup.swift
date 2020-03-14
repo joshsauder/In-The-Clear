@@ -11,30 +11,6 @@ import UIKit
 import CoreLocation
 import GooglePlaces
 
-protocol SharedViewComponents {
-    func showAlert(title: String, message: String) -> UIAlertController
-}
-
-extension SharedViewComponents {
-    
-    /**
-     Displays a UIAlert
-     - parameters:
-        - title: title of alert
-        - message: the message of alert
-    */
-    internal func showAlert(title: String, message: String) -> UIAlertController {
-        //display alert based on tyle
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-        return alert
-    }
-}
-
-//added alert function to each other classes
-extension ViewController: SharedViewComponents {}
-extension LoginController: SharedViewComponents {}
-extension CustomizeTripDetails: SharedViewComponents {}
 
 extension ViewController {
     
@@ -290,35 +266,6 @@ extension ViewController {
         
     }
     
-    /**
-     Displays a spinner while a process is executing
-     - parameters:
-        - view: The view in which the spinner will appear in
-     */
-    internal func showSpinner(view: UIView){
-        let spinnerView = UIView.init(frame: view.bounds)
-        spinnerView.backgroundColor = UIColor.init(red: 0.5, green: 0.5, blue: 0.5, alpha: 0.5)
-        let activityIV = UIActivityIndicatorView.init(style: .whiteLarge)
-        activityIV.startAnimating()
-        activityIV.center = view.center
-        
-        DispatchQueue.main.async {
-            spinnerView.addSubview(activityIV)
-            view.addSubview(spinnerView)
-        }
-        
-        spinner = spinnerView
-    }
-    
-    /**
-     Removes the spinner from the superview
-    */
-    internal func stopSpinner(){
-        DispatchQueue.main.async {
-            self.spinner?.removeFromSuperview()
-            self.spinner = nil
-        }
-    }
 }
 
 extension GMSAutocompleteViewController {
