@@ -414,8 +414,8 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
                     self.createMarker(titleMarker: self.userTripDetails.cityStops[index], latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
                 }
                 
-                self.stopSpinner(spinner: spinner)
-                spinner = nil
+                self.stopSpinner(spinner: self.spinner)
+                self.spinner = nil
                 
                 //set trip data stops
                 self.tripData.stops = self.userTripDetails.cityStops

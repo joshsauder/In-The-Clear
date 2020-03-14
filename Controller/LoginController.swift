@@ -25,6 +25,7 @@ class LoginController: UIViewController {
     @IBOutlet weak var StormArrowTrailingContstraint: NSLayoutConstraint!
     @IBOutlet weak var SunArrowLeadingConstraint: NSLayoutConstraint!
     
+    var spinner: UIView?
     
     var handle: AuthStateDidChangeListenerHandle?
     fileprivate var currentNonce: String = ""
@@ -69,10 +70,17 @@ class LoginController: UIViewController {
      */
     func addStateListener(){
         handle = Auth.auth().addStateDidChangeListener { (auth, user) in
+            
             if let user = user {
+                //show spinner during login
+                self.spinner = self.showSpinner(view: self.view)
+                
                 let parameters = User(paid: true, email: user.email!, displayName: user.displayName != nil ? user.displayName! : "")
                 user.getIDTokenForcingRefresh(true){ idToken, error in
                     if error != nil {
+                        self.stopSpinner(spinner: self.spinner)
+                        self.spinner = nil
+                        
                         self.present(self.showAlert(title: "Issue Signing You In! Please Try Again.", message: ""), animated: true)
                         return;
                         
@@ -80,10 +88,17 @@ class LoginController: UIViewController {
                     else{
                         self.signInUser(parameters: parameters, token: idToken!){ (id, name) in
                             if(id == ""){
+                                self.stopSpinner(spinner: self.spinner)
+                                self.spinner = nil
                                 self.present(self.showAlert(title: "Issue Signing You In! Please Try Again.", message: ""), animated: true)
+                                return;
                             }else {
                                 //add data to Realm
+                                self.stopSpinner(spinner: self.spinner)
+                                
+                                self.spinner = nil
                                 self.saveData(token: idToken!, id: id, name: name)
+                                
                                 self.transitionViewController()
                             }
                         }
