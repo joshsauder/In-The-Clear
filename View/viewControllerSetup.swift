@@ -11,11 +11,11 @@ import UIKit
 import CoreLocation
 import GooglePlaces
 
-protocol Alert {
+protocol SharedViewComponents {
     func showAlert(title: String, message: String) -> UIAlertController
 }
 
-extension Alert{
+extension SharedViewComponents {
     
     /**
      Displays a UIAlert
@@ -32,9 +32,9 @@ extension Alert{
 }
 
 //added alert function to each other classes
-extension ViewController: Alert {}
-extension LoginController: Alert {}
-extension CustomizeTripDetails: Alert {}
+extension ViewController: SharedViewComponents {}
+extension LoginController: SharedViewComponents {}
+extension CustomizeTripDetails: SharedViewComponents {}
 
 extension ViewController {
     
