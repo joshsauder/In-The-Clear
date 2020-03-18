@@ -35,7 +35,7 @@
 [Version 2.1] - Released 10/1/19
 * Added supported for iOS 13 dark mode - 9/23/19
 
-[Version 3.0]
+[Version 3.0] - Released 3/17/20
 * Added Storyboard for Sign in - 1/12/20
 * Added Apple Sign in - 1/12/20
 * Added Google Sign in - 2/1/20
