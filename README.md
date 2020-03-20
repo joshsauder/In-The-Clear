@@ -17,13 +17,6 @@ Clone the repository from Github:
 git clone https://github.com/joshsauder/In-The-Clear.git
 ```
 
-Clone each submodule:
-
-```bash
-cd In-The-Clear
-git submodule update --init --recursive
-```
-
 ### CocoaPods
 Add to your 'Podfile':
 
