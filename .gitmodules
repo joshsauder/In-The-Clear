@@ -1,6 +1,0 @@
-[submodule "InTheClear"]
-	path = InTheClear
-	url = https://github.com/joshsauder/In-The-Clear-App
-[submodule "InTheClearTests"]
-	path = InTheClearTests
-	url = https://github.com/joshsauder/In-The-Clear-Tests
