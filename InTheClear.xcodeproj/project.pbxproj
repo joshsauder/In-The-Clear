@@ -20,6 +20,7 @@
 		19173CED22ED2465001BC2DF /* GMSAutocompleteTripDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19173CEC22ED2465001BC2DF /* GMSAutocompleteTripDetails.swift */; };
 		19173CF322EFD10D001BC2DF /* CustomizeTripDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19173CF222EFD10D001BC2DF /* CustomizeTripDetailsView.swift */; };
 		1917538322F78B7D00678745 /* addIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 1917538222F78B7D00678745 /* addIcon.png */; };
+		191B9B4B244BE41400655FB2 /* TripData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 191B9B4A244BE41400655FB2 /* TripData.swift */; };
 		191E3F9C22E2A08200F0893D /* CloudyNight.png in Resources */ = {isa = PBXBuildFile; fileRef = 191E3F9A22E2A08200F0893D /* CloudyNight.png */; };
 		191E3F9D22E2A08200F0893D /* Night.png in Resources */ = {isa = PBXBuildFile; fileRef = 191E3F9B22E2A08200F0893D /* Night.png */; };
 		191E3F9F22E3FADE00F0893D /* baseline_my_location_black_36dp.png in Resources */ = {isa = PBXBuildFile; fileRef = 191E3F9E22E3FADE00F0893D /* baseline_my_location_black_36dp.png */; };
@@ -93,6 +94,7 @@
 		19173CEC22ED2465001BC2DF /* GMSAutocompleteTripDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GMSAutocompleteTripDetails.swift; sourceTree = "<group>"; };
 		19173CF222EFD10D001BC2DF /* CustomizeTripDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomizeTripDetailsView.swift; sourceTree = "<group>"; };
 		1917538222F78B7D00678745 /* addIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = addIcon.png; sourceTree = "<group>"; };
+		191B9B4A244BE41400655FB2 /* TripData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripData.swift; sourceTree = "<group>"; };
 		191E3F9A22E2A08200F0893D /* CloudyNight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CloudyNight.png; sourceTree = "<group>"; };
 		191E3F9B22E2A08200F0893D /* Night.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Night.png; sourceTree = "<group>"; };
 		191E3F9E22E3FADE00F0893D /* baseline_my_location_black_36dp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = baseline_my_location_black_36dp.png; sourceTree = "<group>"; };
@@ -254,6 +256,7 @@
 				19D1242F22EA9B6C00636C23 /* tripDataModal.swift */,
 				19D1243122EBD67400636C23 /* tripDetailsModal.swift */,
 				190E987C23F7680F00C1C2C3 /* UserData.swift */,
+				191B9B4A244BE41400655FB2 /* TripData.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -587,6 +590,7 @@
 				19365E0823CEBC600060D11C /* LoginAPIRequests.swift in Sources */,
 				19C914C021829D5A002EA1DB /* weatherData.swift in Sources */,
 				19D98A3423CBC34200BD8184 /* LoginController.swift in Sources */,
+				191B9B4B244BE41400655FB2 /* TripData.swift in Sources */,
 				19BA598C23EBC12B00B6F207 /* LoginViewSetup.swift in Sources */,
 				199243D8241D523D00E9A4C2 /* SharedViewComponents.swift in Sources */,
 				190E4411210BF951005160C7 /* ViewController.swift in Sources */,

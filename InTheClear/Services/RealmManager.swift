@@ -21,6 +21,13 @@ class RealmManager {
         }
     }
     
+    func writeTrips(trip: [TripData]) {
+        try! realm.write {
+            //realm is reset when user info is retrieved
+            realm.add(trip)
+        }
+    }
+    
     /**
      Gets User Data from Realm
      
@@ -49,4 +56,5 @@ class RealmManager {
         userData.token = token
         return userData
     }
+    
 }

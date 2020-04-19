@@ -145,6 +145,36 @@ extension ViewController {
         AF.request("\(url.BACKEND_URL)/api/Trip", method: .post, parameters: postData, encoder: JSONParameterEncoder.default, headers: headers)
     }
     
+    func getUserTrips(){
+        let (_, id) = getUserData()
+        
+        AF.request("\(url.BACKEND_URL)/api/Trip?id=\(id)", method: .get).responseJSON { response in
+            let json = JSON(response)
+            
+            let trips = json.arrayValue.map { (trip: JSON) -> TripData in
+                let locations = trip["locations"].arrayValue.map { (location: JSON) -> Locations in
+                    let loc = Locations()
+                    loc.city = location["city"].stringValue
+                    loc.condition = location["condition"].stringValue
+                    loc.longitude = location["longitude"].stringValue
+                    loc.latitude = location["latitude"].stringValue
+                    
+                    return loc
+                }
+                
+                let tripData = TripData()
+                tripData.distance = trip["distance"].stringValue
+                tripData.duration = trip["duration"].stringValue
+                tripData.locations = locations
+                
+                return tripData
+            }
+            
+            self.postUserTrips(trips: trips)
+            
+        }
+    }
+    
     /**
      Fetches User data from Realm
      
@@ -155,5 +185,15 @@ extension ViewController {
         
         let user = manager.getUser()
         return (user.token, user.id)
+    }
+    
+    /**
+     Adds Trips to Realm
+     - parameters:
+        - trips: The user's previous trips
+     */
+    private func postUserTrips(trips: [TripData]) {
+        let manager = RealmManager()
+        manager.writeTrips(trip: trips)
     }
 }
