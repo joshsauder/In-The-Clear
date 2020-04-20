@@ -34,9 +34,7 @@ class RealmManager {
      - returns: The User Data
      */
     func getUser() -> UserData {
-        
         let user = realm.objects(UserData.self).first!
-        
         return user
     }
     
