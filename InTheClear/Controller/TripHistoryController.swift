@@ -25,5 +25,14 @@ class TripHistoryController: UITableViewController {
         return tripDataArray.count
     }
     
-    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "TripHistoryTableViewCell", for: indexPath) as! TripHistoryTableViewCell
+        let entry = tripDataArray[indexPath.row]
+        
+        cell.OverviewLabel?.text = entry.OverviewLabel
+        cell.DateLabel?.text = "days"
+        
+        return cell
+    }
 }

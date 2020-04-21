@@ -8,9 +8,10 @@
 
 import UIKit
 
-class TripHistoryViewCell: UITableViewCell {
+class TripHistoryTableViewCell: UITableViewCell {
     
     @IBOutlet weak var OverviewLabel: UILabel!
+    @IBOutlet weak var DateLabel: UILabel!
     var gradientLayer: CAGradientLayer?
     
     override func awakeFromNib() {
