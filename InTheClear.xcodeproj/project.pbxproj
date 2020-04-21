@@ -30,6 +30,7 @@
 		192C3288244E7DB100D1F384 /* TripHistoryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 192C3287244E7DB100D1F384 /* TripHistoryController.swift */; };
 		192C328A244E7DBE00D1F384 /* TripHistory.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 192C3289244E7DBE00D1F384 /* TripHistory.storyboard */; };
 		192C328C244E81EE00D1F384 /* TripHistoryTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 192C328B244E81EE00D1F384 /* TripHistoryTableCell.swift */; };
+		192C328E244E8F0700D1F384 /* TripHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 192C328D244E8F0700D1F384 /* TripHistory.swift */; };
 		19365E0823CEBC600060D11C /* LoginAPIRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19365E0723CEBC600060D11C /* LoginAPIRequests.swift */; };
 		1939B5E922D0247000E63F32 /* partlyCloudy.png in Resources */ = {isa = PBXBuildFile; fileRef = 1939B5E622D0247000E63F32 /* partlyCloudy.png */; };
 		1939B5EA22D0247000E63F32 /* snow.png in Resources */ = {isa = PBXBuildFile; fileRef = 1939B5E722D0247000E63F32 /* snow.png */; };
@@ -107,6 +108,7 @@
 		192C3287244E7DB100D1F384 /* TripHistoryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripHistoryController.swift; sourceTree = "<group>"; };
 		192C3289244E7DBE00D1F384 /* TripHistory.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = TripHistory.storyboard; sourceTree = "<group>"; };
 		192C328B244E81EE00D1F384 /* TripHistoryTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripHistoryTableCell.swift; sourceTree = "<group>"; };
+		192C328D244E8F0700D1F384 /* TripHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripHistory.swift; sourceTree = "<group>"; };
 		19365E0723CEBC600060D11C /* LoginAPIRequests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginAPIRequests.swift; sourceTree = "<group>"; };
 		1939B5E622D0247000E63F32 /* partlyCloudy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = partlyCloudy.png; sourceTree = "<group>"; };
 		1939B5E722D0247000E63F32 /* snow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = snow.png; sourceTree = "<group>"; };
@@ -264,6 +266,7 @@
 				19D1243122EBD67400636C23 /* tripDetailsModal.swift */,
 				190E987C23F7680F00C1C2C3 /* UserData.swift */,
 				191B9B4A244BE41400655FB2 /* TripData.swift */,
+				192C328D244E8F0700D1F384 /* TripHistory.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -593,6 +596,7 @@
 				19C914BE21829BCE002EA1DB /* WeatherTableViewCell.swift in Sources */,
 				19173CEB22EBF161001BC2DF /* TripDetailsTableViewCell.swift in Sources */,
 				194AD985212E4B620034572D /* URLConfig.swift in Sources */,
+				192C328E244E8F0700D1F384 /* TripHistory.swift in Sources */,
 				1942A6AD22594F1B00ABFF83 /* viewControllerSetup.swift in Sources */,
 				190E987F23F76A3600C1C2C3 /* RealmManager.swift in Sources */,
 				19CB09B8210BF9EB00CC2AA1 /* GMSAutocompleteViewController.swift in Sources */,
