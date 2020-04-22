@@ -12,6 +12,7 @@ class TripHistoryTableViewCell: UITableViewCell {
     
     @IBOutlet weak var OverviewLabel: UILabel!
     @IBOutlet weak var DateLabel: UILabel!
+    @IBOutlet weak var MapImage: UIImageView!
     var gradientLayer: CAGradientLayer?
     
     override func awakeFromNib() {

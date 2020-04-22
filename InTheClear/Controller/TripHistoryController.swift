@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import CoreLocation
+import MapKit
 
 class TripHistoryController: UITableViewController {
     
@@ -34,5 +36,27 @@ class TripHistoryController: UITableViewController {
         cell.DateLabel?.text = "days"
         
         return cell
+    }
+    
+    func generateSnapshot(trip: TripData, scale: CGSize){
+        let options = snapShotOptions(trip: trip, scale: scale)
+        
+        let snapshot = MKMapSnapshotter(options: options)
+    }
+    
+    func snapShotOptions(trip: TripData, scale: CGSize) -> MKMapSnapshotter.Options{
+        let options = MKMapSnapshotter.Options()
+        
+        let coordinates = trip.locations.map {
+            CLLocationCoordinate2D(latitude: $0.latitude, longitude: $0.longitude)}
+        let polyline = MKPolyline(coordinates: coordinates, count: coordinates.count)
+        
+        let region = MKCoordinateRegion(polyline.boundingMapRect)
+
+        options.region = region
+        options.scale = 2
+        options.size = scale
+        
+        return options
     }
 }

@@ -19,6 +19,6 @@ class TripData: Object {
 class Locations: Object {
     @objc dynamic var city = ""
     @objc dynamic var condition = ""
-    @objc dynamic var latitude = ""
-    @objc dynamic var longitude = ""
+    @objc dynamic var latitude: Double = 0.0
+    @objc dynamic var longitude: Double = 0.0
 }
