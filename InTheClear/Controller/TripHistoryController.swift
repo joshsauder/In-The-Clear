@@ -12,7 +12,7 @@ import MapKit
 
 class TripHistoryController: UITableViewController {
     
-    var tripDataArray: [TripHistory] = []
+    var tripDataArray: [TripData] = []
  
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,8 +32,12 @@ class TripHistoryController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "TripHistoryTableViewCell", for: indexPath) as! TripHistoryTableViewCell
         let entry = tripDataArray[indexPath.row]
         
-        cell.OverviewLabel?.text = entry.OverviewLabel
+        cell.OverviewLabel?.text = entry.locations[0].city
         cell.DateLabel?.text = "days"
+        
+        generateSnapshot(trip: entry, scale: cell.MapImage.image!.size, completion: {(image) -> Void in
+            cell.MapImage.image = image
+        })
         
         return cell
     }
