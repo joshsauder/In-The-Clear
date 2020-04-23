@@ -38,17 +38,26 @@ class TripHistoryController: UITableViewController {
         return cell
     }
     
-    func generateSnapshot(trip: TripData, scale: CGSize){
-        let options = snapShotOptions(trip: trip, scale: scale)
+    func generateSnapshot(trip: TripData, scale: CGSize, completion: @escaping (UIImage) -> ()){
+        let coordinates = trip.locations.map {
+        CLLocationCoordinate2D(latitude: $0.latitude, longitude: $0.longitude)}
+        
+        let options = snapShotOptions(trip: trip, scale: scale, coordinates: coordinates)
         
         let snapshot = MKMapSnapshotter(options: options)
+        
+        snapshot.start() { snap, error in
+            guard let snap = snap else {
+                return
+            }
+            
+            completion(self.drawLineOnImage(snapshot: snap, coordinations: coordinates, scale: scale))
+        }
     }
     
-    func snapShotOptions(trip: TripData, scale: CGSize) -> MKMapSnapshotter.Options{
+    func snapShotOptions(trip: TripData, scale: CGSize, coordinates: [CLLocationCoordinate2D]) -> MKMapSnapshotter.Options{
         let options = MKMapSnapshotter.Options()
         
-        let coordinates = trip.locations.map {
-            CLLocationCoordinate2D(latitude: $0.latitude, longitude: $0.longitude)}
         let polyline = MKPolyline(coordinates: coordinates, count: coordinates.count)
         
         let region = MKCoordinateRegion(polyline.boundingMapRect)
@@ -58,5 +67,32 @@ class TripHistoryController: UITableViewController {
         options.size = scale
         
         return options
+    }
+    
+    func drawLineOnImage(snapshot: MKMapSnapshotter.Snapshot, coordinations: [CLLocationCoordinate2D], scale: CGSize) -> UIImage {
+        let image = snapshot.image
+        UIGraphicsBeginImageContextWithOptions(scale, true, 0)
+        image.draw(at: CGPoint.zero)
+
+        // get the context for CoreGraphics
+        let context = UIGraphicsGetCurrentContext()
+
+        // set stroking width and color of the context
+        context!.setLineWidth(2.0)
+        context!.setStrokeColor(UIColor.orange.cgColor)
+
+        context!.move(to: snapshot.point(for: coordinations[0]))
+        for i in 0...coordinations.count-1 {
+          context!.addLine(to: snapshot.point(for: coordinations[i]))
+          context!.move(to: snapshot.point(for: coordinations[i]))
+        }
+
+        context!.strokePath()
+
+        let resultImage = UIGraphicsGetImageFromCurrentImageContext()
+
+        UIGraphicsEndImageContext()
+
+        return resultImage!
     }
 }
