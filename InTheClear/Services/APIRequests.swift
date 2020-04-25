@@ -156,8 +156,8 @@ extension ViewController {
                     let loc = Locations()
                     loc.city = location["city"].stringValue
                     loc.condition = location["condition"].stringValue
-                    loc.longitude = location["longitude"].stringValue
-                    loc.latitude = location["latitude"].stringValue
+                    loc.longitude = location["longitude"].doubleValue
+                    loc.latitude = location["latitude"].doubleValue
                     
                     return loc
                 }

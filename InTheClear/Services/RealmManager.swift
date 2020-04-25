@@ -55,4 +55,10 @@ class RealmManager {
         return userData
     }
     
+    
+    func getTripHistory() -> [TripData] {
+        let trips = realm.objects(TripData.self)
+        return Array(trips)
+    }
+    
 }

@@ -17,6 +17,7 @@ class TripHistoryController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.separatorStyle = .none
+        initTripHistory()
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -40,6 +41,11 @@ class TripHistoryController: UITableViewController {
         })
         
         return cell
+    }
+    
+    func initTripHistory(){
+        let manager = RealmManager()
+        tripDataArray = manager.getTripHistory()
     }
     
     func generateSnapshot(trip: TripData, scale: CGSize, completion: @escaping (UIImage) -> ()){
