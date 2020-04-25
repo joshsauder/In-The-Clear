@@ -165,7 +165,7 @@ extension ViewController {
                 let tripData = TripData()
                 tripData.distance = trip["distance"].stringValue
                 tripData.duration = trip["duration"].stringValue
-                tripData.locations = locations
+                tripData.locations.append(objectsIn: locations)
                 
                 return tripData
             }

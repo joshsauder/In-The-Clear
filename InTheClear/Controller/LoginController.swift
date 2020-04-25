@@ -59,8 +59,8 @@ class LoginController: UIViewController {
      Transitions to Main View Controller
      */
     func transitionViewController(){
-        let storyBoard = UIStoryboard(name: "Main", bundle: nil)
-        let vc = storyBoard.instantiateViewController(withIdentifier: "ViewController")
+        let storyBoard = UIStoryboard(name: "TabBarView", bundle: nil)
+        let vc = storyBoard.instantiateViewController(withIdentifier: "TabBarController")
         vc.modalPresentationStyle = .fullScreen
         self.present(vc, animated: true, completion: nil)
      }

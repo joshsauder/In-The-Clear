@@ -49,8 +49,9 @@ class TripHistoryController: UITableViewController {
     }
     
     func generateSnapshot(trip: TripData, scale: CGSize, completion: @escaping (UIImage) -> ()){
-        let coordinates = trip.locations.map {
-        CLLocationCoordinate2D(latitude: $0.latitude, longitude: $0.longitude)}
+        let coordinates = Array(trip.locations).map {
+            CLLocationCoordinate2D(latitude: $0.latitude, longitude: $0.longitude)
+        }
         
         let options = snapShotOptions(trip: trip, scale: scale, coordinates: coordinates)
         

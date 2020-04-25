@@ -60,6 +60,7 @@
 		19D1242E22EA8FD100636C23 /* WeatherMenu.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 19D1242D22EA8FD100636C23 /* WeatherMenu.storyboard */; };
 		19D1243022EA9B6C00636C23 /* tripDataModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19D1242F22EA9B6C00636C23 /* tripDataModal.swift */; };
 		19D1243222EBD67400636C23 /* tripDetailsModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19D1243122EBD67400636C23 /* tripDetailsModal.swift */; };
+		19D1EEBF2454D158000BEDFA /* TabBarView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 19D1EEBE2454D158000BEDFA /* TabBarView.storyboard */; };
 		19D443C723E7AC4C002D52CA /* StartView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 19D443C623E7AC4C002D52CA /* StartView.storyboard */; };
 		19D98A3423CBC34200BD8184 /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19D98A3323CBC34200BD8184 /* LoginController.swift */; };
 		19DB7AD3234148EE008426B2 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19DB7AD2234148EE008426B2 /* Constants.swift */; };
@@ -137,6 +138,7 @@
 		19D1242D22EA8FD100636C23 /* WeatherMenu.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = WeatherMenu.storyboard; sourceTree = "<group>"; };
 		19D1242F22EA9B6C00636C23 /* tripDataModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = tripDataModal.swift; sourceTree = "<group>"; };
 		19D1243122EBD67400636C23 /* tripDetailsModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = tripDetailsModal.swift; sourceTree = "<group>"; };
+		19D1EEBE2454D158000BEDFA /* TabBarView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = TabBarView.storyboard; sourceTree = "<group>"; };
 		19D443C623E7AC4C002D52CA /* StartView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = StartView.storyboard; sourceTree = "<group>"; };
 		19D98A3323CBC34200BD8184 /* LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
 		19D98A3A23CBC7B600BD8184 /* InTheClear.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = InTheClear.entitlements; sourceTree = "<group>"; };
@@ -252,6 +254,7 @@
 				19BA598B23EBC12B00B6F207 /* LoginViewSetup.swift */,
 				199243D7241D523D00E9A4C2 /* SharedViewComponents.swift */,
 				192C3289244E7DBE00D1F384 /* TripHistory.storyboard */,
+				19D1EEBE2454D158000BEDFA /* TabBarView.storyboard */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -440,6 +443,7 @@
 				19D443C723E7AC4C002D52CA /* StartView.storyboard in Resources */,
 				19294C922252FEA600D09673 /* icons8-google-maps-48.png in Resources */,
 				192C328A244E7DBE00D1F384 /* TripHistory.storyboard in Resources */,
+				19D1EEBF2454D158000BEDFA /* TabBarView.storyboard in Resources */,
 				1939B5EB22D0247000E63F32 /* sun.png in Resources */,
 				1917538322F78B7D00678745 /* addIcon.png in Resources */,
 				19D1242C22EA8EFC00636C23 /* CustomizeTripDetails.storyboard in Resources */,
