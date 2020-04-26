@@ -6,7 +6,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Table View Controller-->
+        <!--History-->
         <scene sceneID="xCt-0m-EG4">
             <objects>
                 <tableViewController id="X8G-Zz-4MQ" sceneMemberID="viewController">
@@ -69,10 +69,15 @@
                             <outlet property="delegate" destination="X8G-Zz-4MQ" id="IJh-wN-a7F"/>
                         </connections>
                     </tableView>
+                    <tabBarItem key="tabBarItem" title="History" image="clock.fill" catalog="system" id="ZxF-1Y-Hiw"/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="a6f-YT-5ZZ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-81.159420289855078" y="122.54464285714285"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="clock.fill" catalog="system" width="128" height="121"/>
+    </resources>
 </document>

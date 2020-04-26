@@ -7,7 +7,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Map-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController storyboardIdentifier="ViewController" id="BYZ-38-t0r" customClass="ViewController" customModule="InTheClear" customModuleProvider="target" sceneMemberID="viewController">
@@ -188,6 +188,8 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <tabBarItem key="tabBarItem" title="Map" image="map.fill" catalog="system" id="fC6-gi-fZ3"/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="destinationButton" destination="Pei-xi-bFd" id="UWt-2B-AJA"/>
                         <outlet property="destinationLocation" destination="epA-ie-vQH" id="o8T-Sf-s82"/>
@@ -248,6 +250,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="map.fill" catalog="system" width="128" height="113"/>
         <image name="mapKey.png" width="800" height="186"/>
     </resources>
 </document>

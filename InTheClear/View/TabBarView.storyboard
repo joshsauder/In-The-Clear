@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="pvG-bQ-Iod">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
@@ -28,7 +28,7 @@
         <scene sceneID="Slc-ug-jqO">
             <objects>
                 <viewControllerPlaceholder storyboardName="Main" id="BLr-88-8IK" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="rFG-GC-KZX"/>
+                    <tabBarItem key="tabBarItem" title="Map" image="map.fill" catalog="system" id="rFG-GC-KZX"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fIK-8h-aNJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -38,11 +38,15 @@
         <scene sceneID="TEm-MW-KVl">
             <objects>
                 <viewControllerPlaceholder storyboardName="TripHistory" id="vfe-jn-qnp" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="y1K-k0-RUP"/>
+                    <tabBarItem key="tabBarItem" title="History" image="clock.fill" catalog="system" id="y1K-k0-RUP"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CEy-ti-vNl" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-2" y="-74"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="clock.fill" catalog="system" width="128" height="121"/>
+        <image name="map.fill" catalog="system" width="128" height="113"/>
+    </resources>
 </document>
