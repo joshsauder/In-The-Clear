@@ -36,7 +36,7 @@ class TripHistoryController: UITableViewController {
         cell.OverviewLabel?.text = entry.locations[0].city
         cell.DateLabel?.text = "days"
         
-        generateSnapshot(trip: entry, scale: cell.MapImage.image!.size, completion: {(image) -> Void in
+        generateSnapshot(trip: entry, scale: cell.MapImage.bounds.size, completion: {(image) -> Void in
             cell.MapImage.image = image
         })
         
@@ -47,6 +47,7 @@ class TripHistoryController: UITableViewController {
         getUserTrips() {
             let manager = RealmManager()
             self.tripDataArray = manager.getTripHistory()
+            self.tableView.reloadData()
         }
     }
     

@@ -168,6 +168,7 @@ extension TripHistoryController {
         AF.request("\(url.BACKEND_URL)/Trip?id=\(id)", method: .get, headers: headers).responseJSON { response in
             
             switch response.result {
+                
             case .success(let value):
                 let json = JSON(value)
                 let trips = json.arrayValue.map { (trip: JSON) -> TripData in
