@@ -60,12 +60,15 @@ class TripHistoryController: UITableViewController {
         
         let snapshot = MKMapSnapshotter(options: options)
         
-        snapshot.start() { snap, error in
-            guard let snap = snap else {
-                return
+        //updating UI so run in main thread
+        DispatchQueue.main.async {
+            snapshot.start() { snap, error in
+                guard let snap = snap else {
+                    return
+                }
+                
+                completion(self.drawLineOnImage(snapshot: snap, coordinations: coordinates, scale: scale))
             }
-            
-            completion(self.drawLineOnImage(snapshot: snap, coordinations: coordinates, scale: scale))
         }
     }
     
