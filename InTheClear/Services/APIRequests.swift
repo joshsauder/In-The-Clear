@@ -145,34 +145,67 @@ extension ViewController {
         AF.request("\(url.BACKEND_URL)/api/Trip", method: .post, parameters: postData, encoder: JSONParameterEncoder.default, headers: headers)
     }
     
-    func getUserTrips(){
-        let (_, id) = getUserData()
+    /**
+     Fetches User data from Realm
+     
+     - returns: The access token and user ID
+     */
+    private func getUserData() -> (String, String) {
+        let manager = RealmManager()
         
-        AF.request("\(url.BACKEND_URL)/api/Trip?id=\(id)", method: .get).responseJSON { response in
-            let json = JSON(response)
+        let user = manager.getUser()
+        return (user.token, user.id)
+    }
+}
+
+
+extension TripHistoryController {
+    func getUserTrips(completion: @escaping () -> ()){
+        let (token, id) = getUserData()
+        
+        let headers: HTTPHeaders = ["Authorization": "Bearer " + token]
+        
+        AF.request("\(url.BACKEND_URL)/Trip?id=\(id)", method: .get, headers: headers).responseJSON { response in
             
-            let trips = json.arrayValue.map { (trip: JSON) -> TripData in
-                let locations = trip["locations"].arrayValue.map { (location: JSON) -> Locations in
-                    let loc = Locations()
-                    loc.city = location["city"].stringValue
-                    loc.condition = location["condition"].stringValue
-                    loc.longitude = location["longitude"].doubleValue
-                    loc.latitude = location["latitude"].doubleValue
+            switch response.result {
+            case .success(let value):
+                let json = JSON(value)
+                let trips = json.arrayValue.map { (trip: JSON) -> TripData in
+                    let locations = trip["locations"].arrayValue.map { (location: JSON) -> Locations in
+                        let loc = Locations()
+                        loc.city = location["city"].stringValue
+                        loc.condition = location["condition"].stringValue
+                        loc.longitude = location["longitude"].doubleValue
+                        loc.latitude = location["latitude"].doubleValue
+                        
+                        return loc
+                    }
                     
-                    return loc
+                    let tripData = TripData()
+                    tripData.distance = trip["distance"].stringValue
+                    tripData.duration = trip["duration"].stringValue
+                    tripData.locations.append(objectsIn: locations)
+                    
+                    return tripData
                 }
-                
-                let tripData = TripData()
-                tripData.distance = trip["distance"].stringValue
-                tripData.duration = trip["duration"].stringValue
-                tripData.locations.append(objectsIn: locations)
-                
-                return tripData
+                self.postUserTrips(trips: trips)
+                completion()
+            
+            case .failure(let error):
+                print(error)
+                completion()
             }
-            
-            self.postUserTrips(trips: trips)
-            
         }
+    }
+    
+    /**
+     Adds Trips to Realm
+     - parameters:
+        - trips: The user's previous trips
+     */
+    private func postUserTrips(trips: [TripData]) {
+        let manager = RealmManager()
+        manager.writeTrips(trip: trips)
     }
     
     /**
@@ -187,13 +220,4 @@ extension ViewController {
         return (user.token, user.id)
     }
     
-    /**
-     Adds Trips to Realm
-     - parameters:
-        - trips: The user's previous trips
-     */
-    private func postUserTrips(trips: [TripData]) {
-        let manager = RealmManager()
-        manager.writeTrips(trip: trips)
-    }
 }

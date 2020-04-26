@@ -44,8 +44,10 @@ class TripHistoryController: UITableViewController {
     }
     
     func initTripHistory(){
-        let manager = RealmManager()
-        tripDataArray = manager.getTripHistory()
+        getUserTrips() {
+            let manager = RealmManager()
+            self.tripDataArray = manager.getTripHistory()
+        }
     }
     
     func generateSnapshot(trip: TripData, scale: CGSize, completion: @escaping (UIImage) -> ()){
