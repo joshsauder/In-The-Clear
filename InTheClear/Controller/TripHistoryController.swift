@@ -67,7 +67,25 @@ class TripHistoryController: UITableViewController {
                     return
                 }
                 
-                completion(self.drawLineOnImage(snapshot: snap, coordinations: coordinates, scale: scale))
+                let image = UIGraphicsImageRenderer(size: options.size).image { _ in
+                    snap.image.draw(at: .zero)
+
+                    let pinView = MKPinAnnotationView(annotation: nil, reuseIdentifier: nil)
+                    let pinImage = pinView.image
+                    
+                    coordinates.forEach {
+                        var point = snap.point(for: $0)
+                        
+                        point.x -= pinView.bounds.width / 2
+                        point.y -= pinView.bounds.height / 2
+                        point.x += pinView.centerOffset.x
+                        point.y += pinView.centerOffset.y
+                        pinImage?.draw(at: point)
+                    }
+                    
+                }
+                
+                completion(image)
             }
         }
     }
@@ -84,32 +102,5 @@ class TripHistoryController: UITableViewController {
         options.size = scale
         
         return options
-    }
-    
-    func drawLineOnImage(snapshot: MKMapSnapshotter.Snapshot, coordinations: [CLLocationCoordinate2D], scale: CGSize) -> UIImage {
-        let image = snapshot.image
-        UIGraphicsBeginImageContextWithOptions(scale, true, 0)
-        image.draw(at: CGPoint.zero)
-
-        // get the context for CoreGraphics
-        let context = UIGraphicsGetCurrentContext()
-
-        // set stroking width and color of the context
-        context!.setLineWidth(2.0)
-        context!.setStrokeColor(UIColor.orange.cgColor)
-
-        context!.move(to: snapshot.point(for: coordinations[0]))
-        for i in 0...coordinations.count-1 {
-          context!.addLine(to: snapshot.point(for: coordinations[i]))
-          context!.move(to: snapshot.point(for: coordinations[i]))
-        }
-
-        context!.strokePath()
-
-        let resultImage = UIGraphicsGetImageFromCurrentImageContext()
-
-        UIGraphicsEndImageContext()
-
-        return resultImage!
     }
 }
