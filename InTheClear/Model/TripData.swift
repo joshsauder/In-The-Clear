@@ -13,6 +13,7 @@ class TripData: Object {
     @objc dynamic var tripId = ""
     @objc dynamic var duration = ""
     @objc dynamic var distance = ""
+    @objc dynamic var createdAt: Date = Date()
     var locations = RealmSwift.List<Locations>()
 }
 

@@ -33,10 +33,10 @@ class TripHistoryController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "TripHistoryTableViewCell", for: indexPath) as! TripHistoryTableViewCell
         let entry = tripDataArray[indexPath.row]
         
-        cell.OverviewLabel?.text = entry.locations[0].city
-        cell.DateLabel?.text = "days"
+        cell.OverviewLabel?.text = "\(entry.locations.first?.city ?? "") - \(entry.locations.last?.city ?? "")"
+        cell.DateLabel?.text = "\(determineDays(date: entry.createdAt)) days ago"
         
-        generateSnapshot(trip: entry, scale: cell.MapImage.bounds.size, completion: {(image) -> Void in
+        generateSnapshot(trip: entry, size: cell.MapImage.bounds.size, completion: {(image) -> Void in
             cell.MapImage.image = image
         })
         
@@ -51,12 +51,12 @@ class TripHistoryController: UITableViewController {
         }
     }
     
-    func generateSnapshot(trip: TripData, scale: CGSize, completion: @escaping (UIImage) -> ()){
+    func generateSnapshot(trip: TripData, size: CGSize, completion: @escaping (UIImage) -> ()){
         let coordinates = Array(trip.locations).map {
             CLLocationCoordinate2D(latitude: $0.latitude, longitude: $0.longitude)
         }
         
-        let options = snapShotOptions(trip: trip, scale: scale, coordinates: coordinates)
+        let options = snapShotOptions(trip: trip, size: size, coordinates: coordinates)
         
         let snapshot = MKMapSnapshotter(options: options)
         
@@ -90,17 +90,24 @@ class TripHistoryController: UITableViewController {
         }
     }
     
-    func snapShotOptions(trip: TripData, scale: CGSize, coordinates: [CLLocationCoordinate2D]) -> MKMapSnapshotter.Options{
+    func snapShotOptions(trip: TripData, size: CGSize, coordinates: [CLLocationCoordinate2D]) -> MKMapSnapshotter.Options{
         let options = MKMapSnapshotter.Options()
         
         let polyline = MKPolyline(coordinates: coordinates, count: coordinates.count)
         
-        let region = MKCoordinateRegion(polyline.boundingMapRect)
+        var region = MKCoordinateRegion(polyline.boundingMapRect)
+        region.span.latitudeDelta += 0.8
+        region.span.longitudeDelta += 0.8
 
         options.region = region
+        //retina resolution
         options.scale = 2
-        options.size = scale
+        options.size = size
         
         return options
+    }
+    
+    func determineDays(date: Date) -> Int {
+        return Calendar.current.dateComponents([.day], from: date, to: Date()).day ?? 0
     }
 }

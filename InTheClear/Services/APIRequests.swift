@@ -142,7 +142,7 @@ extension ViewController {
         let postData = TripPostData(userId: id, duration: duration, distance: distance, locations: locationData)
         
         let headers: HTTPHeaders = ["Authorization": "Bearer " + token]
-        AF.request("\(url.BACKEND_URL)/api/Trip", method: .post, parameters: postData, encoder: JSONParameterEncoder.default, headers: headers)
+        AF.request("\(url.BACKEND_URL)/Trip", method: .post, parameters: postData, encoder: JSONParameterEncoder.default, headers: headers)
     }
     
     /**
@@ -185,6 +185,7 @@ extension TripHistoryController {
                     let tripData = TripData()
                     tripData.distance = trip["distance"].stringValue
                     tripData.duration = trip["duration"].stringValue
+                    tripData.createdAt = self.parseDate(date: trip["createdAt"].stringValue)
                     tripData.locations.append(objectsIn: locations)
                     
                     return tripData
@@ -219,6 +220,15 @@ extension TripHistoryController {
         
         let user = manager.getUser()
         return (user.token, user.id)
+    }
+    
+    private func parseDate(date: String) -> Date {
+        let dateString = String(date.prefix(10))
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        
+        return dateFormatter.date(from: dateString) ?? Date()
     }
     
 }
