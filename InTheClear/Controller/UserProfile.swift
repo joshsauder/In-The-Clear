@@ -14,8 +14,7 @@ class UserProfile: UIViewController, UITableViewDelegate, UITableViewDataSource 
     
     @IBOutlet weak var UserInfoTable: UITableView!
     @IBOutlet weak var LogoutButton: UIButton!
-    @IBOutlet weak var GreetingLabel: UILabel!
-    @IBOutlet weak var NameLabel: UILabel!
+    @IBOutlet weak var tableViewHeight: NSLayoutConstraint!
     
     let details = ["Email", "Date Joined", "Total Trips", "Favorite Destination"]
     var userDetails: [String:String] = [:]
@@ -24,7 +23,8 @@ class UserProfile: UIViewController, UITableViewDelegate, UITableViewDataSource 
         super.viewDidLoad()
         
         setupUserDetails()
-        setupView()
+        setupLogoutButton(button: LogoutButton)
+        setupTable(tableView: UserInfoTable)
         
         UserInfoTable.delegate = self
         UserInfoTable.dataSource = self
@@ -46,11 +46,19 @@ class UserProfile: UIViewController, UITableViewDelegate, UITableViewDataSource 
         return cell
     }
     
-    func setupView(){
-        setupLabels(label: GreetingLabel, text: "Hi")
-        setupLabels(label: NameLabel, text: userDetails["name"]!)
-        setupLogoutButton(button: LogoutButton)
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 100
     }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        return setupHeader(title: "Hi \(userDetails["name"] ?? "")", width: tableView.frame.width)
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        //add one cell to height
+        tableViewHeight.constant = tableView.contentSize.height + cell.layer.frame.height
+    }
+    
     
     func setupUserDetails(){
         let manager = RealmManager()

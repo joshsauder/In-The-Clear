@@ -67,3 +67,35 @@ extension SharedViewComponents {
 extension ViewController: SharedViewComponents {}
 extension LoginController: SharedViewComponents {}
 extension CustomizeTripDetails: SharedViewComponents {}
+
+
+protocol TableViewSetup {
+    func setupHeader(title: String, width: CGFloat) -> UIView
+    func setupTable(tableView: UITableView)
+}
+
+extension TableViewSetup {
+    internal func setupHeader(title: String, width: CGFloat) -> UIView {
+        let headerView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: width, height: 100))
+        headerView.backgroundColor = UIColor(red: 0.52, green: 0.11, blue: 0.52, alpha: 1.00)
+
+        let label = UILabel()
+        label.frame = CGRect.init(x: 7, y: 20, width: headerView.frame.width-10, height: headerView.frame.height-10)
+        label.text = title
+        label.font = UIFont.systemFont(ofSize: 40)
+        label.textColor = .white
+        headerView.addSubview(label)
+
+        return headerView
+    }
+    
+    internal func setupTable(tableView: UITableView){
+        tableView.separatorInset = .zero
+        tableView.layoutMargins = .zero
+        tableView.backgroundColor = UIColor(red: 0.52, green: 0.11, blue: 0.52, alpha: 1.00)
+    }
+}
+
+//added shared functions to each other classes
+extension UserProfile: TableViewSetup {}
+extension TripHistoryController: TableViewSetup {}

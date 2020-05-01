@@ -16,7 +16,7 @@ class TripHistoryController: UITableViewController {
  
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupTable()
+        setupTable(tableView: tableView)
         initTripHistory()
     }
     
@@ -46,6 +46,14 @@ class TripHistoryController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let entry = tripDataArray[indexPath.row]
         showPreviousRoute(trip: entry)
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 100
+    }
+    
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        return setupHeader(title: "Past Trips", width: tableView.frame.width)
     }
     
     func initTripHistory(){
