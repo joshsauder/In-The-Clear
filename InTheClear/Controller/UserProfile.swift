@@ -28,9 +28,6 @@ class UserProfile: UIViewController, UITableViewDelegate, UITableViewDataSource 
         
         UserInfoTable.delegate = self
         UserInfoTable.dataSource = self
-        
-        UserInfoTable.separatorInset = .zero
-        UserInfoTable.layoutMargins = .zero
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -47,7 +44,7 @@ class UserProfile: UIViewController, UITableViewDelegate, UITableViewDataSource 
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 100
+        return 130
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -55,8 +52,8 @@ class UserProfile: UIViewController, UITableViewDelegate, UITableViewDataSource 
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        //add one cell to height
-        tableViewHeight.constant = tableView.contentSize.height + cell.layer.frame.height
+        //dynamic tableview height
+        tableViewHeight.constant = tableView.contentSize.height
     }
     
     
