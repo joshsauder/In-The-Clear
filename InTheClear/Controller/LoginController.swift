@@ -99,7 +99,11 @@ class LoginController: UIViewController {
                                 self.spinner = nil
                                 self.saveData(token: idToken!, id: id, name: name, email: email, createdAt: self.formatDate(date: createdAt))
                                 
-                                self.transitionViewController()
+                                //fetch user trips once we get ID back
+                                //TODO: cache user data and fetch only when needed
+                                self.getUserTrips(id: id, token: idToken!, completion: {
+                                    self.transitionViewController()
+                                })
                             }
                         }
                     }
@@ -112,7 +116,7 @@ class LoginController: UIViewController {
     private func formatDate(date: String) -> Date{
         let dateFormatter = DateFormatter()
         dateFormatter.locale = Locale(identifier: "en_US_POSIX")
-        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss.SSS"
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ssZ"
         
         return dateFormatter.date(from: date) ?? Date()
     }

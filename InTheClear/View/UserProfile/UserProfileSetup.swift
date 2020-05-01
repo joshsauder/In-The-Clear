@@ -13,7 +13,8 @@ extension UserProfile {
     
     func setupLabels(label: UILabel, text: String){
         label.text = text
-        label.font.withSize(30)
+        label.font = UIFont.systemFont(ofSize: 50)
+        label.adjustsFontSizeToFitWidth = true
         label.textColor = .white
     }
     

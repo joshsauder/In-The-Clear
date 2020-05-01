@@ -41,7 +41,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="qKD-iF-nkd">
-                                            <rect key="frame" x="20" y="73" width="374" height="180"/>
+                                            <rect key="frame" x="20" y="64" width="374" height="180"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="180" id="wqD-xp-Zgx"/>
                                             </constraints>
@@ -52,10 +52,10 @@
                                         <constraint firstItem="a7X-Pv-j6w" firstAttribute="baseline" secondItem="z53-jH-fic" secondAttribute="baseline" id="LRr-YZ-DAS"/>
                                         <constraint firstItem="z53-jH-fic" firstAttribute="leading" secondItem="a7X-Pv-j6w" secondAttribute="trailing" constant="8" id="Ot5-1X-bbe"/>
                                         <constraint firstItem="a7X-Pv-j6w" firstAttribute="top" secondItem="n8g-UM-Qm0" secondAttribute="topMargin" id="VLO-lB-joL"/>
-                                        <constraint firstItem="qKD-iF-nkd" firstAttribute="top" secondItem="a7X-Pv-j6w" secondAttribute="bottom" constant="17" id="VaP-dy-iVU"/>
+                                        <constraint firstItem="qKD-iF-nkd" firstAttribute="top" secondItem="a7X-Pv-j6w" secondAttribute="bottom" constant="8" id="VaP-dy-iVU"/>
                                         <constraint firstItem="a7X-Pv-j6w" firstAttribute="leading" secondItem="n8g-UM-Qm0" secondAttribute="leadingMargin" id="Yjd-aR-HoZ"/>
                                         <constraint firstItem="z53-jH-fic" firstAttribute="trailing" secondItem="qKD-iF-nkd" secondAttribute="trailing" id="f0r-4W-gHx"/>
-                                        <constraint firstAttribute="bottomMargin" secondItem="qKD-iF-nkd" secondAttribute="bottom" constant="2" id="jTJ-aZ-nfr"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="qKD-iF-nkd" secondAttribute="bottom" constant="11" id="jTJ-aZ-nfr"/>
                                         <constraint firstItem="z53-jH-fic" firstAttribute="trailing" secondItem="n8g-UM-Qm0" secondAttribute="trailingMargin" id="lhE-cc-1h7"/>
                                         <constraint firstItem="a7X-Pv-j6w" firstAttribute="leading" secondItem="qKD-iF-nkd" secondAttribute="leading" id="mTZ-5y-jdK"/>
                                     </constraints>

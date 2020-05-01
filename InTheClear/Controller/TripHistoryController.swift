@@ -16,7 +16,7 @@ class TripHistoryController: UITableViewController {
  
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.separatorStyle = .none
+        setupTable()
         initTripHistory()
     }
     
@@ -49,11 +49,9 @@ class TripHistoryController: UITableViewController {
     }
     
     func initTripHistory(){
-        getUserTrips() {
-            let manager = RealmManager()
-            self.tripDataArray = manager.getTripHistory()
-            self.tableView.reloadData()
-        }
+        let manager = RealmManager()
+        self.tripDataArray = manager.getTripHistory()
+        self.tableView.reloadData()
     }
     
     func generateSnapshot(trip: TripData, size: CGSize, completion: @escaping (UIImage) -> ()){

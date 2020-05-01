@@ -38,8 +38,66 @@ extension LoginController {
             }
             
             let json = JSON(response.data!)
-            completion(json["id"].stringValue, json["DisplayName"].stringValue, json["email"].stringValue, json["createdAt"].stringValue)
+            completion(json["id"].stringValue, json["displayName"].stringValue, json["email"].stringValue, json["createdAt"].stringValue)
         }
+    }
+    
+    func getUserTrips(id: String, token: String, completion: @escaping () -> ()){
+        
+        let headers: HTTPHeaders = ["Authorization": "Bearer " + token]
+        
+        AF.request("\(url.BACKEND_URL)/Trip?id=\(id)", method: .get, headers: headers).responseJSON { response in
+            
+            switch response.result {
+                
+            case .success(let value):
+                let json = JSON(value)
+                let trips = json.arrayValue.map { (trip: JSON) -> TripData in
+                    let locations = trip["locations"].arrayValue.map { (location: JSON) -> Locations in
+                        let loc = Locations()
+                        loc.city = location["city"].stringValue
+                        loc.condition = location["condition"].stringValue
+                        loc.longitude = location["longitude"].doubleValue
+                        loc.latitude = location["latitude"].doubleValue
+                        
+                        return loc
+                    }
+                    
+                    let tripData = TripData()
+                    tripData.distance = trip["distance"].stringValue
+                    tripData.duration = trip["duration"].stringValue
+                    tripData.createdAt = self.parseDate(date: trip["createdAt"].stringValue)
+                    tripData.locations.append(objectsIn: locations)
+                    
+                    return tripData
+                }
+                self.postUserTrips(trips: trips)
+                completion()
+            
+            case .failure(let error):
+                print(error)
+                completion()
+            }
+        }
+    }
+    
+    /**
+        Adds Trips to Realm
+        - parameters:
+           - trips: The user's previous trips
+        */
+    private func postUserTrips(trips: [TripData]) {
+        let manager = RealmManager()
+        manager.writeTrips(trip: trips)
+    }
+    
+    private func parseDate(date: String) -> Date {
+        let dateString = String(date.prefix(10))
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        
+        return dateFormatter.date(from: dateString) ?? Date()
     }
     
 }

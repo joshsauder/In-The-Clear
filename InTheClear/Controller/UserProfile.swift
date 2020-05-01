@@ -26,9 +26,11 @@ class UserProfile: UIViewController, UITableViewDelegate, UITableViewDataSource 
         setupUserDetails()
         setupView()
         
-        UserInfoTable.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         UserInfoTable.delegate = self
         UserInfoTable.dataSource = self
+        
+        UserInfoTable.separatorInset = .zero
+        UserInfoTable.layoutMargins = .zero
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -36,7 +38,7 @@ class UserProfile: UIViewController, UITableViewDelegate, UITableViewDataSource 
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell:UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "cell")!
+        let cell = UITableViewCell(style: UITableViewCell.CellStyle.value1, reuseIdentifier: "cellId")
         
         cell.textLabel?.text = details[indexPath.row]
         cell.detailTextLabel?.text = userDetails[details[indexPath.row]]
