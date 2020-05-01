@@ -10,23 +10,36 @@ import Foundation
 import UIKit
 import Firebase
 
-class UserProfile: UIViewController {
+class UserProfile: UIViewController, UITableViewDelegate, UITableViewDataSource {
+    
     @IBOutlet weak var UserInfoTable: UITableView!
     @IBOutlet weak var LougoutButton: UIButton!
     
+    let details = ["Email", "Date Joined", "Total Trips", "Favorite Destination"]
     var userDetails: [String:String] = [:]
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        UserInfoTable.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        UserInfoTable.delegate = self
+        UserInfoTable.dataSource = self
+        
         setupUserDetails()
     }
     
-    
-    func setupTable(){
-        
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        details.count
     }
     
-    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell:UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "cell")!
+        
+        cell.textLabel?.text = details[indexPath.row]
+        cell.detailTextLabel?.text = userDetails[details[indexPath.row]]
+        
+        return cell
+    }
     
     func setupUserDetails(){
         let manager = RealmManager()
@@ -37,10 +50,10 @@ class UserProfile: UIViewController {
         df.dateStyle = .medium
         
         
-        userDetails = ["Email" : user.email,
-                       "Date Joined": df.string(from: user.dateJoined),
-                       "Total Trips": String(trips.count),
-                       "Favorite Destination": determineMostUsed(trips: trips)
+        userDetails = [details[0] : user.email,
+                       details[1] : df.string(from: user.dateJoined),
+                       details[2] : String(trips.count),
+                       details[3] : determineMostUsed(trips: trips)
                       ]
     }
     
