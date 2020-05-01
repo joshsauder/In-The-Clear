@@ -13,4 +13,6 @@ class UserData: Object {
     @objc dynamic var id = ""
     @objc dynamic var name = ""
     @objc dynamic var token = ""
+    @objc dynamic var email = ""
+    @objc dynamic var dateJoined: Date = Date()
 }

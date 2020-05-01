@@ -14,8 +14,35 @@ class UserProfile: UIViewController {
     @IBOutlet weak var UserInfoTable: UITableView!
     @IBOutlet weak var LougoutButton: UIButton!
     
+    var userDetails: [String:String] = [:]
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setupUserDetails()
+    }
     
     
+    func setupTable(){
+        
+    }
+    
+    
+    
+    func setupUserDetails(){
+        let manager = RealmManager()
+        let user = manager.getUser()
+        let trips = manager.getTripHistory()
+        
+        let df = DateFormatter()
+        df.dateStyle = .medium
+        
+        
+        userDetails = ["Email" : user.email,
+                       "Date Joined": df.string(from: user.dateJoined),
+                       "Total Trips": String(trips.count),
+                       "Favorite Destination": determineMostUsed(trips: trips)
+                      ]
+    }
     
     @IBAction func LougoutButtonTapped(_ sender: Any) {
         let auth = Auth.auth()
@@ -32,6 +59,14 @@ class UserProfile: UIViewController {
         let vc = UIStoryboard(name: "LaunchScreen", bundle: nil).instantiateInitialViewController() as! LoginController
         vc.modalPresentationStyle = .fullScreen
         self.present(vc, animated: true, completion: nil)
+    }
+    
+    func determineMostUsed(trips: [TripData]) -> String{
+        var counts : [String: Int] = [:]
+        trips.forEach{ counts[$0.locations.last!.city] = (counts[$0.locations.last!.city] ?? 0) + 1}
+    
+        let max = counts.max {a, b in a.value < b.value}
+        return max?.key ?? ""
     }
     
 }

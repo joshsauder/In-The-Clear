@@ -86,7 +86,7 @@ class LoginController: UIViewController {
                         
                     }
                     else{
-                        self.signInUser(parameters: parameters, token: idToken!){ (id, name) in
+                        self.signInUser(parameters: parameters, token: idToken!){ (id, name, email, createdAt) in
                             if(id == ""){
                                 self.stopSpinner(spinner: self.spinner)
                                 self.spinner = nil
