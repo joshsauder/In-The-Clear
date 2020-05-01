@@ -42,6 +42,13 @@ extension LoginController {
         }
     }
     
+    /**
+     Gets the user trips from backend
+     - parameters:
+        - id: User ID
+        - token: Auth token
+        - completion:completion when user data persisted
+     */
     func getUserTrips(id: String, token: String, completion: @escaping () -> ()){
         
         let headers: HTTPHeaders = ["Authorization": "Bearer " + token]
@@ -82,15 +89,21 @@ extension LoginController {
     }
     
     /**
-        Adds Trips to Realm
-        - parameters:
-           - trips: The user's previous trips
-        */
+    Adds Trips to Realm
+    - parameters:
+        - trips: The user's previous trips
+    */
     private func postUserTrips(trips: [TripData]) {
         let manager = RealmManager()
         manager.writeTrips(trip: trips)
     }
     
+    /**
+     Parses the date string to Date object
+     - parameters:
+        - date: date string
+     - returns: the date object
+     */
     private func parseDate(date: String) -> Date {
         let dateString = String(date.prefix(10))
         

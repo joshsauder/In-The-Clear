@@ -13,6 +13,11 @@ class RealmManager {
     
     let realm = try! Realm()
     
+    /**
+    Persists the user data to Realm
+    - parameters:
+       - user: User data to be persisted
+    */
     func writeUser(user: UserData){
 
         try! realm.write {
@@ -21,6 +26,11 @@ class RealmManager {
         }
     }
     
+    /**
+     Persists the trip history to Realm
+     - parameters:
+        - trip: Array of trips to be persisted
+     */
     func writeTrips(trip: [TripData]) {
         try! realm.write {
             //realm is reset when user info is retrieved
@@ -58,6 +68,10 @@ class RealmManager {
     }
     
     
+    /**
+     Fetched trip history from Realm
+     - returns: Array of trip data
+     */
     func getTripHistory() -> [TripData] {
         let trips = realm.objects(TripData.self)
         return Array(trips)

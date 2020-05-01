@@ -75,6 +75,14 @@ protocol TableViewSetup {
 }
 
 extension TableViewSetup {
+    
+    /**
+    Sets up a standardized UIView to be used as UITableView Header
+     - parameters:
+        - title: Header title
+        - width: width of UITableView
+     - returns: UIView to be used as header
+     */
     internal func setupHeader(title: String, width: CGFloat) -> UIView {
         let headerView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: width, height: 100))
         headerView.backgroundColor = UIColor(red: 0.52, green: 0.11, blue: 0.52, alpha: 1.00)
@@ -90,6 +98,11 @@ extension TableViewSetup {
         return headerView
     }
     
+    /**
+     Setups up a UITableView
+     - parameters:
+        - tableView: UITableView to setup
+     */
     internal func setupTable(tableView: UITableView){
         //full width separator
         tableView.separatorInset = .zero

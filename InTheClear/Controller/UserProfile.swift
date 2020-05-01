@@ -38,6 +38,7 @@ class UserProfile: UIViewController, UITableViewDelegate, UITableViewDataSource 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: UITableViewCell.CellStyle.value1, reuseIdentifier: "cellId")
         
+        //text label is on left side, details text label is on right side
         cell.textLabel?.text = details[indexPath.row]
         cell.detailTextLabel?.text = userDetails[details[indexPath.row]]
         
@@ -58,6 +59,9 @@ class UserProfile: UIViewController, UITableViewDelegate, UITableViewDataSource 
     }
     
     
+    /**
+     Sets up the user details to be shown in UITableView
+     */
     func setupUserDetails(){
         let manager = RealmManager()
         let user = manager.getUser()
@@ -65,7 +69,6 @@ class UserProfile: UIViewController, UITableViewDelegate, UITableViewDataSource 
         
         let df = DateFormatter()
         df.dateStyle = .medium
-        
         
         userDetails = [details[0] : user.email,
             details[1] : df.string(from: user.dateJoined),
@@ -75,6 +78,11 @@ class UserProfile: UIViewController, UITableViewDelegate, UITableViewDataSource 
             ]
     }
     
+    /**
+     Handles logout button onTap action
+     - parameters:
+        - sender:the button tapped
+     */
     @IBAction func LogoutButtonTapped(_ sender: Any) {
         let auth = Auth.auth()
         
@@ -86,16 +94,26 @@ class UserProfile: UIViewController, UITableViewDelegate, UITableViewDataSource 
         }
     }
     
+    /**
+     Presents the login view when you logout
+     */
     func showLoginView(){
         let vc = UIStoryboard(name: "LaunchScreen", bundle: nil).instantiateInitialViewController() as! LoginController
         vc.modalPresentationStyle = .fullScreen
         self.present(vc, animated: true, completion: nil)
     }
     
+    /**
+     Determines the most searched for destination
+     - parameters:
+        - trips: List of trips
+     - returns: the most search for trip
+     */
     func determineMostUsed(trips: [TripData]) -> String{
         var counts : [String: Int] = [:]
         trips.forEach{ counts[$0.locations.last!.city] = (counts[$0.locations.last!.city] ?? 0) + 1}
     
+        //similar to javascript array sort
         let max = counts.max {a, b in a.value < b.value}
         return max?.key ?? ""
     }

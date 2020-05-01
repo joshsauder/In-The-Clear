@@ -57,12 +57,22 @@ class TripHistoryController: UITableViewController {
         return setupHeader(title: "Past Trips", width: tableView.frame.width)
     }
     
+    /**
+     Fetches trip history  from Realm
+     */
     func initTripHistory(){
         let manager = RealmManager()
         self.tripDataArray = manager.getTripHistory()
         self.tableView.reloadData()
     }
     
+    /**
+     Generates a snapshot image of start and end location on map
+     - parameters:
+        - trip: The trip we need a snapshot of
+        - size: Size of image
+        - completion - Returns the snapshot on completion-
+     */
     func generateSnapshot(trip: TripData, size: CGSize, completion: @escaping (UIImage) -> ()){
         let coordinates = Array(trip.locations).map {
             CLLocationCoordinate2D(latitude: $0.latitude, longitude: $0.longitude)
@@ -102,7 +112,14 @@ class TripHistoryController: UITableViewController {
         }
     }
     
-    func snapShotOptions(trip: TripData, size: CGSize, coordinates: [CLLocationCoordinate2D]) -> MKMapSnapshotter.Options{
+    /**
+     Sets up the snapshot options/settings
+     - parameters:
+       - size: Size of image
+       - coordinates: Array of coordinates from the given trip
+     - returns: The snapshot options
+    */
+    func snapShotOptions(size: CGSize, coordinates: [CLLocationCoordinate2D]) -> MKMapSnapshotter.Options{
         let options = MKMapSnapshotter.Options()
         
         let polyline = MKPolyline(coordinates: coordinates, count: coordinates.count)
@@ -119,10 +136,21 @@ class TripHistoryController: UITableViewController {
         return options
     }
     
+    /**
+     Determines the number of days since the trip was searched for
+     - parameters:
+        - date: The date the trip was searched for
+     - returns: The number of days
+     */
     func determineDays(date: Date) -> Int {
         return Calendar.current.dateComponents([.day], from: date, to: Date()).day ?? 0
     }
     
+    /**
+     Shows the selected route from the trip history table on the map
+     - parameters:
+        - trip: The selected trip
+     */
     func showPreviousRoute(trip: TripData){
         let mainVc = UIStoryboard(name: "Main", bundle: nil).instantiateInitialViewController() as! ViewController
         let tripDetails = tripDetailsModal()
