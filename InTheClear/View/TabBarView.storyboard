@@ -18,6 +18,7 @@
                     <connections>
                         <segue destination="BLr-88-8IK" kind="relationship" relationship="viewControllers" id="DMl-1T-A7h"/>
                         <segue destination="vfe-jn-qnp" kind="relationship" relationship="viewControllers" id="2ye-Ao-Gw9"/>
+                        <segue destination="hq2-lI-C5G" kind="relationship" relationship="viewControllers" id="Qux-Eb-ksB"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mOz-Pw-EQV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -42,11 +43,22 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CEy-ti-vNl" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2" y="-74"/>
+            <point key="canvasLocation" x="5" y="-238"/>
+        </scene>
+        <!--UserProfile-->
+        <scene sceneID="L1M-NB-edC">
+            <objects>
+                <viewControllerPlaceholder storyboardName="UserProfile" id="hq2-lI-C5G" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Profile" image="person.fill" catalog="system" id="BEd-Fc-GuE"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="YKx-LV-pY9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4" y="-101"/>
         </scene>
     </scenes>
     <resources>
         <image name="clock.fill" catalog="system" width="128" height="121"/>
         <image name="map.fill" catalog="system" width="128" height="113"/>
+        <image name="person.fill" catalog="system" width="128" height="120"/>
     </resources>
 </document>

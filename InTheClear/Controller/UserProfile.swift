@@ -13,7 +13,7 @@ import Firebase
 class UserProfile: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var UserInfoTable: UITableView!
-    @IBOutlet weak var LougoutButton: UIButton!
+    @IBOutlet weak var LogoutButton: UIButton!
     @IBOutlet weak var GreetingLabel: UILabel!
     @IBOutlet weak var NameLabel: UILabel!
     
@@ -47,6 +47,7 @@ class UserProfile: UIViewController, UITableViewDelegate, UITableViewDataSource 
     func setupView(){
         setupLabels(label: GreetingLabel, text: "Hi")
         setupLabels(label: NameLabel, text: userDetails["name"]!)
+        setupLogoutButton(button: LogoutButton)
     }
     
     func setupUserDetails(){

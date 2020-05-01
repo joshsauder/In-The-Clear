@@ -7,7 +7,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--User Profile-->
+        <!--Profile-->
         <scene sceneID="aoF-fY-f1i">
             <objects>
                 <viewController id="Pxa-MP-5qH" customClass="UserProfile" customModule="InTheClear" customModuleProvider="target" sceneMemberID="viewController">
@@ -53,14 +53,13 @@
                                 </constraints>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Us-FJ-qSc">
-                                <rect key="frame" x="0.0" y="821" width="414" height="75"/>
+                                <rect key="frame" x="0.0" y="738" width="414" height="75"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="75" id="A1Y-au-hfm"/>
                                 </constraints>
                                 <state key="normal" title="Button"/>
                                 <connections>
                                     <action selector="LogoutButton:" destination="V21-jU-OqO" eventType="touchUpInside" id="Lfe-W4-0yH"/>
-                                    <action selector="LougoutButtonTapped:" destination="Pxa-MP-5qH" eventType="touchUpInside" id="Fx6-33-kKE"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -72,17 +71,19 @@
                             <constraint firstItem="YXJ-4G-ge8" firstAttribute="leading" secondItem="wjP-1Z-3DA" secondAttribute="leading" id="QtH-18-8Y2"/>
                             <constraint firstItem="gWe-yP-ZRp" firstAttribute="leading" secondItem="YXJ-4G-ge8" secondAttribute="leading" id="W7A-9K-Hob"/>
                             <constraint firstItem="YXJ-4G-ge8" firstAttribute="top" secondItem="gWe-yP-ZRp" secondAttribute="bottom" constant="8" id="fyY-8B-LsW"/>
-                            <constraint firstAttribute="bottomMargin" secondItem="5Us-FJ-qSc" secondAttribute="bottom" constant="-34" id="in9-vY-TD1"/>
+                            <constraint firstAttribute="bottomMargin" secondItem="5Us-FJ-qSc" secondAttribute="bottom" id="in9-vY-TD1"/>
                             <constraint firstItem="YXJ-4G-ge8" firstAttribute="top" secondItem="mdr-Z8-eZl" secondAttribute="top" constant="304" id="rcx-in-O5u"/>
                             <constraint firstItem="gWe-yP-ZRp" firstAttribute="centerX" secondItem="mdr-Z8-eZl" secondAttribute="centerX" id="xkv-VG-bih"/>
                             <constraint firstItem="gWe-yP-ZRp" firstAttribute="top" secondItem="mdr-Z8-eZl" secondAttribute="topMargin" constant="-44" id="zlG-ls-EbY"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="wjP-1Z-3DA"/>
                     </view>
+                    <tabBarItem key="tabBarItem" title="Profile" image="person.fill" catalog="system" id="Mjk-ky-4i6"/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="GreetingLabel" destination="eUd-I1-eDi" id="1JP-sr-Wnf"/>
+                        <outlet property="LogoutButton" destination="5Us-FJ-qSc" id="ZbB-ux-wqY"/>
                         <outlet property="LogoutButtonTapped" destination="5Us-FJ-qSc" id="YGM-Xn-khz"/>
-                        <outlet property="LougoutButton" destination="5Us-FJ-qSc" id="U2d-iI-Ryg"/>
                         <outlet property="NameLabel" destination="d45-Oz-brB" id="088-DR-7Pi"/>
                         <outlet property="UserInfoTable" destination="YXJ-4G-ge8" id="55H-Vp-tcQ"/>
                     </connections>
@@ -93,4 +94,7 @@
             <point key="canvasLocation" x="31.884057971014496" y="-104.46428571428571"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="person.fill" catalog="system" width="128" height="120"/>
+    </resources>
 </document>
