@@ -14,6 +14,8 @@ class UserProfile: UIViewController, UITableViewDelegate, UITableViewDataSource 
     
     @IBOutlet weak var UserInfoTable: UITableView!
     @IBOutlet weak var LougoutButton: UIButton!
+    @IBOutlet weak var GreetingLabel: UILabel!
+    @IBOutlet weak var NameLabel: UILabel!
     
     let details = ["Email", "Date Joined", "Total Trips", "Favorite Destination"]
     var userDetails: [String:String] = [:]
@@ -21,11 +23,12 @@ class UserProfile: UIViewController, UITableViewDelegate, UITableViewDataSource 
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setupUserDetails()
+        setupView()
+        
         UserInfoTable.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         UserInfoTable.delegate = self
         UserInfoTable.dataSource = self
-        
-        setupUserDetails()
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -41,6 +44,11 @@ class UserProfile: UIViewController, UITableViewDelegate, UITableViewDataSource 
         return cell
     }
     
+    func setupView(){
+        setupLabels(label: GreetingLabel, text: "Hi")
+        setupLabels(label: NameLabel, text: userDetails["name"]!)
+    }
+    
     func setupUserDetails(){
         let manager = RealmManager()
         let user = manager.getUser()
@@ -51,10 +59,11 @@ class UserProfile: UIViewController, UITableViewDelegate, UITableViewDataSource 
         
         
         userDetails = [details[0] : user.email,
-                       details[1] : df.string(from: user.dateJoined),
-                       details[2] : String(trips.count),
-                       details[3] : determineMostUsed(trips: trips)
-                      ]
+            details[1] : df.string(from: user.dateJoined),
+            details[2] : String(trips.count),
+            details[3] : determineMostUsed(trips: trips),
+            "name" : user.name
+            ]
     }
     
     @IBAction func LougoutButtonTapped(_ sender: Any) {

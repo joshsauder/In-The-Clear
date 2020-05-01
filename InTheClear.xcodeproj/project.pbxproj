@@ -63,6 +63,7 @@
 		19D1EEBF2454D158000BEDFA /* TabBarView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 19D1EEBE2454D158000BEDFA /* TabBarView.storyboard */; };
 		19D1EEC3245A5E09000BEDFA /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19D1EEC2245A5E09000BEDFA /* UserProfile.swift */; };
 		19D1EEC5245A5E1A000BEDFA /* UserProfile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 19D1EEC4245A5E1A000BEDFA /* UserProfile.storyboard */; };
+		19D1EECA245BC4FE000BEDFA /* UserProfileSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19D1EEC9245BC4FE000BEDFA /* UserProfileSetup.swift */; };
 		19D443C723E7AC4C002D52CA /* StartView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 19D443C623E7AC4C002D52CA /* StartView.storyboard */; };
 		19D98A3423CBC34200BD8184 /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19D98A3323CBC34200BD8184 /* LoginController.swift */; };
 		19DB7AD3234148EE008426B2 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19DB7AD2234148EE008426B2 /* Constants.swift */; };
@@ -143,6 +144,7 @@
 		19D1EEBE2454D158000BEDFA /* TabBarView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = TabBarView.storyboard; sourceTree = "<group>"; };
 		19D1EEC2245A5E09000BEDFA /* UserProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfile.swift; sourceTree = "<group>"; };
 		19D1EEC4245A5E1A000BEDFA /* UserProfile.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = UserProfile.storyboard; sourceTree = "<group>"; };
+		19D1EEC9245BC4FE000BEDFA /* UserProfileSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileSetup.swift; sourceTree = "<group>"; };
 		19D443C623E7AC4C002D52CA /* StartView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = StartView.storyboard; sourceTree = "<group>"; };
 		19D98A3323CBC34200BD8184 /* LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
 		19D98A3A23CBC7B600BD8184 /* InTheClear.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = InTheClear.entitlements; sourceTree = "<group>"; };
@@ -247,19 +249,15 @@
 		19D1241F22EA85C700636C23 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				19D1242D22EA8FD100636C23 /* WeatherMenu.storyboard */,
-				19D1242B22EA8EFC00636C23 /* CustomizeTripDetails.storyboard */,
-				190E4412210BF951005160C7 /* Main.storyboard */,
-				190E4417210BF958005160C7 /* LaunchScreen.storyboard */,
-				1942A6AC22594F1B00ABFF83 /* viewControllerSetup.swift */,
-				19D1242422EA87E100636C23 /* WeatherMenuView.swift */,
-				19173CF222EFD10D001BC2DF /* CustomizeTripDetailsView.swift */,
-				19D443C623E7AC4C002D52CA /* StartView.storyboard */,
-				19BA598B23EBC12B00B6F207 /* LoginViewSetup.swift */,
-				199243D7241D523D00E9A4C2 /* SharedViewComponents.swift */,
-				192C3289244E7DBE00D1F384 /* TripHistory.storyboard */,
+				19D1EECF245BC7C1000BEDFA /* Main */,
+				19D1EECE245BC7A7000BEDFA /* WeatherMenu */,
+				19D1EECD245BC782000BEDFA /* CustomizeTripDetails */,
+				19D1EECC245BC764000BEDFA /* Login */,
+				19D1EECB245BC74C000BEDFA /* TripHistory */,
+				19D1EEC8245BC208000BEDFA /* UserProfile */,
 				19D1EEBE2454D158000BEDFA /* TabBarView.storyboard */,
-				19D1EEC4245A5E1A000BEDFA /* UserProfile.storyboard */,
+				190E4417210BF958005160C7 /* LaunchScreen.storyboard */,
+				199243D7241D523D00E9A4C2 /* SharedViewComponents.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -313,6 +311,59 @@
 				190E987E23F76A3600C1C2C3 /* RealmManager.swift */,
 			);
 			path = Services;
+			sourceTree = "<group>";
+		};
+		19D1EEC8245BC208000BEDFA /* UserProfile */ = {
+			isa = PBXGroup;
+			children = (
+				19D1EEC4245A5E1A000BEDFA /* UserProfile.storyboard */,
+				19D1EEC9245BC4FE000BEDFA /* UserProfileSetup.swift */,
+			);
+			path = UserProfile;
+			sourceTree = "<group>";
+		};
+		19D1EECB245BC74C000BEDFA /* TripHistory */ = {
+			isa = PBXGroup;
+			children = (
+				192C3289244E7DBE00D1F384 /* TripHistory.storyboard */,
+			);
+			path = TripHistory;
+			sourceTree = "<group>";
+		};
+		19D1EECC245BC764000BEDFA /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				19D443C623E7AC4C002D52CA /* StartView.storyboard */,
+				19BA598B23EBC12B00B6F207 /* LoginViewSetup.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		19D1EECD245BC782000BEDFA /* CustomizeTripDetails */ = {
+			isa = PBXGroup;
+			children = (
+				19D1242B22EA8EFC00636C23 /* CustomizeTripDetails.storyboard */,
+				19173CF222EFD10D001BC2DF /* CustomizeTripDetailsView.swift */,
+			);
+			path = CustomizeTripDetails;
+			sourceTree = "<group>";
+		};
+		19D1EECE245BC7A7000BEDFA /* WeatherMenu */ = {
+			isa = PBXGroup;
+			children = (
+				19D1242D22EA8FD100636C23 /* WeatherMenu.storyboard */,
+				19D1242422EA87E100636C23 /* WeatherMenuView.swift */,
+			);
+			path = WeatherMenu;
+			sourceTree = "<group>";
+		};
+		19D1EECF245BC7C1000BEDFA /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				190E4412210BF951005160C7 /* Main.storyboard */,
+				1942A6AC22594F1B00ABFF83 /* viewControllerSetup.swift */,
+			);
+			path = Main;
 			sourceTree = "<group>";
 		};
 		19E7B63E2235EA8B006CB3AF /* InTheClearTests */ = {
@@ -619,6 +670,7 @@
 				19D1243222EBD67400636C23 /* tripDetailsModal.swift in Sources */,
 				194AD989215331940034572D /* Weather.swift in Sources */,
 				19173CF322EFD10D001BC2DF /* CustomizeTripDetailsView.swift in Sources */,
+				19D1EECA245BC4FE000BEDFA /* UserProfileSetup.swift in Sources */,
 				192C3288244E7DB100D1F384 /* TripHistoryController.swift in Sources */,
 				191EF2E122FBB7260049D7D1 /* TripDetailsAPIRequest.swift in Sources */,
 				190E987D23F7680F00C1C2C3 /* UserData.swift in Sources */,
