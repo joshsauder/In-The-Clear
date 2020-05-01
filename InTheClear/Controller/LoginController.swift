@@ -97,7 +97,7 @@ class LoginController: UIViewController {
                                 self.stopSpinner(spinner: self.spinner)
                                 
                                 self.spinner = nil
-                                self.saveData(token: idToken!, id: id, name: name)
+                                self.saveData(token: idToken!, id: id, name: name, email: email, createdAt: self.formatDate(date: createdAt))
                                 
                                 self.transitionViewController()
                             }
@@ -109,13 +109,21 @@ class LoginController: UIViewController {
         }
     }
     
+    private func formatDate(date: String) -> Date{
+        let dateFormatter = DateFormatter()
+        dateFormatter.locale = Locale(identifier: "en_US_POSIX")
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss.SSS"
+        
+        return dateFormatter.date(from: date) ?? Date()
+    }
+    
     /**
      Save User Data to Realm
      */
-    private func saveData(token: String, id: String, name: String) {
+    private func saveData(token: String, id: String, name: String, email: String, createdAt: Date) {
         let manager = RealmManager()
         
-        let data = manager.initUserData(id: id, name: name, token: token)
+        let data = manager.initUserData(id: id, name: name, token: token, email: email, createdAt: createdAt)
         manager.writeUser(user: data)
     }
         

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Pxa-MP-5qH">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
@@ -34,7 +34,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" red="0.49803921569999998" green="0.01176470588" blue="0.99607843139999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <color key="backgroundColor" red="0.51764705882352935" green="0.11372549019607843" blue="0.51764705882352935" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
                                     <constraint firstItem="eUd-I1-eDi" firstAttribute="centerX" secondItem="gWe-yP-ZRp" secondAttribute="centerX" id="3TO-Nm-8gh"/>
                                     <constraint firstItem="d45-Oz-brB" firstAttribute="top" secondItem="eUd-I1-eDi" secondAttribute="bottom" constant="31" id="GSP-2m-M2W"/>
@@ -59,7 +59,7 @@
                                 </constraints>
                                 <state key="normal" title="Button"/>
                                 <connections>
-                                    <action selector="LogoutButton:" destination="V21-jU-OqO" eventType="touchUpInside" id="Lfe-W4-0yH"/>
+                                    <action selector="LogoutButtonTapped:" destination="Pxa-MP-5qH" eventType="touchUpInside" id="43l-iP-Vfj"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -82,14 +82,12 @@
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="GreetingLabel" destination="eUd-I1-eDi" id="1JP-sr-Wnf"/>
-                        <outlet property="LogoutButton" destination="5Us-FJ-qSc" id="ZbB-ux-wqY"/>
-                        <outlet property="LogoutButtonTapped" destination="5Us-FJ-qSc" id="YGM-Xn-khz"/>
+                        <outlet property="LogoutButton" destination="5Us-FJ-qSc" id="Y7x-Ni-NV5"/>
                         <outlet property="NameLabel" destination="d45-Oz-brB" id="088-DR-7Pi"/>
                         <outlet property="UserInfoTable" destination="YXJ-4G-ge8" id="55H-Vp-tcQ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ui8-l3-4K5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-                <exit id="V21-jU-OqO" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="31.884057971014496" y="-104.46428571428571"/>
         </scene>

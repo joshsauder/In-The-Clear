@@ -13,15 +13,15 @@ extension UserProfile {
     
     func setupLabels(label: UILabel, text: String){
         label.text = text
-        label.font.withSize(20)
+        label.font.withSize(30)
         label.textColor = .white
     }
     
     func setupLogoutButton(button: UIButton){
-        button.backgroundColor = UIColor(red:0.47, green:0.15, blue:0.50, alpha:1.0)
+        button.backgroundColor = UIColor(red: 0.52, green: 0.11, blue: 0.52, alpha: 1.00)
 
         button.setTitle("Logout", for: .normal)
         button.setTitleColor(.white, for: .normal)
-        button.titleLabel!.font = UIFont.systemFont(ofSize: 20)
+        button.titleLabel!.font = UIFont.systemFont(ofSize: 30)
     }
 }

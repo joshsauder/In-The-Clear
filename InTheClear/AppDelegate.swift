@@ -13,6 +13,7 @@ import GoogleSignIn
 import Alamofire
 import SwiftyJSON
 import Firebase
+import RealmSwift
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate{
@@ -29,6 +30,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate{
         GMSPlacesClient.provideAPIKey(googlePlacesKey)
         FirebaseApp.configure()
    
+        var config = Realm.Configuration(
+
+            // Set the new schema version. This must be greater than the previously used
+            schemaVersion: 1,
+
+            // Set the block which will be called automatically when opening a Realm with
+            // a schema version lower than the one set above
+            migrationBlock: { migration, oldSchemaVersion in
+
+                if (oldSchemaVersion < 1) {
+                    // Nothing to do!
+                    // Realm will automatically detect new properties and removed properties
+                    // And will update the schema on disk automatically
+                }
+        })
+
+        Realm.Configuration.defaultConfiguration = config
+        config = Realm.Configuration()
+        config.deleteRealmIfMigrationNeeded = true
+        
         // Override point for customization after application launch.
         return true
     }

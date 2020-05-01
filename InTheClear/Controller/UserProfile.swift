@@ -67,7 +67,7 @@ class UserProfile: UIViewController, UITableViewDelegate, UITableViewDataSource 
             ]
     }
     
-    @IBAction func LougoutButtonTapped(_ sender: Any) {
+    @IBAction func LogoutButtonTapped(_ sender: Any) {
         let auth = Auth.auth()
         
         do {
