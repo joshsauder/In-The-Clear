@@ -25,6 +25,7 @@ class UserProfile: UIViewController, UITableViewDelegate, UITableViewDataSource 
         setupUserDetails()
         setupLogoutButton(button: LogoutButton)
         setupTable(tableView: UserInfoTable)
+        UserInfoTable.allowsSelection = false;
         
         UserInfoTable.delegate = self
         UserInfoTable.dataSource = self

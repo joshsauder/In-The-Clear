@@ -46,6 +46,7 @@ class TripHistoryController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let entry = tripDataArray[indexPath.row]
         showPreviousRoute(trip: entry)
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
