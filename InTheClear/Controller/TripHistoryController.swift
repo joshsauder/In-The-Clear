@@ -43,6 +43,11 @@ class TripHistoryController: UITableViewController {
         return cell
     }
     
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let entry = tripDataArray[indexPath.row]
+        showPreviousRoute(trip: entry)
+    }
+    
     func initTripHistory(){
         getUserTrips() {
             let manager = RealmManager()
@@ -109,5 +114,25 @@ class TripHistoryController: UITableViewController {
     
     func determineDays(date: Date) -> Int {
         return Calendar.current.dateComponents([.day], from: date, to: Date()).day ?? 0
+    }
+    
+    func showPreviousRoute(trip: TripData){
+        let mainVc = UIStoryboard(name: "Main", bundle: nil).instantiateInitialViewController() as! ViewController
+        let tripDetails = tripDetailsModal()
+        
+        for (index, item) in trip.locations.enumerated(){
+            let location = CLLocation(latitude: item.latitude, longitude: item.longitude)
+            tripDetails.addCity(city: item.city, loc: location, index: index)
+        }
+        
+        mainVc.locationStart = tripDetails.cityLocations[0]
+        mainVc.locationEnd = tripDetails.cityLocations.last!
+        
+        mainVc.userTripDetails = tripDetails
+        self.present(mainVc, animated: true, completion: nil)
+        
+        mainVc.startLocation.text = tripDetails.cityStops[0]
+        mainVc.destinationLocation.text = tripDetails.cityStops.last!
+        mainVc.showTimePopup(UIButton())
     }
 }

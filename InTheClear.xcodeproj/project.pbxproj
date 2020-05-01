@@ -61,6 +61,8 @@
 		19D1243022EA9B6C00636C23 /* tripDataModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19D1242F22EA9B6C00636C23 /* tripDataModal.swift */; };
 		19D1243222EBD67400636C23 /* tripDetailsModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19D1243122EBD67400636C23 /* tripDetailsModal.swift */; };
 		19D1EEBF2454D158000BEDFA /* TabBarView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 19D1EEBE2454D158000BEDFA /* TabBarView.storyboard */; };
+		19D1EEC3245A5E09000BEDFA /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19D1EEC2245A5E09000BEDFA /* UserProfile.swift */; };
+		19D1EEC5245A5E1A000BEDFA /* UserProfile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 19D1EEC4245A5E1A000BEDFA /* UserProfile.storyboard */; };
 		19D443C723E7AC4C002D52CA /* StartView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 19D443C623E7AC4C002D52CA /* StartView.storyboard */; };
 		19D98A3423CBC34200BD8184 /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19D98A3323CBC34200BD8184 /* LoginController.swift */; };
 		19DB7AD3234148EE008426B2 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19DB7AD2234148EE008426B2 /* Constants.swift */; };
@@ -139,6 +141,8 @@
 		19D1242F22EA9B6C00636C23 /* tripDataModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = tripDataModal.swift; sourceTree = "<group>"; };
 		19D1243122EBD67400636C23 /* tripDetailsModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = tripDetailsModal.swift; sourceTree = "<group>"; };
 		19D1EEBE2454D158000BEDFA /* TabBarView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = TabBarView.storyboard; sourceTree = "<group>"; };
+		19D1EEC2245A5E09000BEDFA /* UserProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfile.swift; sourceTree = "<group>"; };
+		19D1EEC4245A5E1A000BEDFA /* UserProfile.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = UserProfile.storyboard; sourceTree = "<group>"; };
 		19D443C623E7AC4C002D52CA /* StartView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = StartView.storyboard; sourceTree = "<group>"; };
 		19D98A3323CBC34200BD8184 /* LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
 		19D98A3A23CBC7B600BD8184 /* InTheClear.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = InTheClear.entitlements; sourceTree = "<group>"; };
@@ -255,6 +259,7 @@
 				199243D7241D523D00E9A4C2 /* SharedViewComponents.swift */,
 				192C3289244E7DBE00D1F384 /* TripHistory.storyboard */,
 				19D1EEBE2454D158000BEDFA /* TabBarView.storyboard */,
+				19D1EEC4245A5E1A000BEDFA /* UserProfile.storyboard */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -285,6 +290,7 @@
 				19D98A3323CBC34200BD8184 /* LoginController.swift */,
 				192C3287244E7DB100D1F384 /* TripHistoryController.swift */,
 				192C328B244E81EE00D1F384 /* TripHistoryTableViewCell.swift */,
+				19D1EEC2245A5E09000BEDFA /* UserProfile.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -450,6 +456,7 @@
 				1939B5F022D0248900E63F32 /* cloud.png in Resources */,
 				1939B5EA22D0247000E63F32 /* snow.png in Resources */,
 				191E3F9D22E2A08200F0893D /* Night.png in Resources */,
+				19D1EEC5245A5E1A000BEDFA /* UserProfile.storyboard in Resources */,
 				191E3F9C22E2A08200F0893D /* CloudyNight.png in Resources */,
 				1939B5F322D4180000E63F32 /* danger.png in Resources */,
 				190E4419210BF958005160C7 /* LaunchScreen.storyboard in Resources */,
@@ -600,6 +607,7 @@
 				1942A6AD22594F1B00ABFF83 /* viewControllerSetup.swift in Sources */,
 				190E987F23F76A3600C1C2C3 /* RealmManager.swift in Sources */,
 				19CB09B8210BF9EB00CC2AA1 /* GMSAutocompleteViewController.swift in Sources */,
+				19D1EEC3245A5E09000BEDFA /* UserProfile.swift in Sources */,
 				19C914BA217575D0002EA1DB /* WeatherMenu.swift in Sources */,
 				19365E0823CEBC600060D11C /* LoginAPIRequests.swift in Sources */,
 				19C914C021829D5A002EA1DB /* weatherData.swift in Sources */,
