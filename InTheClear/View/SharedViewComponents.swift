@@ -84,6 +84,7 @@ extension TableViewSetup {
         label.text = title
         label.font = UIFont.systemFont(ofSize: 40)
         label.textColor = .white
+        label.adjustsFontSizeToFitWidth = true
         headerView.addSubview(label)
 
         return headerView

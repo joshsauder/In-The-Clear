@@ -222,6 +222,44 @@
 			path = InTheClear;
 			sourceTree = "<group>";
 		};
+		19BC26B4245CBF9F00B5D582 /* WeatherMenu */ = {
+			isa = PBXGroup;
+			children = (
+				19C914BD21829BCE002EA1DB /* WeatherTableViewCell.swift */,
+				19C914B9217575D0002EA1DB /* WeatherMenu.swift */,
+			);
+			path = WeatherMenu;
+			sourceTree = "<group>";
+		};
+		19BC26B5245CBFB800B5D582 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				190E4410210BF951005160C7 /* ViewController.swift */,
+				19CB09B6210BF9EB00CC2AA1 /* GMSAutocompleteViewController.swift */,
+				194AD988215331940034572D /* Weather.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		19BC26B6245CBFE600B5D582 /* TripHistory */ = {
+			isa = PBXGroup;
+			children = (
+				192C3287244E7DB100D1F384 /* TripHistoryController.swift */,
+				192C328B244E81EE00D1F384 /* TripHistoryTableViewCell.swift */,
+			);
+			path = TripHistory;
+			sourceTree = "<group>";
+		};
+		19BC26B7245CC04700B5D582 /* TripDetails */ = {
+			isa = PBXGroup;
+			children = (
+				193AAD3022DC16E900C6C6DA /* CustomizeTripDetails.swift */,
+				19173CEA22EBF161001BC2DF /* TripDetailsTableViewCell.swift */,
+				19173CEC22ED2465001BC2DF /* GMSAutocompleteTripDetails.swift */,
+			);
+			path = TripDetails;
+			sourceTree = "<group>";
+		};
 		19C914C52184B701002EA1DB /* supportingFiles */ = {
 			isa = PBXGroup;
 			children = (
@@ -277,17 +315,11 @@
 		19D1242122EA85E400636C23 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				19C914BD21829BCE002EA1DB /* WeatherTableViewCell.swift */,
-				19CB09B6210BF9EB00CC2AA1 /* GMSAutocompleteViewController.swift */,
-				193AAD3022DC16E900C6C6DA /* CustomizeTripDetails.swift */,
-				19C914B9217575D0002EA1DB /* WeatherMenu.swift */,
-				190E4410210BF951005160C7 /* ViewController.swift */,
-				194AD988215331940034572D /* Weather.swift */,
-				19173CEA22EBF161001BC2DF /* TripDetailsTableViewCell.swift */,
-				19173CEC22ED2465001BC2DF /* GMSAutocompleteTripDetails.swift */,
+				19BC26B7245CC04700B5D582 /* TripDetails */,
+				19BC26B6245CBFE600B5D582 /* TripHistory */,
+				19BC26B5245CBFB800B5D582 /* ViewController */,
+				19BC26B4245CBF9F00B5D582 /* WeatherMenu */,
 				19D98A3323CBC34200BD8184 /* LoginController.swift */,
-				192C3287244E7DB100D1F384 /* TripHistoryController.swift */,
-				192C328B244E81EE00D1F384 /* TripHistoryTableViewCell.swift */,
 				19D1EEC2245A5E09000BEDFA /* UserProfile.swift */,
 			);
 			path = Controller;
