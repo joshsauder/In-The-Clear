@@ -16,7 +16,7 @@ class UserProfile: UIViewController, UITableViewDelegate, UITableViewDataSource 
     @IBOutlet weak var LogoutButton: UIButton!
     @IBOutlet weak var tableViewHeight: NSLayoutConstraint!
     
-    let details = ["Email", "Date Joined", "Total Trips", "Favorite Destination"]
+    let details = ["Name", "Email", "Date Joined", "Total Trips", "Favorite Destination"]
     var userDetails: [String:String] = [:]
     
     override func viewDidLoad() {
@@ -50,7 +50,7 @@ class UserProfile: UIViewController, UITableViewDelegate, UITableViewDataSource 
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        return setupHeader(title: "Hi \(userDetails["name"] ?? "")", width: tableView.frame.width)
+        return setupHeader(title: "Profile", width: tableView.frame.width)
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
@@ -70,11 +70,11 @@ class UserProfile: UIViewController, UITableViewDelegate, UITableViewDataSource 
         let df = DateFormatter()
         df.dateStyle = .medium
         
-        userDetails = [details[0] : user.email,
-            details[1] : df.string(from: user.dateJoined),
-            details[2] : String(trips.count),
-            details[3] : determineMostUsed(trips: trips),
-            "name" : user.name
+        userDetails = [details[1] : user.email,
+            details[2] : df.string(from: user.dateJoined),
+            details[3] : String(trips.count),
+            details[4] : determineMostUsed(trips: trips),
+            details[0] : user.name
             ]
     }
     

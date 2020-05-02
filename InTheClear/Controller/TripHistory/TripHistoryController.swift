@@ -78,7 +78,7 @@ class TripHistoryController: UITableViewController {
             CLLocationCoordinate2D(latitude: $0.latitude, longitude: $0.longitude)
         }
         
-        let options = snapShotOptions(trip: trip, size: size, coordinates: coordinates)
+        let options = snapShotOptions(size: size, coordinates: coordinates)
         
         let snapshot = MKMapSnapshotter(options: options)
         
