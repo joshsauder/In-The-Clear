@@ -422,6 +422,7 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
                 self.tripData.stops[0] = self.tripData.cities[self.tripData.cities.count-1]
                 
                 self.postTrip(tripData: self.tripData, distance: Int(distance), duration: time, locations: self.userTripDetails.cityLocations)
+                
             }
         }
     }

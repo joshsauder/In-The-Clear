@@ -143,6 +143,8 @@ extension ViewController {
         
         let headers: HTTPHeaders = ["Authorization": "Bearer " + token]
         AF.request("\(url.BACKEND_URL)/Trip", method: .post, parameters: postData, encoder: JSONParameterEncoder.default, headers: headers)
+        
+        addUserTrip(trip: locationData, distance: distance, duration: duration)
     }
     
     /**
@@ -155,5 +157,28 @@ extension ViewController {
         
         let user = manager.getUser()
         return (user.token, user.id)
+    }
+    
+    
+    private func addUserTrip(trip: [LocationData], distance: Int, duration: Int) {
+        let manager = RealmManager()
+        
+        let data = TripData()
+        data.createdAt = Date()
+        data.distance = String(distance)
+        data.duration = String(duration)
+        
+        let locations = trip.map{ (t) -> Locations in
+            let loc = Locations()
+            loc.city = t.city
+            loc.condition = t.condition
+            loc.latitude = t.latitude
+            loc.longitude = t.longitude
+            
+            return loc
+        }
+        
+        data.locations.append(objectsIn: locations)
+        manager.writeTrips(trip: [data])
     }
 }
