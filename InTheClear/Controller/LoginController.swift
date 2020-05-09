@@ -107,6 +107,13 @@ class LoginController: UIViewController {
         }
     }
     
+    /**
+     Gets user data when it is not in Realm cache
+     - parameters  :
+        - parameters: user details
+        - idToken: Auth Token
+        - completion: Returns the user id on completion
+     */
     func newUser(parameters: User, idToken: String, completion: @escaping  (String) -> ()){
         self.signInUser(parameters: parameters, token: idToken){ (id, name, email, createdAt) in
             if(id == ""){
