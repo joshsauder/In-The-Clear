@@ -86,30 +86,42 @@ class LoginController: UIViewController {
                         
                     }
                     else{
-                        self.signInUser(parameters: parameters, token: idToken!){ (id, name, email, createdAt) in
-                            if(id == ""){
-                                self.stopSpinner(spinner: self.spinner)
-                                self.spinner = nil
-                                self.present(self.showAlert(title: "Issue Signing You In! Please Try Again.", message: ""), animated: true)
-                                return;
-                            }else {
-                                //add data to Realm
-                                self.stopSpinner(spinner: self.spinner)
-                                
-                                self.spinner = nil
-                                self.saveData(token: idToken!, id: id, name: name, email: email, createdAt: self.formatDate(date: createdAt))
-                                
-                                //fetch user trips once we get ID back
-                                //TODO: cache user data and fetch only when needed
+                        let tempUser = self.getUserData()
+                        //check if user already signed in
+                        if(tempUser.email != user.email){
+                            self.newUser(parameters: parameters, idToken: idToken!) { id in
                                 self.getUserTrips(id: id, token: idToken!, completion: {
                                     self.transitionViewController()
                                 })
                             }
                         }
+                        else {
+                            self.getUserTrips(id: tempUser.id, token: idToken!, completion: {
+                                self.transitionViewController()
+                            })
+                        }
                     }
                 }
             }
             
+        }
+    }
+    
+    func newUser(parameters: User, idToken: String, completion: @escaping  (String) -> ()){
+        self.signInUser(parameters: parameters, token: idToken){ (id, name, email, createdAt) in
+            if(id == ""){
+                self.stopSpinner(spinner: self.spinner)
+                self.spinner = nil
+                self.present(self.showAlert(title: "Issue Signing You In! Please Try Again.", message: ""), animated: true)
+                return;
+            }else {
+                //add data to Realm
+                self.stopSpinner(spinner: self.spinner)
+                
+                self.spinner = nil
+                self.saveData(token: idToken, id: id, name: name, email: email, createdAt: self.formatDate(date: createdAt))
+                completion(id)
+            }
         }
     }
     
@@ -129,6 +141,15 @@ class LoginController: UIViewController {
         
         let data = manager.initUserData(id: id, name: name, token: token, email: email, createdAt: createdAt)
         manager.writeUser(user: data)
+    }
+    
+    /**
+     Gets User Data
+     - Returns: The user's data
+     */
+    private func getUserData() -> UserData{
+        let manager = RealmManager()
+        return manager.getUser()
     }
         
 }

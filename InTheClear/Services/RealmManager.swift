@@ -19,7 +19,6 @@ class RealmManager {
        - user: User data to be persisted
     */
     func writeUser(user: UserData){
-
         try! realm.write {
             realm.deleteAll()
             realm.add(user)
@@ -35,6 +34,16 @@ class RealmManager {
         try! realm.write {
             //realm is reset when user info is retrieved
             realm.add(trip)
+        }
+    }
+    
+    /**
+    Resets trip history in Realm
+    */
+    func resetTrips(){
+        let tripObjs = realm.objects(TripData.self)
+        try! realm.write {
+            realm.delete(tripObjs)
         }
     }
     
