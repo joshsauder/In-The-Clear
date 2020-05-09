@@ -98,7 +98,7 @@ class UserProfile: UIViewController, UITableViewDelegate, UITableViewDataSource 
      Presents the login view when you logout
      */
     func showLoginView(){
-        let vc = UIStoryboard(name: "LaunchScreen", bundle: nil).instantiateInitialViewController() as! LoginController
+        let vc = UIStoryboard(name: "StartView", bundle: nil).instantiateInitialViewController() as! LoginController
         vc.modalPresentationStyle = .fullScreen
         self.present(vc, animated: true, completion: nil)
     }
