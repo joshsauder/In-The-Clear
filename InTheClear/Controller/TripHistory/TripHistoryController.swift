@@ -17,6 +17,9 @@ class TripHistoryController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTable(tableView: tableView)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
         initTripHistory()
     }
     

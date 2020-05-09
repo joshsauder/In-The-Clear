@@ -82,7 +82,7 @@ class RealmManager {
      - returns: Array of trip data
      */
     func getTripHistory() -> [TripData] {
-        let trips = realm.objects(TripData.self)
+        let trips = realm.objects(TripData.self).sorted(byKeyPath: "createdAt", ascending: false)
         return Array(trips)
     }
     

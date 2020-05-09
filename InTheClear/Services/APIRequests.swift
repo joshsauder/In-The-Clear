@@ -160,6 +160,14 @@ extension ViewController {
     }
     
     
+    /**
+     Adds user trip to Realm cache
+     
+     - parameters:
+        - trip: Location data
+        - distance: trip distance
+        - duration: trip duration
+     */
     private func addUserTrip(trip: [LocationData], distance: Int, duration: Int) {
         let manager = RealmManager()
         
