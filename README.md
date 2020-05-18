@@ -24,7 +24,7 @@ git clone https://github.com/joshsauder/In-The-Clear.git
 Add to your 'Podfile':
 
 ```ruby
-platform :ios, '12.0'
+platform :ios, '13.0'
 
 target 'InTheClear' do
   use_frameworks!
