@@ -181,13 +181,18 @@ class TripHistoryController: UITableViewController {
         mainVc.locationStart = tripDetails.cityLocations[0]
         mainVc.locationEnd = tripDetails.cityLocations.last!
         mainVc.userTripDetails = tripDetails
-        
         self.present(mainVc, animated: true, completion: nil)
         
         //must be set after presenting.
         mainVc.startLocation.text = tripDetails.cityStops[0]
         mainVc.destinationLocation.text = tripDetails.cityStops.last!
         
+        //constrain time and distance label view to super view instead of safe view
+        mainVc.BottomLabelConstraint.isActive = false
+        mainVc.BottomLabelConstraint = mainVc.view.bottomAnchor.constraint(equalTo: mainVc.timeAndDistanceView.bottomAnchor, constant: -10)
+        mainVc.BottomLabelConstraint.isActive = true
+        
         mainVc.showTimePopup(UIButton())
+        
     }
 }

@@ -50,6 +50,7 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
     @IBOutlet weak var mapKey: UIImageView!
     
     @IBOutlet weak var openMapsBottomContraints: NSLayoutConstraint!
+    @IBOutlet weak var BottomLabelConstraint: NSLayoutConstraint!
     
     var spinner: UIView?
     var tripData = tripDataModal()
