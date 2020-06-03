@@ -38,6 +38,18 @@ class TripHistoryController: UITableViewController {
         
         cell.OverviewLabel?.text = "\(entry.locations.first?.city ?? "") - \(entry.locations.last?.city ?? "")"
         cell.DateLabel?.text = "\(determineDays(date: entry.createdAt)) days ago"
+        cell.StopsLabel?.text = "Stops -"
+        
+        if(entry.locations.count > 2 ){
+            var stopString = ""
+            
+            for (i, loc) in entry.locations.enumerated() {
+                if(i != 0 && i < entry.locations.count - 1){
+                    stopString += " \(loc.city),"
+                }
+            }
+            cell.StopsLabel?.text! += stopString.prefix(stopString.count - 1)
+        } else { cell.StopsLabel?.text! += " None" }
         
         generateSnapshot(trip: entry, size: cell.MapImage.bounds.size, completion: {(image) -> Void in
             cell.MapImage.image = image
@@ -96,10 +108,13 @@ class TripHistoryController: UITableViewController {
                     snap.image.draw(at: .zero)
 
                     let pinView = MKPinAnnotationView(annotation: nil, reuseIdentifier: nil)
-                    let pinImage = pinView.image
                     
-                    coordinates.forEach {
-                        var point = snap.point(for: $0)
+                    for(index, item) in coordinates.enumerated() {
+                        
+                        pinView.pinTintColor = index == 0 || index == coordinates.count - 1 ? MKPinAnnotationView.redPinColor() : MKPinAnnotationView.greenPinColor()
+                        
+                        let pinImage = pinView.image
+                        var point = snap.point(for: item)
                         
                         point.x -= pinView.bounds.width / 2
                         point.y -= pinView.bounds.height / 2
