@@ -38,7 +38,7 @@ class InTheClearTests: XCTestCase {
         
         vc.createLine(startLocation: start, endLocation: destination, time: Date()) {time, distance in
             //if there is a valid route, the associated polyline will be added to the polyline array
-            assert(self.vc.polylineArray.count > 0)
+            assert(!self.vc.polylineArray.count.isEmpty)
             assert(time != 0)
             assert(distance != 0.0)
         }
@@ -58,8 +58,8 @@ class InTheClearTests: XCTestCase {
         //Los Angeles, CA coordinates
         let destination = CLLocation(latitude: CLLocationDegrees(exactly: 34.05349)!, longitude: CLLocationDegrees(exactly: -118.24532)!)
         
-        vc.createLine(startLocation: start, endLocation: destination, time: Date()){ time, distance in
-            assert(self.vc.polylineArray.count == 0)
+        vc.createLine(startLocation: start, endLocation: destination, time: Date()){ _, _ in
+            assert(self.vc.polylineArray.count.isEmpty)
         }
         
     }
@@ -75,7 +75,7 @@ class InTheClearTests: XCTestCase {
         //Columbus, OH coordinates
         let destination = CLLocation(latitude: CLLocationDegrees(exactly: 39.96199)!, longitude: CLLocationDegrees(exactly: -83.00275)!)
         
-        vc.createLine(startLocation: start, endLocation: destination, time: Date()){ time, distance in
+        vc.createLine(startLocation: start, endLocation: destination, time: Date()){ _, _ in
             let path = self.vc.polylineArray[0].path
             
             //get coordinates
@@ -104,7 +104,7 @@ class InTheClearTests: XCTestCase {
         //Columbus, OH coordinates
         let destination = CLLocation(latitude: CLLocationDegrees(exactly: 39.96199)!, longitude: CLLocationDegrees(exactly: -83.00275)!)
         
-        vc.createLine(startLocation: start, endLocation: destination, time: Date()){ time, distance in
+        vc.createLine(startLocation: start, endLocation: destination, time: Date()){ _, _ in
             assert(self.vc.polylineArray.count == 1)
         }
         
@@ -114,7 +114,7 @@ class InTheClearTests: XCTestCase {
         //Columbus, OH coordinates
         let secondDestination = CLLocation(latitude: CLLocationDegrees(exactly: 32.77815)!, longitude: CLLocationDegrees(exactly: -96.7954)!)
         
-        vc.createLine(startLocation: secondStart, endLocation: secondDestination, time: Date()){time, distance in
+        vc.createLine(startLocation: secondStart, endLocation: secondDestination, time: Date()){_, _ in
             assert(self.vc.polylineArray.count == 1)
         }
         
@@ -162,8 +162,8 @@ class InTheClearTests: XCTestCase {
             assert(json[0]["lat"] as! String == latArray[0] && json[0]["long"] as! String == longArray[0])
             assert(json[1]["lat"] as! String == latArray[1] && json[1]["long"] as! String == longArray[1])
             //assert weather details exist
-            assert((json[0]["condition"] as! String).count > 0 && (json[0]["temp"] as! String).count > 0)
-            assert((json[1]["condition"] as! String).count > 0 && (json[1]["temp"] as! String).count > 0)
+            assert((!json[0]["condition"] as! String).isEmpty && (json[0]["temp"] as! String).isEmpty)
+            assert((!json[1]["condition"] as! String).isEmpty && (json[1]["temp"] as! String).isEmpty)
             //assert requestedtime is added correctly to current time
             assert(weatherArray[0]["time"] as! Int == Int(testDate) + timeArray[0])
             assert(weatherArray[1]["time"] as! Int == Int(testDate) + timeArray[1])

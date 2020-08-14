@@ -1,6 +1,7 @@
 # In The Clear
 
 [![License: CC BY-NC-SA 4.0](https://img.shields.io/badge/License-CC%20BY--NC--SA%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by-nc-sa/4.0/)
+[![CodeFactor](https://www.codefactor.io/repository/github/joshsauder/in-the-clear/badge/master)](https://www.codefactor.io/repository/github/joshsauder/in-the-clear/overview/master)
 
 In The Clear is an iOS directions app that shows the user the weather they can expect as they are driving. It not only shows the weather via the Google Maps polyline (directions path displayed on map), but also in a table that shows the weather in each city the user will be driving through. If you are ever driving over a long distance, especially if you're traveling through an area that commonly receives unfavorable weather, this app can be a great tool that can help you predict what weather conditions you can expect to drive through. 
 
