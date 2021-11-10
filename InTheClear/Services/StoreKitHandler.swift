@@ -9,16 +9,16 @@
 import Foundation
 import StoreKit
 
-class StoreKitHandler {
+class StoreKitHandler: NSObject {
     
     let productIdentifiers: Set<String>
-    let currencyFormatter: NumberFormatter
-    let skProducts: Dictionary<String, SKProduct>
+    let currencyFormatter: NumberFormatter = NumberFormatter()
+    var skProducts: Dictionary<String, SKProduct> = [:]
     
-    init() {
+    override init() {
         productIdentifiers = Set<String>(["premium"])
-        super.init()
         currencyFormatter.numberStyle = .currency
+        super.init()
         SKPaymentQueue.default().add(self)
     }
     

@@ -16,3 +16,5 @@ class UserData: Object {
     @objc dynamic var email = ""
     @objc dynamic var dateJoined: Date = Date()
 }
+
+// class UserDBModel: Dictionary

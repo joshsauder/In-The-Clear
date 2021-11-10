@@ -11,6 +11,8 @@ target 'InTheClear' do
   pod 'GoogleSignIn'
   pod 'Firebase/Analytics'
   pod 'Firebase/Auth'
+  pod 'Firebase/Firestore'
+  pod 'FirebaseFirestoreSwift'
   pod 'RealmSwift', '~> 4.3.2' 
 end
 
