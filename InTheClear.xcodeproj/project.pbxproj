@@ -45,6 +45,7 @@
 		194AD985212E4B620034572D /* URLConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 194AD984212E4B620034572D /* URLConfig.swift */; };
 		194AD989215331940034572D /* Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 194AD988215331940034572D /* Weather.swift */; };
 		199243D8241D523D00E9A4C2 /* SharedViewComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 199243D7241D523D00E9A4C2 /* SharedViewComponents.swift */; };
+		199658AC273A4A630061761A /* StoreKitHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 199658AB273A4A630061761A /* StoreKitHandler.swift */; };
 		1996FA6023F79C80000F906E /* RealmTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1996FA5F23F79C80000F906E /* RealmTests.swift */; };
 		1996FA6423F7A50D000F906E /* TripDataModalTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1996FA6323F7A50D000F906E /* TripDataModalTest.swift */; };
 		1996FA6623F7AA22000F906E /* TripDetailsModalTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1996FA6523F7AA22000F906E /* TripDetailsModalTest.swift */; };
@@ -126,6 +127,7 @@
 		194AD984212E4B620034572D /* URLConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLConfig.swift; sourceTree = "<group>"; };
 		194AD988215331940034572D /* Weather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weather.swift; sourceTree = "<group>"; };
 		199243D7241D523D00E9A4C2 /* SharedViewComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedViewComponents.swift; sourceTree = "<group>"; };
+		199658AB273A4A630061761A /* StoreKitHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreKitHandler.swift; sourceTree = "<group>"; };
 		1996FA5F23F79C80000F906E /* RealmTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmTests.swift; sourceTree = "<group>"; };
 		1996FA6323F7A50D000F906E /* TripDataModalTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripDataModalTest.swift; sourceTree = "<group>"; };
 		1996FA6523F7AA22000F906E /* TripDetailsModalTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripDetailsModalTest.swift; sourceTree = "<group>"; };
@@ -341,6 +343,7 @@
 				191EF2E022FBB7260049D7D1 /* TripDetailsAPIRequest.swift */,
 				19365E0723CEBC600060D11C /* LoginAPIRequests.swift */,
 				190E987E23F76A3600C1C2C3 /* RealmManager.swift */,
+				199658AB273A4A630061761A /* StoreKitHandler.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -702,6 +705,7 @@
 				19D1243222EBD67400636C23 /* tripDetailsModal.swift in Sources */,
 				194AD989215331940034572D /* Weather.swift in Sources */,
 				19173CF322EFD10D001BC2DF /* CustomizeTripDetailsView.swift in Sources */,
+				199658AC273A4A630061761A /* StoreKitHandler.swift in Sources */,
 				19D1EECA245BC4FE000BEDFA /* UserProfileSetup.swift in Sources */,
 				192C3288244E7DB100D1F384 /* TripHistoryController.swift in Sources */,
 				191EF2E122FBB7260049D7D1 /* TripDetailsAPIRequest.swift in Sources */,
