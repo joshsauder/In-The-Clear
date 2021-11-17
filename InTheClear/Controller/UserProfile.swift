@@ -14,6 +14,7 @@ class UserProfile: UIViewController, UITableViewDelegate, UITableViewDataSource 
     
     @IBOutlet weak var UserInfoTable: UITableView!
     @IBOutlet weak var LogoutButton: UIButton!
+    @IBOutlet weak var UpgradeButton: UIButton!
     @IBOutlet weak var tableViewHeight: NSLayoutConstraint!
     
     let details = ["Name", "Email", "Date Joined", "Total Trips", "Favorite Destination"]
@@ -93,6 +94,15 @@ class UserProfile: UIViewController, UITableViewDelegate, UITableViewDataSource 
             print(signOutError)
         }
     }
+    
+    @IBAction func UpgradeButtonTapped(_ sender: Any) {
+        StoreKitHandler.shared.purchase(product: StoreKitHandler.shared.PREMIUM)
+        StoreKitHandler.shared.productDidPurchased = {
+            [weak self] in
+            print("send to DB")
+        }
+    }
+    
     
     /**
      Presents the login view when you logout

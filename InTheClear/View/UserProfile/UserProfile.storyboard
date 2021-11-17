@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Pxa-MP-5qH">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Pxa-MP-5qH">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -15,7 +17,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Us-FJ-qSc">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Us-FJ-qSc">
                                 <rect key="frame" x="0.0" y="738" width="414" height="75"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="75" id="A1Y-au-hfm"/>
@@ -27,27 +29,42 @@
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="YXJ-4G-ge8">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="400"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="400" id="eG6-J4-Ydd"/>
                                 </constraints>
                             </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oan-nu-k8Y">
+                                <rect key="frame" x="0.0" y="663" width="414" height="75"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="75" id="c12-St-sW0"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="LogoutButtonTapped:" destination="Pxa-MP-5qH" eventType="touchUpInside" id="7EU-7V-1yF"/>
+                                    <action selector="UpgradeButtonTapped:" destination="Pxa-MP-5qH" eventType="touchUpInside" id="9ic-vS-8S9"/>
+                                </connections>
+                            </button>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="wjP-1Z-3DA"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="oan-nu-k8Y" firstAttribute="trailing" secondItem="wjP-1Z-3DA" secondAttribute="trailing" id="1QH-lP-rgQ"/>
                             <constraint firstItem="5Us-FJ-qSc" firstAttribute="leading" secondItem="wjP-1Z-3DA" secondAttribute="leading" id="8Ng-rJ-ngp"/>
                             <constraint firstItem="YXJ-4G-ge8" firstAttribute="top" secondItem="mdr-Z8-eZl" secondAttribute="top" id="CXo-Ww-khX"/>
                             <constraint firstItem="5Us-FJ-qSc" firstAttribute="trailing" secondItem="wjP-1Z-3DA" secondAttribute="trailing" id="O6j-pI-mMu"/>
                             <constraint firstItem="5Us-FJ-qSc" firstAttribute="bottom" secondItem="wjP-1Z-3DA" secondAttribute="bottom" id="W9H-i2-Wef"/>
+                            <constraint firstItem="oan-nu-k8Y" firstAttribute="leading" secondItem="wjP-1Z-3DA" secondAttribute="leading" id="tc7-pm-4Ef"/>
                             <constraint firstItem="YXJ-4G-ge8" firstAttribute="leading" secondItem="wjP-1Z-3DA" secondAttribute="leading" id="wJw-bM-FdZ"/>
+                            <constraint firstItem="5Us-FJ-qSc" firstAttribute="top" secondItem="oan-nu-k8Y" secondAttribute="bottom" id="xUe-Ul-32H"/>
                             <constraint firstItem="YXJ-4G-ge8" firstAttribute="trailing" secondItem="wjP-1Z-3DA" secondAttribute="trailing" id="xhW-q5-1ts"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="wjP-1Z-3DA"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Profile" image="person.fill" catalog="system" id="Mjk-ky-4i6"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="LogoutButton" destination="5Us-FJ-qSc" id="Y7x-Ni-NV5"/>
+                        <outlet property="UpgradeButton" destination="oan-nu-k8Y" id="6p1-Yh-ZQd"/>
                         <outlet property="UserInfoTable" destination="YXJ-4G-ge8" id="55H-Vp-tcQ"/>
                         <outlet property="tableViewHeight" destination="eG6-J4-Ydd" id="rkQ-kS-6an"/>
                     </connections>
@@ -59,5 +76,8 @@
     </scenes>
     <resources>
         <image name="person.fill" catalog="system" width="128" height="120"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
     </resources>
 </document>

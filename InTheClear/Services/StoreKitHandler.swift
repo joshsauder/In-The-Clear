@@ -14,9 +14,12 @@ class StoreKitHandler: NSObject {
     let productIdentifiers: Set<String>
     let currencyFormatter: NumberFormatter = NumberFormatter()
     var skProducts: Dictionary<String, SKProduct> = [:]
+    let PREMIUM = "premium"
+    var productDidPurchased: (() -> Void)?
+    static let shared = StoreKitHandler()
     
     override init() {
-        productIdentifiers = Set<String>(["premium"])
+        productIdentifiers = Set<String>([PREMIUM])
         currencyFormatter.numberStyle = .currency
         super.init()
         SKPaymentQueue.default().add(self)
@@ -42,10 +45,6 @@ extension StoreKitHandler: SKProductsRequestDelegate {
 }
 
 extension StoreKitHandler {
-    func purchaseAnnualSubscription(){
-        
-    }
-    
     func purchase(product: String){
         guard let skProduct = skProducts[product] else { return }
         SKPaymentQueue.default().add(SKPayment(product: skProduct))
@@ -66,10 +65,13 @@ extension StoreKitHandler: SKPaymentTransactionObserver {
                 print("Purchasing: \(transaction.payment.productIdentifier)")
             case .purchased:
                 print("Purchased: \(transaction.payment.productIdentifier)")
+                SKPaymentQueue.default().finishTransaction(transaction)
+                productDidPurchased?()
             case .restored:
                 print("Restored: \(transaction.payment.productIdentifier)")
             case .failed:
                 print("Failed: \(transaction.payment.productIdentifier)")
+                SKPaymentQueue.default().finishTransaction(transaction)
             default:
                 print("Purchase Queue: Default")
             }

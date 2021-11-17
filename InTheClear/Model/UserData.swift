@@ -17,4 +17,16 @@ class UserData: Object {
     @objc dynamic var dateJoined: Date = Date()
 }
 
-// class UserDBModel: Dictionary
+struct FirebaseUser: Codable {
+    let name: String
+    let email: String
+    let dateJoined: String
+    let planExpiration: String
+    
+    enum CodingKeys: String, CodingKey {
+        case name
+        case email
+        case dateJoined
+        case planExpiration
+    }
+}
