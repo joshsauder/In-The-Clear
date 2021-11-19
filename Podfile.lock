@@ -305,11 +305,11 @@ PODS:
   - nanopb/decode (0.3.9011)
   - nanopb/encode (0.3.9011)
   - PromisesObjC (1.2.8)
-  - Realm (4.3.2):
-    - Realm/Headers (= 4.3.2)
-  - Realm/Headers (4.3.2)
-  - RealmSwift (4.3.2):
-    - Realm (= 4.3.2)
+  - Realm (10.20.0):
+    - Realm/Headers (= 10.20.0)
+  - Realm/Headers (10.20.0)
+  - RealmSwift (10.20.0):
+    - Realm (= 10.20.0)
   - SwiftyJSON (4.3.0)
 
 DEPENDENCIES:
@@ -321,7 +321,7 @@ DEPENDENCIES:
   - GoogleMaps (~> 3.0.2)
   - GooglePlaces
   - GoogleSignIn
-  - RealmSwift (~> 4.3.2)
+  - RealmSwift (~> 10)
   - SwiftyJSON (~> 4.0)
 
 SPEC REPOS:
@@ -390,10 +390,10 @@ SPEC CHECKSUMS:
   leveldb-library: 50c7b45cbd7bf543c81a468fe557a16ae3db8729
   nanopb: 18003b5e52dab79db540fe93fe9579f399bd1ccd
   PromisesObjC: c119f3cd559f50b7ae681fa59dc1acd19173b7e6
-  Realm: 5e92902e2875dff4bb0fd02f67bb737c3d5db2bc
-  RealmSwift: 9a360fc7bae04fc2e308a34fbd899d5faa2d6b22
+  Realm: ae32bdc1da7d19c7617e0400201a77acd4a211b9
+  RealmSwift: c95eec6a712924870b2e36c4c081d63ec07e5414
   SwiftyJSON: 6faa0040f8b59dead0ee07436cbf76b73c08fd08
 
-PODFILE CHECKSUM: 44cbb9866d6ce7024c5b05ea022c8f21c765718a
+PODFILE CHECKSUM: b2aa5f231748750fbbfd98719f18cbf224e3e1a0
 
-COCOAPODS: 1.8.4
+COCOAPODS: 1.11.2

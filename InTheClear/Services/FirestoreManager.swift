@@ -8,6 +8,7 @@
 
 import Foundation
 import Firebase
+import FirebaseFirestoreSwift
 
 class FirestoreManager {
     private let db = Firestore.firestore()
@@ -16,17 +17,28 @@ class FirestoreManager {
     
     func addUser(userData: UserData) {
         let user = FirebaseUser(name: userData.name, email: userData.email, dateJoined: userData.dateJoined.toString(dateFormat: DATE_FORMAT), planExpiration: "")
-        db.collection(USER_TABLE).document(user.id).setData(from: user)
+        let newId = NSUUID().uuidString
+        do {
+            try db.collection(USER_TABLE).document(newId).setData(from: user)
+        } catch _ {
+            print("Error while adding user")
+        }
     }
     
-    func getUser(userId: String): DocumentReference {
+    func getUser(userId: String) -> DocumentReference {
         return db.collection(USER_TABLE).document(userId)
     }
     
     func updatePaid(userId: String){
         let userRef = getUser(userId: userId)
+        
+        let currentDate = Date()
+        var dateComponent = DateComponents()
+        dateComponent.year = 1
+        let futureDate = Calendar.current.date(byAdding: dateComponent, to: currentDate)
+        
         userRef.updateData([
-            "planExpiration": Date.now.toString(dateFormat: DATE_FORMAT)
+            "planExpiration": futureDate!.toString(dateFormat: DATE_FORMAT)
         ])
     }
     

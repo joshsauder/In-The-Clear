@@ -13,7 +13,8 @@ target 'InTheClear' do
   pod 'Firebase/Auth'
   pod 'Firebase/Firestore'
   pod 'FirebaseFirestoreSwift'
-  pod 'RealmSwift', '~> 4.3.2' 
+  pod 'FirebaseFirestoreSwift'
+  pod 'RealmSwift', '~>10'
 end
 
 target 'InTheClearTests' do
@@ -25,5 +26,5 @@ target 'InTheClearTests' do
   pod 'SwiftyJSON', '~> 4.0' 
   # pod 'Firebase/Analytics'
   # pod 'Firebase/Auth'
-  pod 'RealmSwift', '~> 4.3.2' 
+  pod 'RealmSwift', '~>10' 
 end

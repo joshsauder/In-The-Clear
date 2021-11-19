@@ -62,18 +62,13 @@ extension StoreKitHandler: SKPaymentTransactionObserver {
         for transaction in transactions {
             switch transaction.transactionState {
             case .purchasing:
-                print("Purchasing: \(transaction.payment.productIdentifier)")
+                break
             case .purchased:
                 print("Purchased: \(transaction.payment.productIdentifier)")
                 SKPaymentQueue.default().finishTransaction(transaction)
                 productDidPurchased?()
-            case .restored:
-                print("Restored: \(transaction.payment.productIdentifier)")
-            case .failed:
-                print("Failed: \(transaction.payment.productIdentifier)")
-                SKPaymentQueue.default().finishTransaction(transaction)
             default:
-                print("Purchase Queue: Default")
+                SKPaymentQueue.default().finishTransaction(transaction)
             }
         }
     }
