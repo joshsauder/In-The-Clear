@@ -89,8 +89,8 @@ class LoginController: UIViewController {
                         let tempUser = self.getUserData()
                         //check if user already signed in
                         if(tempUser.email != user.email){
-                            self.newUser(parameters: parameters, idToken: idToken!) { id in
-                                self.getUserTrips(id: id, token: idToken!, completion: {
+                            self.newUser(parameters: parameters, idToken: idToken!, id: user.uid, createdAt: user.metadata.creationDate ?? Date()) {
+                                self.getUserTrips(id: user.uid, token: idToken!, completion: {
                                     self.transitionViewController()
                                 })
                             }
@@ -116,22 +116,17 @@ class LoginController: UIViewController {
         - idToken: Auth Token
         - completion: Returns the user id on completion
      */
-    func newUser(parameters: User, idToken: String, completion: @escaping  (String) -> ()){
-        self.signInUser(parameters: parameters, token: idToken){ (id, name, email, createdAt) in
-            if(id == ""){
-                self.stopSpinner(spinner: self.spinner)
-                self.spinner = nil
-                self.present(self.showAlert(title: "Issue Signing You In! Please Try Again.", message: ""), animated: true)
-                return;
-            }else {
-                //add data to Realm
-                self.stopSpinner(spinner: self.spinner)
+    func newUser(parameters: User, idToken: String, id: String, createdAt: Date, completion: @escaping  () -> ()){
+        let (displayName, email) = self.signInUser(parameters: parameters, token: idToken)
+        
+        //add data to Realm
+        self.stopSpinner(spinner: self.spinner)
                 
-                self.spinner = nil
-                self.saveData(token: idToken, id: id, name: name, email: email, createdAt: self.formatDate(date: createdAt))
-                completion(id)
-            }
-        }
+        self.spinner = nil
+        self.saveData(token: idToken, id: id, name: displayName, email: email, createdAt: createdAt)
+        completion()
+            
+        
     }
     
     private func formatDate(date: String) -> Date{
@@ -147,9 +142,11 @@ class LoginController: UIViewController {
      */
     private func saveData(token: String, id: String, name: String, email: String, createdAt: Date) {
         let manager = RealmManager()
+        let firestore = FirestoreManager()
         
         let data = manager.initUserData(id: id, name: name, token: token, email: email, createdAt: createdAt)
         manager.writeUser(user: data)
+        firestore.addUser(userData: data)
     }
     
     /**
