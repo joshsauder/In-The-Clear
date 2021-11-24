@@ -45,15 +45,48 @@
                                     <action selector="UpgradeButtonTapped:" destination="Pxa-MP-5qH" eventType="touchUpInside" id="9ic-vS-8S9"/>
                                 </connections>
                             </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="m8c-GH-hfC">
+                                <rect key="frame" x="20" y="443" width="374" height="200"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Premium Benefits" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PoI-D4-s7C">
+                                        <rect key="frame" x="8" y="8" width="358" height="45"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="26"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TwP-xP-8mD">
+                                        <rect key="frame" x="8" y="133" width="358" height="50"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="23"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pAO-fm-qgq">
+                                        <rect key="frame" x="8" y="61" width="358" height="50"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="22"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="200" id="bef-IM-p7M"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="wjP-1Z-3DA"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="oan-nu-k8Y" firstAttribute="top" secondItem="m8c-GH-hfC" secondAttribute="bottom" constant="20" id="1A8-UM-q2V"/>
                             <constraint firstItem="oan-nu-k8Y" firstAttribute="trailing" secondItem="wjP-1Z-3DA" secondAttribute="trailing" id="1QH-lP-rgQ"/>
                             <constraint firstItem="5Us-FJ-qSc" firstAttribute="leading" secondItem="wjP-1Z-3DA" secondAttribute="leading" id="8Ng-rJ-ngp"/>
+                            <constraint firstItem="wjP-1Z-3DA" firstAttribute="trailing" secondItem="m8c-GH-hfC" secondAttribute="trailing" constant="20" id="BNM-TH-VbC"/>
                             <constraint firstItem="YXJ-4G-ge8" firstAttribute="top" secondItem="mdr-Z8-eZl" secondAttribute="top" id="CXo-Ww-khX"/>
                             <constraint firstItem="5Us-FJ-qSc" firstAttribute="trailing" secondItem="wjP-1Z-3DA" secondAttribute="trailing" id="O6j-pI-mMu"/>
                             <constraint firstItem="5Us-FJ-qSc" firstAttribute="bottom" secondItem="wjP-1Z-3DA" secondAttribute="bottom" id="W9H-i2-Wef"/>
+                            <constraint firstItem="m8c-GH-hfC" firstAttribute="leading" secondItem="wjP-1Z-3DA" secondAttribute="leading" constant="20" id="eFm-vV-vwl"/>
                             <constraint firstItem="oan-nu-k8Y" firstAttribute="leading" secondItem="wjP-1Z-3DA" secondAttribute="leading" id="tc7-pm-4Ef"/>
                             <constraint firstItem="YXJ-4G-ge8" firstAttribute="leading" secondItem="wjP-1Z-3DA" secondAttribute="leading" id="wJw-bM-FdZ"/>
                             <constraint firstItem="5Us-FJ-qSc" firstAttribute="top" secondItem="oan-nu-k8Y" secondAttribute="bottom" id="xUe-Ul-32H"/>
@@ -63,7 +96,9 @@
                     <tabBarItem key="tabBarItem" title="Profile" image="person.fill" catalog="system" id="Mjk-ky-4i6"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="FirstPremiumBenefitLabel" destination="pAO-fm-qgq" id="ybc-oP-VsA"/>
                         <outlet property="LogoutButton" destination="5Us-FJ-qSc" id="Y7x-Ni-NV5"/>
+                        <outlet property="SecondPremiumBenefitLabel" destination="TwP-xP-8mD" id="eDO-KJ-3A2"/>
                         <outlet property="UpgradeButton" destination="oan-nu-k8Y" id="6p1-Yh-ZQd"/>
                         <outlet property="UserInfoTable" destination="YXJ-4G-ge8" id="55H-Vp-tcQ"/>
                         <outlet property="tableViewHeight" destination="eG6-J4-Ydd" id="rkQ-kS-6an"/>

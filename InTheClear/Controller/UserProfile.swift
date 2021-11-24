@@ -16,8 +16,10 @@ class UserProfile: UIViewController, UITableViewDelegate, UITableViewDataSource 
     @IBOutlet weak var LogoutButton: UIButton!
     @IBOutlet weak var UpgradeButton: UIButton!
     @IBOutlet weak var tableViewHeight: NSLayoutConstraint!
+    @IBOutlet weak var FirstPremiumBenefitLabel: UILabel!
+    @IBOutlet weak var SecondPremiumBenefitLabel: UILabel!
     
-    let details = ["Name", "Email", "Date Joined", "Total Trips", "Favorite Destination"]
+    let details = ["Name", "Email", "Date Joined", "Total Trips", "Favorite Destination", "Paid"]
     var userDetails: [String:String] = [:]
     
     override func viewDidLoad() {
@@ -25,6 +27,7 @@ class UserProfile: UIViewController, UITableViewDelegate, UITableViewDataSource 
         
         setupUserDetails()
         setupLogoutButton(button: LogoutButton)
+        setupUpgradeButton(button: UpgradeButton, paid: userDetails[details[5]] == "true")
         setupTable(tableView: UserInfoTable)
         UserInfoTable.allowsSelection = false;
         
@@ -75,7 +78,8 @@ class UserProfile: UIViewController, UITableViewDelegate, UITableViewDataSource 
             details[2] : df.string(from: user.dateJoined),
             details[3] : String(trips.count),
             details[4] : determineMostUsed(trips: trips),
-            details[0] : user.name
+            details[0] : user.name,
+            details[5] : user.paid.description
             ]
     }
     

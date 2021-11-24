@@ -125,8 +125,6 @@ class LoginController: UIViewController {
         self.spinner = nil
         self.saveData(token: idToken, id: id, name: displayName, email: email, createdAt: createdAt)
         completion()
-            
-        
     }
     
     private func formatDate(date: String) -> Date{
@@ -208,7 +206,6 @@ extension LoginController: ASAuthorizationControllerDelegate {
                     return
                 }
             }
-        
         }
     }
     
@@ -257,7 +254,6 @@ extension LoginController: ASAuthorizationControllerDelegate {
 
       return hashString
     }
-    
 }
 
 extension LoginController: ASAuthorizationControllerPresentationContextProviding {
