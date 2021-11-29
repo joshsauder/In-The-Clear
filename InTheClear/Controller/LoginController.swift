@@ -90,17 +90,19 @@ class LoginController: UIViewController {
                         //check if user already signed in
                         if(tempUser.email != user.email){
                             self.newUser(parameters: parameters, idToken: idToken!, id: user.uid, createdAt: user.metadata.creationDate ?? Date()) {
-                                self.getUserTrips(id: user.uid, token: idToken!, completion: {
-                                    self.transitionViewController()
-                                })
+//                                self.getUserTrips(id: user.uid, token: idToken!, completion: {
+//                                    self.transitionViewController()
+//                                })
+                                self.transitionViewController()
                             }
                         }
                         else {
                             let manger = RealmManager()
                             manger.resetTrips()
-                            self.getUserTrips(id: tempUser.id, token: idToken!, completion: {
-                                self.transitionViewController()
-                            })
+//                            self.getUserTrips(id: tempUser.id, token: idToken!, completion: {
+//                                self.transitionViewController()
+//                            })
+                            self.transitionViewController()
                         }
                     }
                 }

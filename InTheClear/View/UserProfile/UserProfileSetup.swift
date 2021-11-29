@@ -45,12 +45,12 @@ extension UserProfile {
         let firstAttachmentString = NSAttributedString(attachment: imageAttachment)
         let secondAttachmentString = NSAttributedString(attachment: imageAttachment)
         //Initialize mutable string
-        let firstText = NSMutableAttributedString(string: "Plan a trip up to 5 days in advance.")
-        let secondText = NSMutableAttributedString(string: "Add stops during your trip.")
+        let firstText = NSMutableAttributedString(string: " Plan a trip up to 5 days in advance.")
+        let secondText = NSMutableAttributedString(string: " Add stops during your trip.")
         //Add image to mutable string
-        firstAttachmentString.append(firstText)
-        secondAttachmentString.append(secondText)
-        self.FirstPremiumBenefitLabel.attributedText = firstAttachmentString
-        self.SecondPremiumBenefitLabel.attributedText = secondAttachmentString
+        firstText.insert(firstAttachmentString, at: 0)
+        secondText.insert(secondAttachmentString, at: 0)
+        self.FirstPremiumBenefitLabel.attributedText = firstText
+        self.SecondPremiumBenefitLabel.attributedText = secondText
     }
 }

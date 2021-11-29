@@ -15,7 +15,7 @@ class UserData: Object {
     @objc dynamic var token = ""
     @objc dynamic var email = ""
     @objc dynamic var dateJoined: Date = Date()
-    @objc dynamic var paid: Bool
+    @objc dynamic var paid: Bool = false
 }
 
 struct FirebaseUser: Codable {

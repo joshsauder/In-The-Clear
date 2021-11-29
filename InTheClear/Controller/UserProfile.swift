@@ -28,6 +28,7 @@ class UserProfile: UIViewController, UITableViewDelegate, UITableViewDataSource 
         setupUserDetails()
         setupLogoutButton(button: LogoutButton)
         setupUpgradeButton(button: UpgradeButton, paid: userDetails[details[5]] == "true")
+        premiumLabelSetup()
         setupTable(tableView: UserInfoTable)
         UserInfoTable.allowsSelection = false;
         
@@ -36,7 +37,7 @@ class UserProfile: UIViewController, UITableViewDelegate, UITableViewDataSource 
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        details.count
+        details.count - 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
