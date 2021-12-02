@@ -18,9 +18,9 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Us-FJ-qSc">
-                                <rect key="frame" x="0.0" y="738" width="414" height="75"/>
+                                <rect key="frame" x="0.0" y="763" width="414" height="50"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="75" id="A1Y-au-hfm"/>
+                                    <constraint firstAttribute="height" constant="50" id="A1Y-au-hfm"/>
                                 </constraints>
                                 <state key="normal" title="Button"/>
                                 <connections>
@@ -35,18 +35,17 @@
                                 </constraints>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oan-nu-k8Y">
-                                <rect key="frame" x="0.0" y="663" width="414" height="75"/>
+                                <rect key="frame" x="0.0" y="711" width="414" height="50"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="75" id="c12-St-sW0"/>
+                                    <constraint firstAttribute="height" constant="50" id="c12-St-sW0"/>
                                 </constraints>
                                 <state key="normal" title="Button"/>
                                 <connections>
-                                    <action selector="LogoutButtonTapped:" destination="Pxa-MP-5qH" eventType="touchUpInside" id="7EU-7V-1yF"/>
                                     <action selector="UpgradeButtonTapped:" destination="Pxa-MP-5qH" eventType="touchUpInside" id="9ic-vS-8S9"/>
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="m8c-GH-hfC">
-                                <rect key="frame" x="20" y="484" width="374" height="159"/>
+                                <rect key="frame" x="20" y="532" width="374" height="159"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Premium Benefits" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PoI-D4-s7C">
                                         <rect key="frame" x="8" y="8" width="358" height="45"/>
@@ -84,12 +83,12 @@
                             <constraint firstItem="5Us-FJ-qSc" firstAttribute="leading" secondItem="wjP-1Z-3DA" secondAttribute="leading" id="8Ng-rJ-ngp"/>
                             <constraint firstItem="wjP-1Z-3DA" firstAttribute="trailing" secondItem="m8c-GH-hfC" secondAttribute="trailing" constant="20" id="BNM-TH-VbC"/>
                             <constraint firstItem="YXJ-4G-ge8" firstAttribute="top" secondItem="mdr-Z8-eZl" secondAttribute="top" id="CXo-Ww-khX"/>
+                            <constraint firstItem="5Us-FJ-qSc" firstAttribute="top" secondItem="oan-nu-k8Y" secondAttribute="bottom" constant="2" id="D27-x2-dRX"/>
                             <constraint firstItem="5Us-FJ-qSc" firstAttribute="trailing" secondItem="wjP-1Z-3DA" secondAttribute="trailing" id="O6j-pI-mMu"/>
                             <constraint firstItem="5Us-FJ-qSc" firstAttribute="bottom" secondItem="wjP-1Z-3DA" secondAttribute="bottom" id="W9H-i2-Wef"/>
                             <constraint firstItem="m8c-GH-hfC" firstAttribute="leading" secondItem="wjP-1Z-3DA" secondAttribute="leading" constant="20" id="eFm-vV-vwl"/>
                             <constraint firstItem="oan-nu-k8Y" firstAttribute="leading" secondItem="wjP-1Z-3DA" secondAttribute="leading" id="tc7-pm-4Ef"/>
                             <constraint firstItem="YXJ-4G-ge8" firstAttribute="leading" secondItem="wjP-1Z-3DA" secondAttribute="leading" id="wJw-bM-FdZ"/>
-                            <constraint firstItem="5Us-FJ-qSc" firstAttribute="top" secondItem="oan-nu-k8Y" secondAttribute="bottom" id="xUe-Ul-32H"/>
                             <constraint firstItem="YXJ-4G-ge8" firstAttribute="trailing" secondItem="wjP-1Z-3DA" secondAttribute="trailing" id="xhW-q5-1ts"/>
                         </constraints>
                     </view>

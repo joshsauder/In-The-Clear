@@ -14,15 +14,15 @@ class StoreKitHandler: NSObject {
     let productIdentifiers: Set<String>
     let currencyFormatter: NumberFormatter = NumberFormatter()
     var skProducts: Dictionary<String, SKProduct> = [:]
-    let PREMIUM = "premium"
+    let YEARLY = "yearly"
     var productDidPurchased: (() -> Void)?
-    static let shared = StoreKitHandler()
     
     override init() {
-        productIdentifiers = Set<String>([PREMIUM])
+        productIdentifiers = Set<String>([YEARLY])
         currencyFormatter.numberStyle = .currency
         super.init()
         SKPaymentQueue.default().add(self)
+        getAppStoreProducts()
     }
     
     func getAppStoreProducts(){

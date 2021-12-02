@@ -135,6 +135,7 @@
 		1996FA6523F7AA22000F906E /* TripDetailsModalTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripDetailsModalTest.swift; sourceTree = "<group>"; };
 		1996FA6B23F856C6000F906E /* StormArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = StormArrow.png; sourceTree = "<group>"; };
 		1996FA6F23F85759000F906E /* SunArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SunArrow.png; sourceTree = "<group>"; };
+		19AC528E2758720500421AB8 /* Configuration.storekit */ = {isa = PBXFileReference; lastKnownFileType = text; path = Configuration.storekit; sourceTree = "<group>"; };
 		19BA598B23EBC12B00B6F207 /* LoginViewSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewSetup.swift; sourceTree = "<group>"; };
 		19C914B9217575D0002EA1DB /* WeatherMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherMenu.swift; sourceTree = "<group>"; };
 		19C914BD21829BCE002EA1DB /* WeatherTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherTableViewCell.swift; sourceTree = "<group>"; };
@@ -222,6 +223,7 @@
 				190E440E210BF951005160C7 /* AppDelegate.swift */,
 				190E4415210BF958005160C7 /* Assets.xcassets */,
 				190E441A210BF958005160C7 /* Info.plist */,
+				19AC528E2758720500421AB8 /* Configuration.storekit */,
 			);
 			path = InTheClear;
 			sourceTree = "<group>";

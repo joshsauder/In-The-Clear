@@ -19,22 +19,24 @@ extension UserProfile {
     func setupLogoutButton(button: UIButton){
         button.backgroundColor = UIColor(red: 0.52, green: 0.11, blue: 0.52, alpha: 1.00)
 
-        button.setTitle("Logout", for: .normal)
+        button.setTitle("  Logout", for: .normal)
         button.setTitleColor(.white, for: .normal)
-        button.titleLabel!.font = UIFont.systemFont(ofSize: 30)
+        button.titleLabel!.font = UIFont.systemFont(ofSize: 20)
+        button.contentHorizontalAlignment = .left
     }
     
     func setupUpgradeButton(button: UIButton, paid: Bool){
         if paid {
             button.backgroundColor = UIColor.green
             
-            button.setTitle("\(UIImage(systemName: "checkmark.circle.fill")) You're a Premium Member", for: .normal)
+            button.setTitle("  \(UIImage(systemName: "checkmark.circle.fill")) You're a Premium Member", for: .normal)
         } else {
             button.backgroundColor = UIColor(red: 0.52, green: 0.11, blue: 0.52, alpha: 1.00)
-            button.setTitle("Upgrade to Premium", for: .normal)
+            button.setTitle("  Upgrade to Premium", for: .normal)
         }
         button.setTitleColor(.white, for: .normal)
-        button.titleLabel!.font = UIFont.systemFont(ofSize: 30)
+        button.titleLabel!.font = UIFont.systemFont(ofSize: 20)
+        button.contentHorizontalAlignment = .left
     }
     
     func premiumLabelSetup(){

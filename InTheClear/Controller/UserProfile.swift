@@ -19,12 +19,14 @@ class UserProfile: UIViewController, UITableViewDelegate, UITableViewDataSource 
     @IBOutlet weak var FirstPremiumBenefitLabel: UILabel!
     @IBOutlet weak var SecondPremiumBenefitLabel: UILabel!
     
+    let storeKitHandler = StoreKitHandler()
+    
     let details = ["Name", "Email", "Date Joined", "Total Trips", "Favorite Destination", "Paid"]
     var userDetails: [String:String] = [:]
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         setupUserDetails()
         setupLogoutButton(button: LogoutButton)
         setupUpgradeButton(button: UpgradeButton, paid: userDetails[details[5]] == "true")
@@ -101,8 +103,8 @@ class UserProfile: UIViewController, UITableViewDelegate, UITableViewDataSource 
     }
     
     @IBAction func UpgradeButtonTapped(_ sender: Any) {
-        StoreKitHandler.shared.purchase(product: StoreKitHandler.shared.PREMIUM)
-        StoreKitHandler.shared.productDidPurchased = {
+        storeKitHandler.purchase(product: storeKitHandler.YEARLY)
+        storeKitHandler.productDidPurchased = {
             [weak self] in
             print("send to DB")
         }
