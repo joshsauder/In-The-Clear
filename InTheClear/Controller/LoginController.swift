@@ -88,12 +88,25 @@ class LoginController: UIViewController {
                     else{
                         let tempUser = self.getUserData()
                         //check if user already signed in
-                        if(tempUser.email != user.email){
+                        print(user.uid)
+                        if(user.metadata.lastSignInDate == user.metadata.creationDate){
                             self.newUser(parameters: parameters, idToken: idToken!, id: user.uid, createdAt: user.metadata.creationDate ?? Date()) {
 //                                self.getUserTrips(id: user.uid, token: idToken!, completion: {
 //                                    self.transitionViewController()
 //                                })
                                 self.transitionViewController()
+                            }
+                        }
+                        else if (user.uid != tempUser.id){
+                            self.fetchUserData(userId: user.uid) { fetchedUser in
+                                if let fetchedUser = fetchedUser {
+                                    self.saveData(token: "", id: user.uid, name: fetchedUser.name, email: fetchedUser.email, createdAt: user.metadata.creationDate ?? Date())
+                                    self.transitionViewController()
+                                } else {
+                                    self.newUser(parameters: parameters, idToken: idToken!, id: user.uid, createdAt: user.metadata.creationDate ?? Date()) {
+                                        self.transitionViewController()
+                                    }
+                                }
                             }
                         }
                         else {
@@ -125,6 +138,7 @@ class LoginController: UIViewController {
         self.stopSpinner(spinner: self.spinner)
                 
         self.spinner = nil
+        self.saveNewUser(token: idToken, id: id, name: displayName, email: email, createdAt: createdAt)
         self.saveData(token: idToken, id: id, name: displayName, email: email, createdAt: createdAt)
         completion()
     }
@@ -142,11 +156,23 @@ class LoginController: UIViewController {
      */
     private func saveData(token: String, id: String, name: String, email: String, createdAt: Date) {
         let manager = RealmManager()
-        let firestore = FirestoreManager()
-        
         let data = manager.initUserData(id: id, name: name, token: token, email: email, createdAt: createdAt)
         manager.writeUser(user: data)
+    }
+    
+    private func saveNewUser(token: String, id: String, name: String, email: String, createdAt: Date){
+        let manager = RealmManager()
+        let firestore = FirestoreManager()
+
+        let data = manager.initUserData(id: id, name: name, token: token, email: email, createdAt: createdAt)
         firestore.addUser(userData: data)
+    }
+    
+    private func fetchUserData(userId: String, completion: @escaping (FirebaseUser?) -> ()){
+        let firestore = FirestoreManager()
+        firestore.getUser(userId: userId){ userRef, _  in
+            completion(userRef)
+        }
     }
     
     /**

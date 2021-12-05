@@ -20,9 +20,12 @@ class UserProfile: UIViewController, UITableViewDelegate, UITableViewDataSource 
     @IBOutlet weak var SecondPremiumBenefitLabel: UILabel!
     
     let storeKitHandler = StoreKitHandler()
+    let realmManager = RealmManager()
+    let firestoreManager = FirestoreManager()
     
     let details = ["Name", "Email", "Date Joined", "Total Trips", "Favorite Destination", "Paid"]
     var userDetails: [String:String] = [:]
+    var user: UserData = UserData()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -70,9 +73,9 @@ class UserProfile: UIViewController, UITableViewDelegate, UITableViewDataSource 
      Sets up the user details to be shown in UITableView
      */
     func setupUserDetails(){
-        let manager = RealmManager()
-        let user = manager.getUser()
-        let trips = manager.getTripHistory()
+        user = realmManager.getUser()
+        
+        let trips = realmManager.getTripHistory()
         
         let df = DateFormatter()
         df.dateStyle = .medium
@@ -103,10 +106,12 @@ class UserProfile: UIViewController, UITableViewDelegate, UITableViewDataSource 
     }
     
     @IBAction func UpgradeButtonTapped(_ sender: Any) {
+        user = realmManager.getUser()
         storeKitHandler.purchase(product: storeKitHandler.YEARLY)
         storeKitHandler.productDidPurchased = {
             [weak self] in
-            print("send to DB")
+            // TODO: Catch this error
+            self?.firestoreManager.updatePaid(userId: (self?.user.id)!)
         }
     }
     
