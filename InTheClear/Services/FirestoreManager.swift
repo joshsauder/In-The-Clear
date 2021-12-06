@@ -17,10 +17,8 @@ class FirestoreManager {
     
     func addUser(userData: UserData, expiration: String = "") {
         let user = FirebaseUser(name: userData.name, email: userData.email, dateJoined: userData.dateJoined.toString(dateFormat: DATE_FORMAT), planExpiration: expiration)
-        let newId = NSUUID().uuidString
         do {
-            try db.collection(USER_TABLE).document(newId).setData(from: user)
-            print("user saved")
+            try db.collection(USER_TABLE).document(userData.id).setData(from: user)
         } catch _ {
             print("Error while adding user")
         }
@@ -54,8 +52,15 @@ class FirestoreManager {
         var dateComponent = DateComponents()
         dateComponent.year = 1
         let futureDate = Calendar.current.date(byAdding: dateComponent, to: currentDate)
+        print(futureDate!.toString(dateFormat: self.DATE_FORMAT))
         docRef.updateData([
             "planExpiration": futureDate!.toString(dateFormat: self.DATE_FORMAT)
-        ])
+        ]) { err in
+            if let err = err {
+                print("Error updating document: \(err)")
+            } else {
+                print("Document successfully updated")
+            }
+        }
     }
 }
