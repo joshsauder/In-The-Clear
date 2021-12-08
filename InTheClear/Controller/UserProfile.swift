@@ -14,8 +14,6 @@ class UserProfile: UIViewController, UITableViewDelegate, UITableViewDataSource 
     
     @IBOutlet weak var UserInfoTable: UITableView!
     @IBOutlet weak var UserActionsTable: UITableView!
-    @IBOutlet weak var LogoutButton: UIButton!
-    @IBOutlet weak var UpgradeButton: UIButton!
     @IBOutlet weak var tableViewHeight: NSLayoutConstraint!
     @IBOutlet weak var FirstPremiumBenefitLabel: UILabel!
     @IBOutlet weak var SecondPremiumBenefitLabel: UILabel!
@@ -25,7 +23,7 @@ class UserProfile: UIViewController, UITableViewDelegate, UITableViewDataSource 
     let firestoreManager = FirestoreManager()
     
     let details = ["Name", "Email", "Date Joined", "Total Trips", "Favorite Destination", "Paid"]
-    let UserActions = ["Upgrade to Premium", "Logout"]
+    var UserActions = ["Upgrade to Premium", "Logout"]
     var userDetails: [String:String] = [:]
     var user: UserData = UserData()
     
@@ -33,10 +31,12 @@ class UserProfile: UIViewController, UITableViewDelegate, UITableViewDataSource 
         super.viewDidLoad()
 
         setupUserDetails()
-        setupLogoutButton(button: LogoutButton)
-        setupUpgradeButton(button: UpgradeButton, paid: userDetails[details[5]] == "true")
         premiumLabelSetup()
         setupTable(tableView: UserInfoTable)
+        
+        if(userDetails[details[5]] == "true"){
+            UserActions.removeFirst()
+        }
         
         // Setup UI Table Views
         UserInfoTable.allowsSelection = false
@@ -49,7 +49,7 @@ class UserProfile: UIViewController, UITableViewDelegate, UITableViewDataSource 
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if tableView == UserActionsTable {
-            UserActions.count
+            return UserActions.count
         }
         return details.count - 1
 
@@ -70,10 +70,16 @@ class UserProfile: UIViewController, UITableViewDelegate, UITableViewDataSource 
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if tableView == UserActionsTable {
+            return 0
+        }
         return 130
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        if tableView == UserActionsTable {
+            return nil
+        }
         return setupHeader(title: "Profile", width: tableView.frame.width)
     }
     
@@ -84,7 +90,7 @@ class UserProfile: UIViewController, UITableViewDelegate, UITableViewDataSource 
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if tableView == UserActionsTable {
-            if(indexPath.row == 0){
+            if(indexPath.row == 0 && userDetails[details[5]] != "true"){
                 UpgradeButtonTapped()
             } else {
                 LogoutButtonTapped()
