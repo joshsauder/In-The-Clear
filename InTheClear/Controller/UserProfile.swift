@@ -13,6 +13,7 @@ import Firebase
 class UserProfile: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var UserInfoTable: UITableView!
+    @IBOutlet weak var UserActionsTable: UITableView!
     @IBOutlet weak var LogoutButton: UIButton!
     @IBOutlet weak var UpgradeButton: UIButton!
     @IBOutlet weak var tableViewHeight: NSLayoutConstraint!
@@ -24,6 +25,7 @@ class UserProfile: UIViewController, UITableViewDelegate, UITableViewDataSource 
     let firestoreManager = FirestoreManager()
     
     let details = ["Name", "Email", "Date Joined", "Total Trips", "Favorite Destination", "Paid"]
+    let UserActions = ["Upgrade to Premium", "Logout"]
     var userDetails: [String:String] = [:]
     var user: UserData = UserData()
     
@@ -35,22 +37,34 @@ class UserProfile: UIViewController, UITableViewDelegate, UITableViewDataSource 
         setupUpgradeButton(button: UpgradeButton, paid: userDetails[details[5]] == "true")
         premiumLabelSetup()
         setupTable(tableView: UserInfoTable)
-        UserInfoTable.allowsSelection = false;
         
+        // Setup UI Table Views
+        UserInfoTable.allowsSelection = false
+        UserActionsTable.allowsSelection = true
         UserInfoTable.delegate = self
         UserInfoTable.dataSource = self
+        UserActionsTable.delegate = self
+        UserActionsTable.dataSource = self
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        details.count - 1
+        if tableView == UserActionsTable {
+            UserActions.count
+        }
+        return details.count - 1
+
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: UITableViewCell.CellStyle.value1, reuseIdentifier: "cellId")
         
-        //text label is on left side, details text label is on right side
-        cell.textLabel?.text = details[indexPath.row]
-        cell.detailTextLabel?.text = userDetails[details[indexPath.row]]
+        if tableView == UserActionsTable {
+            cell.textLabel?.text = UserActions[indexPath.row]
+        } else {
+            //text label is on left side, details text label is on right side
+            cell.textLabel?.text = details[indexPath.row]
+            cell.detailTextLabel?.text = userDetails[details[indexPath.row]]
+        }
         
         return cell
     }
@@ -66,6 +80,16 @@ class UserProfile: UIViewController, UITableViewDelegate, UITableViewDataSource 
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         //dynamic tableview height
         tableViewHeight.constant = tableView.contentSize.height
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if tableView == UserActionsTable {
+            if(indexPath.row == 0){
+                UpgradeButtonTapped()
+            } else {
+                LogoutButtonTapped()
+            }
+        }
     }
     
     
@@ -91,10 +115,8 @@ class UserProfile: UIViewController, UITableViewDelegate, UITableViewDataSource 
     
     /**
      Handles logout button onTap action
-     - parameters:
-        - sender:the button tapped
      */
-    @IBAction func LogoutButtonTapped(_ sender: Any) {
+    func LogoutButtonTapped() {
         let auth = Auth.auth()
         
         do {
@@ -105,7 +127,7 @@ class UserProfile: UIViewController, UITableViewDelegate, UITableViewDataSource 
         }
     }
     
-    @IBAction func UpgradeButtonTapped(_ sender: Any) {
+    func UpgradeButtonTapped() {
         user = realmManager.getUser()
         storeKitHandler.purchase(product: storeKitHandler.YEARLY)
         storeKitHandler.productDidPurchased = {
