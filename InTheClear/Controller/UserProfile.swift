@@ -52,7 +52,6 @@ class UserProfile: UIViewController, UITableViewDelegate, UITableViewDataSource 
             return UserActions.count
         }
         return details.count - 1
-
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

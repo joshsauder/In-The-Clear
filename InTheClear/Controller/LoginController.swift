@@ -88,7 +88,6 @@ class LoginController: UIViewController {
                     else{
                         let tempUser = self.getUserData()
                         //check if user already signed in
-                        print(user.uid)
                         if(user.metadata.lastSignInDate == user.metadata.creationDate){
                             self.newUser(parameters: parameters, idToken: idToken!, id: user.uid, createdAt: user.metadata.creationDate ?? Date()) {
 //                                self.getUserTrips(id: user.uid, token: idToken!, completion: {
@@ -100,7 +99,14 @@ class LoginController: UIViewController {
                         else if (user.uid != tempUser.id){
                             self.fetchUserData(userId: user.uid) { fetchedUser in
                                 if let fetchedUser = fetchedUser {
-                                    self.saveData(token: "", id: user.uid, name: fetchedUser.name, email: fetchedUser.email, createdAt: user.metadata.creationDate ?? Date())
+                                    var paidDate = Date()
+                                    if fetchedUser.planExpiration != "" {
+                                        let dateFormatter = DateFormatter()
+                                        dateFormatter.locale = Locale(identifier: "en_US_POSIX")
+                                        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+                                        paidDate = dateFormatter.date(from: fetchedUser.planExpiration) ?? Date()
+                                    }
+                                    self.saveData(token: "", id: user.uid, name: fetchedUser.name, email: fetchedUser.email, createdAt: user.metadata.creationDate ?? Date(), paidDate: paidDate)
                                     self.transitionViewController()
                                 } else {
                                     self.newUser(parameters: parameters, idToken: idToken!, id: user.uid, createdAt: user.metadata.creationDate ?? Date()) {
@@ -154,9 +160,9 @@ class LoginController: UIViewController {
     /**
      Save User Data to Realm
      */
-    private func saveData(token: String, id: String, name: String, email: String, createdAt: Date) {
+    private func saveData(token: String, id: String, name: String, email: String, createdAt: Date, paidDate: Date = Date()) {
         let manager = RealmManager()
-        let data = manager.initUserData(id: id, name: name, token: token, email: email, createdAt: createdAt)
+        let data = manager.initUserData(id: id, name: name, token: token, email: email, createdAt: createdAt, paidDate: paidDate)
         manager.writeUser(user: data)
     }
     

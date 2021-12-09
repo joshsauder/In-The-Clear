@@ -66,13 +66,14 @@ class RealmManager {
         - Token: Access Token
      - returns: The User Data
     */
-    func initUserData(id: String, name: String, token: String, email: String, createdAt: Date) -> UserData {
+    func initUserData(id: String, name: String, token: String, email: String, createdAt: Date, paidDate: Date = Date()) -> UserData {
         let userData = UserData()
         userData.id = id
         userData.name = name
         userData.token = token
         userData.email = email
         userData.dateJoined = createdAt
+        userData.paid = paidDate > Date()
         return userData
     }
     
