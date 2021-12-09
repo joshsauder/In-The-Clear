@@ -139,6 +139,8 @@ class UserProfile: UIViewController, UITableViewDelegate, UITableViewDataSource 
             [weak self] in
             // TODO: Catch this error
             self?.firestoreManager.updatePaid(userId: (self?.user.id)!)
+            self?.user.paid = true
+            self?.realmManager.writeUser(user: (self?.user)!)
         }
     }
     

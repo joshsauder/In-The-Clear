@@ -30,6 +30,7 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
     var locationSelected = Location.startLocation
     var locationStart = CLLocation()
     var locationEnd = CLLocation()
+    let realmManager = RealmManager()
     
     @IBOutlet weak var mapView: GMSMapView!
     
@@ -363,13 +364,16 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
     Calls createLine to add polyline to map and also enables the weatherList button and time label at bottom
      */
     private func showDirection(){
+        let user = realmManager.getUser()
         
         let different = Calendar.current.dateComponents([Calendar.Component.day], from: Date(), to: userTripDetails.endTime)
         
         //dark sky only supports dates up to 7 days out
         if different.day! > 6 {
-            showAlertTimePopup(title: "Trip Too Long", message: "Looks like your trip is too long. Try shortening your tip up a bit.")
+            showAlertTimePopup(title: "Trip Too Long", message: "Looks like you're trip is too long. Try shortening your tip up a bit.")
             
+        } else if !user.paid && different.hour! > 5 {
+            showAlertTimePopup(title: "Trip Too Long", message: "Looks like you're not a premium user. Upgrade to Premium to use a trip longer than 5 hours.")
         } else {
         
             disableInputButtons()

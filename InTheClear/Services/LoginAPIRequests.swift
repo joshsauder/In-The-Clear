@@ -29,16 +29,6 @@ extension LoginController {
      */
     func signInUser(parameters: User, token: String) -> (String, String){
         print(token)
-//        AF.request("\(url.BACKEND_URL)/User/Auth", method: .post, parameters: parameters, encoder: JSONParameterEncoder.default, headers: headers).validate().responseJSON {
-//            response in
-//
-//            if(response.response?.statusCode != 200){
-//                completion("", "", "", "")
-//            }
-//
-//            let json = JSON(response.data!)
-//            completion(json["id"].stringValue, json["displayName"].stringValue, json["email"].stringValue, json["createdAt"].stringValue)
-//        }
         return (parameters.displayName, parameters.email)
     }
     
