@@ -168,7 +168,6 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
     }
     
     func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
-        
         mapView.isMyLocationEnabled = true
         return false
     }
@@ -177,7 +176,6 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
     }
     
     func didTapMyLocationButton(for mapView: GMSMapView) -> Bool {
-        
         mapView.isMyLocationEnabled = true
         mapView.selectedMarker = nil
         return false
@@ -187,7 +185,6 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
      Function to request user enable location services in settings
     */
     internal func showLocationDisabledPopUp() {
-        
         let alertController = UIAlertController(title: "Background Location Access Disabled",
                                                 message: "Your Location is disabled. Enable if you'd like your location to be shown on map",
                                                 preferredStyle: .alert)
@@ -209,7 +206,6 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
         Initializes the initail trip details modal
      */
     func intializeLocationData() -> tripDetailsModal {
-        
         let tripDetails = userTripDetails
         
         if userTripDetails.cityStops.count == 0 {
@@ -230,10 +226,8 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
             - tripDetails: the user inputted trip details
      */
     func recieveLocationData(tripDetials: tripDetailsModal) {
-        
         userTripDetails = tripDetials
         processTripData()
-        
     }
     
     /**

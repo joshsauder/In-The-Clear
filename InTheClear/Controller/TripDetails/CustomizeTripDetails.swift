@@ -29,6 +29,7 @@ class CustomizeTripDetails: UIViewController, CellDataDelegate{
     weak var delegate: TripDetailsDetegate?
     var earliestTimes: [Date] = [Date()]
     var timeOffset: [Int] = []
+    let realmManager = RealmManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -66,6 +67,11 @@ class CustomizeTripDetails: UIViewController, CellDataDelegate{
      - sender: The UI object interacted with
      */
     @IBAction func addButtonTapped(_ sender: Any){
+        let user = realmManager.getUser()
+        if(!user.paid){
+            self.present(self.showAlert(title: "Cannot Add Stops", message: "If you would like to add stops to your trip, please upgrade to Premium."), animated: true)
+            return
+        }
         //open GMSAutocomplete controller and present
         let autoCompleteController = GMSAutocompleteViewController()
         autoCompleteController.delegate = self
