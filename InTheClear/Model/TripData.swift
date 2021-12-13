@@ -23,3 +23,34 @@ class Locations: Object {
     @objc dynamic var latitude: Double = 0.0
     @objc dynamic var longitude: Double = 0.0
 }
+
+
+struct FirebaseTripData: Codable {
+    let duration: Int
+    let distance: Int
+    let locations: [LocationData]
+    let dateAdded: String
+    
+    enum CodingKeys: String, CodingKey {
+        case duration
+        case distance
+        case locations
+        case dateAdded
+    }
+}
+
+struct LocationData: Codable {
+    let city: String
+    let condition: String
+    let longitude: Double
+    let latitude: Double
+    let temperature: Int
+    
+    enum CodingKeys: String, CodingKey {
+        case city
+        case condition
+        case longitude
+        case latitude
+        case temperature
+    }
+}

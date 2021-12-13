@@ -14,11 +14,15 @@ class FirestoreManager {
     private let db = Firestore.firestore()
     let DATE_FORMAT = "yyyy-MM-dd HH:mm:ss"
     let USER_TABLE = "user"
+    let TRIP_TABLE = "trip"
     
     func addUser(userData: UserData, expiration: String = "") {
         let user = FirebaseUser(name: userData.name, email: userData.email, dateJoined: userData.dateJoined.toString(dateFormat: DATE_FORMAT), planExpiration: expiration)
         do {
             try db.collection(USER_TABLE).document(userData.id).setData(from: user)
+            try db.collection(TRIP_TABLE).document(userData.id).setData([
+                "trips": []
+            ])
         } catch _ {
             print("Error while adding user")
         }
@@ -56,6 +60,19 @@ class FirestoreManager {
         docRef.updateData([
             "planExpiration": futureDate!.toString(dateFormat: self.DATE_FORMAT)
         ]) { err in
+            if let err = err {
+                print("Error updating document: \(err)")
+            } else {
+                print("Document successfully updated")
+            }
+        }
+    }
+    
+    func postTrip(userId: String, tripData: FirebaseTripData){
+        let docRef = db.collection(TRIP_TABLE).document(userId)
+        docRef.updateData([
+            "trips": FieldValue.arrayUnion([tripData])
+        ]){ err in
             if let err = err {
                 print("Error updating document: \(err)")
             } else {

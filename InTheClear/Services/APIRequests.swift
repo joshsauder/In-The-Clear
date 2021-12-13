@@ -12,22 +12,6 @@ import SwiftyJSON
 import CoreLocation
 
 extension ViewController {
-    
-    struct TripPostData: Encodable {
-        let userId: String
-        let duration: Int
-        let distance: Int
-        let locations: [LocationData]
-        
-    }
-    
-    struct LocationData: Encodable {
-        let city: String
-        let condition: String
-        let longitude: Double
-        let latitude: Double
-        let temperature: Int
-    }
     /**
      Calls the AWS Lambda Weather API service and populates the weather array
      
@@ -125,6 +109,7 @@ extension ViewController {
         - Locations: Array of CLLocations for each city
      */
     func postTrip(tripData: tripDataModal, distance: Int, duration: Int, locations: [CLLocation]){
+        let fireStoreManager = FirestoreManager()
         var locationData : [LocationData] = []
         for (index, stop) in tripData.stops.enumerated(){
             //find first instance of stop and save its index
@@ -137,13 +122,10 @@ extension ViewController {
             }
         }
         
-        let (token, id) = getUserData()
+        let userId = getUserData()
+        let postData = FirebaseTripData(duration: duration, distance: distance, locations: locationData, dateAdded: Date().toString(dateFormat: "yyyy-MM-dd HH:mm:ss"))
         
-        let postData = TripPostData(userId: id, duration: duration, distance: distance, locations: locationData)
-        
-        let headers: HTTPHeaders = ["Authorization": "Bearer " + token]
-        AF.request("\(url.BACKEND_URL)/Trip", method: .post, parameters: postData, encoder: JSONParameterEncoder.default, headers: headers)
-        
+        fireStoreManager.postTrip(userId: userId, tripData: postData)
         addUserTrip(trip: locationData, distance: distance, duration: duration)
     }
     
@@ -152,11 +134,11 @@ extension ViewController {
      
      - returns: The access token and user ID
      */
-    private func getUserData() -> (String, String) {
+    private func getUserData() -> String {
         let manager = RealmManager()
         
         let user = manager.getUser()
-        return (user.token, user.id)
+        return user.id
     }
     
     
