@@ -36,43 +36,36 @@ extension LoginController {
      Gets the user trips from backend
      - parameters:
         - id: User ID
-        - token: Auth token
         - completion:completion when user data persisted
      */
-    func getUserTrips(id: String, token: String, completion: @escaping () -> ()){
+    func getUserTrips(id: String, completion: @escaping () -> ()){
+        let firestoreManager = FirestoreManager()
         
-        let headers: HTTPHeaders = ["Authorization": "Bearer " + token]
-        
-        AF.request("\(url.BACKEND_URL)/Trip?id=\(id)", method: .get, headers: headers).responseJSON { response in
-            
-            switch response.result {
-                
-            case .success(let value):
-                let json = JSON(value)
-                let trips = json.arrayValue.map { (trip: JSON) -> TripData in
-                    let locations = trip["locations"].arrayValue.map { (location: JSON) -> Locations in
+        firestoreManager.getTrips(userId: id) { tripsResponse in
+            if let tripsResponse = tripsResponse {
+                let trips = tripsResponse.trips.map { (trip: FirebaseTripData) -> TripData in
+                    let locations = trip.locations.map { (location: LocationData) -> Locations in
                         let loc = Locations()
-                        loc.city = location["city"].stringValue
-                        loc.condition = location["condition"].stringValue
-                        loc.longitude = location["longitude"].doubleValue
-                        loc.latitude = location["latitude"].doubleValue
-                        
+                        loc.city = location.city
+                        loc.condition = location.condition
+                        loc.longitude = location.longitude
+                        loc.latitude = location.latitude
                         return loc
                     }
                     
                     let tripData = TripData()
-                    tripData.distance = trip["distance"].stringValue
-                    tripData.duration = trip["duration"].stringValue
-                    tripData.createdAt = self.parseDate(date: trip["createdAt"].stringValue)
+                    tripData.distance = trip.distance.description
+                    tripData.duration = trip.duration.description
+                    tripData.createdAt = self.parseDate(date: trip.dateAdded)
                     tripData.locations.append(objectsIn: locations)
                     
                     return tripData
                 }
+                
                 self.postUserTrips(trips: trips)
                 completion()
-            
-            case .failure(let error):
-                print(error)
+            } else {
+                self.postUserTrips(trips: [])
                 completion()
             }
         }

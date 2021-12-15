@@ -80,4 +80,25 @@ class FirestoreManager {
             }
         }
     }
+    
+    func getTrips(userId: String, completion: @escaping (FirebaseTrips?) -> Void){
+        let docRef = db.collection(TRIP_TABLE).document(userId)
+        docRef.getDocument { (document, error) in
+            let result = Result{
+                try document?.data(as: FirebaseTrips.self)
+            }
+            
+            switch result {
+            case .success(let trips):
+                if let trips = trips {
+                    completion(trips)
+                } else {
+                    completion(nil)
+                }
+            case .failure(let error):
+                print("Error decoding trips: \(error)")
+                completion(nil)
+            }
+        }
+    }
 }
