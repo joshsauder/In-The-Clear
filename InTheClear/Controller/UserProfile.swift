@@ -40,11 +40,14 @@ class UserProfile: UIViewController, UITableViewDelegate, UITableViewDataSource 
         
         // Setup UI Table Views
         UserInfoTable.allowsSelection = false
-        UserActionsTable.allowsSelection = true
+        UserActionsTable.allowsSelection = false
         UserInfoTable.delegate = self
         UserInfoTable.dataSource = self
         UserActionsTable.delegate = self
         UserActionsTable.dataSource = self
+
+        UserActionsTable.layoutMargins = UIEdgeInsets.zero
+        UserActionsTable.separatorInset = UIEdgeInsets.zero
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -59,6 +62,9 @@ class UserProfile: UIViewController, UITableViewDelegate, UITableViewDataSource 
         
         if tableView == UserActionsTable {
             cell.textLabel?.text = UserActions[indexPath.row]
+            // style cell
+            cell.layoutMargins = UIEdgeInsets.zero
+            cell.separatorInset = UIEdgeInsets.zero
         } else {
             //text label is on left side, details text label is on right side
             cell.textLabel?.text = details[indexPath.row]
@@ -70,7 +76,7 @@ class UserProfile: UIViewController, UITableViewDelegate, UITableViewDataSource 
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if tableView == UserActionsTable {
-            return 0
+            return 30
         }
         return 130
     }
@@ -80,6 +86,14 @@ class UserProfile: UIViewController, UITableViewDelegate, UITableViewDataSource 
             return nil
         }
         return setupHeader(title: "Profile", width: tableView.frame.width)
+    }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection
+                                section: Int) -> String? {
+        if tableView == UserActionsTable {
+            return "  Profile Actions"
+        }
+        return nil
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {

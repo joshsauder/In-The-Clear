@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		19017516223F3E3E00B6793A /* InTheClear.png in Resources */ = {isa = PBXBuildFile; fileRef = 19017515223F3E3E00B6793A /* InTheClear.png */; };
 		19017526224DA5F100B6793A /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19017525224DA5F100B6793A /* MapKit.framework */; };
+		190A2A70276AF0F8003C717E /* undraw_navigator_a479.png in Resources */ = {isa = PBXBuildFile; fileRef = 190A2A6F276AF0F7003C717E /* undraw_navigator_a479.png */; };
 		190E440F210BF951005160C7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 190E440E210BF951005160C7 /* AppDelegate.swift */; };
 		190E4411210BF951005160C7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 190E4410210BF951005160C7 /* ViewController.swift */; };
 		190E4414210BF951005160C7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 190E4412210BF951005160C7 /* Main.storyboard */; };
@@ -90,6 +91,7 @@
 /* Begin PBXFileReference section */
 		19017515223F3E3E00B6793A /* InTheClear.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = InTheClear.png; sourceTree = "<group>"; };
 		19017525224DA5F100B6793A /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		190A2A6F276AF0F7003C717E /* undraw_navigator_a479.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = undraw_navigator_a479.png; sourceTree = "<group>"; };
 		190E440B210BF951005160C7 /* InTheClear.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = InTheClear.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		190E440E210BF951005160C7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		190E4410210BF951005160C7 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -286,6 +288,7 @@
 				191E3F9E22E3FADE00F0893D /* baseline_my_location_black_36dp.png */,
 				1939B5F422D41FB700E63F32 /* mapKey.png */,
 				19017515223F3E3E00B6793A /* InTheClear.png */,
+				190A2A6F276AF0F7003C717E /* undraw_navigator_a479.png */,
 			);
 			path = supportingFiles;
 			sourceTree = "<group>";
@@ -546,6 +549,7 @@
 				19D1242C22EA8EFC00636C23 /* CustomizeTripDetails.storyboard in Resources */,
 				1939B5F022D0248900E63F32 /* cloud.png in Resources */,
 				1939B5EA22D0247000E63F32 /* snow.png in Resources */,
+				190A2A70276AF0F8003C717E /* undraw_navigator_a479.png in Resources */,
 				191E3F9D22E2A08200F0893D /* Night.png in Resources */,
 				19D1EEC5245A5E1A000BEDFA /* UserProfile.storyboard in Resources */,
 				191E3F9C22E2A08200F0893D /* CloudyNight.png in Resources */,
