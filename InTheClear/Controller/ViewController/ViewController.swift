@@ -360,7 +360,7 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
     private func showDirection(){
         let user = realmManager.getUser()
         
-        let different = Calendar.current.dateComponents([Calendar.Component.day], from: Date(), to: userTripDetails.endTime)
+        let different = Calendar.current.dateComponents([Calendar.Component.day, Calendar.Component.hour], from: Date(), to: userTripDetails.endTime)
         
         //dark sky only supports dates up to 7 days out
         if different.day! > 6 {

@@ -20,7 +20,6 @@ class RealmManager {
     */
     func writeUser(user: UserData){
         try! realm.write {
-            realm.deleteAll()
             realm.add(user)
         }
     }

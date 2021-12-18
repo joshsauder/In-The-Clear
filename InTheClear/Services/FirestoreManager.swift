@@ -71,7 +71,7 @@ class FirestoreManager {
     func postTrip(userId: String, tripData: FirebaseTripData){
         let docRef = db.collection(TRIP_TABLE).document(userId)
         docRef.updateData([
-            "trips": FieldValue.arrayUnion([tripData])
+            "trips": FieldValue.arrayUnion([tripData.dictionary])
         ]){ err in
             if let err = err {
                 print("Error updating document: \(err)")

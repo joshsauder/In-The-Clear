@@ -38,6 +38,15 @@ struct FirebaseTripData: Codable {
     let locations: [LocationData]
     let dateAdded: String
     
+    var dictionary: [String: Any] {
+        return [
+            "duration": duration,
+            "distance": distance,
+            "locations": locations.map { $0.dictionary },
+            "dateAdded": dateAdded
+        ]
+    }
+    
     enum CodingKeys: String, CodingKey {
         case duration
         case distance
@@ -52,6 +61,16 @@ struct LocationData: Codable {
     let longitude: Double
     let latitude: Double
     let temperature: Int
+    
+    var dictionary: [String: Any] {
+        return [
+            "city": city,
+            "condition": condition,
+            "longitude": longitude,
+            "latitude": latitude,
+            "temperature": temperature
+        ]
+    }
     
     enum CodingKeys: String, CodingKey {
         case city
