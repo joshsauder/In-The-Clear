@@ -12,6 +12,7 @@ import Firebase
 
 class UserProfile: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
+    @IBOutlet weak var PremiumView: UIView!
     @IBOutlet weak var UserInfoTable: UITableView!
     @IBOutlet weak var UserActionsTable: UITableView!
     @IBOutlet weak var tableViewHeight: NSLayoutConstraint!
@@ -32,6 +33,7 @@ class UserProfile: UIViewController, UITableViewDelegate, UITableViewDataSource 
 
         setupUserDetails()
         premiumLabelSetup()
+        premiumViewSetup()
         setupTable(tableView: UserInfoTable)
         
         if(userDetails[details[5]] == "true"){
