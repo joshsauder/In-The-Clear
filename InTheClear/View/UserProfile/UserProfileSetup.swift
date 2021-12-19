@@ -40,7 +40,7 @@ extension UserProfile {
         gradientLayer.zPosition = -1
         self.PremiumView.layer.addSublayer(gradientLayer)
         
-        self.PremiumView.layer.cornerRadius = 16
+        self.PremiumView.layer.cornerRadius = 10
         self.PremiumView.layer.masksToBounds = true
     }
 }
