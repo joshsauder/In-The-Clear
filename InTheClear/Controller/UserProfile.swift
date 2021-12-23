@@ -42,12 +42,13 @@ class UserProfile: UIViewController, UITableViewDelegate, UITableViewDataSource 
         
         // Setup UI Table Views
         UserInfoTable.allowsSelection = false
-        UserActionsTable.allowsSelection = false
+        UserActionsTable.allowsSelection = true
         UserInfoTable.delegate = self
         UserInfoTable.dataSource = self
         UserActionsTable.delegate = self
         UserActionsTable.dataSource = self
 
+        // Fix table insets
         UserActionsTable.layoutMargins = UIEdgeInsets.zero
         UserActionsTable.separatorInset = UIEdgeInsets.zero
     }
