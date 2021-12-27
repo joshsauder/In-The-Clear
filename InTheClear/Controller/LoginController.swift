@@ -120,8 +120,6 @@ class LoginController: UIViewController {
                             }
                         }
                         else {
-                            let manger = RealmManager()
-                            manger.resetTrips()
                             self.getUserTrips(id: tempUser.id, completion: {
                                 self.transitionViewController()
                             })
