@@ -30,13 +30,16 @@ class RealmTest: XCTestCase {
         let id = "123"
         let name = "Josh"
         let token = "ABCD"
+        let email = "josh.sauder@aa.bb"
+        let date = Date()
         
-        let user = manager.initUserData(id: id, name: name, token: token)
+        let user = manager.initUserData(id: id, name: name, token: token, email: email, createdAt: date)
         
         
         XCTAssertEqual(user.id, id)
         XCTAssertEqual(user.name, name)
         XCTAssertEqual(user.token, token)
+        XCTAssertEqual(<#T##expression1: Equatable##Equatable#>, <#T##expression2: Equatable##Equatable#>)
     }
     
     /**
@@ -46,8 +49,10 @@ class RealmTest: XCTestCase {
         let id = "123"
         let name = "Josh"
         let token = "ABCD"
+        let email = "josh.sauder@aa.bb"
+        let date = Date()
         
-        let user = manager.initUserData(id: id, name: name, token: token)
+        let user = manager.initUserData(id: id, name: name, token: token, email: email, createdAt: date)
         
         manager.writeUser(user: user)
         
@@ -63,14 +68,16 @@ class RealmTest: XCTestCase {
         let id = "123"
         let name = "Josh"
         let token = "ABCD"
+        let email = "josh.sauder@aa.bb"
+        let date = Date()
         
-        let user1 = manager.initUserData(id: id, name: name, token: token)
+        let user1 = manager.initUserData(id: id, name: name, token: token, email: email, createdAt: date)
         
         let id2 = "456"
         let name2 = "Sauder"
         let token2 = "EFGH"
         
-        let user2 = manager.initUserData(id: id2, name: name2, token: token2)
+        let user2 = manager.initUserData(id: id2, name: name2, token: token2, email: email, createdAt: date)
         
         //user1 should be not be retrieved once user 2 is inserted
         manager.writeUser(user: user1)

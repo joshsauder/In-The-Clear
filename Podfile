@@ -13,7 +13,6 @@ target 'InTheClear' do
   pod 'Firebase/Auth'
   pod 'Firebase/Firestore'
   pod 'FirebaseFirestoreSwift'
-  pod 'FirebaseFirestoreSwift'
   pod 'RealmSwift', '~>10'
 end
 
@@ -24,7 +23,9 @@ target 'InTheClearTests' do
   pod 'GooglePlaces'
   pod 'Alamofire', '~> 5.0.0-rc.3' 
   pod 'SwiftyJSON', '~> 4.0' 
-  # pod 'Firebase/Analytics'
-  # pod 'Firebase/Auth'
-  pod 'RealmSwift', '~>10' 
+  pod 'Firebase/Analytics'
+  pod 'Firebase/Auth'
+  pod 'RealmSwift', '~>10'
+  pod 'Firebase/Firestore'
+  pod 'FirebaseFirestoreSwift' 
 end

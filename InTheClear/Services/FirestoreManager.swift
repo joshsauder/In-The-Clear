@@ -76,7 +76,7 @@ class FirestoreManager {
             if let err = err {
                 print("Error updating document: \(err)")
                 self.db.collection(self.TRIP_TABLE).document(userId).setData([
-                        "trips": [tripData.dictionary]
+                    "trips": [tripData.dictionary]
                 ])
             } else {
                 print("Document successfully updated")
