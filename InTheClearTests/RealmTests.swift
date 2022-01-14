@@ -39,7 +39,7 @@ class RealmTest: XCTestCase {
         XCTAssertEqual(user.id, id)
         XCTAssertEqual(user.name, name)
         XCTAssertEqual(user.token, token)
-        XCTAssertEqual(<#T##expression1: Equatable##Equatable#>, <#T##expression2: Equatable##Equatable#>)
+        XCTAssertEqual(user.email, email)
     }
     
     /**
