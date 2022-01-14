@@ -25,6 +25,9 @@ class StoreKitHandler: NSObject {
         getAppStoreProducts()
     }
     
+    /**
+     Fetches Apps In App purchases
+     */
     func getAppStoreProducts(){
         let productRequest = SKProductsRequest(productIdentifiers: productIdentifiers)
         productRequest.delegate = self
@@ -45,11 +48,19 @@ extension StoreKitHandler: SKProductsRequestDelegate {
 }
 
 extension StoreKitHandler {
+    /**
+     Sends purchase to the Store Kit Payment Queue
+     - parameters:
+        - product: Product ID
+     */
     func purchase(product: String){
         guard let skProduct = skProducts[product] else { return }
         SKPaymentQueue.default().add(SKPayment(product: skProduct))
     }
     
+    /**
+     Restores previous purchases
+     */
     func restorePreviousPurchase(){
         SKPaymentQueue.default().restoreCompletedTransactions()
     }
@@ -83,6 +94,12 @@ extension StoreKitHandler: SKPaymentTransactionObserver {
 }
 
 extension StoreKitHandler {
+    /**
+     Fetches price for a given product
+     - parameters:
+        - productKey: The product identifier
+     - returns: Product price
+     */
     private func price(forProduct productKey: String) -> String? {
         let currencyFormatter = NumberFormatter()
         guard let skProduct = skProducts[productKey] else { return nil }

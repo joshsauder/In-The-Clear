@@ -52,8 +52,11 @@ class RealmManager {
      
      - Parameters:
         - id: User ID
-        - Name : User Display Name
-        - Token: Access Token
+        - name : User Display Name
+        - token: Access Token
+        - email: User Email
+        - createdAt: User creation date
+        - paidDate: Date the user paid
      - returns: The User Data
     */
     func initUserData(id: String, name: String, token: String, email: String, createdAt: Date, paidDate: Date = Date()) -> UserData {

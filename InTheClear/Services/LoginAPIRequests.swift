@@ -20,12 +20,11 @@ struct User: Encodable {
 extension LoginController {
     
     /**
-     Sends user credentials to API and validates the token
+     Returns email and display name
      
      - Parameters:
         - parameters: User login credentials
         - token: Access Token
-        - completion: The User ID and DisplayName
      */
     func signInUser(parameters: User, token: String) -> (String, String){
         print(token)
