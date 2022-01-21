@@ -111,6 +111,7 @@ class UserProfile: UIViewController, UITableViewDelegate, UITableViewDataSource 
             } else {
                 LogoutButtonTapped()
             }
+            tableView.deselectRow(at: indexPath, animated: false)
         }
     }
     
@@ -158,8 +159,7 @@ class UserProfile: UIViewController, UITableViewDelegate, UITableViewDataSource 
         storeKitHandler.productDidPurchased = {
             [weak self] in
             self?.firestoreManager.updatePaid(userId: (self?.user.id)!)
-            self?.user.paid = true
-            self?.realmManager.writeUser(user: (self?.user)!)
+            self?.realmManager.updatePaid(user: (self?.user)!)
         }
     }
     

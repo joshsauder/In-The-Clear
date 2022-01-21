@@ -26,6 +26,17 @@ class RealmManager {
     }
     
     /**
+    Updates user paid boolean to true
+    - parameters:
+       - user: User data to be persisted
+    */
+    func updatePaid(user: UserData){
+        try! realm.write {
+            user.paid = true
+        }
+    }
+    
+    /**
      Persists the trip history to Realm
      - parameters:
         - trip: Array of trips to be persisted
