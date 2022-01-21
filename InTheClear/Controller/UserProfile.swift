@@ -149,12 +149,14 @@ class UserProfile: UIViewController, UITableViewDelegate, UITableViewDataSource 
         }
     }
     
+    /**
+     Handles the upgrade button being tapped
+     */
     func UpgradeButtonTapped() {
         user = realmManager.getUser()
         storeKitHandler.purchase(product: storeKitHandler.YEARLY)
         storeKitHandler.productDidPurchased = {
             [weak self] in
-            // TODO: Catch this error
             self?.firestoreManager.updatePaid(userId: (self?.user.id)!)
             self?.user.paid = true
             self?.realmManager.writeUser(user: (self?.user)!)

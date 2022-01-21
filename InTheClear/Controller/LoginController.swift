@@ -167,6 +167,9 @@ class LoginController: UIViewController {
         manager.writeUser(user: data)
     }
     
+    /**
+     Saves user data to Firebase
+     */
     private func saveNewUser(token: String, id: String, name: String, email: String, createdAt: Date){
         let manager = RealmManager()
         let firestore = FirestoreManager()
@@ -175,6 +178,9 @@ class LoginController: UIViewController {
         firestore.addUser(userData: data)
     }
     
+    /**
+     Fetches user data from Firebase
+     */
     private func fetchUserData(userId: String, completion: @escaping (FirebaseUser?) -> ()){
         let firestore = FirestoreManager()
         firestore.getUser(userId: userId){ userRef, _  in
