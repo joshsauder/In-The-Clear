@@ -11,6 +11,9 @@ import UIKit
 
 extension UserProfile {
     
+    /**
+     Sets up Premium label
+     */
     func premiumLabelSetup(){
         let imageAttachment =  NSTextAttachment()
         imageAttachment.image = UIImage(systemName: "checkmark.circle")?.withTintColor(.white, renderingMode: .alwaysOriginal)
@@ -31,6 +34,9 @@ extension UserProfile {
         self.SecondPremiumBenefitLabel.textColor = .white
     }
     
+    /**
+     Colors the premium view
+     */
     func premiumViewSetup(){
         let colorOne = UIColor(red:0.47, green:0.15, blue:0.50, alpha:1.0)
         let colorTwo = UIColor(red:0.88, green:0.19, blue:0.88, alpha:1.0)
