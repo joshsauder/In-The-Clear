@@ -16,6 +16,7 @@ class UserProfile: UIViewController, UITableViewDelegate, UITableViewDataSource 
     @IBOutlet weak var UserInfoTable: UITableView!
     @IBOutlet weak var UserActionsTable: UITableView!
     @IBOutlet weak var tableViewHeight: NSLayoutConstraint!
+    @IBOutlet weak var PayLabel: UILabel!
     @IBOutlet weak var FirstPremiumBenefitLabel: UILabel!
     @IBOutlet weak var SecondPremiumBenefitLabel: UILabel!
     
@@ -160,6 +161,15 @@ class UserProfile: UIViewController, UITableViewDelegate, UITableViewDataSource 
             [weak self] in
             self?.firestoreManager.updatePaid(userId: (self?.user.id)!)
             self?.realmManager.updatePaid(user: (self?.user)!)
+            
+            // Remove upgrade logo
+            self?.UserActions.removeFirst()
+            self?.UserActionsTable.beginUpdates()
+            self?.UserActionsTable.deleteRows(at: [IndexPath.init(row: 0, section: 0)], with: UITableView.RowAnimation.right)
+            self?.UserActionsTable.endUpdates()
+            
+            // Update Premium Label
+            self?.updateLabel()
         }
     }
     

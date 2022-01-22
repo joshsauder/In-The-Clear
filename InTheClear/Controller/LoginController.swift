@@ -90,7 +90,7 @@ class LoginController: UIViewController {
                         //check if user already signed in
                         if(user.metadata.lastSignInDate == user.metadata.creationDate){
                             self.newUser(parameters: parameters, idToken: idToken!, id: user.uid, createdAt: user.metadata.creationDate ?? Date()) {
-                                self.getUserTrips(id: tempUser.id, completion: {
+                                self.getUserTrips(id: user.uid, completion: {
                                     self.transitionViewController()
                                 })
                             }
@@ -106,13 +106,13 @@ class LoginController: UIViewController {
                                         paidDate = dateFormatter.date(from: fetchedUser.planExpiration) ?? Date()
                                     }
                                     self.saveData(token: "", id: user.uid, name: fetchedUser.name, email: fetchedUser.email, createdAt: user.metadata.creationDate ?? Date(), paidDate: paidDate)
-                                    self.getUserTrips(id: tempUser.id, completion: {
+                                    self.getUserTrips(id: user.uid, completion: {
                                         self.transitionViewController()
                                     })
                                     self.transitionViewController()
                                 } else {
                                     self.newUser(parameters: parameters, idToken: idToken!, id: user.uid, createdAt: user.metadata.creationDate ?? Date()) {
-                                        self.getUserTrips(id: tempUser.id, completion: {
+                                        self.getUserTrips(id: user.uid, completion: {
                                             self.transitionViewController()
                                         })
                                     }

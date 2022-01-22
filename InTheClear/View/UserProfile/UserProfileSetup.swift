@@ -15,6 +15,8 @@ extension UserProfile {
      Sets up Premium label
      */
     func premiumLabelSetup(){
+        updateLabel()
+        
         let imageAttachment =  NSTextAttachment()
         imageAttachment.image = UIImage(systemName: "checkmark.circle")?.withTintColor(.white, renderingMode: .alwaysOriginal)
         imageAttachment.bounds = CGRect(x: 0, y: -5, width: 20, height: 20)
@@ -48,5 +50,16 @@ extension UserProfile {
         
         self.PremiumView.layer.cornerRadius = 10
         self.PremiumView.layer.masksToBounds = true
+    }
+    
+    /**
+     Updates the Premium Label
+     */
+    func updateLabel(){
+        if self.user.paid {
+            self.PayLabel.text = "Your Premium Benefits"
+        } else {
+            self.PayLabel.text = "Join for $5 per year"
+        }
     }
 }

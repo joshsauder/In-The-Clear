@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Pxa-MP-5qH">
-    <device id="retina6_1" orientation="portrait" appearance="light"/>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Pxa-MP-5qH">
+    <device id="retina6_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -14,39 +14,39 @@
             <objects>
                 <viewController id="Pxa-MP-5qH" customClass="UserProfile" customModule="InTheClear" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="mdr-Z8-eZl">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="YXJ-4G-ge8">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="400"/>
+                                <rect key="frame" x="0.0" y="0.0" width="428" height="400"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="400" id="eG6-J4-Ydd"/>
                                 </constraints>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="m8c-GH-hfC">
-                                <rect key="frame" x="10" y="425" width="394" height="159"/>
+                                <rect key="frame" x="10" y="425" width="408" height="159"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="In The Clear Premium" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PoI-D4-s7C">
-                                        <rect key="frame" x="20" y="20" width="354" height="17"/>
+                                        <rect key="frame" x="20" y="20" width="368" height="17"/>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
                                         <color key="textColor" red="0.98928298552831018" green="0.88094587413689029" blue="0.52973746120850462" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TwP-xP-8mD">
-                                        <rect key="frame" x="20" y="113" width="354" height="20"/>
+                                        <rect key="frame" x="20" y="113" width="368" height="20"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Join for $5 per year" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="prI-3s-enK">
-                                        <rect key="frame" x="20" y="47" width="354" height="25.5"/>
+                                        <rect key="frame" x="20" y="47" width="368" height="25.666666666666671"/>
                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="21"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pAO-fm-qgq">
-                                        <rect key="frame" x="20" y="82.5" width="354" height="20.5"/>
+                                        <rect key="frame" x="20" y="82.666666666666686" width="368" height="20.333333333333329"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -70,7 +70,7 @@
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="F4h-so-19t">
-                                <rect key="frame" x="0.0" y="584" width="414" height="150"/>
+                                <rect key="frame" x="0.0" y="584" width="428" height="150"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="150" id="J3w-MR-8oj"/>
@@ -84,17 +84,18 @@
                             <constraint firstItem="YXJ-4G-ge8" firstAttribute="top" secondItem="mdr-Z8-eZl" secondAttribute="top" id="CXo-Ww-khX"/>
                             <constraint firstItem="F4h-so-19t" firstAttribute="leading" secondItem="wjP-1Z-3DA" secondAttribute="leading" id="PNj-oR-0Fy"/>
                             <constraint firstItem="F4h-so-19t" firstAttribute="top" secondItem="m8c-GH-hfC" secondAttribute="bottom" id="PxV-kZ-EvF"/>
-                            <constraint firstItem="m8c-GH-hfC" firstAttribute="leading" secondItem="wjP-1Z-3DA" secondAttribute="leading" constant="10" id="t9o-Ok-wMQ"/>
+                            <constraint firstItem="m8c-GH-hfC" firstAttribute="leading" secondItem="mdr-Z8-eZl" secondAttribute="leading" constant="10" id="t9o-Ok-wMQ"/>
                             <constraint firstItem="m8c-GH-hfC" firstAttribute="top" secondItem="YXJ-4G-ge8" secondAttribute="bottom" constant="25" id="tkk-Z2-f4E"/>
                             <constraint firstItem="YXJ-4G-ge8" firstAttribute="leading" secondItem="wjP-1Z-3DA" secondAttribute="leading" id="wJw-bM-FdZ"/>
                             <constraint firstItem="YXJ-4G-ge8" firstAttribute="trailing" secondItem="wjP-1Z-3DA" secondAttribute="trailing" id="xhW-q5-1ts"/>
-                            <constraint firstItem="m8c-GH-hfC" firstAttribute="trailing" secondItem="wjP-1Z-3DA" secondAttribute="trailing" constant="-10" id="zZc-Oy-mKD"/>
+                            <constraint firstItem="m8c-GH-hfC" firstAttribute="trailing" secondItem="mdr-Z8-eZl" secondAttribute="trailing" constant="-10" id="zZc-Oy-mKD"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Profile" image="person.fill" catalog="system" id="Mjk-ky-4i6"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="FirstPremiumBenefitLabel" destination="pAO-fm-qgq" id="ybc-oP-VsA"/>
+                        <outlet property="PayLabel" destination="prI-3s-enK" id="aIh-QY-eHX"/>
                         <outlet property="PremiumView" destination="m8c-GH-hfC" id="nNy-Gh-zEP"/>
                         <outlet property="SecondPremiumBenefitLabel" destination="TwP-xP-8mD" id="eDO-KJ-3A2"/>
                         <outlet property="UserActionsTable" destination="F4h-so-19t" id="zNr-id-Akv"/>
