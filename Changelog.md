@@ -45,3 +45,12 @@
 * Added Realm for User Data and Token Storing - 2/14/20
 * Login Route Updated for Firebase - 2/14/20
 * Increased Trip Leg Time Limit to 48 hours - 3/1/20
+
+[Version 4.0] - Released x/xx/xx
+* Added Codefactor for code analysis - 8/13/20
+* Added Storekit Handler - 12/1/21
+* Added Premium Membership - 12/1/21
+* Profile Action Table Added - 12/7/21
+* Free tier limits Added - 12/12/21
+* Added Firestore - 12/18/21
+* Added Premium Ad - 12/18/21
