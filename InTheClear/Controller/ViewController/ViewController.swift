@@ -12,6 +12,7 @@ import GoogleMaps
 import GooglePlaces
 import Alamofire
 import Foundation
+import StoreKit
 
 enum Location {
     case startLocation
@@ -69,6 +70,8 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
         locationAuthorization()
         //set up GMSMap
         setupMap()
+        //Request Review
+        requestReviewIfAppropriate()
     }
     
     /**
@@ -507,6 +510,28 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
             let targetController = DestViewController.topViewController as! weatherMenu
             targetController.weatherDataArray = weatherDataVals
 
+        }
+    }
+    
+    /**
+     Requests a review when the user has logged in 3 times
+     */
+    private func requestReviewIfAppropriate() {
+        let defaultKey = "userReview"
+        var count = UserDefaults.standard.integer(forKey: defaultKey)
+        count += 1
+        UserDefaults.standard.set(count, forKey: defaultKey)
+        
+        guard count == 3 else {
+            return
+        }
+        
+        if let scene = UIApplication.shared.connectedScenes.first(where: { $0.activationState == .foregroundActive }) as? UIWindowScene {
+            if #available(iOS 14.0, *) {
+                SKStoreReviewController.requestReview(in: scene)
+            } else {
+                SKStoreReviewController.requestReview()
+            }
         }
     }
 }
