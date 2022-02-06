@@ -16,6 +16,7 @@ extension UserProfile {
      */
     func premiumLabelSetup(){
         updateLabel()
+        updateLegalText()
         
         let imageAttachment =  NSTextAttachment()
         imageAttachment.image = UIImage(systemName: "checkmark.circle")?.withTintColor(.white, renderingMode: .alwaysOriginal)
@@ -50,6 +51,11 @@ extension UserProfile {
         
         self.PremiumView.layer.cornerRadius = 10
         self.PremiumView.layer.masksToBounds = true
+        
+        if UIScreen.main.bounds.height < 700 {
+            self.ProfileToPremiumConstraint.constant = 13
+            self.view.layoutIfNeeded()
+        }
     }
     
     /**
@@ -61,5 +67,29 @@ extension UserProfile {
         } else {
             self.PayLabel.text = "Join for $5 per year"
         }
+    }
+    
+    /**
+     Updates the legal text view
+     */
+    func updateLegalText(){
+        let attributedString = NSMutableAttributedString(string: "Terms of Service and Privacy Policy")
+        
+        // Add Link
+        attributedString.addAttribute(.link, value: "https://intheclearapp.com/termsOfService", range: NSRange(location: 0, length: 16))
+        attributedString.addAttribute(.link, value: "https://intheclearapp.com/privacy", range: NSRange(location: 21, length: 14))
+        
+        //Update Font
+        attributedString.addAttribute(.font, value: UIFont.boldSystemFont(ofSize: 17), range: NSRange(location: 0, length: 16))
+        attributedString.addAttribute(.font, value: UIFont.systemFont(ofSize: 17), range: NSRange(location: 16, length: 5))
+        attributedString.addAttribute(.font, value: UIFont.boldSystemFont(ofSize: 17), range: NSRange(location: 21, length: 14))
+        
+        //Update Color
+        attributedString.addAttribute(.foregroundColor, value: UIColor.white, range: NSRange(location: 0, length: 35))
+
+        
+        self.LegalTextView.attributedText = attributedString
+        self.LegalTextView.backgroundColor = .clear
+        self.LegalTextView.linkTextAttributes = [.foregroundColor: UIColor.white]
     }
 }

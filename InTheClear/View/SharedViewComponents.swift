@@ -89,6 +89,9 @@ extension TableViewSetup {
 
         let label = UILabel()
         label.frame = CGRect.init(x: 10, y: 55, width: headerView.frame.width-10, height: headerView.frame.height-10)
+        if UIScreen.main.bounds.height < 700 {
+            label.frame = CGRect.init(x: 10, y: -15, width: headerView.frame.width-10, height: headerView.frame.height-10)
+        }
         label.text = title
         label.font = UIFont.systemFont(ofSize: 40)
         label.textColor = .white

@@ -65,6 +65,9 @@ class TripHistoryController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if UIScreen.main.bounds.height < 700 {
+            return 50
+        }
         return 130
     }
     

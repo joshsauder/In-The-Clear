@@ -19,6 +19,8 @@ class UserProfile: UIViewController, UITableViewDelegate, UITableViewDataSource 
     @IBOutlet weak var PayLabel: UILabel!
     @IBOutlet weak var FirstPremiumBenefitLabel: UILabel!
     @IBOutlet weak var SecondPremiumBenefitLabel: UILabel!
+    @IBOutlet weak var LegalTextView: UITextView!
+    @IBOutlet weak var ProfileToPremiumConstraint: NSLayoutConstraint!
     
     let storeKitHandler = StoreKitHandler()
     let realmManager = RealmManager()
@@ -48,6 +50,7 @@ class UserProfile: UIViewController, UITableViewDelegate, UITableViewDataSource 
         UserInfoTable.dataSource = self
         UserActionsTable.delegate = self
         UserActionsTable.dataSource = self
+        UserInfoTable.isScrollEnabled = false
 
         // Fix table insets
         UserActionsTable.layoutMargins = UIEdgeInsets.zero
@@ -79,6 +82,12 @@ class UserProfile: UIViewController, UITableViewDelegate, UITableViewDataSource 
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if UIScreen.main.bounds.height < 700 {
+            if tableView == UserActionsTable {
+                return 15
+            }
+            return 50
+        }
         if tableView == UserActionsTable {
             return 30
         }
