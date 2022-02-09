@@ -15,8 +15,8 @@ class StoreKitHandler: NSObject {
     let currencyFormatter: NumberFormatter = NumberFormatter()
     var skProducts: Dictionary<String, SKProduct> = [:]
     let YEARLY = "yearly"
-    var productDidPurchased: (() -> Void)?
-    
+    var productDidPurchased: ((_ date: Date?) -> Void)?
+
     override init() {
         productIdentifiers = Set<String>([YEARLY])
         currencyFormatter.numberStyle = .currency
@@ -67,9 +67,7 @@ extension StoreKitHandler {
 }
 
 extension StoreKitHandler: SKPaymentTransactionObserver {
-    func paymentQueue(_ queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {
-        var purchaseCompleteSubscription: Bool = false
-        
+    func paymentQueue(_ queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {        
         for transaction in transactions {
             switch transaction.transactionState {
             case .purchasing:
@@ -77,7 +75,11 @@ extension StoreKitHandler: SKPaymentTransactionObserver {
             case .purchased:
                 print("Purchased: \(transaction.payment.productIdentifier)")
                 SKPaymentQueue.default().finishTransaction(transaction)
-                productDidPurchased?()
+                productDidPurchased?(Date())
+            case .restored:
+                print("Restored: \(transaction.payment.productIdentifier)")
+                SKPaymentQueue.default().finishTransaction(transaction)
+                productDidPurchased?(transaction.original?.transactionDate)
             default:
                 SKPaymentQueue.default().finishTransaction(transaction)
             }
@@ -85,6 +87,7 @@ extension StoreKitHandler: SKPaymentTransactionObserver {
     }
     
     func paymentQueueRestoreCompletedTransactionsFinished(_ queue: SKPaymentQueue) {
+        print("Restore finished")
         // Tells observer payment queue finished restoring purchases
     }
     

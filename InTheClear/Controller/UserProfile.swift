@@ -26,8 +26,8 @@ class UserProfile: UIViewController, UITableViewDelegate, UITableViewDataSource 
     let realmManager = RealmManager()
     let firestoreManager = FirestoreManager()
     
-    let details = ["Name", "Email", "Date Joined", "Total Trips", "Favorite Destination", "Paid"]
-    var UserActions = ["Upgrade to Premium", "Logout"]
+    let details = ["Name", "Email", "Total Trips", "Favorite Destination", "Paid"]
+    var UserActions = ["Upgrade to Premium", "Restore Purchase", "Logout"]
     var userDetails: [String:String] = [:]
     var user: UserData = UserData()
     
@@ -39,7 +39,7 @@ class UserProfile: UIViewController, UITableViewDelegate, UITableViewDataSource 
         premiumViewSetup()
         setupTable(tableView: UserInfoTable)
         
-        if(userDetails[details[5]] == "true"){
+        if(userDetails[details[4]] == "true"){
             UserActions.removeFirst()
         }
         
@@ -116,8 +116,12 @@ class UserProfile: UIViewController, UITableViewDelegate, UITableViewDataSource 
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if tableView == UserActionsTable {
-            if(indexPath.row == 0 && userDetails[details[5]] != "true"){
+            if indexPath.row == 0 && userDetails[details[4]] != "true" {
                 UpgradeButtonTapped()
+            } else if indexPath.row == 0 && userDetails[details[4]] == "true" {
+                RestorePurchaseButtonTapped()
+            } else if indexPath.row == 1 && userDetails[details[4]] != "true" {
+                RestorePurchaseButtonTapped()
             } else {
                 LogoutButtonTapped()
             }
@@ -138,11 +142,10 @@ class UserProfile: UIViewController, UITableViewDelegate, UITableViewDataSource 
         df.dateStyle = .medium
         
         userDetails = [details[1] : user.email,
-            details[2] : df.string(from: user.dateJoined),
-            details[3] : String(trips.count),
-            details[4] : determineMostUsed(trips: trips),
+            details[2] : String(trips.count),
+            details[3] : determineMostUsed(trips: trips),
             details[0] : user.name,
-            details[5] : user.paid.description
+            details[4] : user.paid.description
             ]
     }
     
@@ -167,8 +170,8 @@ class UserProfile: UIViewController, UITableViewDelegate, UITableViewDataSource 
         user = realmManager.getUser()
         storeKitHandler.purchase(product: storeKitHandler.YEARLY)
         storeKitHandler.productDidPurchased = {
-            [weak self] in
-            self?.firestoreManager.updatePaid(userId: (self?.user.id)!)
+            [weak self] (date: Date?) in
+            self?.firestoreManager.updatePaid(userId: (self?.user.id)!, date: date)
             self?.realmManager.updatePaid(user: (self?.user)!)
             
             // Remove upgrade logo
@@ -177,11 +180,19 @@ class UserProfile: UIViewController, UITableViewDelegate, UITableViewDataSource 
             self?.UserActionsTable.deleteRows(at: [IndexPath.init(row: 0, section: 0)], with: UITableView.RowAnimation.right)
             self?.UserActionsTable.endUpdates()
             
+            self?.userDetails[(self?.details[4])!] = "true"
             // Update Premium Label
             self?.updateLabel()
+        
         }
     }
     
+    /**
+     Handles the restore purchase button being tapped
+     */
+    func RestorePurchaseButtonTapped(){
+        storeKitHandler.restorePreviousPurchase()
+    }
     
     /**
      Presents the login view when you logout

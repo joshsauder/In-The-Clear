@@ -50,9 +50,11 @@ class FirestoreManager {
         }
     }
     
-    func updatePaid(userId: String){
+    func updatePaid(userId: String, date: Date?){
         let docRef = db.collection(USER_TABLE).document(userId)
-        let currentDate = Date()
+        
+        let currentDate = date ?? Date()
+        
         var dateComponent = DateComponents()
         dateComponent.year = 1
         let futureDate = Calendar.current.date(byAdding: dateComponent, to: currentDate)
