@@ -159,7 +159,7 @@ class UserProfile: UIViewController, UITableViewDelegate, UITableViewDataSource 
             try auth.signOut()
             showLoginView()
         } catch let signOutError as NSError {
-            print(signOutError)
+            self.present(self.showAlert(title: "Issue Signing Out", message: "There was an issue signing you out. Please try again."), animated: true)
         }
     }
     

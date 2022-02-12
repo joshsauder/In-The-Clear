@@ -87,6 +87,7 @@ class LoginController: UIViewController {
                     }
                     else{
                         let tempUser = self.getUserData()
+                        let updatedDate = Calendar.current.date(byAdding: .hour, value: 6, to: user.metadata.lastSignInDate ?? Date()) ?? Date()
                         //check if user already signed in
                         if(user.metadata.lastSignInDate == user.metadata.creationDate){
                             self.newUser(parameters: parameters, idToken: idToken!, id: user.uid, createdAt: user.metadata.creationDate ?? Date()) {
@@ -95,7 +96,8 @@ class LoginController: UIViewController {
                                 })
                             }
                         }
-                        else if (user.uid != tempUser.id){
+                        //If ID's not equal or date is 1 day before
+                        else if (user.uid != tempUser.id || updatedDate < Date()){
                             self.fetchUserData(userId: user.uid) { fetchedUser in
                                 if let fetchedUser = fetchedUser {
                                     var paidDate = Date()
