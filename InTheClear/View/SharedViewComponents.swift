@@ -68,6 +68,7 @@ extension ViewController: SharedViewComponents {}
 extension LoginController: SharedViewComponents {}
 extension CustomizeTripDetails: SharedViewComponents {}
 extension UserProfile: SharedViewComponents {}
+extension StoreKitHandler: SharedViewComponents {}
 
 protocol TableViewSetup {
     func setupHeader(title: String, width: CGFloat) -> UIView

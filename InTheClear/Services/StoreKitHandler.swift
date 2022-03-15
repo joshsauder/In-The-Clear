@@ -88,11 +88,13 @@ extension StoreKitHandler: SKPaymentTransactionObserver {
     
     func paymentQueueRestoreCompletedTransactionsFinished(_ queue: SKPaymentQueue) {
         print("Restore finished")
+        self.showAlert(title: "Restore Finished", message: "All purchased products should be restored")
         // Tells observer payment queue finished restoring purchases
     }
     
     func paymentQueue(_ queue: SKPaymentQueue, restoreCompletedTransactionsFailedWithError error: Error) {
         print("Restore Failed")
+        self.showAlert(title: "Restore Failed", message: "There was an issue restoring your purchases")
     }
 }
 
