@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14854.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14806.4"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -29,14 +29,14 @@
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="okp-FV-ytU">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="okp-FV-ytU">
                                         <rect key="frame" x="0.0" y="472" width="167" height="42"/>
                                         <color key="backgroundColor" red="0.47464728360000003" green="0.15095242859999999" blue="0.50199043750000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="42" id="ofy-NX-WbO"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="21"/>
-                                        <state key="normal" title="Set Trip Stops">
+                                        <state key="normal" title="View Route">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <connections>
@@ -48,7 +48,7 @@
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="TripDetailsTableViewCell" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="TripDetailsTableViewCell" rowHeight="184" id="O2Z-77-fRu" customClass="TripDetailsTableViewCell" customModule="InTheClear" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="28" width="335" height="184"/>
+                                                <rect key="frame" x="0.0" y="44.666666030883789" width="335" height="184"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="O2Z-77-fRu" id="qT2-Oh-bgO">
                                                     <rect key="frame" x="0.0" y="0.0" width="335" height="184"/>
@@ -61,7 +61,7 @@
                                                             </connections>
                                                         </datePicker>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pWn-KF-vcz">
-                                                            <rect key="frame" x="15" y="3" width="148.66666666666666" height="38"/>
+                                                            <rect key="frame" x="16" y="3" width="147.66666666666666" height="38"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="38" id="7CU-xp-1BN"/>
                                                             </constraints>
@@ -70,13 +70,13 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Arrval Time" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8y3-jm-509">
-                                                            <rect key="frame" x="171.66666666666663" y="3" width="148.33333333333337" height="18"/>
+                                                            <rect key="frame" x="171.66666666666663" y="3" width="147.33333333333337" height="18"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Departure Time" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8JF-y0-vSa">
-                                                            <rect key="frame" x="171.66666666666663" y="21" width="148.33333333333337" height="18"/>
+                                                            <rect key="frame" x="171.66666666666663" y="21" width="147.33333333333337" height="18"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
@@ -112,7 +112,7 @@
                                             </tableViewCell>
                                         </prototypes>
                                     </tableView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gaa-4G-K13">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gaa-4G-K13">
                                         <rect key="frame" x="168" y="472" width="167" height="42"/>
                                         <color key="backgroundColor" red="0.47464728360000003" green="0.15095242859999999" blue="0.50199043750000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="21"/>
@@ -123,7 +123,7 @@
                                             <action selector="onCancel:" destination="oEp-kz-6sl" eventType="touchUpInside" id="bV8-SG-ZrU"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ywt-Pz-YXo">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ywt-Pz-YXo">
                                         <rect key="frame" x="273" y="4" width="54" height="34"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                         <state key="normal" title="Button"/>
@@ -131,7 +131,7 @@
                                             <action selector="editButtonTapped:" destination="oEp-kz-6sl" eventType="touchUpInside" id="3YA-Ac-KJY"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Dc-Di-m5d">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Dc-Di-m5d">
                                         <rect key="frame" x="8" y="10" width="21" height="22"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="21" id="ZaY-5t-CUS"/>
@@ -167,6 +167,7 @@
                                 </constraints>
                             </view>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="Brl-bT-qop"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="Brl-bT-qop" firstAttribute="trailing" secondItem="gPA-Xj-wrF" secondAttribute="trailing" constant="20" id="A6W-IU-S08"/>
@@ -174,7 +175,6 @@
                             <constraint firstItem="gPA-Xj-wrF" firstAttribute="top" secondItem="Brl-bT-qop" secondAttribute="top" constant="110" id="RJZ-TA-Dzo"/>
                             <constraint firstItem="gPA-Xj-wrF" firstAttribute="leading" secondItem="Brl-bT-qop" secondAttribute="leading" constant="20" id="XKI-9P-jbo"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="Brl-bT-qop"/>
                     </view>
                     <connections>
                         <outlet property="addButton" destination="8Dc-Di-m5d" id="zWm-Vl-YDS"/>

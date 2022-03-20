@@ -37,7 +37,7 @@ extension ViewController {
         //set up weatherButton
         weatherList.layer.cornerRadius = 5
         weatherList.clipsToBounds = true
-        weatherList.setTitle("Expanded City List" , for: .normal)
+        weatherList.setTitle("City By City List" , for: .normal)
         weatherList.setTitleColor(UIColor.black, for: .normal)
         weatherList.titleLabel?.font = UIFont.systemFont(ofSize: 12)
         weatherList.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
@@ -160,7 +160,7 @@ extension ViewController {
     internal func mapButtonsSetup(){
         
         configureMapButtons(button: openGoogleMaps, imageString: "icons8-google-maps-48", size: 30)
-        configureMapButtons(button: setTime, imageString: "time", size: 30)
+        configureMapButtons(button: setTime, imageString: "route", size: 30)
         configureMapButtons(button: myLocationButton, imageString: "baseline_my_location_black_36dp", size: 22)
     }
 

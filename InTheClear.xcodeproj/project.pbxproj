@@ -41,10 +41,10 @@
 		1939B5F522D41FB700E63F32 /* mapKey.png in Resources */ = {isa = PBXBuildFile; fileRef = 1939B5F422D41FB700E63F32 /* mapKey.png */; };
 		193AAD2F22D5810D00C6C6DA /* APIRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 193AAD2E22D5810D00C6C6DA /* APIRequests.swift */; };
 		193AAD3122DC16E900C6C6DA /* CustomizeTripDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 193AAD3022DC16E900C6C6DA /* CustomizeTripDetails.swift */; };
-		193AAD3322DFFD0100C6C6DA /* time.png in Resources */ = {isa = PBXBuildFile; fileRef = 193AAD3222DFFD0100C6C6DA /* time.png */; };
 		1942A6AD22594F1B00ABFF83 /* viewControllerSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1942A6AC22594F1B00ABFF83 /* viewControllerSetup.swift */; };
 		194AD985212E4B620034572D /* URLConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 194AD984212E4B620034572D /* URLConfig.swift */; };
 		194AD989215331940034572D /* Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 194AD988215331940034572D /* Weather.swift */; };
+		19724AC227E6FCE2007FD2CA /* route.png in Resources */ = {isa = PBXBuildFile; fileRef = 19724AC127E6FCE2007FD2CA /* route.png */; };
 		199243D8241D523D00E9A4C2 /* SharedViewComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 199243D7241D523D00E9A4C2 /* SharedViewComponents.swift */; };
 		199658AC273A4A630061761A /* StoreKitHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 199658AB273A4A630061761A /* StoreKitHandler.swift */; };
 		199658AE273B86E50061761A /* FirestoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 199658AD273B86E50061761A /* FirestoreManager.swift */; };
@@ -125,10 +125,10 @@
 		1939B5F422D41FB700E63F32 /* mapKey.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mapKey.png; sourceTree = "<group>"; };
 		193AAD2E22D5810D00C6C6DA /* APIRequests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIRequests.swift; sourceTree = "<group>"; };
 		193AAD3022DC16E900C6C6DA /* CustomizeTripDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomizeTripDetails.swift; sourceTree = "<group>"; };
-		193AAD3222DFFD0100C6C6DA /* time.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = time.png; sourceTree = "<group>"; };
 		1942A6AC22594F1B00ABFF83 /* viewControllerSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = viewControllerSetup.swift; sourceTree = "<group>"; };
 		194AD984212E4B620034572D /* URLConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLConfig.swift; sourceTree = "<group>"; };
 		194AD988215331940034572D /* Weather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weather.swift; sourceTree = "<group>"; };
+		19724AC127E6FCE2007FD2CA /* route.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = route.png; sourceTree = "<group>"; };
 		199243D7241D523D00E9A4C2 /* SharedViewComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedViewComponents.swift; sourceTree = "<group>"; };
 		199658AB273A4A630061761A /* StoreKitHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreKitHandler.swift; sourceTree = "<group>"; };
 		199658AD273B86E50061761A /* FirestoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreManager.swift; sourceTree = "<group>"; };
@@ -283,7 +283,7 @@
 				1939B5E722D0247000E63F32 /* snow.png */,
 				1939B5E822D0247000E63F32 /* sun.png */,
 				1939B5F222D4180000E63F32 /* danger.png */,
-				193AAD3222DFFD0100C6C6DA /* time.png */,
+				19724AC127E6FCE2007FD2CA /* route.png */,
 				19294C912252FEA600D09673 /* icons8-google-maps-48.png */,
 				191E3F9E22E3FADE00F0893D /* baseline_my_location_black_36dp.png */,
 				1939B5F422D41FB700E63F32 /* mapKey.png */,
@@ -545,6 +545,7 @@
 				192C328A244E7DBE00D1F384 /* TripHistory.storyboard in Resources */,
 				19D1EEBF2454D158000BEDFA /* TabBarView.storyboard in Resources */,
 				1939B5EB22D0247000E63F32 /* sun.png in Resources */,
+				19724AC227E6FCE2007FD2CA /* route.png in Resources */,
 				1917538322F78B7D00678745 /* addIcon.png in Resources */,
 				19D1242C22EA8EFC00636C23 /* CustomizeTripDetails.storyboard in Resources */,
 				1939B5F022D0248900E63F32 /* cloud.png in Resources */,
@@ -563,7 +564,6 @@
 				19F1FCF723F2662C007E3F2E /* GoogleService-Info.plist in Resources */,
 				190E4414210BF951005160C7 /* Main.storyboard in Resources */,
 				191EF2E5230505010049D7D1 /* BirdhouseWhiteLogo.png in Resources */,
-				193AAD3322DFFD0100C6C6DA /* time.png in Resources */,
 				1939B5E922D0247000E63F32 /* partlyCloudy.png in Resources */,
 				19D1242E22EA8FD100636C23 /* WeatherMenu.storyboard in Resources */,
 			);
