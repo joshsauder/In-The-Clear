@@ -47,7 +47,7 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
     @IBOutlet weak var totalDistanceLabel: UILabel!
     
     @IBOutlet weak var myLocationButton: UIButton!
-    @IBOutlet weak var openGoogleMaps: UIButton!
+    @IBOutlet weak var showMapButton: UIButton!
     @IBOutlet weak var setTime: UIButton!
     @IBOutlet weak var mapKey: UIImageView!
     
@@ -304,7 +304,37 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
      - parameters:
         - sender: the UIButton being interacted with
     */
-    @IBAction func openGoogleMaps(_ sender: UIButton){
+    @IBAction func showMapsActionSheet(_ sender: UIButton){
+        let alert = UIAlertController(title: "Title", message: "Please Select an Option", preferredStyle: .actionSheet)
+        
+        alert.addAction(UIAlertAction(title: "Open Apple Maps", style: .default, handler: { (_) in
+            self.openAppleMaps()
+        }))
+        alert.addAction(UIAlertAction(title: "Open Google Maps", style: .default, handler: { (_) in
+            self.openGoogleMaps()
+        }))
+        alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler: { (_) in
+            alert.dismiss(animated: true)
+        }))
+
+        self.present(alert, animated: true)
+    }
+    
+    /**
+     Opens Apple Maps App with directions
+    */
+    internal func openAppleMaps() {
+        let startPoint = "\(Float(locationStart.coordinate.latitude)),\(Float(locationStart.coordinate.longitude))"
+        let endPoint = "\(Float(locationEnd.coordinate.latitude)),\(Float( locationEnd.coordinate.longitude))"
+        guard let url = URL(string:"maps://?saddr=\(startPoint)&daddr=\(endPoint)&dirfgl=c") else { return }
+        
+        UIApplication.shared.open(url)
+    }
+    
+    /**
+     Opens Google Maps App (or website if app is not installed) with directions
+    */
+    internal func openGoogleMaps(){
         //set up waypoints
         var waypoints = "&waypoints="
         var appWaypoints=""
@@ -320,15 +350,16 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
         }
         
         if UIApplication.shared.canOpenURL(NSURL(string:"comgooglemaps://")! as URL){
+            guard let url = NSURL(string: "comgooglemapsurl://www.google.com/maps/dir/\(Float(locationStart.coordinate.latitude)),\(Float(locationStart.coordinate.longitude))/\(appWaypoints)\(Float(locationEnd.coordinate.latitude)),\(Float( locationEnd.coordinate.longitude))") else { return; }
             
-            UIApplication.shared.open(NSURL(string: "comgooglemapsurl://www.google.com/maps/dir/\(Float(locationStart.coordinate.latitude)),\(Float(locationStart.coordinate.longitude))/\(appWaypoints)\(Float(locationEnd.coordinate.latitude)),\(Float( locationEnd.coordinate.longitude))")! as URL, options: [:], completionHandler: nil)
+            UIApplication.shared.open(url as URL, options: [:], completionHandler: nil)
             
         } else {
             //call google maps to open up directions
             let base = url.GOOGLEMAPS_URL
-            let url = URL(string: "\(base)\(Float(locationStart.coordinate.latitude)),\(Float(locationStart.coordinate.longitude))&daddr=\(Float(locationEnd.coordinate.latitude)),\(Float( locationEnd.coordinate.longitude))&travelMode=driving\(waypoints)".addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlFragmentAllowed)!)
+            guard let url = URL(string: "\(base)\(Float(locationStart.coordinate.latitude)),\(Float(locationStart.coordinate.longitude))&daddr=\(Float(locationEnd.coordinate.latitude)),\(Float( locationEnd.coordinate.longitude))&travelMode=driving\(waypoints)".addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlFragmentAllowed)!) else { return; }
                 
-            UIApplication.shared.open(url!, options: convertToUIApplicationOpenExternalURLOptionsKeyDictionary([:]), completionHandler: nil)
+            UIApplication.shared.open(url, options: convertToUIApplicationOpenExternalURLOptionsKeyDictionary([:]), completionHandler: nil)
         }
     }
     

@@ -121,8 +121,9 @@ extension ViewController {
         - button: The UIButton that is configured
         - imageString: The image name
         - size: Size of image
+        - system: Is SF Icon Image
     */
-    internal func configureMapButtons(button: UIButton, imageString: String, size: Int){
+    internal func configureMapButtons(button: UIButton, imageString: String, size: Int, system: Bool){
         
         button.isHidden = true
         button.backgroundColor = UIColor(white: 1, alpha: 1)
@@ -131,7 +132,11 @@ extension ViewController {
         
         //Create Attachment
         let imageAttachment =  NSTextAttachment()
-        imageAttachment.image = UIImage(named: imageString)
+        if system {
+            imageAttachment.image = UIImage(systemName: imageString)
+        } else {
+            imageAttachment.image = UIImage(named: imageString)
+        }
         imageAttachment.bounds = CGRect(x: 0, y: -5, width: size, height: size)
         
         //Create string with attachment
@@ -159,9 +164,9 @@ extension ViewController {
     */
     internal func mapButtonsSetup(){
         
-        configureMapButtons(button: openGoogleMaps, imageString: "icons8-google-maps-48", size: 30)
-        configureMapButtons(button: setTime, imageString: "route", size: 30)
-        configureMapButtons(button: myLocationButton, imageString: "baseline_my_location_black_36dp", size: 22)
+        configureMapButtons(button: showMapButton, imageString: "map.fill", size: 30, system: true)
+        configureMapButtons(button: setTime, imageString: "route", size: 30, system: false)
+        configureMapButtons(button: myLocationButton, imageString: "baseline_my_location_black_36dp", size: 22, system: false)
     }
 
     /**
@@ -193,7 +198,7 @@ extension ViewController {
         self.weatherList.isEnabled = true
         self.weatherList.alpha = 1
         //enable google maps button
-        self.openGoogleMaps.isHidden = false
+        self.showMapButton.isHidden = false
         self.setTime.isHidden = false
         self.mapKey.isHidden = false
         
@@ -267,7 +272,6 @@ extension ViewController {
         self.timeAndDistanceView.isHidden = true
         
     }
-    
 }
 
 extension GMSAutocompleteViewController {

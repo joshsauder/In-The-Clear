@@ -27,7 +27,6 @@
 		191E3F9F22E3FADE00F0893D /* baseline_my_location_black_36dp.png in Resources */ = {isa = PBXBuildFile; fileRef = 191E3F9E22E3FADE00F0893D /* baseline_my_location_black_36dp.png */; };
 		191EF2E122FBB7260049D7D1 /* TripDetailsAPIRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 191EF2E022FBB7260049D7D1 /* TripDetailsAPIRequest.swift */; };
 		191EF2E5230505010049D7D1 /* BirdhouseWhiteLogo.png in Resources */ = {isa = PBXBuildFile; fileRef = 191EF2E4230505010049D7D1 /* BirdhouseWhiteLogo.png */; };
-		19294C922252FEA600D09673 /* icons8-google-maps-48.png in Resources */ = {isa = PBXBuildFile; fileRef = 19294C912252FEA600D09673 /* icons8-google-maps-48.png */; };
 		192C3288244E7DB100D1F384 /* TripHistoryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 192C3287244E7DB100D1F384 /* TripHistoryController.swift */; };
 		192C328A244E7DBE00D1F384 /* TripHistory.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 192C3289244E7DBE00D1F384 /* TripHistory.storyboard */; };
 		192C328C244E81EE00D1F384 /* TripHistoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 192C328B244E81EE00D1F384 /* TripHistoryTableViewCell.swift */; };
@@ -111,7 +110,6 @@
 		191E3F9E22E3FADE00F0893D /* baseline_my_location_black_36dp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = baseline_my_location_black_36dp.png; sourceTree = "<group>"; };
 		191EF2E022FBB7260049D7D1 /* TripDetailsAPIRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripDetailsAPIRequest.swift; sourceTree = "<group>"; };
 		191EF2E4230505010049D7D1 /* BirdhouseWhiteLogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BirdhouseWhiteLogo.png; sourceTree = "<group>"; };
-		19294C912252FEA600D09673 /* icons8-google-maps-48.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icons8-google-maps-48.png"; sourceTree = "<group>"; };
 		192C3287244E7DB100D1F384 /* TripHistoryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripHistoryController.swift; sourceTree = "<group>"; };
 		192C3289244E7DBE00D1F384 /* TripHistory.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = TripHistory.storyboard; sourceTree = "<group>"; };
 		192C328B244E81EE00D1F384 /* TripHistoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripHistoryTableViewCell.swift; sourceTree = "<group>"; };
@@ -284,7 +282,6 @@
 				1939B5E822D0247000E63F32 /* sun.png */,
 				1939B5F222D4180000E63F32 /* danger.png */,
 				19724AC127E6FCE2007FD2CA /* route.png */,
-				19294C912252FEA600D09673 /* icons8-google-maps-48.png */,
 				191E3F9E22E3FADE00F0893D /* baseline_my_location_black_36dp.png */,
 				1939B5F422D41FB700E63F32 /* mapKey.png */,
 				19017515223F3E3E00B6793A /* InTheClear.png */,
@@ -541,7 +538,6 @@
 				1939B5F522D41FB700E63F32 /* mapKey.png in Resources */,
 				19017516223F3E3E00B6793A /* InTheClear.png in Resources */,
 				19D443C723E7AC4C002D52CA /* StartView.storyboard in Resources */,
-				19294C922252FEA600D09673 /* icons8-google-maps-48.png in Resources */,
 				192C328A244E7DBE00D1F384 /* TripHistory.storyboard in Resources */,
 				19D1EEBF2454D158000BEDFA /* TabBarView.storyboard in Resources */,
 				1939B5EB22D0247000E63F32 /* sun.png in Resources */,
