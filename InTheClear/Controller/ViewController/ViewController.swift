@@ -305,7 +305,7 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
         - sender: the UIButton being interacted with
     */
     @IBAction func showMapsActionSheet(_ sender: UIButton){
-        let alert = UIAlertController(title: "Title", message: "Please Select an Option", preferredStyle: .actionSheet)
+        let alert = UIAlertController(title: "Select a Map Option", message: nil, preferredStyle: .actionSheet)
         
         alert.addAction(UIAlertAction(title: "Open Apple Maps", style: .default, handler: { (_) in
             self.openAppleMaps()
@@ -318,6 +318,7 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
         }))
 
         self.present(alert, animated: true)
+
     }
     
     /**

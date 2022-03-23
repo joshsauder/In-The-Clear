@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina6_5" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -112,7 +112,7 @@
                                 </constraints>
                                 <state key="normal" title="Button"/>
                                 <connections>
-                                    <action selector="openGoogleMaps:" destination="BYZ-38-t0r" eventType="touchUpInside" id="3Jf-dI-mld"/>
+                                    <action selector="showMapsActionSheet:" destination="BYZ-38-t0r" eventType="touchUpInside" id="CEK-i8-Pef"/>
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cNi-GN-vs2">
@@ -199,9 +199,9 @@
                         <outlet property="mapKey" destination="cBk-DE-G9b" id="QNI-je-CYP"/>
                         <outlet property="mapView" destination="MeT-bN-U9A" id="GKc-Kf-vIJ"/>
                         <outlet property="myLocationButton" destination="BuA-yv-0eC" id="bDj-5j-8hg"/>
-                        <outlet property="openGoogleMaps" destination="fEc-Uw-77w" id="CSx-dX-cHn"/>
                         <outlet property="openMapsBottomContraints" destination="VdC-zy-0IP" id="zgr-uh-2ab"/>
                         <outlet property="setTime" destination="iRQ-nk-2T0" id="Y8g-In-LHF"/>
+                        <outlet property="showMapButton" destination="fEc-Uw-77w" id="CAp-RO-sNW"/>
                         <outlet property="startButton" destination="46b-9j-VGI" id="ccg-zZ-jkl"/>
                         <outlet property="startLocation" destination="NRT-9p-hDV" id="aAr-az-4Uy"/>
                         <outlet property="timeAndDistanceView" destination="cNi-GN-vs2" id="yyk-7j-ZvL"/>
