@@ -111,7 +111,6 @@ class CustomizeTripDetails: UIViewController, CellDataDelegate{
         tripDetails.startTimes[selectedIndex.row] = time
         updateTimes()
     }
-    
 
     /**
      Calls Here maps API service and gets the travel times
@@ -138,29 +137,24 @@ class CustomizeTripDetails: UIViewController, CellDataDelegate{
         - times: the time offsets
     */
     internal func addTimes(times: [Int]) -> [Date]{
-        var retArray:[Date] = [Date()]
-        if times.count > 0 {
-            var tempArray = times
-            //remove last from time array
-            let time = tempArray.removeLast()
-            //recursive call
-            retArray = addTimes(times: tempArray)
+        // start locations in order
+        // times in order
+        return tripDetails.startTimes.enumerated().map { (idx, startTime) -> Date in
+            var latestTime = Date()
             
-            var date = Date()
-            //if start time is less than earliest time, add time offset to earilest time
-            //else add to start time
-            //needed in the case where start time is greater than earliest time
-            if Calendar.current.date(byAdding: .second, value: time, to: retArray[retArray.count - 1])! > Calendar.current.date(byAdding: .second, value: time, to: tripDetails.startTimes[retArray.count - 1])! {
-                    
-                date = Calendar.current.date(byAdding: .second, value: time, to: retArray[retArray.count - 1])!
-            } else {
-                date = Calendar.current.date(byAdding: .second, value: time, to: tripDetails.startTimes[retArray.count - 1])!
+            if(idx > 0){
+                latestTime = Calendar.current.date(byAdding: .second, value: times[idx-1], to: tripDetails.startTimes[idx-1])!
             }
-            retArray.append(date)
+            
+            // check the latest time possible given tracel
+            if latestTime > startTime {
+                return latestTime
+            }
+            
+            return startTime
         }
-        return retArray
     }
-    
+        
     private func checkValues() -> Bool {
         return timeOffset.allSatisfy { time in
             if time/3600 > 47 {
@@ -239,14 +233,14 @@ extension CustomizeTripDetails: UITableViewDelegate, UITableViewDataSource {
         tripCell.CityName.text = tripDetails.cityStops[indexPath.row]
         //if index is in middle add arrival and departure, if first, add only departure time, else add only arrival time
         if indexPath.row < earliestTimes.count - 1 && indexPath.row != 0 {
-            tripCell.createDatePicker(minDate: earliestTimes[indexPath.row])
+            tripCell.createDatePicker(minDate: earliestTimes[indexPath.row], inputtedDate: self.tripDetails.startTimes[indexPath.row])
             tripCell.departureTime.text = "Departure: \(setTimeText(date: tripCell.DatePicker.date))"
             tripCell.arrivalTime.text = "Arrival: \(setTimeText(date: earliestTimes[indexPath.row]))"
             tripCell.arrivalToTopConstraint.constant = 0
             tripCell.departureToBottomConstraint.constant = -2
             
         } else if indexPath.row == 0 {
-            tripCell.createDatePicker(minDate: earliestTimes[indexPath.row])
+            tripCell.createDatePicker(minDate: Date(), inputtedDate: self.tripDetails.startTimes[indexPath.row])
             tripCell.departureTime.text = "Departure: \(setTimeText(date: tripCell.DatePicker.date))"
             //move departure to middle
             tripCell.arrivalTime.text = ""

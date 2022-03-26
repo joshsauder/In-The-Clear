@@ -34,19 +34,25 @@ class TripDetailsTableViewCell: UITableViewCell  {
     
     /**
      Configure the date picker
+     - parameters:
+        - minDate: Minimum allowed date
+        - inputtedDate: Date inputted by user
      */
-    internal func createDatePicker(minDate: Date?){
+    internal func createDatePicker(minDate: Date?, inputtedDate: Date){
         
         DatePicker.datePickerMode = UIDatePicker.Mode.dateAndTime
+        DatePicker.preferredDatePickerStyle = .wheels
+        
+        let date = inputtedDate > minDate! ? inputtedDate : minDate!
         
         //set maxDate
         let maxDate = Calendar.current.date(byAdding: .day, value: 6, to: Date())
+        DatePicker.setDate(date, animated: true)
         DatePicker.maximumDate = maxDate
-        DatePicker.minimumDate = minDate
+        DatePicker.minimumDate = Date()
         
         //set the datepickers text color to white
-        DatePicker.setValue(UIColor.white, forKey: "textColor")
-        
+        DatePicker.overrideUserInterfaceStyle = .dark
     }
     
     /**
