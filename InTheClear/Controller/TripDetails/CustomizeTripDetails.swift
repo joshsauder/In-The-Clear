@@ -139,20 +139,25 @@ class CustomizeTripDetails: UIViewController, CellDataDelegate{
     internal func addTimes(times: [Int]) -> [Date]{
         // start locations in order
         // times in order
-        return tripDetails.startTimes.enumerated().map { (idx, startTime) -> Date in
-            var latestTime = Date()
-            
-            if(idx > 0){
-                latestTime = Calendar.current.date(byAdding: .second, value: times[idx-1], to: tripDetails.startTimes[idx-1])!
+        var retArray: [Date] = []
+        
+        tripDetails.startTimes.enumerated().forEach { (idx, startTime) in
+            if(idx == times.count) {
+                retArray.append(Date())
+                return
             }
             
-            // check the latest time possible given tracel
-            if latestTime > startTime {
-                return latestTime
+            var date = Calendar.current.date(byAdding: .second, value: times[idx], to: tripDetails.startTimes[idx])!
+            let potentialDate = retArray.count > 0 ? Calendar.current.date(byAdding: .second, value: times[idx], to: retArray[retArray.count - 1])! : Date()
+            
+            if(potentialDate > date){
+                date = potentialDate
             }
             
-            return startTime
+            retArray.append(date)
         }
+        
+        return retArray
     }
         
     private func checkValues() -> Bool {
@@ -233,9 +238,9 @@ extension CustomizeTripDetails: UITableViewDelegate, UITableViewDataSource {
         tripCell.CityName.text = tripDetails.cityStops[indexPath.row]
         //if index is in middle add arrival and departure, if first, add only departure time, else add only arrival time
         if indexPath.row < earliestTimes.count - 1 && indexPath.row != 0 {
-            tripCell.createDatePicker(minDate: earliestTimes[indexPath.row], inputtedDate: self.tripDetails.startTimes[indexPath.row])
+            tripCell.createDatePicker(minDate: earliestTimes[indexPath.row - 1], inputtedDate: self.tripDetails.startTimes[indexPath.row])
             tripCell.departureTime.text = "Departure: \(setTimeText(date: tripCell.DatePicker.date))"
-            tripCell.arrivalTime.text = "Arrival: \(setTimeText(date: earliestTimes[indexPath.row]))"
+            tripCell.arrivalTime.text = "Arrival: \(setTimeText(date: earliestTimes[indexPath.row - 1]))"
             tripCell.arrivalToTopConstraint.constant = 0
             tripCell.departureToBottomConstraint.constant = -2
             
@@ -250,8 +255,8 @@ extension CustomizeTripDetails: UITableViewDelegate, UITableViewDataSource {
         }
         else {
             if earliestTimes.count - 1 == indexPath.row {
-                tripCell.arrivalTime.text = "Arrival: \(setTimeText(date: earliestTimes[indexPath.row]))"
-                tripDetails.endTime = earliestTimes[indexPath.row]
+                tripCell.arrivalTime.text = "Arrival: \(setTimeText(date: earliestTimes[indexPath.row - 1]))"
+                tripDetails.endTime = earliestTimes[indexPath.row - 1]
                 //move arrival to middle
                 tripCell.departureTime.text = ""
                 tripCell.arrivalToTopConstraint.constant = 10
