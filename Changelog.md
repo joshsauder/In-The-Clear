@@ -46,7 +46,7 @@
 * Login Route Updated for Firebase - 2/14/20
 * Increased Trip Leg Time Limit to 48 hours - 3/1/20
 
-[Version 4.0] - Released 3/12/22
+[Version 3.1] - Released 3/12/22
 * Added Codefactor for code analysis - 8/13/20
 * Added Storekit Handler - 12/1/21
 * Added Premium Membership - 12/1/21
@@ -55,3 +55,8 @@
 * Added Firestore - 12/18/21
 * Added Premium Ad - 12/18/21
 * Added Restore for Purchases - 2/8/22
+
+[Version 3.2]
+* UI/UX Enhancements - 3/19/22
+* Added option to open route in Apple Maps - 3/22/22
+* Route selector bug fix - 3/26/22
